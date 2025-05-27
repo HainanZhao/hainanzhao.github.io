@@ -1,0 +1,181 @@
+<div class="container">
+  <h2 class="title">Regex Tester</h2>
+  
+  <!-- Regex Input Section -->
+  <div class="section">
+    <h3>Regular Expression</h3>
+    <div class="input-group">
+      <label for="regexPattern">Regex Pattern:</label>
+      <div class="regex-input-container">
+        <span class="regex-delimiter">/</span>
+        <input 
+          type="text" 
+          id="regexPattern" 
+          [(ngModel)]="regexPattern" 
+          placeholder="Enter your regex pattern here..."
+          (input)="onInputChange()"
+          class="regex-input"
+        >
+        <span class="regex-delimiter">/</span>
+        <input 
+          type="text" 
+          [(ngModel)]="flags" 
+          placeholder="flags"
+          (input)="onInputChange()"
+          class="flags-input"
+          maxlength="5"
+        >
+      </div>
+      
+      <div class="flags-info">
+        <small>
+          <strong>Flags:</strong> g (global), i (ignore case), m (multiline), s (dotall), u (unicode), y (sticky)
+        </small>
+      </div>
+      
+      <div class="button-group">
+        <button (click)="testRegex()">Test Regex</button>
+        <button (click)="clearAll()">Clear All</button>
+      </div>
+      
+      <div class="error" *ngIf="testResult && !testResult.isValid">
+        <div class="error-label">Error:</div>
+        <div>{{ testResult.errorMessage }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test String Section -->
+  <div class="section">
+    <h3>Test String</h3>
+    <div class="input-group">
+      <label for="testString">Text to test against:</label>
+      <textarea 
+        id="testString" 
+        [(ngModel)]="testString" 
+        rows="4" 
+        placeholder="Enter the text you want to test your regex against..."
+        (input)="onInputChange()"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="section" *ngIf="testResult && testResult.isValid">
+    <h3>Results</h3>
+    
+    <div class="results-summary">
+      <div class="match-count">
+        <strong>{{ testResult.matches.length }}</strong> match{{ testResult.matches.length !== 1 ? 'es' : '' }} found
+      </div>
+      <div class="flags-used" *ngIf="testResult.flags">
+        <strong>Flags used:</strong> {{ testResult.flags }}
+      </div>
+    </div>
+
+    <!-- Highlighted Text -->
+    <div class="highlighted-section" *ngIf="testResult.matches.length > 0">
+      <h4>Highlighted Matches</h4>
+      <div class="highlighted-text" [innerHTML]="highlightMatches()"></div>
+    </div>
+
+    <!-- Match Details -->
+    <div class="matches-section" *ngIf="testResult.matches.length > 0">
+      <h4>Match Details</h4>
+      <div class="match-item" *ngFor="let match of testResult.matches; let i = index">
+        <div class="match-header">
+          <span class="match-number">Match {{ i + 1 }}</span>
+          <button class="copy-btn" (click)="copyToClipboard(match.match)" title="Copy to clipboard">📋</button>
+        </div>
+        <div class="match-details">
+          <div class="match-value">
+            <strong>Match:</strong> "<span class="match-text">{{ match.match }}</span>"
+          </div>
+          <div class="match-position">
+            <strong>Position:</strong> {{ match.index }} - {{ match.index + match.match.length - 1 }}
+          </div>
+          <div class="capture-groups" *ngIf="match.groups && match.groups.length > 0">
+            <strong>Capture Groups:</strong>
+            <ul>
+              <li *ngFor="let group of match.groups; let j = index">
+                Group {{ j + 1 }}: "{{ group || '(empty)' }}"
+              </li>
+            </ul>
+          </div>
+          <div class="named-groups" *ngIf="match.namedGroups">
+            <strong>Named Groups:</strong>
+            <ul>
+              <li *ngFor="let group of match.namedGroups | keyvalue">
+                {{ group.key }}: "{{ group.value }}"
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Matches -->
+    <div class="no-matches" *ngIf="testResult.matches.length === 0">
+      <p>No matches found for this pattern.</p>
+    </div>
+  </div>
+
+  <!-- Regex Examples Section -->
+  <div class="section">
+    <h3>Common Regex Examples</h3>
+    <div class="examples-grid">
+      <div class="example-item" *ngFor="let example of regexExamples">
+        <div class="example-header">
+          <h4>{{ example.name }}</h4>
+          <button (click)="loadExample(example)">Load Example</button>
+        </div>
+        <div class="example-pattern">
+          <strong>Pattern:</strong> <code>/{{ example.pattern }}/{{ example.flags }}</code>
+        </div>
+        <div class="example-description">
+          <strong>Test String:</strong> {{ example.testString.substring(0, 80) }}{{ example.testString.length > 80 ? '...' : '' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regex Help Section -->
+  <div class="section">
+    <h3>Quick Reference</h3>
+    <div class="help-content">
+      <div class="help-column">
+        <h4>Basic Patterns</h4>
+        <ul>
+          <li><code>.</code> - Any character except newline</li>
+          <li><code>\d</code> - Any digit (0-9)</li>
+          <li><code>\w</code> - Any word character (a-z, A-Z, 0-9, _)</li>
+          <li><code>\s</code> - Any whitespace character</li>
+          <li><code>^</code> - Start of string</li>
+          <li><code>$</code> - End of string</li>
+        </ul>
+      </div>
+      <div class="help-column">
+        <h4>Quantifiers</h4>
+        <ul>
+          <li><code>*</code> - Zero or more</li>
+          <li><code>+</code> - One or more</li>
+          <li><code>?</code> - Zero or one</li>
+          <li><code>{{ '{' }}n{{ '}' }}</code> - Exactly n times</li>
+          <li><code>{{ '{' }}n,{{ '}' }}</code> - n or more times</li>
+          <li><code>{{ '{' }}n,m{{ '}' }}</code> - Between n and m times</li>
+        </ul>
+      </div>
+      <div class="help-column">
+        <h4>Character Classes</h4>
+        <ul>
+          <li><code>[abc]</code> - Any of a, b, or c</li>
+          <li><code>[a-z]</code> - Any lowercase letter</li>
+          <li><code>[A-Z]</code> - Any uppercase letter</li>
+          <li><code>[0-9]</code> - Any digit</li>
+          <li><code>[^abc]</code> - Not a, b, or c</li>
+          <li><code>(a|b)</code> - Either a or b</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

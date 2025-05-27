@@ -6,6 +6,7 @@ import { DateUtilsComponent } from './date-utils/date-utils.component';
 import { NumberUtilsComponent } from './number-utils/number-utils.component';
 import { ArrayUtilsComponent } from './array-utils/array-utils.component';
 import { JsonVisualizerComponent } from './json-visualizer/json-visualizer.component';
+import { RegexTesterComponent } from './regex-tester/regex-tester.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/calculator', pathMatch: 'full' }, // Default route
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'date-utils', component: DateUtilsComponent },
   { path: 'number-utils', component: NumberUtilsComponent },
   { path: 'array-utils', component: ArrayUtilsComponent },
-  { path: 'json-visualizer', component: JsonVisualizerComponent }
+  { path: 'json-visualizer', component: JsonVisualizerComponent },
+  { path: 'regex-tester', component: RegexTesterComponent }
 ];
