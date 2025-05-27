@@ -37,8 +37,9 @@ jobs:
 
       - name: Install project dependencies
         run: | 
-          npm cache clean --force
-          npm ci # 'npm ci' is preferred for CI/CD for reproducible builds
+          npm install -g npm@latest # Update npm to the latest version
+          npm cache verify          # Verify and clear the npm cache
+          npm ci  
 
       - name: Build Angular application
         run: |
