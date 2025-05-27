@@ -1,0 +1,82 @@
+# .github/workflows/deploy.yml
+
+name: Deploy Angular App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Or 'master', depending on your default branch name
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the previous and latest triggered runs.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Use a Linux runner for the build process
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Action to check out your repository code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Use Node.js 18, matching your GitLab CI
+
+      - name: Install Angular CLI (globally)
+        run: npm install -g @angular/cli@latest # Install Angular CLI globally
+
+      - name: Install project dependencies
+        run: npm ci # 'npm ci' is preferred for CI/CD for reproducible builds
+
+      - name: Build Angular application
+        run: |
+          # Build the Angular app for production.
+          # IMPORTANT: Adjust '--base-href' to match your GitHub Pages URL structure.
+          # For a project page (e.g., https://<username>.github.io/<repo-name>/), use /<repo-name>/
+          # For a user/organization page (e.g., https://<username>.github.io/), use /
+          # Replace 'your-repo-name' with your actual GitHub repository name.
+          ng build --configuration production --base-href /debugi/
+
+      - name: Add .nojekyll file
+        # This prevents GitHub Pages from trying to build your Angular app with Jekyll,
+        # which is usually not what you want for a client-side Angular application.
+        # Angular 17+ often outputs to 'dist/browser'. Older versions to 'dist/project-name'.
+        # We need to find the correct output directory first.
+        run: |
+          ANGULAR_OUTPUT_DIR=""
+          if [ -d "dist/debugi" ]; then # Assuming 'debugi' is your Angular project name or repo name
+            ANGULAR_OUTPUT_DIR="dist/debugi"
+          elif [ -d "dist/browser" ]; then # Common for Angular 17+
+            ANGULAR_OUTPUT_DIR="dist/browser"
+          else
+            echo "ERROR: Angular build output directory not found. Please check your angular.json or build process."
+            exit 1
+          fi
+          echo "Adding .nojekyll to $ANGULAR_OUTPUT_DIR"
+          touch $ANGULAR_OUTPUT_DIR/.nojekyll
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5 # Configures GitHub Pages with a specified build directory
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          # Upload the Angular build output directory.
+          # This should be the same directory determined in the previous step.
+          path: |
+            dist/debugi # Adjust this if your Angular build output is different (e.g., dist/browser)
+            dist/browser # Include both possibilities, action will pick existing one
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Deploys the uploaded artifact to GitHub Pages
