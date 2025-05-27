@@ -6,7 +6,7 @@
     <h3>String Case Converter</h3>
     <div class="input-group">
       <label for="inputText">Enter text:</label>
-      <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..."></textarea>
+      <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..." (input)="analyzeText()"></textarea>
     
       <div class="button-group">
         <button (click)="convertToUppercase()">UPPERCASE</button>
@@ -19,7 +19,159 @@
     
       <div class="result" *ngIf="convertedText">
         <div class="result-label">Converted Text:</div>
-        <div>{{ convertedText }}</div>
+        <div class="result-text">{{ convertedText }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(convertedText)">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text Analysis Section -->
+  <div class="section" *ngIf="textAnalysis.characterCount">
+    <h3>Text Analysis</h3>
+    <div class="analysis-grid">
+      <div class="stat-item">
+        <div class="stat-label">Characters</div>
+        <div class="stat-value">{{ textAnalysis.characterCount }}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Characters (no spaces)</div>
+        <div class="stat-value">{{ textAnalysis.characterCountNoSpaces }}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Words</div>
+        <div class="stat-value">{{ textAnalysis.wordCount }}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Sentences</div>
+        <div class="stat-value">{{ textAnalysis.sentenceCount }}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Paragraphs</div>
+        <div class="stat-value">{{ textAnalysis.paragraphCount }}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Reading Time</div>
+        <div class="stat-value">{{ textAnalysis.readingTime }} min</div>
+      </div>
+    </div>
+    
+    <div class="analysis-details" *ngIf="textAnalysis.commonWords?.length > 0">
+      <h4>Most Common Words</h4>
+      <ul>
+        <li *ngFor="let word of textAnalysis.commonWords">
+          {{ word[0] }}: {{ word[1] }} times
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Text Manipulation Section -->
+  <div class="section">
+    <h3>Text Manipulation</h3>
+    <div class="input-group">
+      <div class="manipulation-controls">
+        <div class="find-replace">
+          <input type="text" [(ngModel)]="findText" placeholder="Find text...">
+          <input type="text" [(ngModel)]="replaceText" placeholder="Replace with...">
+          <button (click)="findAndReplace()">Find & Replace</button>
+        </div>
+        
+        <div class="button-group">
+          <button (click)="reverseText()">Reverse Text</button>
+          <button (click)="removeExtraSpaces()">Remove Extra Spaces</button>
+          <button (click)="removeLineBreaks()">Remove Line Breaks</button>
+          <button (click)="addLineNumbers()">Add Line Numbers</button>
+          <button (click)="sortLines()">Sort Lines</button>
+          <button (click)="removeDuplicateLines()">Remove Duplicates</button>
+        </div>
+        
+        <div class="extraction-group">
+          <h4>Extract Data</h4>
+          <button (click)="extractEmails()">Extract Emails</button>
+          <button (click)="extractUrls()">Extract URLs</button>
+          <button (click)="extractNumbers()">Extract Numbers</button>
+        </div>
+      </div>
+      
+      <div class="result" *ngIf="manipulatedText">
+        <div class="result-label">Manipulated Text:</div>
+        <div class="result-text">{{ manipulatedText }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(manipulatedText)">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Encoding/Decoding Section -->
+  <div class="section">
+    <h3>Encoding & Decoding</h3>
+    <div class="input-group">
+      <div class="button-group">
+        <button (click)="encodeBase64()">Encode Base64</button>
+        <button (click)="decodeBase64()">Decode Base64</button>
+        <button (click)="encodeURL()">Encode URL</button>
+        <button (click)="decodeURL()">Decode URL</button>
+        <button (click)="encodeHTML()">Encode HTML</button>
+        <button (click)="decodeHTML()">Decode HTML</button>
+      </div>
+      
+      <div class="result" *ngIf="encodedText">
+        <div class="result-label">Encoded Text:</div>
+        <div class="result-text">{{ encodedText }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(encodedText)">📋 Copy</button>
+      </div>
+      
+      <div class="result" *ngIf="decodedText">
+        <div class="result-label">Decoded Text:</div>
+        <div class="result-text">{{ decodedText }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(decodedText)">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hash Generation Section -->
+  <div class="section">
+    <h3>Hash Generation</h3>
+    <div class="input-group">
+      <div class="button-group">
+        <button (click)="generateSHA256()">Generate SHA-256</button>
+        <button (click)="generateMD5()">Generate MD5 (Demo)</button>
+      </div>
+      
+      <div class="result" *ngIf="hashedText">
+        <div class="result-label">Hash:</div>
+        <div class="result-text hash-text">{{ hashedText }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(hashedText)">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Generator Section -->
+  <div class="section">
+    <h3>Password Generator</h3>
+    <div class="input-group">
+      <div class="password-controls">
+        <div class="length-control">
+          <label for="passwordLength">Length:</label>
+          <input type="number" id="passwordLength" [(ngModel)]="passwordLength" min="4" max="128">
+        </div>
+        
+        <div class="options-group">
+          <label><input type="checkbox" [(ngModel)]="includeUppercase"> Uppercase (A-Z)</label>
+          <label><input type="checkbox" [(ngModel)]="includeLowercase"> Lowercase (a-z)</label>
+          <label><input type="checkbox" [(ngModel)]="includeNumbers"> Numbers (0-9)</label>
+          <label><input type="checkbox" [(ngModel)]="includeSymbols"> Symbols (#$%)</label>
+        </div>
+        
+        <div class="button-group">
+          <button (click)="generatePassword()">Generate Password</button>
+          <button (click)="generateMultiplePasswords(5)">Generate 5 Passwords</button>
+        </div>
+      </div>
+      
+      <div class="result" *ngIf="generatedPassword">
+        <div class="result-label">Generated Password(s):</div>
+        <div class="result-text password-text">{{ generatedPassword }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(generatedPassword)">📋 Copy</button>
       </div>
     </div>
   </div>
@@ -48,8 +200,16 @@
     
       <div class="result" *ngIf="generatedCharacters">
         <div class="result-label">Generated Characters ({{ generatedCharacters.length }}):</div>
-        <div class="generated-text">{{ generatedCharacters }}</div>
+        <div class="result-text">{{ generatedCharacters }}</div>
+        <button class="copy-btn" (click)="copyToClipboard(generatedCharacters)">📋 Copy</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Clear All Section -->
+  <div class="section">
+    <div class="clear-section">
+      <button class="clear-btn" (click)="clearAllFields()">Clear All Fields</button>
     </div>
   </div>
 </div>
