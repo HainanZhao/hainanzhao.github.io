@@ -45,9 +45,8 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          npm install -g npm@latest # Update npm to the latest version as specified by the user
           npm cache verify          # Verify and clear the npm cache as specified by the user
-          npm ci --loglevel verbose # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
+          npm i --loglevel verbose # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
 
       # Diagnostic: Check disk space and memory after npm ci (if it passes)
       - name: Check system resources (post-npm ci)
