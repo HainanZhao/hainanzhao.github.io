@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { evaluate } from 'mathjs';
 
 @Component({
   selector: 'app-calculator',
@@ -9,27 +10,19 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule here
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent {
-  operand1: number = 0;
-  operand2: number = 0;
+  expression: string = '';
   result: number | string = 0;
 
-  add() {
-    this.result = this.operand1 + this.operand2;
-  }
-
-  subtract() {
-    this.result = this.operand1 - this.operand2;
-  }
-
-  multiply() {
-    this.result = this.operand1 * this.operand2;
-  }
-
-  divide() {
-    if (this.operand2 === 0) {
-      this.result = 'Error: Division by zero';
-    } else {
-      this.result = this.operand1 / this.operand2;
+  evaluateExpression() {
+    try {
+      if (!this.expression || this.expression.trim() === '') {
+        this.result = ''; // Clear result if expression is empty
+        return;
+      }
+      this.result = evaluate(this.expression);
+    } catch (error) {
+      this.result = 'Error: Invalid expression';
+      console.error('Error evaluating expression:', error);
     }
   }
 }
