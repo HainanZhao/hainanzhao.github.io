@@ -1,9 +1,13 @@
-<nav>
-  <ul>
-    <li><a routerLink="/calculator" routerLinkActive="active">Calculator</a></li>
-    <li><a routerLink="/string-converter" routerLinkActive="active">String Converter</a></li>
-    <li><a routerLink="/csv-formatter" routerLinkActive="active">CSV Formatter</a></li>
-  </ul>
-</nav>
+<div class="app-container">
+  <nav>
+    <ul>
+      <li><a routerLink="/calculator" routerLinkActive="active">Calculator</a></li>
+      <li><a routerLink="/string-converter" routerLinkActive="active">String Converter</a></li>
+      <li><a routerLink="/csv-formatter" routerLinkActive="active">CSV Formatter</a></li>
+    </ul>
+  </nav>
 
-<router-outlet></router-outlet>
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
+</div>

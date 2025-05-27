@@ -1,0 +1,78 @@
+.app-container {
+  display: flex;
+  min-height: 100vh; /* Ensure container takes at least full viewport height */
+}
+
+nav {
+  width: 200px; /* Fixed width for the navigation panel */
+  flex-shrink: 0; /* Prevent nav from shrinking */
+  background-color: #f0f0f0; /* Example background color for nav */
+  padding: 20px;
+  border-right: 1px solid #ccc; /* Example border */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Override global style if any */
+  flex-direction: column; /* Stack nav items vertically */
+}
+
+nav ul li a {
+  display: block; /* Make links block-level for full-width click area */
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px; /* Optional: for rounded corners */
+  margin-bottom: 5px; /* Spacing between nav items */
+}
+
+nav ul li a.active {
+  background-color: #007bff; /* Example active link background */
+  color: white;
+}
+
+nav ul li a:hover {
+  background-color: #e9e9e9; /* Example hover background */
+}
+
+/* Styles for the main content area (where router-outlet is) */
+/* We can apply styles directly to the host of router-outlet or wrap it if needed.
+   For simplicity, let's assume router-outlet itself (or its direct parent if structure changes)
+   will be the flex item. If router-outlet is directly inside .app-container,
+   we need a way to target it. Angular's router-outlet doesn't directly accept class/style bindings
+   in the same way as regular HTML elements for direct flex item styling.
+   A common practice is to wrap <router-outlet> in a div if specific styling is needed for the container.
+   However, if <router-outlet> is the direct child, flex-grow can be applied to it via a wrapping div
+   or by targeting it specifically if the browser/Angular version supports it.
+   Let's assume we add a class to a div wrapping router-outlet for clarity, e.g., 'content-area'.
+   If not, these styles might need to be adjusted or applied to a more general selector.
+*/
+
+/* If router-outlet is wrapped in a div with class "content-area" */
+.content-area { /* This class would be on the div wrapping <router-outlet> */
+  flex-grow: 1; /* Takes up the remaining space */
+  padding: 20px;
+  background-color: #ffffff; /* Example background for content */
+}
+
+/* Since router-outlet is a direct child of .app-container as per previous step,
+   we might need to reconsider how to apply flex-grow.
+   A simple way without adding another wrapper is to ensure .app-container's children
+   are treated as flex items. The nav is already set to not grow/shrink.
+   The router-outlet will naturally take up the remaining space if it's the only other child.
+   However, for explicit control and padding, a wrapper div for router-outlet is better.
+   Let's assume for now router-outlet itself will expand.
+   If not, the HTML structure in app.component.html might need adjustment (add a wrapper div).
+*/
+
+/*
+  If you don't want to add a wrapper around <router-outlet> in the HTML,
+  and assuming <router-outlet> is a direct child of .app-container,
+  you might rely on its default flex behavior or target it using :host / ng-deep (less ideal).
+  A cleaner approach for styling the content area is to wrap <router-outlet>.
+
+  Let's adjust app.component.html to include a wrapper for router-outlet for better styling.
+  Then, the .content-area styles above will apply correctly.
+*/
