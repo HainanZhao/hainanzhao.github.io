@@ -46,7 +46,7 @@ jobs:
       - name: Install project dependencies
         run: |
           npm cache verify          # Verify and clear the npm cache as specified by the user
-          npm i --loglevel verbose # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
+          npm i # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
 
       # Diagnostic: Check disk space and memory after npm ci (if it passes)
       - name: Check system resources (post-npm ci)
@@ -93,7 +93,6 @@ jobs:
           # Upload the Angular build output directory.
           # This should be the same directory determined in the previous step.
           path: |
-            dist/debugi # Adjust this if your Angular build output is different (e.g., dist/browser)
             dist/browser # Include both possibilities, action will pick existing one
 
       - name: Deploy to GitHub Pages
