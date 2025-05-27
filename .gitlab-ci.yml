@@ -7,28 +7,29 @@ cache:
 pages: # This job is automatically recognized by GitLab Pages
   stage: deploy
   script:
-    - npm install -g @angular/cli@latest # Install Angular CLI
-    - npm install # Install project dependencies
-    # Build the Angular app for production.
-    # Adjust 'common-utils-ui' in base-href if your GitLab repository has a different name or path.
-    # The output path might be 'dist/common-utils-ui' or 'dist/browser' depending on Angular version.
-    # Check the actual output path after `ng build` if there are issues.
-    - ng build --configuration production --base-href /common-utils-ui/
-    # GitLab Pages expects artifacts in a 'public' directory.
-    # Copy the build output to 'public'. Adjust 'dist/common-utils-ui' if your build output is different.
-    - rm -rf public # Clean up previous public directory if any
-    - mkdir public
-    # Try to determine the correct build output directory.
-    # Angular 17+ often uses 'dist/browser'. Older versions might use 'dist/project-name'.
+    - npm install -g @angular/cli@latest
+    - npm install
+    - ng build --configuration production --base-href /common-utils-ui/ # Assumes project name is common-utils-ui
+    - echo "Verifying build output..."
     - |
-      if [ -d "dist/common-utils-ui" ]; then
-        cp -r dist/common-utils-ui/* public/
-      elif [ -d "dist/browser" ]; then
-        cp -r dist/browser/* public/
-      else
-        echo "Build output directory not found. Please check your angular.json or build process."
+      if [ ! -f "dist/common-utils-ui/index.html" ]; then
+        echo "ERROR: index.html not found in dist/common-utils-ui/"
+        ls -la dist/common-utils-ui/ # List contents for debugging
         exit 1
       fi
+    - echo "Build output verified. Preparing public directory..."
+    - rm -rf public
+    - mkdir public
+    - echo "Copying build artifacts from dist/common-utils-ui/ to public/"
+    - cp -r dist/common-utils-ui/* public/
+    - echo "Verifying public directory contents..."
+    - |
+      if [ ! -f "public/index.html" ]; then
+        echo "ERROR: index.html not found in public/ after copy!"
+        ls -la public/ # List contents for debugging
+        exit 1
+      fi
+    - echo "Successfully copied artifacts to public directory."
   artifacts:
     paths:
       - public # GitLab Pages will serve files from this directory
