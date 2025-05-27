@@ -5,7 +5,7 @@ name: Deploy Angular App to GitHub Pages
 on:
   push:
     branches:
-      - master # Or 'master', depending on your default branch name
+      - master # Using 'master' as specified by the user
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -30,16 +30,33 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Use Node.js 18, matching your GitLab CI
+          node-version: '22' # Updated to Node.js 22 as specified by the user
+
+      # Diagnostic: Check disk space and memory before npm ci
+      - name: Check system resources (pre-npm ci)
+        run: |
+          echo "--- Disk Usage ---"
+          df -h
+          echo "--- Memory Usage ---"
+          free -h
 
       - name: Install Angular CLI (globally)
         run: npm install -g @angular/cli@latest # Install Angular CLI globally
 
       - name: Install project dependencies
-        run: | 
-          npm install -g npm@latest # Update npm to the latest version
-          npm cache verify          # Verify and clear the npm cache
-          npm ci  
+        run: |
+          npm install -g npm@latest # Update npm to the latest version as specified by the user
+          npm cache verify          # Verify and clear the npm cache as specified by the user
+          npm ci --loglevel verbose # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
+
+      # Diagnostic: Check disk space and memory after npm ci (if it passes)
+      - name: Check system resources (post-npm ci)
+        if: success() # Only run if npm ci succeeds
+        run: |
+          echo "--- Disk Usage ---"
+          df -h
+          echo "--- Memory Usage ---"
+          free -h
 
       - name: Build Angular application
         run: |
@@ -72,7 +89,7 @@ jobs:
         uses: actions/configure-pages@v5 # Configures GitHub Pages with a specified build directory
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3 # Corrected to v3 as v4 does not exist for this action
         with:
           # Upload the Angular build output directory.
           # This should be the same directory determined in the previous step.
