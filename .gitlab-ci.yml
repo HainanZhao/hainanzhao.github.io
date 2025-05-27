@@ -13,7 +13,7 @@ pages: # This job is automatically recognized by GitLab Pages
     # Adjust 'common-utils-ui' in base-href if your GitLab repository has a different name or path.
     # The output path might be 'dist/common-utils-ui' or 'dist/browser' depending on Angular version.
     # Check the actual output path after `ng build` if there are issues.
-    - ng build --configuration production --base-href /common-utils-ui/
+    - ng build --configuration production --base-href /debugi/
     # GitLab Pages expects artifacts in a 'public' directory.
     # Copy the build output to 'public'. Adjust 'dist/common-utils-ui' if your build output is different.
     - rm -rf public # Clean up previous public directory if any
@@ -21,8 +21,8 @@ pages: # This job is automatically recognized by GitLab Pages
     # Try to determine the correct build output directory.
     # Angular 17+ often uses 'dist/browser'. Older versions might use 'dist/project-name'.
     - |
-      if [ -d "dist/common-utils-ui" ]; then
-        cp -r dist/common-utils-ui/* public/
+      if [ -d "dist/debugi" ]; then
+        cp -r dist/debugi/* public/
       elif [ -d "dist/browser" ]; then
         cp -r dist/browser/* public/
       else
