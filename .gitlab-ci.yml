@@ -21,10 +21,8 @@ pages: # This job is automatically recognized by GitLab Pages
     # Try to determine the correct build output directory.
     # Angular 17+ often uses 'dist/browser'. Older versions might use 'dist/project-name'.
     - |
-      if [ -d "dist/debugi" ]; then
-        cp -r dist/debugi/* public/
-      elif [ -d "dist/browser" ]; then
-        cp -r dist/browser/* public/
+      if [ -d "dist/browser" ]; then
+        cp -r dist/browser* public/
       else
         echo "Build output directory not found. Please check your angular.json or build process."
         exit 1
