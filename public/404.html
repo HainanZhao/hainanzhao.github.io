@@ -7,11 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
-    // GitHub Pages SPA redirect handler for subdirectory deployment
+    // GitHub Pages SPA redirect hack for subdirectory deployment
+    // Redirects from /debugi/route to /debugi/?/route
     (function(l) {
-      if (l.search.startsWith('?/')) {
-        var path = l.search.slice(2) + l.hash;
-        window.history.replaceState(null, null, '/debugi/' + path);
+      if (l.pathname.startsWith('/debugi/') && l.pathname !== '/debugi/') {
+        var path = l.pathname.replace('/debugi/', '/debugi/?/');
+        window.history.replaceState(null, null, path + l.search + l.hash);
       }
     }(window.location))
   </script>

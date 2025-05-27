@@ -64,7 +64,7 @@ jobs:
           # For a project page (e.g., https://<username>.github.io/<repo-name>/), use /<repo-name>/
           # For a user/organization page (e.g., https://<username>.github.io/), use /
           # Replace 'your-repo-name' with your actual GitHub repository name.
-          ng build --configuration production --base-href /debugi/
+          npm run build:gh-pages
 
       - name: Add .nojekyll file
         # This prevents GitHub Pages from trying to build your Angular app with Jekyll,
