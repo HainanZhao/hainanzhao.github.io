@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SearchService } from '../shared/services/search.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface RegexMatch {
   match: string;
@@ -23,11 +25,30 @@ interface TestResult {
   templateUrl: './regex-tester.component.html',
   styleUrls: ['./regex-tester.component.css']
 })
-export class RegexTesterComponent {
+export class RegexTesterComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  highlightedSection = '';
+  
   regexPattern: string = '';
   testString: string = '';
   flags: string = 'g';
   testResult: TestResult | null = null;
+
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit() {
+    // Subscribe to section highlighting
+    this.searchService.highlightedSection$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(sectionId => {
+        this.highlightedSection = sectionId;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
   
   // Predefined regex examples
   regexExamples = [

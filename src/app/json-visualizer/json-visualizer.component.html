@@ -2,7 +2,7 @@
   <h2 class="title">JSON Visualizer</h2>
   
   <!-- JSON Input Section -->
-  <div class="section">
+  <div id="json-input" class="section" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Input</h3>
     <div class="input-group">
       <label for="jsonInput">Enter JSON data:</label>
@@ -29,7 +29,7 @@
   </div>
 
   <!-- Visualization Controls -->
-  <div class="section" *ngIf="parsedJson && !errorMessage">
+  <div id="visualization-controls" class="section" [class.highlighted]="highlightedSection === 'visualization-controls'" *ngIf="parsedJson && !errorMessage">
     <h3>Visualization Options</h3>
     <div class="input-group">
       <label for="visualizationType">Visualization Type:</label>
@@ -58,7 +58,7 @@
   </div>
 
   <!-- Visualization Section -->
-  <div class="section visualization-section" *ngIf="parsedJson && !errorMessage">
+  <div id="json-visualization" class="section visualization-section" [class.highlighted]="highlightedSection === 'json-visualization'" *ngIf="parsedJson && !errorMessage">
     <h3>Visualization</h3>
     <div class="visualization-container">
       <div #svgContainer class="svg-container"></div>

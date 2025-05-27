@@ -2,7 +2,7 @@
   <h2 class="title">Regex Tester</h2>
   
   <!-- Regex Input Section -->
-  <div class="section">
+  <div class="section" id="regex-input">
     <h3>Regular Expression</h3>
     <div class="input-group">
       <label for="regexPattern">Regex Pattern:</label>
@@ -46,7 +46,7 @@
   </div>
 
   <!-- Test String Section -->
-  <div class="section">
+  <div class="section" id="test-string">
     <h3>Test String</h3>
     <div class="input-group">
       <label for="testString">Text to test against:</label>
@@ -61,7 +61,7 @@
   </div>
 
   <!-- Results Section -->
-  <div class="section" *ngIf="testResult && testResult.isValid">
+  <div class="section" id="results" *ngIf="testResult && testResult.isValid">
     <h3>Results</h3>
     
     <div class="results-summary">
@@ -121,7 +121,7 @@
   </div>
 
   <!-- Regex Examples Section -->
-  <div class="section">
+  <div class="section" id="regex-examples">
     <h3>Common Regex Examples</h3>
     <div class="examples-grid">
       <div class="example-item" *ngFor="let example of regexExamples">
@@ -140,7 +140,7 @@
   </div>
 
   <!-- Regex Help Section -->
-  <div class="section">
+  <div class="section" id="quick-reference">
     <h3>Quick Reference</h3>
     <div class="help-content">
       <div class="help-column">

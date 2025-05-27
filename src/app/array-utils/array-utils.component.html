@@ -1,32 +1,38 @@
 <div class="container">
   <h2 class="title">Array Utilities</h2>
   
-  <div class="input-group">
-    <label for="arrayInput">Enter comma-separated values:</label>
-    <input id="arrayInput" type="text" [(ngModel)]="arrayInput" placeholder="1, 2, 3, 4, 5">
-    
-    <div class="button-group">
-      <button (click)="shuffleArray()">Shuffle Array</button>
-      <button (click)="uniqueArray()">Get Unique Values</button>
-    </div>
+  <div class="section" id="array-manipulation">
+    <h3>Array Manipulation</h3>
+    <div class="input-group">
+      <label for="arrayInput">Enter comma-separated values:</label>
+      <input id="arrayInput" type="text" [(ngModel)]="arrayInput" placeholder="1, 2, 3, 4, 5">
+      
+      <div class="button-group">
+        <button (click)="shuffleArray()">Shuffle Array</button>
+        <button (click)="uniqueArray()">Get Unique Values</button>
+      </div>
 
-    <div class="result" *ngIf="arrayResult">
-      <div class="result-label">Result:</div>
-      <div>{{arrayResult}}</div>
+      <div class="result" *ngIf="arrayResult">
+        <div class="result-label">Result:</div>
+        <div>{{arrayResult}}</div>
+      </div>
     </div>
   </div>
 
-  <div class="input-group">
-    <label for="rangeInput">Enter number to create range (1 to N):</label>
-    <input id="rangeInput" type="number" [(ngModel)]="rangeInput" placeholder="10" min="1">
-    
-    <div class="button-group">
-      <button (click)="createRange()">Create Range</button>
-    </div>
+  <div class="section" id="array-generation">
+    <h3>Array Generation</h3>
+    <div class="input-group">
+      <label for="rangeInput">Enter number to create range (1 to N):</label>
+      <input id="rangeInput" type="number" [(ngModel)]="rangeInput" placeholder="10" min="1">
+      
+      <div class="button-group">
+        <button (click)="createRange()">Create Range</button>
+      </div>
 
-    <div class="result" *ngIf="rangeResult">
-      <div class="result-label">Range Result:</div>
-      <div>{{rangeResult}}</div>
+      <div class="result" *ngIf="rangeResult">
+        <div class="result-label">Range Result:</div>
+        <div>{{rangeResult}}</div>
+      </div>
     </div>
   </div>
 </div>

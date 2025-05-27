@@ -2,7 +2,7 @@
   <h2 class="title">String Utilities</h2>
   
   <!-- String Case Conversion Section -->
-  <div class="section">
+  <div id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
     <h3>String Case Converter</h3>
     <div class="input-group">
       <label for="inputText">Enter text:</label>
@@ -26,7 +26,7 @@
   </div>
 
   <!-- Text Analysis Section -->
-  <div class="section" *ngIf="textAnalysis.characterCount">
+  <div id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'" *ngIf="textAnalysis.characterCount">
     <h3>Text Analysis</h3>
     <div class="analysis-grid">
       <div class="stat-item">
@@ -66,7 +66,7 @@
   </div>
 
   <!-- Text Manipulation Section -->
-  <div class="section">
+  <div id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
     <h3>Text Manipulation</h3>
     <div class="input-group">
       <div class="manipulation-controls">
@@ -102,7 +102,7 @@
   </div>
 
   <!-- Encoding/Decoding Section -->
-  <div class="section">
+  <div id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
     <h3>Encoding & Decoding</h3>
     <div class="input-group">
       <div class="button-group">
@@ -129,7 +129,7 @@
   </div>
 
   <!-- Hash Generation Section -->
-  <div class="section">
+  <div id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
     <h3>Hash Generation</h3>
     <div class="input-group">
       <div class="button-group">
@@ -146,7 +146,7 @@
   </div>
 
   <!-- Password Generator Section -->
-  <div class="section">
+  <div id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
     <h3>Password Generator</h3>
     <div class="input-group">
       <div class="password-controls">
@@ -177,7 +177,7 @@
   </div>
 
   <!-- Random Character Generator Section -->
-  <div class="section">
+  <div id="random-generator" class="section" [class.highlighted]="highlightedSection === 'random-generator'">
     <h3>Random Character Generator</h3>
     <div class="input-group">
       <label for="characterCount">Number of characters:</label>

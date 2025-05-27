@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SearchService } from '../shared/services/search.service';
+import { Subscription } from 'rxjs';
 
 interface CsvStats {
   rows: number;
@@ -17,9 +19,12 @@ interface CsvStats {
   templateUrl: './csv-to-sheets-formatter.component.html',
   styleUrls: ['./csv-to-sheets-formatter.component.css']
 })
-export class CsvToSheetsFormatterComponent {
+export class CsvToSheetsFormatterComponent implements OnInit, OnDestroy {
   csvInput: string = '';
   csvOutput: string = '';
+  
+  // Search integration
+  private highlightSubscription?: Subscription;
   
   // Configuration options
   delimiter: string = ',';
@@ -42,6 +47,29 @@ John Doe,30,New York,john@example.com
 Jane Smith,25,Los Angeles,jane@example.com
 Bob Johnson,35,Chicago,bob@example.com
 Alice Brown,28,Houston,alice@example.com`;
+
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit() {
+    this.highlightSubscription = this.searchService.highlightedSection$.subscribe((section: string | null) => {
+      if (section) {
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.classList.add('highlighted');
+            setTimeout(() => element.classList.remove('highlighted'), 3000);
+          }
+        }, 100);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.highlightSubscription) {
+      this.highlightSubscription.unsubscribe();
+    }
+  }
 
   formatForSheets() {
     if (!this.csvInput.trim()) {

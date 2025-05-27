@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SearchService } from '../shared/services/search.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-string-utils',
@@ -9,7 +11,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './string-utils.component.html',
   styleUrls: ['./string-utils.component.css']
 })
-export class StringUtilsComponent {
+export class StringUtilsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  highlightedSection = '';
+
   // Case conversion properties
   inputText: string = '';
   convertedText: string = '';
@@ -40,6 +45,22 @@ export class StringUtilsComponent {
   includeNumbers: boolean = true;
   includeSymbols: boolean = false;
   generatedPassword: string = '';
+
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit() {
+    // Subscribe to section highlighting
+    this.searchService.highlightedSection$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(sectionId => {
+        this.highlightedSection = sectionId;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   convertToUppercase() {
     this.convertedText = this.inputText.toUpperCase();

@@ -1,6 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SearchService } from '../shared/services/search.service';
+import { Subject, takeUntil } from 'rxjs';
 import * as d3 from 'd3';
 
 interface JsonNode {
@@ -18,8 +20,11 @@ interface JsonNode {
   templateUrl: './json-visualizer.component.html',
   styleUrls: ['./json-visualizer.component.css']
 })
-export class JsonVisualizerComponent implements OnInit, AfterViewInit {
+export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
+  
+  private destroy$ = new Subject<void>();
+  highlightedSection = '';
   
   jsonInput: string = `{
   "name": "John Doe",
@@ -51,8 +56,22 @@ export class JsonVisualizerComponent implements OnInit, AfterViewInit {
   private height = 800;  // Increased from 600
   private margin = { top: 20, right: 120, bottom: 20, left: 120 };
 
+  constructor(private searchService: SearchService) {}
+
   ngOnInit() {
     this.parseJson();
+    
+    // Subscribe to section highlighting
+    this.searchService.highlightedSection$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(sectionId => {
+        this.highlightedSection = sectionId;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngAfterViewInit() {

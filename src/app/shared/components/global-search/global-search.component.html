@@ -1,0 +1,104 @@
+<div class="search-overlay" [class.visible]="isVisible">
+  <div class="search-modal" (click)="$event.stopPropagation()">
+    <div class="search-header">
+      <div class="search-input-container">
+        <span class="search-icon">🔍</span>
+        <input 
+          #searchInput
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearchChange()"
+          placeholder="Search utilities... (Ctrl+K)"
+          class="search-input"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="close-button" (click)="hideSearch()">✕</button>
+      </div>
+    </div>
+
+    <div class="search-content" *ngIf="searchQuery.trim()">
+      <div class="search-results" *ngIf="searchResults.length > 0">
+        <div class="results-header">
+          <span class="results-count">{{searchResults.length}} result{{searchResults.length !== 1 ? 's' : ''}}</span>
+        </div>
+        
+        <div class="results-list">
+          <div 
+            *ngFor="let item of searchResults; let i = index"
+            class="result-item"
+            [class.selected]="i === selectedIndex"
+            (click)="selectResult(item, i)"
+            (mouseenter)="selectedIndex = i"
+          >
+            <div class="result-icon">{{getCategoryIcon(item.category)}}</div>
+            <div class="result-content">
+              <div class="result-title" [innerHTML]="highlightText(item.title, searchQuery)"></div>
+              <div class="result-description" [innerHTML]="highlightText(item.description, searchQuery)"></div>
+              <div class="result-meta">
+                <span class="result-category">{{item.category}}</span>
+                <span class="result-route">{{item.route}}</span>
+              </div>
+            </div>
+            <div class="result-action">
+              <span class="enter-hint" *ngIf="i === selectedIndex">⏎</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-results" *ngIf="searchResults.length === 0">
+        <div class="no-results-icon">🔍</div>
+        <div class="no-results-text">No results found for "{{searchQuery}}"</div>
+        <div class="no-results-hint">Try searching for features like "calculator", "case converter", or "json"</div>
+      </div>
+    </div>
+
+    <div class="search-empty" *ngIf="!searchQuery.trim()">
+      <div class="search-suggestions">
+        <div class="suggestions-header">Popular Features</div>
+        <div class="suggestion-categories">
+          <div class="suggestion-category">
+            <div class="category-header">🧮 Calculator</div>
+            <div class="category-items">
+              <span class="suggestion-item" (click)="searchQuery = 'calculator'; onSearchChange()">Basic Calculator</span>
+            </div>
+          </div>
+          
+          <div class="suggestion-category">
+            <div class="category-header">📝 String Utils</div>
+            <div class="category-items">
+              <span class="suggestion-item" (click)="searchQuery = 'case'; onSearchChange()">Case Converter</span>
+              <span class="suggestion-item" (click)="searchQuery = 'text analysis'; onSearchChange()">Text Analysis</span>
+              <span class="suggestion-item" (click)="searchQuery = 'password'; onSearchChange()">Password Generator</span>
+            </div>
+          </div>
+          
+          <div class="suggestion-category">
+            <div class="category-header">📋 CSV Utils</div>
+            <div class="category-items">
+              <span class="suggestion-item" (click)="searchQuery = 'csv'; onSearchChange()">CSV Converter</span>
+              <span class="suggestion-item" (click)="searchQuery = 'json export'; onSearchChange()">JSON Export</span>
+            </div>
+          </div>
+          
+          <div class="suggestion-category">
+            <div class="category-header">🌳 JSON & Regex</div>
+            <div class="category-items">
+              <span class="suggestion-item" (click)="searchQuery = 'json visualizer'; onSearchChange()">JSON Visualizer</span>
+              <span class="suggestion-item" (click)="searchQuery = 'regex'; onSearchChange()">Regex Tester</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-footer">
+      <div class="keyboard-shortcuts">
+        <span class="shortcut"><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+        <span class="shortcut"><kbd>⏎</kbd> Select</span>
+        <span class="shortcut"><kbd>Esc</kbd> Close</span>
+      </div>
+    </div>
+  </div>
+</div>

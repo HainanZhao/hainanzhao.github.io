@@ -2,7 +2,7 @@
   <h2 class="title">CSV Utilities</h2>
 
   <!-- Configuration Section -->
-  <div class="section">
+  <div class="section" id="csv-conversion">
     <h3>Configuration</h3>
     <div class="config-group">
       <div class="config-item">
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Input Section -->
-  <div class="section">
+  <div class="section" id="csv-input">
     <h3>CSV Input</h3>
     <div class="input-group">
       <label for="csvInput">Paste CSV Data:</label>
@@ -57,7 +57,7 @@
   </div>
 
   <!-- Statistics Section -->
-  <div class="section" *ngIf="csvStats">
+  <div class="section" id="csv-analysis" *ngIf="csvStats">
     <h3>CSV Statistics</h3>
     <div class="stats-grid">
       <div class="stat-item">
@@ -86,7 +86,7 @@
   </div>
 
   <!-- Data Manipulation Section -->
-  <div class="section" *ngIf="csvStats">
+  <div class="section" id="csv-manipulation" *ngIf="csvStats">
     <h3>Data Manipulation</h3>
     <div class="manipulation-controls">
       <div class="control-group">
@@ -136,7 +136,7 @@
   </div>
 
   <!-- Output Section -->
-  <div class="section" *ngIf="csvOutput">
+  <div class="section" id="csv-output" *ngIf="csvOutput">
     <h3>Output ({{ outputFormat.toUpperCase() }})</h3>
     <div class="output-group">
       <div class="output-controls">

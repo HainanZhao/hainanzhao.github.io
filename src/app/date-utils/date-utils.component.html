@@ -1,19 +1,22 @@
 <div class="container">
   <h2 class="title">Date Utilities</h2>
   
-  <div class="input-group">
-    <label for="dateInput">Select date:</label>
-    <input id="dateInput" type="date" [(ngModel)]="dateInput">
-    
-    <div class="button-group">
-      <button (click)="formatSelectedDate()">Format Date</button>
-      <button (click)="checkIfToday()">Check if Today</button>
-      <button (click)="addDaysToDate()">Add 7 Days</button>
-    </div>
+  <div class="section" id="date-conversion">
+    <h3>Date Operations</h3>
+    <div class="input-group">
+      <label for="dateInput">Select date:</label>
+      <input id="dateInput" type="date" [(ngModel)]="dateInput">
+      
+      <div class="button-group">
+        <button (click)="formatSelectedDate()">Format Date</button>
+        <button (click)="checkIfToday()">Check if Today</button>
+        <button (click)="addDaysToDate()">Add 7 Days</button>
+      </div>
 
-    <div class="result" *ngIf="dateResult">
-      <div class="result-label">Result:</div>
-      <div>{{dateResult}}</div>
+      <div class="result" *ngIf="dateResult">
+        <div class="result-label">Result:</div>
+        <div>{{dateResult}}</div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,1 +1,47 @@
-/* Using global styles from styles.css */
+/* Modern Array Utils Styles */
+
+.section {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-primary);
+  transition: var(--transition-smooth);
+}
+
+.section:hover {
+  border-color: var(--border-secondary);
+  background-color: var(--bg-tertiary);
+}
+
+.section h3 {
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Search highlighting functionality */
+.section.highlighted {
+  background-color: rgba(var(--accent-primary-rgb), 0.15);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  animation: pulse-highlight 2s ease-in-out;
+  transform: scale(1.01);
+  transition: all var(--transition-smooth);
+}
+
+@keyframes pulse-highlight {
+  0%, 100% { 
+    background-color: rgba(var(--accent-primary-rgb), 0.15);
+    box-shadow: var(--shadow-glow);
+  }
+  50% { 
+    background-color: rgba(var(--accent-primary-rgb), 0.25);
+    box-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.5);
+  }
+}

@@ -1,62 +1,82 @@
+/* Modern Regex Tester Styles */
+
 .section {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  border: 1px solid #444;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-primary);
+  transition: var(--transition-smooth);
+}
+
+.section:hover {
+  border-color: var(--border-secondary);
+  background-color: var(--bg-tertiary);
 }
 
 .section h3 {
-  color: #0d7377;
-  margin-bottom: 1rem;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-md);
   font-size: 1.2rem;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section h4 {
-  color: #0d7377;
-  margin-bottom: 0.75rem;
+  color: var(--accent-secondary);
+  margin-bottom: var(--spacing-sm);
   font-size: 1rem;
+  font-weight: 500;
 }
 
 /* Regex Input Styles */
 .regex-input-container {
   display: flex;
   align-items: center;
-  background-color: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 4px;
-  padding: 0.5rem;
-  font-family: 'Courier New', monospace;
-  margin-bottom: 0.5rem;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+  font-family: var(--font-mono);
+  margin-bottom: var(--spacing-sm);
+  transition: var(--transition-smooth);
+}
+
+.regex-input-container:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
 }
 
 .regex-delimiter {
-  color: #0d7377;
+  color: var(--accent-primary);
   font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0.25rem;
+  font-weight: 700;
+  margin: 0 var(--spacing-xs);
 }
 
 .regex-input {
   flex: 1;
   background: transparent;
   border: none;
-  color: #e0e0e0;
-  font-family: 'Courier New', monospace;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   outline: none;
-  padding: 0.25rem;
+  padding: var(--spacing-xs);
 }
 
 .flags-input {
   width: 60px;
   background: transparent;
   border: none;
-  color: #ff9800;
-  font-family: 'Courier New', monospace;
+  color: var(--accent-warning);
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   outline: none;
-  padding: 0.25rem;
+  padding: var(--spacing-xs);
   text-align: center;
 }
 
@@ -308,6 +328,27 @@
 .error-label {
   font-weight: bold;
   margin-bottom: 0.25rem;
+}
+
+/* Search highlighting functionality */
+.section.highlighted {
+  background-color: rgba(13, 115, 119, 0.15);
+  border-color: #0d7377;
+  box-shadow: 0 0 10px rgba(13, 115, 119, 0.3);
+  animation: pulse-highlight 2s ease-in-out;
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse-highlight {
+  0%, 100% { 
+    background-color: rgba(13, 115, 119, 0.15);
+    box-shadow: 0 0 10px rgba(13, 115, 119, 0.3);
+  }
+  50% { 
+    background-color: rgba(13, 115, 119, 0.25);
+    box-shadow: 0 0 20px rgba(13, 115, 119, 0.5);
+  }
 }
 
 /* Responsive Design */
