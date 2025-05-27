@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>CSV to Sheets Formatter</h2>
+  <div>
+    <label for="csvInput">Paste CSV Data:</label>
+    <textarea id="csvInput" [(ngModel)]="csvInput" rows="5" placeholder="e.g., header1,header2,header3\nvalue1,value2,value3"></textarea>
+  </div>
+  <div>
+    <button (click)="formatForSheets()">Format for Sheets</button>
+  </div>
+  <div>
+    <h3>Formatted Output (for Google Sheets):</h3>
+    <textarea id="sheetsOutput" [(ngModel)]="sheetsOutput" rows="5" readonly placeholder="Formatted data will appear here..."></textarea>
+  </div>
+</div>
