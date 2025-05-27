@@ -1,0 +1,55 @@
+<div class="container">
+  <h2 class="title">String Utilities</h2>
+  
+  <!-- String Case Conversion Section -->
+  <div class="section">
+    <h3>String Case Converter</h3>
+    <div class="input-group">
+      <label for="inputText">Enter text:</label>
+      <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..."></textarea>
+    
+      <div class="button-group">
+        <button (click)="convertToUppercase()">UPPERCASE</button>
+        <button (click)="convertToLowercase()">lowercase</button>
+        <button (click)="convertToCamelCase()">camelCase</button>
+        <button (click)="convertToPascalCase()">PascalCase</button>
+        <button (click)="convertToKebabCase()">kebab-case</button>
+        <button (click)="convertToSnakeCase()">snake_case</button>
+      </div>
+    
+      <div class="result" *ngIf="convertedText">
+        <div class="result-label">Converted Text:</div>
+        <div>{{ convertedText }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Random Character Generator Section -->
+  <div class="section">
+    <h3>Random Character Generator</h3>
+    <div class="input-group">
+      <label for="characterCount">Number of characters:</label>
+      <input 
+        type="number" 
+        id="characterCount" 
+        [(ngModel)]="characterCount" 
+        min="1" 
+        max="1000"
+        placeholder="Enter number of characters"
+        (keyup.enter)="generateRandomCharacters()"
+      >
+    
+      <div class="button-group">
+        <button (click)="generateRandomCharacters()">Generate Mixed (A-Z, a-z, 0-9)</button>
+        <button (click)="generateRandomLetters()">Generate Letters Only</button>
+        <button (click)="generateRandomNumbers()">Generate Numbers Only</button>
+        <button (click)="generateRandomSpecialChars()">Generate Special Characters</button>
+      </div>
+    
+      <div class="result" *ngIf="generatedCharacters">
+        <div class="result-label">Generated Characters ({{ generatedCharacters.length }}):</div>
+        <div class="generated-text">{{ generatedCharacters }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { evaluate } from 'mathjs';
 
 @Component({
   selector: 'app-calculator',
   standalone: true, // Mark as standalone
-  imports: [FormsModule], // Import FormsModule
+  imports: [FormsModule, CommonModule], // Import FormsModule and CommonModule
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.css']
 })

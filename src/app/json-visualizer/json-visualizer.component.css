@@ -1,0 +1,251 @@
+.section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.section h3 {
+  color: #0d7377;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+/* JSON Input Styles */
+textarea {
+  min-height: 150px;
+  resize: vertical;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+select {
+  width: 200px;
+  padding: 0.5rem;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0d7377;
+}
+
+/* Visualization Container */
+.visualization-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.svg-container {
+  width: 100%;
+  min-height: 800px; /* Increased from 600px */
+}
+
+/* Make the visualization section larger */
+.visualization-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  border: 1px solid #444;
+  min-height: 900px; /* Added minimum height for larger section */
+}
+
+.visualization-section .visualization-container {
+  min-height: 850px; /* Increased height for container */
+}
+
+.no-visualization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #888;
+  font-style: italic;
+}
+
+.error-text {
+  color: #f44336;
+  margin: 0;
+}
+
+.info-text {
+  color: #888;
+  margin: 0;
+}
+
+/* D3 SVG Styles */
+:host ::ng-deep svg {
+  background-color: #1a1a1a;
+  border-radius: 4px;
+}
+
+/* Tree Layout Styles */
+:host ::ng-deep .link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2px;
+}
+
+:host ::ng-deep .node circle {
+  stroke: #0d7377;
+  stroke-width: 2px;
+}
+
+:host ::ng-deep .node-string circle {
+  fill: #4CAF50;
+}
+
+:host ::ng-deep .node-number circle {
+  fill: #2196F3;
+}
+
+:host ::ng-deep .node-boolean circle {
+  fill: #FF9800;
+}
+
+:host ::ng-deep .node-object circle {
+  fill: #9C27B0;
+}
+
+:host ::ng-deep .node-array circle {
+  fill: #F44336;
+}
+
+:host ::ng-deep .node text {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  fill: #e0e0e0;
+}
+
+/* Bubble Hierarchy Styles */
+:host ::ng-deep .bubble circle {
+  stroke: #0d7377;
+  stroke-width: 1px;
+}
+
+:host ::ng-deep .bubble-string circle {
+  fill: rgba(76, 175, 80, 0.7);
+}
+
+:host ::ng-deep .bubble-number circle {
+  fill: rgba(33, 150, 243, 0.7);
+}
+
+:host ::ng-deep .bubble-boolean circle {
+  fill: rgba(255, 152, 0, 0.7);
+}
+
+:host ::ng-deep .bubble-object circle {
+  fill: rgba(156, 39, 176, 0.7);
+}
+
+:host ::ng-deep .bubble-array circle {
+  fill: rgba(244, 67, 54, 0.7);
+}
+
+:host ::ng-deep .bubble text {
+  font-family: 'Courier New', monospace;
+  fill: #e0e0e0;
+  font-weight: bold;
+}
+
+/* Network Graph Styles */
+:host ::ng-deep .network-link {
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+:host ::ng-deep .network-node circle {
+  stroke: #0d7377;
+  stroke-width: 2px;
+  cursor: grab;
+}
+
+:host ::ng-deep .network-node:active circle {
+  cursor: grabbing;
+}
+
+:host ::ng-deep .network-node-string circle {
+  fill: #4CAF50;
+}
+
+:host ::ng-deep .network-node-number circle {
+  fill: #2196F3;
+}
+
+:host ::ng-deep .network-node-boolean circle {
+  fill: #FF9800;
+}
+
+:host ::ng-deep .network-node-object circle {
+  fill: #9C27B0;
+}
+
+:host ::ng-deep .network-node-array circle {
+  fill: #F44336;
+}
+
+:host ::ng-deep .network-node text {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  fill: #e0e0e0;
+  pointer-events: none;
+}
+
+/* Error Styles */
+.error {
+  background-color: #d32f2f;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.error-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+/* Visualization Info */
+.visualization-info {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.visualization-info strong {
+  color: #0d7377;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .visualization-container {
+    overflow-x: scroll;
+  }
+  
+  .svg-container {
+    min-width: 1000px; /* Updated to match new width */
+    min-height: 600px;  /* Smaller height on mobile */
+  }
+
+  .visualization-section {
+    min-height: 700px; /* Smaller on mobile */
+  }
+
+  .visualization-section .visualization-container {
+    min-height: 650px; /* Smaller on mobile */
+  }
+}

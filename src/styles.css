@@ -1,13 +1,17 @@
+/* Base styles - Dark Theme */
 body {
   font-family: sans-serif;
-  margin: 20px;
-  background-color: #f4f4f4;
+  margin: 0;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
+/* Navigation styles */
 nav {
-  background-color: #333;
+  background-color: #2d2d2d;
   padding: 10px;
   margin-bottom: 20px;
+  border-bottom: 1px solid #404040;
 }
 
 nav ul {
@@ -18,46 +22,109 @@ nav ul {
 }
 
 nav ul li a {
-  color: white;
+  color: #e0e0e0;
   text-decoration: none;
   padding: 10px 15px;
   display: block;
+  transition: background-color 0.2s;
 }
 
-nav ul li a:hover { /* , nav ul li a.active */
-  background-color: #555;
+nav ul li a:hover, nav ul li a.active {
+  background-color: #404040;
+  color: #ffffff;
 }
 
-.container { /* A general container for component content */
-  background-color: white;
+/* Common container layouts */
+.container {
+  width: 100%;
+  height: 100%;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
-/* Basic form styling */
-input[type="text"], input[type="number"], textarea {
-  width: calc(100% - 22px); /* Full width minus padding and border */
+.title {
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+/* Input group styles */
+.input-group {
+  background: #2d2d2d;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  border: 1px solid #404040;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+/* Form controls */
+input[type="text"], 
+input[type="number"], 
+input[type="date"],
+input[type="email"],
+textarea {
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  background-color: #3d3d3d;
+  border: 1px solid #555555;
   border-radius: 4px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+input[type="date"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0d7377;
+  background-color: #404040;
+}
+
+/* Button styles */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
 }
 
 button {
-  background-color: #007bff;
+  background-color: #0d7377;
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
-  margin-bottom: 10px;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #14a085;
 }
 
-/* Utility specific styling can be added to component CSS files */
+/* Result display */
+.result {
+  background: #2d2d2d;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #404040;
+  margin-top: 20px;
+}
+
+.result-label {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}

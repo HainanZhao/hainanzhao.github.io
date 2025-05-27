@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 class="title">Number Utilities</h2>
+  
+  <div class="input-group">
+    <label for="numberInput">Enter number:</label>
+    <input id="numberInput" type="number" [(ngModel)]="numberInput" step="0.01">
+    
+    <div class="clamp-inputs">
+      <label for="minValue">Min Value (for clamp):</label>
+      <input id="minValue" type="number" [(ngModel)]="minValue">
+      
+      <label for="maxValue">Max Value (for clamp):</label>
+      <input id="maxValue" type="number" [(ngModel)]="maxValue">
+    </div>
+
+    <div class="button-group">
+      <button (click)="applyRounding()">Round</button>
+      <button (click)="applyFormatCurrency()">Format as Currency</button>
+      <button (click)="applyClamp()">Clamp</button>
+    </div>
+
+    <div class="result" *ngIf="numberResult">
+      <div class="result-label">Result:</div>
+      <div>{{numberResult}}</div>
+    </div>
+  </div>
+</div>

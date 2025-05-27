@@ -1,0 +1,33 @@
+.section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.section h3 {
+  color: #0d7377;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.generated-text {
+  font-family: 'Courier New', monospace;
+  background-color: #1a1a1a;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  word-break: break-all;
+  font-size: 0.9rem;
+}
+
+/* Additional specific styles for this component */
+input[type="number"] {
+  width: 200px;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}

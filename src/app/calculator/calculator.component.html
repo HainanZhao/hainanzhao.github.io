@@ -1,14 +1,17 @@
 <div class="container">
-  <h2>Expression Calculator</h2>
-  <div>
+  <h2 class="title">Expression Calculator</h2>
+  
+  <div class="input-group">
     <label for="expression">Enter Expression:</label>
-    <input type="text" id="expression" [(ngModel)]="expression" placeholder="(1 + 2) * 3">
-  </div>
-  <div>
-    <button (click)="evaluateExpression()">Calculate</button>
-  </div>
-  <div>
-    <h3>Result:</h3>
-    <p>{{ result }}</p>
+    <input type="text" id="expression" [(ngModel)]="expression" placeholder="(1 + 2) * 3" (keydown.enter)="evaluateExpression()">
+  
+    <div class="button-group">
+      <button (click)="evaluateExpression()">Calculate</button>
+    </div>
+  
+    <div class="result" *ngIf="result">
+      <div class="result-label">Result:</div>
+      <div>{{ result }}</div>
+    </div>
   </div>
 </div>

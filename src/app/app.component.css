@@ -1,40 +1,42 @@
 .app-container {
   display: flex;
-  min-height: 100vh; /* Ensure container takes at least full viewport height */
+  min-height: 100vh;
+  background-color: #1a1a1a;
 }
 
 nav {
-  width: 200px; /* Fixed width for the navigation panel */
-  flex-shrink: 0; /* Prevent nav from shrinking */
-  background-color: #f0f0f0; /* Example background color for nav */
+  width: 200px;
+  flex-shrink: 0;
+  background-color: #2d2d2d;
   padding: 20px;
-  border-right: 1px solid #ccc; /* Example border */
+  border-right: 1px solid #404040;
 }
 
 nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: flex; /* Override global style if any */
-  flex-direction: column; /* Stack nav items vertically */
+  display: flex;
+  flex-direction: column;
 }
 
 nav ul li a {
-  display: block; /* Make links block-level for full-width click area */
+  display: block;
   padding: 10px 15px;
   text-decoration: none;
-  color: #333;
-  border-radius: 4px; /* Optional: for rounded corners */
-  margin-bottom: 5px; /* Spacing between nav items */
+  color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s;
 }
 
 nav ul li a.active {
-  background-color: #007bff; /* Example active link background */
+  background-color: #0d7377;
   color: white;
 }
 
 nav ul li a:hover {
-  background-color: #e9e9e9; /* Example hover background */
+  background-color: #404040;
 }
 
 /* Styles for the main content area (where router-outlet is) */
@@ -51,10 +53,11 @@ nav ul li a:hover {
 */
 
 /* If router-outlet is wrapped in a div with class "content-area" */
-.content-area { /* This class would be on the div wrapping <router-outlet> */
-  flex-grow: 1; /* Takes up the remaining space */
+.content-area {
+  flex-grow: 1;
   padding: 20px;
-  background-color: #ffffff; /* Example background for content */
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
 /* Since router-outlet is a direct child of .app-container as per previous step,
