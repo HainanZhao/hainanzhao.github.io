@@ -36,7 +36,7 @@ jobs:
         run: npm install -g @angular/cli@latest # Install Angular CLI globally
 
       - name: Install project dependencies
-        run: npm ci # 'npm ci' is preferred for CI/CD for reproducible builds
+        run: npm install # 'npm ci' is preferred for CI/CD for reproducible builds
 
       - name: Build Angular application
         run: |
