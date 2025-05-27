@@ -2,56 +2,52 @@
   <h2 class="title">String Utilities</h2>
   
   <!-- String Case Conversion Section -->
-  <div id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
+  <section id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
     <h3>String Case Converter</h3>
-    <div class="input-group">
-      <label for="inputText">Enter text:</label>
-      <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..." (input)="analyzeText()"></textarea>
-    
-      <div class="button-group">
-        <button (click)="convertToUppercase()">UPPERCASE</button>
-        <button (click)="convertToLowercase()">lowercase</button>
-        <button (click)="convertToCamelCase()">camelCase</button>
-        <button (click)="convertToPascalCase()">PascalCase</button>
-        <button (click)="convertToKebabCase()">kebab-case</button>
-        <button (click)="convertToSnakeCase()">snake_case</button>
-      </div>
-    
-      <div class="result" *ngIf="convertedText">
-        <div class="result-label">Converted Text:</div>
-        <div class="result-text">{{ convertedText }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(convertedText)">📋 Copy</button>
-      </div>
+    <label for="inputText">Enter text:</label>
+    <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..." (input)="analyzeText()"></textarea>
+  
+    <button (click)="convertToUppercase()">UPPERCASE</button>
+    <button (click)="convertToLowercase()">lowercase</button>
+    <button (click)="convertToCamelCase()">camelCase</button>
+    <button (click)="convertToPascalCase()">PascalCase</button>
+    <button (click)="convertToKebabCase()">kebab-case</button>
+    <button (click)="convertToSnakeCase()">snake_case</button>
+  
+    <div class="result" *ngIf="convertedText">
+      <span class="result-label">Converted Text:</span>
+      <span class="result-text">{{ convertedText }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(convertedText)">📋 Copy</button>
     </div>
-  </div>
+  </section>
 
   <!-- Text Analysis Section -->
-  <div id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'" *ngIf="textAnalysis.characterCount">
+  <section id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'" *ngIf="textAnalysis.characterCount">
     <h3>Text Analysis</h3>
     <div class="analysis-grid">
       <div class="stat-item">
-        <div class="stat-label">Characters</div>
-        <div class="stat-value">{{ textAnalysis.characterCount }}</div>
+        <span class="stat-label">Characters</span>
+        <span class="stat-value">{{ textAnalysis.characterCount }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Characters (no spaces)</div>
-        <div class="stat-value">{{ textAnalysis.characterCountNoSpaces }}</div>
+        <span class="stat-label">Characters (no spaces)</span>
+        <span class="stat-value">{{ textAnalysis.characterCountNoSpaces }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Words</div>
-        <div class="stat-value">{{ textAnalysis.wordCount }}</div>
+        <span class="stat-label">Words</span>
+        <span class="stat-value">{{ textAnalysis.wordCount }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Sentences</div>
-        <div class="stat-value">{{ textAnalysis.sentenceCount }}</div>
+        <span class="stat-label">Sentences</span>
+        <span class="stat-value">{{ textAnalysis.sentenceCount }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Paragraphs</div>
-        <div class="stat-value">{{ textAnalysis.paragraphCount }}</div>
+        <span class="stat-label">Paragraphs</span>
+        <span class="stat-value">{{ textAnalysis.paragraphCount }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Reading Time</div>
-        <div class="stat-value">{{ textAnalysis.readingTime }} min</div>
+        <span class="stat-label">Reading Time</span>
+        <span class="stat-value">{{ textAnalysis.readingTime }} min</span>
       </div>
     </div>
     
@@ -63,153 +59,133 @@
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 
   <!-- Text Manipulation Section -->
-  <div id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
+  <section id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
     <h3>Text Manipulation</h3>
-    <div class="input-group">
-      <div class="manipulation-controls">
-        <div class="find-replace">
-          <input type="text" [(ngModel)]="findText" placeholder="Find text...">
-          <input type="text" [(ngModel)]="replaceText" placeholder="Replace with...">
-          <button (click)="findAndReplace()">Find & Replace</button>
-        </div>
-        
-        <div class="button-group">
-          <button (click)="reverseText()">Reverse Text</button>
-          <button (click)="removeExtraSpaces()">Remove Extra Spaces</button>
-          <button (click)="removeLineBreaks()">Remove Line Breaks</button>
-          <button (click)="addLineNumbers()">Add Line Numbers</button>
-          <button (click)="sortLines()">Sort Lines</button>
-          <button (click)="removeDuplicateLines()">Remove Duplicates</button>
-        </div>
-        
-        <div class="extraction-group">
-          <h4>Extract Data</h4>
-          <button (click)="extractEmails()">Extract Emails</button>
-          <button (click)="extractUrls()">Extract URLs</button>
-          <button (click)="extractNumbers()">Extract Numbers</button>
-        </div>
-      </div>
-      
-      <div class="result" *ngIf="manipulatedText">
-        <div class="result-label">Manipulated Text:</div>
-        <div class="result-text">{{ manipulatedText }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(manipulatedText)">📋 Copy</button>
-      </div>
+    
+    <div class="find-replace">
+      <input type="text" [(ngModel)]="findText" placeholder="Find text...">
+      <input type="text" [(ngModel)]="replaceText" placeholder="Replace with...">
+      <button (click)="findAndReplace()">Find & Replace</button>
     </div>
-  </div>
+    
+    <button (click)="reverseText()">Reverse Text</button>
+    <button (click)="removeExtraSpaces()">Remove Extra Spaces</button>
+    <button (click)="removeLineBreaks()">Remove Line Breaks</button>
+    <button (click)="addLineNumbers()">Add Line Numbers</button>
+    <button (click)="sortLines()">Sort Lines</button>
+    <button (click)="removeDuplicateLines()">Remove Duplicates</button>
+    
+    <div class="extraction-group">
+      <h4>Extract Data</h4>
+      <button (click)="extractEmails()">Extract Emails</button>
+      <button (click)="extractUrls()">Extract URLs</button>
+      <button (click)="extractNumbers()">Extract Numbers</button>
+    </div>
+    
+    <div class="result" *ngIf="manipulatedText">
+      <span class="result-label">Manipulated Text:</span>
+      <span class="result-text">{{ manipulatedText }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(manipulatedText)">📋 Copy</button>
+    </div>
+  </section>
 
   <!-- Encoding/Decoding Section -->
-  <div id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
+  <section id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
     <h3>Encoding & Decoding</h3>
-    <div class="input-group">
-      <div class="button-group">
-        <button (click)="encodeBase64()">Encode Base64</button>
-        <button (click)="decodeBase64()">Decode Base64</button>
-        <button (click)="encodeURL()">Encode URL</button>
-        <button (click)="decodeURL()">Decode URL</button>
-        <button (click)="encodeHTML()">Encode HTML</button>
-        <button (click)="decodeHTML()">Decode HTML</button>
-      </div>
-      
-      <div class="result" *ngIf="encodedText">
-        <div class="result-label">Encoded Text:</div>
-        <div class="result-text">{{ encodedText }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(encodedText)">📋 Copy</button>
-      </div>
-      
-      <div class="result" *ngIf="decodedText">
-        <div class="result-label">Decoded Text:</div>
-        <div class="result-text">{{ decodedText }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(decodedText)">📋 Copy</button>
-      </div>
+    
+    <button (click)="encodeBase64()">Encode Base64</button>
+    <button (click)="decodeBase64()">Decode Base64</button>
+    <button (click)="encodeURL()">Encode URL</button>
+    <button (click)="decodeURL()">Decode URL</button>
+    <button (click)="encodeHTML()">Encode HTML</button>
+    <button (click)="decodeHTML()">Decode HTML</button>
+    
+    <div class="result" *ngIf="encodedText">
+      <span class="result-label">Encoded Text:</span>
+      <span class="result-text">{{ encodedText }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(encodedText)">📋 Copy</button>
     </div>
-  </div>
+    
+    <div class="result" *ngIf="decodedText">
+      <span class="result-label">Decoded Text:</span>
+      <span class="result-text">{{ decodedText }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(decodedText)">📋 Copy</button>
+    </div>
+  </section>
 
   <!-- Hash Generation Section -->
-  <div id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
+  <section id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
     <h3>Hash Generation</h3>
-    <div class="input-group">
-      <div class="button-group">
-        <button (click)="generateSHA256()">Generate SHA-256</button>
-        <button (click)="generateMD5()">Generate MD5 (Demo)</button>
-      </div>
-      
-      <div class="result" *ngIf="hashedText">
-        <div class="result-label">Hash:</div>
-        <div class="result-text hash-text">{{ hashedText }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(hashedText)">📋 Copy</button>
-      </div>
+    
+    <button (click)="generateSHA256()">Generate SHA-256</button>
+    <button (click)="generateMD5()">Generate MD5 (Demo)</button>
+    
+    <div class="result" *ngIf="hashedText">
+      <span class="result-label">Hash:</span>
+      <span class="result-text hash-text">{{ hashedText }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(hashedText)">📋 Copy</button>
     </div>
-  </div>
+  </section>
 
   <!-- Password Generator Section -->
-  <div id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
+  <section id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
     <h3>Password Generator</h3>
-    <div class="input-group">
-      <div class="password-controls">
-        <div class="length-control">
-          <label for="passwordLength">Length:</label>
-          <input type="number" id="passwordLength" [(ngModel)]="passwordLength" min="4" max="128">
-        </div>
-        
-        <div class="options-group">
-          <label><input type="checkbox" [(ngModel)]="includeUppercase"> Uppercase (A-Z)</label>
-          <label><input type="checkbox" [(ngModel)]="includeLowercase"> Lowercase (a-z)</label>
-          <label><input type="checkbox" [(ngModel)]="includeNumbers"> Numbers (0-9)</label>
-          <label><input type="checkbox" [(ngModel)]="includeSymbols"> Symbols (#$%)</label>
-        </div>
-        
-        <div class="button-group">
-          <button (click)="generatePassword()">Generate Password</button>
-          <button (click)="generateMultiplePasswords(5)">Generate 5 Passwords</button>
-        </div>
+    
+    <div class="password-controls">
+      <div class="length-control">
+        <label for="passwordLength">Length:</label>
+        <input type="number" id="passwordLength" [(ngModel)]="passwordLength" min="4" max="128">
       </div>
       
-      <div class="result" *ngIf="generatedPassword">
-        <div class="result-label">Generated Password(s):</div>
-        <div class="result-text password-text">{{ generatedPassword }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(generatedPassword)">📋 Copy</button>
+      <div class="options-group">
+        <label><input type="checkbox" [(ngModel)]="includeUppercase"> Uppercase (A-Z)</label>
+        <label><input type="checkbox" [(ngModel)]="includeLowercase"> Lowercase (a-z)</label>
+        <label><input type="checkbox" [(ngModel)]="includeNumbers"> Numbers (0-9)</label>
+        <label><input type="checkbox" [(ngModel)]="includeSymbols"> Symbols (#$%)</label>
       </div>
     </div>
-  </div>
+    
+    <button (click)="generatePassword()">Generate Password</button>
+    <button (click)="generateMultiplePasswords(5)">Generate 5 Passwords</button>
+    
+    <div class="result" *ngIf="generatedPassword">
+      <span class="result-label">Generated Password(s):</span>
+      <span class="result-text password-text">{{ generatedPassword }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(generatedPassword)">📋 Copy</button>
+    </div>
+  </section>
 
   <!-- Random Character Generator Section -->
-  <div id="random-generator" class="section" [class.highlighted]="highlightedSection === 'random-generator'">
+  <section id="random-generator" class="section" [class.highlighted]="highlightedSection === 'random-generator'">
     <h3>Random Character Generator</h3>
-    <div class="input-group">
-      <label for="characterCount">Number of characters:</label>
-      <input 
-        type="number" 
-        id="characterCount" 
-        [(ngModel)]="characterCount" 
-        min="1" 
-        max="1000"
-        placeholder="Enter number of characters"
-        (keyup.enter)="generateRandomCharacters()"
-      >
-    
-      <div class="button-group">
-        <button (click)="generateRandomCharacters()">Generate Mixed (A-Z, a-z, 0-9)</button>
-        <button (click)="generateRandomLetters()">Generate Letters Only</button>
-        <button (click)="generateRandomNumbers()">Generate Numbers Only</button>
-        <button (click)="generateRandomSpecialChars()">Generate Special Characters</button>
-      </div>
-    
-      <div class="result" *ngIf="generatedCharacters">
-        <div class="result-label">Generated Characters ({{ generatedCharacters.length }}):</div>
-        <div class="result-text">{{ generatedCharacters }}</div>
-        <button class="copy-btn" (click)="copyToClipboard(generatedCharacters)">📋 Copy</button>
-      </div>
+    <label for="characterCount">Number of characters:</label>
+    <input 
+      type="number" 
+      id="characterCount" 
+      [(ngModel)]="characterCount" 
+      min="1" 
+      max="1000"
+      placeholder="Enter number of characters"
+      (keyup.enter)="generateRandomCharacters()"
+    >
+  
+    <button (click)="generateRandomCharacters()">Generate Mixed (A-Z, a-z, 0-9)</button>
+    <button (click)="generateRandomLetters()">Generate Letters Only</button>
+    <button (click)="generateRandomNumbers()">Generate Numbers Only</button>
+    <button (click)="generateRandomSpecialChars()">Generate Special Characters</button>
+  
+    <div class="result" *ngIf="generatedCharacters">
+      <span class="result-label">Generated Characters ({{ generatedCharacters.length }}):</span>
+      <span class="result-text">{{ generatedCharacters }}</span>
+      <button class="copy-btn" (click)="copyToClipboard(generatedCharacters)">📋 Copy</button>
     </div>
-  </div>
+  </section>
 
   <!-- Clear All Section -->
-  <div class="section">
-    <div class="clear-section">
-      <button class="clear-btn" (click)="clearAllFields()">Clear All Fields</button>
-    </div>
-  </div>
+  <section class="section">
+    <button class="clear-btn" (click)="clearAllFields()">Clear All Fields</button>
+  </section>
 </div>

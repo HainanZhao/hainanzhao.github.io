@@ -2,75 +2,69 @@
   <h2 class="title">Regex Tester</h2>
   
   <!-- Regex Input Section -->
-  <div class="section" id="regex-input">
+  <section class="section" id="regex-input">
     <h3>Regular Expression</h3>
-    <div class="input-group">
-      <label for="regexPattern">Regex Pattern:</label>
-      <div class="regex-input-container">
-        <span class="regex-delimiter">/</span>
-        <input 
-          type="text" 
-          id="regexPattern" 
-          [(ngModel)]="regexPattern" 
-          placeholder="Enter your regex pattern here..."
-          (input)="onInputChange()"
-          class="regex-input"
-        >
-        <span class="regex-delimiter">/</span>
-        <input 
-          type="text" 
-          [(ngModel)]="flags" 
-          placeholder="flags"
-          (input)="onInputChange()"
-          class="flags-input"
-          maxlength="5"
-        >
-      </div>
-      
-      <div class="flags-info">
-        <small>
-          <strong>Flags:</strong> g (global), i (ignore case), m (multiline), s (dotall), u (unicode), y (sticky)
-        </small>
-      </div>
-      
-      <div class="button-group">
-        <button (click)="testRegex()">Test Regex</button>
-        <button (click)="clearAll()">Clear All</button>
-      </div>
-      
-      <div class="error" *ngIf="testResult && !testResult.isValid">
-        <div class="error-label">Error:</div>
-        <div>{{ testResult.errorMessage }}</div>
-      </div>
+    <label for="regexPattern">Regex Pattern:</label>
+    <div class="regex-input-container">
+      <span class="regex-delimiter">/</span>
+      <input 
+        type="text" 
+        id="regexPattern" 
+        [(ngModel)]="regexPattern" 
+        placeholder="Enter your regex pattern here..."
+        (input)="onInputChange()"
+        class="regex-input"
+      >
+      <span class="regex-delimiter">/</span>
+      <input 
+        type="text" 
+        [(ngModel)]="flags" 
+        placeholder="flags"
+        (input)="onInputChange()"
+        class="flags-input"
+        maxlength="5"
+      >
     </div>
-  </div>
+    
+    <div class="flags-info">
+      <small>
+        <strong>Flags:</strong> g (global), i (ignore case), m (multiline), s (dotall), u (unicode), y (sticky)
+      </small>
+    </div>
+    
+    <button (click)="testRegex()">Test Regex</button>
+    <button (click)="clearAll()">Clear All</button>
+    
+    <div class="error" *ngIf="testResult && !testResult.isValid">
+      <span class="error-label">Error:</span>
+      <span>{{ testResult.errorMessage }}</span>
+    </div>
+  </section>
 
   <!-- Test String Section -->
-  <div class="section" id="test-string">
+  <section class="section" id="test-string">
     <h3>Test String</h3>
-    <div class="input-group">
-      <label for="testString">Text to test against:</label>
-      <textarea 
-        id="testString" 
-        [(ngModel)]="testString" 
-        rows="4" 
-        placeholder="Enter the text you want to test your regex against..."
-        (input)="onInputChange()"
-      ></textarea>
-    </div>
-  </div>
+    <label for="testString">Text to test against:</label>
+    <textarea 
+      id="testString" 
+      [(ngModel)]="testString" 
+      rows="4" 
+      placeholder="Enter the text you want to test your regex against..."
+      (input)="onInputChange()"
+    ></textarea>
+  </section>
 
   <!-- Results Section -->
-  <div class="section" id="results" *ngIf="testResult && testResult.isValid">
+  <section class="section" id="results" *ngIf="testResult && testResult.isValid">
     <h3>Results</h3>
     
     <div class="results-summary">
-      <div class="match-count">
+      <span class="match-count">
         <strong>{{ testResult.matches.length }}</strong> match{{ testResult.matches.length !== 1 ? 'es' : '' }} found
-      </div>
-      <div class="flags-used" *ngIf="testResult.flags">
+      </span>
+      <span class="flags-used" *ngIf="testResult.flags">
         <strong>Flags used:</strong> {{ testResult.flags }}
-      </div>
+      </span>
     </div>
 
     <!-- Highlighted Text -->
@@ -118,10 +112,10 @@
     <div class="no-matches" *ngIf="testResult.matches.length === 0">
       <p>No matches found for this pattern.</p>
     </div>
-  </div>
+  </section>
 
   <!-- Regex Examples Section -->
-  <div class="section" id="regex-examples">
+  <section class="section" id="regex-examples">
     <h3>Common Regex Examples</h3>
     <div class="examples-grid">
       <div class="example-item" *ngFor="let example of regexExamples">
@@ -137,10 +131,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Regex Help Section -->
-  <div class="section" id="quick-reference">
+  <section class="section" id="quick-reference">
     <h3>Quick Reference</h3>
     <div class="help-content">
       <div class="help-column">
@@ -177,5 +171,5 @@
         </ul>
       </div>
     </div>
-  </div>
+  </section>
 </div>

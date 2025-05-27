@@ -2,75 +2,69 @@
   <h2 class="title">CSV Utilities</h2>
 
   <!-- Configuration Section -->
-  <div class="section" id="csv-conversion">
+  <section class="section" id="csv-conversion">
     <h3>Configuration</h3>
-    <div class="config-group">
-      <div class="config-item">
-        <label for="delimiter">Delimiter:</label>
-        <select id="delimiter" [(ngModel)]="delimiter" (change)="formatForSheets()">
-          <option value=",">Comma (,)</option>
-          <option value=";">Semicolon (;)</option>
-          <option value="\t">Tab</option>
-          <option value="|">Pipe (|)</option>
-        </select>
-      </div>
-      
-      <div class="config-item">
-        <label><input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()"> Has Headers</label>
-      </div>
-      
-      <div class="config-item">
-        <label for="outputFormat">Output Format:</label>
-        <select id="outputFormat" [(ngModel)]="outputFormat" (change)="formatForSheets()">
-          <option value="tabs">Tab-separated (Google Sheets)</option>
-          <option value="json">JSON</option>
-          <option value="sql">SQL</option>
-          <option value="html">HTML Table</option>
-          <option value="xml">XML</option>
-          <option value="markdown">Markdown</option>
-        </select>
-      </div>
-      
-      <button class="sample-btn" (click)="loadSampleData()">Load Sample Data</button>
+    <div class="config-item">
+      <label for="delimiter">Delimiter:</label>
+      <select id="delimiter" [(ngModel)]="delimiter" (change)="formatForSheets()">
+        <option value=",">Comma (,)</option>
+        <option value=";">Semicolon (;)</option>
+        <option value="\t">Tab</option>
+        <option value="|">Pipe (|)</option>
+      </select>
     </div>
-  </div>
+    
+    <div class="config-item">
+      <label><input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()"> Has Headers</label>
+    </div>
+    
+    <div class="config-item">
+      <label for="outputFormat">Output Format:</label>
+      <select id="outputFormat" [(ngModel)]="outputFormat" (change)="formatForSheets()">
+        <option value="tabs">Tab-separated (Google Sheets)</option>
+        <option value="json">JSON</option>
+        <option value="sql">SQL</option>
+        <option value="html">HTML Table</option>
+        <option value="xml">XML</option>
+        <option value="markdown">Markdown</option>
+      </select>
+    </div>
+    
+    <button class="sample-btn" (click)="loadSampleData()">Load Sample Data</button>
+  </section>
 
   <!-- Input Section -->
-  <div class="section" id="csv-input">
+  <section class="section" id="csv-input">
     <h3>CSV Input</h3>
-    <div class="input-group">
-      <label for="csvInput">Paste CSV Data:</label>
-      <textarea 
-        id="csvInput" 
-        [(ngModel)]="csvInput" 
-        rows="8" 
-        placeholder="e.g., Name,Age,City,Email&#10;John Doe,30,New York,john@example.com&#10;Jane Smith,25,Los Angeles,jane@example.com"
-        (input)="analyzeCSV()"
-      ></textarea>
-      
-      <div class="button-group">
-        <button (click)="formatForSheets()">Convert</button>
-        <button (click)="analyzeCSV()">Analyze</button>
-        <button (click)="clearData()">Clear</button>
-      </div>
-    </div>
-  </div>
+    <label for="csvInput">Paste CSV Data:</label>
+    <textarea 
+      id="csvInput" 
+      [(ngModel)]="csvInput" 
+      rows="8" 
+      placeholder="e.g., Name,Age,City,Email&#10;John Doe,30,New York,john@example.com&#10;Jane Smith,25,Los Angeles,jane@example.com"
+      (input)="analyzeCSV()"
+    ></textarea>
+    
+    <button (click)="formatForSheets()">Convert</button>
+    <button (click)="analyzeCSV()">Analyze</button>
+    <button (click)="clearData()">Clear</button>
+  </section>
 
   <!-- Statistics Section -->
-  <div class="section" id="csv-analysis" *ngIf="csvStats">
+  <section class="section" id="csv-analysis" *ngIf="csvStats">
     <h3>CSV Statistics</h3>
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-label">Rows</div>
-        <div class="stat-value">{{ csvStats.rows }}</div>
+        <span class="stat-label">Rows</span>
+        <span class="stat-value">{{ csvStats.rows }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Columns</div>
-        <div class="stat-value">{{ csvStats.columns }}</div>
+        <span class="stat-label">Columns</span>
+        <span class="stat-value">{{ csvStats.columns }}</span>
       </div>
       <div class="stat-item">
-        <div class="stat-label">Has Headers</div>
-        <div class="stat-value">{{ csvStats.hasHeaders ? 'Yes' : 'No' }}</div>
+        <span class="stat-label">Has Headers</span>
+        <span class="stat-value">{{ csvStats.hasHeaders ? 'Yes' : 'No' }}</span>
       </div>
     </div>
     
@@ -83,80 +77,68 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Data Manipulation Section -->
-  <div class="section" id="csv-manipulation" *ngIf="csvStats">
+  <section class="section" id="csv-manipulation" *ngIf="csvStats">
     <h3>Data Manipulation</h3>
-    <div class="manipulation-controls">
-      <div class="control-group">
-        <h4>Sort Data</h4>
-        <div class="sort-controls">
-          <select [(ngModel)]="sortColumn">
-            <option value="-1">Select column to sort...</option>
-            <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
-              {{ header }}
-            </option>
-          </select>
-          <select [(ngModel)]="sortDirection">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-          <button (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
-        </div>
-      </div>
-      
-      <div class="control-group">
-        <h4>Filter Data</h4>
-        <div class="filter-controls">
-          <select [(ngModel)]="filterColumn">
-            <option value="-1">Select column to filter...</option>
-            <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
-              {{ header }}
-            </option>
-          </select>
-          <input 
-            type="text" 
-            [(ngModel)]="filterValue" 
-            placeholder="Filter value..."
-            (input)="filterData()"
-          >
-          <button (click)="filterData()" [disabled]="filterColumn === -1 || !filterValue">Filter</button>
-        </div>
-      </div>
-      
-      <div class="control-group">
-        <h4>Data Operations</h4>
-        <div class="button-group">
-          <button (click)="removeDuplicates()">Remove Duplicates</button>
-          <button (click)="transoposeData()">Transpose</button>
-        </div>
-      </div>
+    <div class="control-group">
+      <h4>Sort Data</h4>
+      <select [(ngModel)]="sortColumn">
+        <option value="-1">Select column to sort...</option>
+        <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
+          {{ header }}
+        </option>
+      </select>
+      <select [(ngModel)]="sortDirection">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+      <button (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
     </div>
-  </div>
+    
+    <div class="control-group">
+      <h4>Filter Data</h4>
+      <select [(ngModel)]="filterColumn">
+        <option value="-1">Select column to filter...</option>
+        <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
+          {{ header }}
+        </option>
+      </select>
+      <input 
+        type="text" 
+        [(ngModel)]="filterValue" 
+        placeholder="Filter value..."
+        (input)="filterData()"
+      >
+      <button (click)="filterData()" [disabled]="filterColumn === -1 || !filterValue">Filter</button>
+    </div>
+    
+    <div class="control-group">
+      <h4>Data Operations</h4>
+      <button (click)="removeDuplicates()">Remove Duplicates</button>
+      <button (click)="transoposeData()">Transpose</button>
+    </div>
+  </section>
 
   <!-- Output Section -->
-  <div class="section" id="csv-output" *ngIf="csvOutput">
+  <section class="section" id="csv-output" *ngIf="csvOutput">
     <h3>Output ({{ outputFormat.toUpperCase() }})</h3>
-    <div class="output-group">
-      <div class="output-controls">
-        <button class="copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
-        <button class="download-btn" (click)="downloadAsFile(csvOutput, 'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat), outputFormat === 'json' ? 'application/json' : 'text/plain')">💾 Download</button>
-      </div>
-      
-      <textarea 
-        id="csvOutput" 
-        [(ngModel)]="csvOutput" 
-        rows="10" 
-        readonly 
-        placeholder="Converted data will appear here..."
-        class="output-textarea"
-      ></textarea>
-    </div>
-  </div>
+    <button class="copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
+    <button class="download-btn" (click)="downloadAsFile(csvOutput, 'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat), outputFormat === 'json' ? 'application/json' : 'text/plain')">💾 Download</button>
+    
+    <textarea 
+      id="csvOutput" 
+      [(ngModel)]="csvOutput" 
+      rows="10" 
+      readonly 
+      placeholder="Converted data will appear here..."
+      class="output-textarea"
+    ></textarea>
+  </section>
 
   <!-- Help Section -->
-  <div class="section">
+  <section class="section">
     <h3>Format Guide</h3>
     <div class="help-content">
       <div class="help-item">
@@ -189,5 +171,5 @@
         <p>Markdown table format for documentation and README files.</p>
       </div>
     </div>
-  </div>
+  </section>
 </div>

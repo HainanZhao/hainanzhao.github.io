@@ -1,24 +1,24 @@
 /* Modern Regex Tester Styles */
 
 .section {
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  background-color: var(--bg-secondary);
-  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: transparent;
+  border-radius: var(--border-radius-md);
   border: 1px solid var(--border-primary);
   transition: var(--transition-smooth);
 }
 
 .section:hover {
   border-color: var(--border-secondary);
-  background-color: var(--bg-tertiary);
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 .section h3 {
   color: var(--accent-primary);
   margin-bottom: var(--spacing-md);
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -113,23 +113,24 @@
 
 /* Highlighted Text */
 .highlighted-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .highlighted-text {
-  background-color: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 4px;
-  padding: 1rem;
-  font-family: 'Courier New', monospace;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
+  transition: var(--transition-smooth);
 }
 
 .highlighted-text :global(.highlight) {
-  background-color: #0d7377;
+  background-color: var(--accent-primary);
   color: #fff;
   padding: 2px 4px;
   border-radius: 2px;
@@ -138,49 +139,56 @@
 
 /* Match Details */
 .matches-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .match-item {
-  background-color: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-sm);
   overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.match-item:hover {
+  border-color: var(--border-secondary);
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 .match-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #444;
+  background-color: var(--bg-tertiary);
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .match-number {
   font-weight: bold;
-  color: #0d7377;
+  color: var(--accent-primary);
 }
 
 .copy-btn {
   background: none;
-  border: 1px solid #555;
-  color: #e0e0e0;
+  border: 1px solid var(--border-secondary);
+  color: var(--text-secondary);
   padding: 0.25rem 0.5rem;
-  border-radius: 3px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-size: 0.8rem;
-  transition: all 0.2s ease;
+  transition: var(--transition-smooth);
 }
 
 .copy-btn:hover {
-  background-color: #0d7377;
-  border-color: #0d7377;
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
 }
 
 .match-details {
-  padding: 1rem;
+  padding: var(--spacing-sm);
 }
 
 .match-details > div {
@@ -188,16 +196,16 @@
 }
 
 .match-text {
-  background-color: #0d7377;
+  background-color: var(--accent-primary);
   color: #fff;
   padding: 2px 6px;
   border-radius: 3px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-weight: bold;
 }
 
 .match-value, .match-position {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
 }
 
@@ -225,14 +233,20 @@
 .examples-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
 
 .example-item {
-  background-color: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 4px;
-  padding: 1rem;
+  background-color: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  transition: var(--transition-smooth);
+}
+
+.example-item:hover {
+  border-color: var(--border-secondary);
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 .example-header {
@@ -250,16 +264,16 @@
 .example-header button {
   padding: 0.25rem 0.75rem;
   font-size: 0.8rem;
-  background-color: #0d7377;
+  background-color: var(--accent-primary);
   border: none;
   color: white;
-  border-radius: 3px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: var(--transition-smooth);
 }
 
 .example-header button:hover {
-  background-color: #0a5f63;
+  background-color: var(--accent-secondary);
 }
 
 .example-pattern {

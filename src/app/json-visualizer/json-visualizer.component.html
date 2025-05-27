@@ -2,66 +2,58 @@
   <h2 class="title">JSON Visualizer</h2>
   
   <!-- JSON Input Section -->
-  <div id="json-input" class="section" [class.highlighted]="highlightedSection === 'json-input'">
+  <section id="json-input" class="section" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Input</h3>
-    <div class="input-group">
-      <label for="jsonInput">Enter JSON data:</label>
-      <textarea 
-        id="jsonInput" 
-        [(ngModel)]="jsonInput" 
-        rows="8" 
-        placeholder="Enter valid JSON data..."
-        (input)="parseJson()"
-      ></textarea>
-      
-      <div class="button-group">
-        <button (click)="parseJson()">Parse & Visualize</button>
-        <button (click)="loadSampleData('simple')">Load Simple Sample</button>
-        <button (click)="loadSampleData('complex')">Load Complex Sample</button>
-        <button (click)="loadSampleData('array')">Load Array Sample</button>
-      </div>
-      
-      <div class="error" *ngIf="errorMessage">
-        <div class="error-label">Error:</div>
-        <div>{{ errorMessage }}</div>
-      </div>
+    <label for="jsonInput">Enter JSON data:</label>
+    <textarea 
+      id="jsonInput" 
+      [(ngModel)]="jsonInput" 
+      rows="8" 
+      placeholder="Enter valid JSON data..."
+      (input)="parseJson()"
+    ></textarea>
+    
+    <button (click)="parseJson()">Parse & Visualize</button>
+    <button (click)="loadSampleData('simple')">Load Simple Sample</button>
+    <button (click)="loadSampleData('complex')">Load Complex Sample</button>
+    <button (click)="loadSampleData('array')">Load Array Sample</button>
+    
+    <div class="error" *ngIf="errorMessage">
+      <span class="error-label">Error:</span>
+      <span>{{ errorMessage }}</span>
     </div>
-  </div>
+  </section>
 
   <!-- Visualization Controls -->
-  <div id="visualization-controls" class="section" [class.highlighted]="highlightedSection === 'visualization-controls'" *ngIf="parsedJson && !errorMessage">
+  <section id="visualization-controls" class="section" [class.highlighted]="highlightedSection === 'visualization-controls'" *ngIf="parsedJson && !errorMessage">
     <h3>Visualization Options</h3>
-    <div class="input-group">
-      <label for="visualizationType">Visualization Type:</label>
-      <select 
-        id="visualizationType" 
-        [(ngModel)]="visualizationType" 
-        (change)="onVisualizationTypeChange()"
-      >
-        <option value="tree">Tree Layout</option>
-        <option value="hierarchy">Bubble Hierarchy</option>
-        <option value="network">Network Graph</option>
-      </select>
-      
-      <div class="visualization-info">
-        <div *ngIf="visualizationType === 'tree'">
-          <strong>Tree Layout:</strong> Displays JSON structure as a hierarchical tree with parent-child relationships.
-        </div>
-        <div *ngIf="visualizationType === 'hierarchy'">
-          <strong>Bubble Hierarchy:</strong> Shows JSON structure as nested circles, with size representing depth.
-        </div>
-        <div *ngIf="visualizationType === 'network'">
-          <strong>Network Graph:</strong> Interactive force-directed graph where you can drag nodes around.
-        </div>
+    <label for="visualizationType">Visualization Type:</label>
+    <select 
+      id="visualizationType" 
+      [(ngModel)]="visualizationType" 
+      (change)="onVisualizationTypeChange()"
+    >
+      <option value="tree">Tree Layout</option>
+      <option value="hierarchy">Bubble Hierarchy</option>
+      <option value="network">Network Graph</option>
+    </select>
+    
+    <div class="visualization-info">
+      <div *ngIf="visualizationType === 'tree'">
+        <strong>Tree Layout:</strong> Displays JSON structure as a hierarchical tree with parent-child relationships.
+      </div>
+      <div *ngIf="visualizationType === 'hierarchy'">
+        <strong>Bubble Hierarchy:</strong> Shows JSON structure as nested circles, with size representing depth.
+      </div>
+      <div *ngIf="visualizationType === 'network'">
+        <strong>Network Graph:</strong> Interactive force-directed graph where you can drag nodes around.
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Visualization Section -->
-  <div id="json-visualization" class="section visualization-section" [class.highlighted]="highlightedSection === 'json-visualization'" *ngIf="parsedJson && !errorMessage">
+  <section id="json-visualization" class="section visualization-section" [class.highlighted]="highlightedSection === 'json-visualization'" *ngIf="parsedJson && !errorMessage">
     <h3>Visualization</h3>
-    <div class="visualization-container">
-      <div #svgContainer class="svg-container"></div>
-    </div>
-  </div>
+    <div #svgContainer class="svg-container"></div>
+  </section>
 </div>
