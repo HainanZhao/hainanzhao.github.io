@@ -8,11 +8,12 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
     // GitHub Pages SPA redirect hack for subdirectory deployment
-    // Redirects from /debugi/route to /debugi/?/route
+    // Store the path and redirect to the base URL with a special query parameter
     (function(l) {
       if (l.pathname.startsWith('/debugi/') && l.pathname !== '/debugi/') {
-        var path = l.pathname.replace('/debugi/', '/debugi/?/');
-        window.history.replaceState(null, null, path + l.search + l.hash);
+        var path = l.pathname.replace('/debugi/', '');
+        sessionStorage.setItem('spa-redirect', path + l.search + l.hash);
+        window.location.replace(l.origin + '/debugi/');
       }
     }(window.location))
   </script>
