@@ -45,8 +45,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          npm cache verify          # Verify and clear the npm cache as specified by the user
-          npm i # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
+          npm ci # 'npm ci' is preferred for CI/CD for reproducible builds, added verbose logging
 
       # Diagnostic: Check disk space and memory after npm ci (if it passes)
       - name: Check system resources (post-npm ci)

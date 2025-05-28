@@ -1,0 +1,83 @@
+<div class="container">
+  <h2 class="title">QR Code Generator</h2>
+
+  <!-- QR Code Generator Section -->
+  <section id="qr-code-generator" class="section" [class.highlighted]="highlightedSection === 'qr-code-generator'">
+    <h3>Generate QR Code</h3>
+    
+    <label for="qrInput">Text or URL to encode:</label>
+    <textarea 
+      id="qrInput" 
+      [(ngModel)]="inputText" 
+      rows="4" 
+      placeholder="Enter text, URL, or data to encode into a QR code..."
+      (input)="generateQRCode()"
+    ></textarea>
+    
+    <div class="qr-controls">
+      <div class="size-control">
+        <label for="qrCodeSize">Size (pixels):</label>
+        <input type="number" id="qrCodeSize" [(ngModel)]="qrCodeSize" min="128" max="512" step="32" (change)="generateQRCode()">
+      </div>
+      
+      <div class="error-level-control">
+        <label for="qrErrorLevel">Error Correction:</label>
+        <select id="qrErrorLevel" [(ngModel)]="qrCodeErrorLevel" (change)="generateQRCode()">
+          <option value="L">Low (7%)</option>
+          <option value="M">Medium (15%)</option>
+          <option value="Q">Quartile (25%)</option>
+          <option value="H">High (30%)</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="button-group">
+      <button (click)="generateQRCode()">Generate QR Code</button>
+      <button (click)="downloadQRCode()" *ngIf="qrCodeDataURL">Download QR Code</button>
+      <button (click)="clearQRCode()">Clear</button>
+    </div>
+    
+    <!-- Example Buttons -->
+    <div class="examples-section">
+      <h4>Quick Examples:</h4>
+      <div class="button-group">
+        <button (click)="loadQRExample()" class="secondary">Website URL</button>
+        <button (click)="loadTextExample()" class="secondary">Text Message</button>
+        <button (click)="loadContactExample()" class="secondary">Contact Card</button>
+        <button (click)="loadWifiExample()" class="secondary">WiFi Network</button>
+      </div>
+    </div>
+    
+    <div class="qr-result" *ngIf="qrCodeDataURL">
+      <span class="result-label">Generated QR Code:</span>
+      <div class="qr-display">
+        <img [src]="qrCodeDataURL" [alt]="'QR Code for: ' + inputText" class="qr-image">
+      </div>
+      <button class="copy-btn" (click)="copyToClipboard(qrCodeDataURL)">📋 Copy Data URL</button>
+    </div>
+  </section>
+
+  <!-- QR Code Information Section -->
+  <section class="section info-section">
+    <h3>About QR Codes</h3>
+    <div class="info-content">
+      <h4>Error Correction Levels:</h4>
+      <ul>
+        <li><strong>Low (7%):</strong> Smallest size, basic error recovery</li>
+        <li><strong>Medium (15%):</strong> Good balance of size and reliability</li>
+        <li><strong>Quartile (25%):</strong> Higher reliability for damaged codes</li>
+        <li><strong>High (30%):</strong> Maximum error recovery, larger size</li>
+      </ul>
+      
+      <h4>Supported Data Types:</h4>
+      <ul>
+        <li>Plain text and messages</li>
+        <li>Website URLs and links</li>
+        <li>Contact information (vCard format)</li>
+        <li>WiFi network credentials</li>
+        <li>Email addresses and phone numbers</li>
+        <li>Geographic coordinates</li>
+      </ul>
+    </div>
+  </section>
+</div>

@@ -81,6 +81,16 @@ export class SearchService {
       category: 'String Utils'
     },
     {
+      id: 'qr-code-generator',
+      title: 'QR Code Generator',
+      description: 'Generate QR codes from text with customizable size and error correction levels',
+      keywords: ['qr', 'qr code', 'generate', 'barcode', 'scan', 'mobile', 'link', 'url', 'text'],
+      component: 'QrCodeComponent',
+      route: '/qr-code',
+      section: 'qr-code-generator',
+      category: 'QR Code'
+    },
+    {
       id: 'password-generator',
       title: 'Password Generator',
       description: 'Generate secure passwords with customizable length and character types',

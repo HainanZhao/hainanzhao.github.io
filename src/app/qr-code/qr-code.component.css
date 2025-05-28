@@ -1,0 +1,207 @@
+/* QR Code Generator Styles */
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  transition: var(--transition-smooth);
+}
+
+.section:hover {
+  border-color: var(--border-secondary);
+}
+
+.section h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.section h4 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Form Elements */
+label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  margin-bottom: var(--spacing-md);
+}
+
+/* QR Code Controls */
+.qr-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.size-control,
+.error-level-control {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.size-control input,
+.error-level-control select {
+  margin-top: var(--spacing-xs);
+}
+
+/* Button Styles */
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+  flex-wrap: wrap;
+}
+
+/* Examples Section */
+.examples-section {
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-primary);
+}
+
+/* QR Code Result Display */
+.qr-result {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.qr-display {
+  background: #ffffff;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-primary);
+  margin: var(--spacing-md) 0;
+  display: inline-block;
+  transition: var(--transition-smooth);
+}
+
+.qr-display:hover {
+  border-color: var(--border-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.qr-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-sm);
+  display: block;
+}
+
+.result-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.copy-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  color: var(--text-secondary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: var(--spacing-sm);
+  transition: var(--transition-smooth);
+}
+
+.copy-btn:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Information Section */
+.info-section {
+  background: var(--bg-tertiary);
+}
+
+.info-content ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.info-content li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.info-content strong {
+  color: var(--text-primary);
+}
+
+/* Section highlighting for search results */
+.section.highlighted {
+  border: 2px solid var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  animation: highlightPulse 2s ease-in-out;
+}
+
+@keyframes highlightPulse {
+  0% { 
+    box-shadow: var(--shadow-glow);
+  }
+  50% { 
+    box-shadow: 0 0 25px rgba(var(--accent-primary-rgb), 0.6);
+  }
+  100% { 
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qr-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .size-control,
+  .error-level-control {
+    min-width: auto;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .button-group button {
+    width: 100%;
+  }
+}

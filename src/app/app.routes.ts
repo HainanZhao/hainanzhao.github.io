@@ -7,11 +7,13 @@ import { NumberUtilsComponent } from './number-utils/number-utils.component';
 import { ArrayUtilsComponent } from './array-utils/array-utils.component';
 import { JsonVisualizerComponent } from './json-visualizer/json-visualizer.component';
 import { RegexTesterComponent } from './regex-tester/regex-tester.component';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/calculator', pathMatch: 'full' }, // Default route
   { path: 'calculator', component: CalculatorComponent },
   { path: 'string-utils', component: StringUtilsComponent },
+  { path: 'qr-code', component: QrCodeComponent },
   { path: 'csv-formatter', component: CsvToSheetsFormatterComponent },
   { path: 'date-utils', component: DateUtilsComponent },
   { path: 'number-utils', component: NumberUtilsComponent },

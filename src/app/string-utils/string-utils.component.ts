@@ -16,8 +16,8 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   highlightedSection = '';
 
   // Case conversion properties
-  inputText: string = '';
-  convertedText: string = '';
+  inputText = 'Hello World! Visit https://github.com/hainanzhao/debugi';
+  convertedText = '';
 
   // Random character generation properties
   characterCount: number = 10;
@@ -45,6 +45,8 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   includeNumbers: boolean = true;
   includeSymbols: boolean = false;
   generatedPassword: string = '';
+
+
 
   constructor(private searchService: SearchService) {}
 
