@@ -29,11 +29,24 @@ nav {
   font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.app-logo {
+  width: 140px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.app-name {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
 }
 
 .search-button {
