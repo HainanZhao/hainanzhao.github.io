@@ -1,0 +1,49 @@
+<div class="converter-container">
+  <h2>Unit Converter</h2>
+
+  <div class="input-section">
+    <label for="inputValue">Value:</label>
+    <input
+      type="number"
+      id="inputValue"
+      [(ngModel)]="inputValue"
+      (ngModelChange)="convert()"
+      placeholder="Enter value"
+    />
+  </div>
+
+  <div class="selection-section">
+    <div class="unit-selector">
+      <label for="fromUnit">From:</label>
+      <select id="fromUnit" [(ngModel)]="fromUnitSymbol" (ngModelChange)="convert()">
+        <ng-container *ngFor="let category of unitCategories">
+          <optgroup [label]="category.name">
+            <option *ngFor="let unit of category.units" [value]="unit.symbol">
+              {{ unit.name }} ({{ unit.symbol }})
+            </option>
+          </optgroup>
+        </ng-container>
+      </select>
+    </div>
+
+    <div class="unit-selector">
+      <label for="toUnit">To:</label>
+      <select id="toUnit" [(ngModel)]="toUnitSymbol" (ngModelChange)="convert()">
+        <ng-container *ngFor="let category of unitCategories">
+          <optgroup [label]="category.name">
+            <option *ngFor="let unit of category.units" [value]="unit.symbol">
+              {{ unit.name }} ({{ unit.symbol }})
+            </option>
+          </optgroup>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-section">
+    <h3>Result:</h3>
+    <p *ngIf="result !== null && typeof result === 'number'">{{ result }}</p>
+    <p *ngIf="result !== null && typeof result === 'string'" class="error-message">{{ result }}</p>
+    <p *ngIf="inputValue === null && (result === null || result === 'Please enter a value and select units.')">Enter a value and select units to see the result.</p>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import { ArrayUtilsComponent } from './array-utils/array-utils.component';
 import { JsonVisualizerComponent } from './json-visualizer/json-visualizer.component';
 import { RegexTesterComponent } from './regex-tester/regex-tester.component';
 import { QrCodeComponent } from './qr-code/qr-code.component';
+import { UnitConverterComponent } from './unit-converter/unit-converter.component';
+import { TimezoneConverterComponent } from './timezone-converter/timezone-converter.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/calculator', pathMatch: 'full' }, // Default route
@@ -19,5 +21,7 @@ export const routes: Routes = [
   { path: 'number-utils', component: NumberUtilsComponent },
   { path: 'array-utils', component: ArrayUtilsComponent },
   { path: 'json-visualizer', component: JsonVisualizerComponent },
-  { path: 'regex-tester', component: RegexTesterComponent }
+  { path: 'regex-tester', component: RegexTesterComponent },
+  { path: 'unit-converter', component: UnitConverterComponent, title: 'Unit Converter' },
+  { path: 'timezone-converter', component: TimezoneConverterComponent, title: 'Time Zone Converter' }
 ];

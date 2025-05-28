@@ -25,6 +25,12 @@ This is utils application providing a collection of common utility tools for dev
 - **Date Utils**: Date formatting and manipulation
 - **Number Utils**: Number formatting, rounding, currency formatting
 - **Regex Tester**: Test and validate regular expressions
+- **Unit Converter**:
+    - Converts between common units of measurement for categories like Length (e.g., meters, feet, miles), Weight (e.g., kilograms, pounds, ounces), and Temperature (e.g., Celsius, Fahrenheit, Kelvin).
+- **Time Zone Converter**:
+    - Displays the current time in multiple selected time zones.
+    - Allows conversion of a specific date and time from one selected time zone to others.
+    - Persists selected time zones for convenience.
 
 ## Development Setup
 

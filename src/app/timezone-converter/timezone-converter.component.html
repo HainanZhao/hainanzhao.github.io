@@ -1,0 +1,49 @@
+<div class="timezone-converter-container">
+  <h2>Time Zone Converter</h2>
+
+  <!-- Time Zone Selection -->
+  <div class="selection-area">
+    <select [(ngModel)]="selectedTimeZoneToAdd">
+      <option *ngFor="let tz of availableTimeZones" [value]="tz">{{ tz.replace('_', ' ') }}</option>
+    </select>
+    <button (click)="addTimeZone()" [disabled]="!selectedTimeZoneToAdd">Add Time Zone</button>
+  </div>
+
+  <!-- Optional: Specific Date/Time Picker -->
+  <div class="source-time-picker-area" *ngIf="displayedTimeZones.length > 0">
+    <h3>Set Specific Time:</h3>
+    <div class="picker-controls">
+      <input type="datetime-local" [(ngModel)]="sourceDateTime" (change)="onSourceDateTimeChange()">
+      <select [(ngModel)]="sourceTimeZoneForPicker" (change)="onSourceTimeZoneChange()">
+        <option *ngFor="let tz of displayedTimeZones" [value]="tz.ianaName">
+          {{ tz.ianaName.replace('_', ' ') }} (Source)
+        </option>
+      </select>
+    </div>
+    <p class="picker-info" *ngIf="!sourceDateTime">
+      Select a date and time above to see it reflected in all chosen time zones.
+      Times below are currently live.
+    </p>
+     <p class="picker-info" *ngIf="sourceDateTime">
+      Times below are reflecting the date and time set above. Clear the date/time input to revert to live times.
+    </p>
+  </div>
+
+  <!-- Displayed Time Zones -->
+  <div class="displayed-zones-area">
+    <div *ngIf="displayedTimeZones.length === 0" class="no-zones-message">
+      No time zones selected. Please add one using the dropdown above.
+    </div>
+
+    <div *ngFor="let tz of displayedTimeZones" class="time-zone-entry">
+      <div class="zone-info">
+        <span class="zone-name">{{ tz.ianaName.replace('_', ' ') }}</span>
+        <span class="zone-offset">({{ tz.offset }})</span>
+      </div>
+      <div class="zone-time">{{ tz.currentDate }}, {{ tz.currentTime }}</div>
+      <button class="remove-button" (click)="removeTimeZone(tz.ianaName)" title="Remove {{tz.ianaName}}">
+        &times;
+      </button>
+    </div>
+  </div>
+</div>

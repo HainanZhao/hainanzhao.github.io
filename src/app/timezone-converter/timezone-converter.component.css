@@ -1,0 +1,216 @@
+.timezone-converter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+.timezone-converter-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 0px; /* Reduced from 10px */
+}
+
+.selection-area {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.selection-area select {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.selection-area button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.selection-area button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.selection-area button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Specific Date/Time Picker Styling */
+.source-time-picker-area {
+  padding: 15px;
+  background-color: #eef7ff; /* Light blue background */
+  border: 1px solid #cce0ff; /* Light blue border */
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source-time-picker-area h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #004085; /* Darker blue for heading */
+  font-size: 1.1em;
+}
+
+.picker-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.picker-controls input[type="datetime-local"],
+.picker-controls select {
+  padding: 8px;
+  border: 1px solid #b8d6fb;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.picker-controls input[type="datetime-local"] {
+  flex-grow: 1;
+}
+
+.picker-controls select {
+  min-width: 150px; /* Ensure select is not too small */
+}
+
+.picker-info {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+
+.displayed-zones-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.no-zones-message {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.time-zone-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.time-zone-entry:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.zone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.zone-name {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.zone-offset {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.zone-time {
+  font-size: 1em;
+  color: #0056b3; /* Using a blue similar to the button for consistency */
+  text-align: right;
+  min-width: 230px; /* Ensure enough space for date and time */
+}
+
+.remove-button {
+  background-color: transparent;
+  border: none;
+  color: #dc3545; /* Red color for removal */
+  font-size: 24px; /* Larger for easier clicking */
+  cursor: pointer;
+  padding: 0 5px 0 15px; /* Padding: top right bottom left */
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.remove-button:hover {
+  color: #a71d2a; /* Darker red on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .timezone-converter-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .selection-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .picker-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .picker-controls input[type="datetime-local"],
+  .picker-controls select {
+    width: 100%;
+  }
+
+  .time-zone-entry {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .zone-time {
+    text-align: left;
+    width: 100%;
+  }
+
+  .remove-button {
+    align-self: flex-end;
+    padding: 5px 0; /* Adjust padding for a stacked layout */
+  }
+}
