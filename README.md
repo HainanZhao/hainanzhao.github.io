@@ -1,6 +1,6 @@
 # Debugi - Developer Utilities
 
-This is an Angular application providing a collection of common utility tools for developers. It is hosted on GitHub Pages.
+This is utils application providing a collection of common utility tools for developers. It is hosted on GitHub Pages.
 
 ## Utilities Included
 
