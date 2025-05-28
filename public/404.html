@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8">
   <title>Debugi</title>
-  <base href="/debugi/">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
-    // GitHub Pages SPA redirect hack for subdirectory deployment
-    // Store the path and redirect to the base URL with a special query parameter
+    // GitHub Pages SPA redirect hack for root domain deployment
+    // Store the path and redirect to the base URL
     (function(l) {
-      if (l.pathname.startsWith('/debugi/') && l.pathname !== '/debugi/') {
-        var path = l.pathname.replace('/debugi/', '');
-        sessionStorage.setItem('spa-redirect', path + l.search + l.hash);
-        window.location.replace(l.origin + '/debugi/');
+      if (l.pathname !== '/') {
+        sessionStorage.setItem('spa-redirect', l.pathname + l.search + l.hash);
+        window.location.replace(l.origin + '/');
       }
     }(window.location))
   </script>

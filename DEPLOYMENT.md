@@ -11,8 +11,8 @@ This project is configured for deployment on GitHub Pages with proper SPA routin
 
 ## How It Works
 
-1. When a user visits a direct route like `/debugi/calculator`, GitHub Pages serves the 404.html file
-2. The 404.html script redirects to `/debugi/?/calculator`
+1. When a user visits a direct route like `/calculator`, GitHub Pages serves the 404.html file
+2. The 404.html script redirects to `/?/calculator`
 3. The index.html script detects the `?/` parameter and restores the proper route
 4. Angular router takes over and renders the correct component
 
@@ -29,7 +29,7 @@ This project is configured for deployment on GitHub Pages with proper SPA routin
 
 ## Base Href
 
-The app is configured with `base href="/debugi/"` for deployment to `https://username.github.io/debugi/`
+The app is configured for deployment to `https://username.github.io/`
 
 If deploying to a different path, update:
 - The base href in `src/index.html` and `public/404.html`

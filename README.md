@@ -59,7 +59,7 @@ npm run build:gh-pages
 ## GitHub Pages
 
 This project is configured for deployment to GitHub Pages. The live version can be accessed at:
-https://hainanzhao.github.io/debugi/
+https://hainanzhao.github.io/
 
 ## Features
 

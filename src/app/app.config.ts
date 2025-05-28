@@ -8,6 +8,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    { provide: APP_BASE_HREF, useValue: '/debugi/' }
+    { provide: APP_BASE_HREF, useValue: '/' }
   ]
 };

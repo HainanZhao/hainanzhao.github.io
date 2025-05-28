@@ -16,7 +16,7 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   highlightedSection = '';
 
   // QR Code generation properties
-  inputText = 'Visit our app: https://hainanzhao.github.io/debugi/';
+  inputText = 'Visit our app: https://hainanzhao.github.io/';
   qrCodeDataURL = '';
   qrCodeErrorLevel: 'L' | 'M' | 'Q' | 'H' = 'M';
   qrCodeSize = 256;
@@ -73,7 +73,7 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   }
 
   loadQRExample() {
-    this.inputText = 'Visit our app: https://hainanzhao.github.io/debugi/';
+    this.inputText = 'Visit our app: https://hainanzhao.github.io/';
     this.generateQRCode();
   }
 

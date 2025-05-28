@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Debugi</title>
-  <base href="/debugi/">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- Favicons -->
@@ -30,9 +30,9 @@
   <meta name="theme-color" content="#3b82f6">
   
   <script>
-    // GitHub Pages SPA redirect handler for subdirectory deployment
+    // GitHub Pages SPA redirect handler for root domain deployment
     (function(l) {
-      // Handle query parameter redirects
+      // Handle query parameter redirects from 404 page
       if (l.search.startsWith('?/')) {
         var path = l.search.slice(2) + l.hash;
         window.history.replaceState(null, null, path || '/');
