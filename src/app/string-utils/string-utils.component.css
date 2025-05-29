@@ -17,7 +17,7 @@
 .section h3 {
   color: var(--accent-primary);
   margin-bottom: var(--spacing-sm);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   background: var(--gradient-primary);
   -webkit-background-clip: text;

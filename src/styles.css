@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
 h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 h5 { font-size: 1.125rem; }
@@ -129,8 +129,11 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 .title {
-  color: #ffffff;
-  margin-bottom: 2rem;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 /* Input group styles */
