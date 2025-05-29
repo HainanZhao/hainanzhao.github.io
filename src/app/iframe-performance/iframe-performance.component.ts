@@ -58,10 +58,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'Heavy CPU Loop',
       description: 'Runs a CPU-intensive loop to test thread blocking',
-      duration: 3000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 3000; // 3 seconds
+        const duration = 10000; // 10 seconds
         
         function heavyTask() {
           let result = 0;
@@ -91,10 +91,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'DOM Manipulation',
       description: 'Creates and modifies many DOM elements rapidly',
-      duration: 3000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 3000;
+        const duration = 10000;
         const container = document.createElement('div');
         document.body.appendChild(container);
         
@@ -128,10 +128,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'Animation Stress Test',
       description: 'Runs multiple CSS animations simultaneously',
-      duration: 5000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 5000;
+        const duration = 10000;
         
         // Create animated elements
         for (let i = 0; i < 50; i++) {
@@ -171,10 +171,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'Memory Allocation',
       description: 'Allocates and deallocates large amounts of memory',
-      duration: 4000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 4000;
+        const duration = 10000;
         let arrays = [];
         
         function memoryTask() {
@@ -205,10 +205,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'Network Simulation',
       description: 'Simulates network requests and data processing',
-      duration: 3000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 3000;
+        const duration = 10000;
         let requestCount = 0;
         
         function simulateRequest() {
@@ -258,10 +258,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     {
       name: 'Main Thread Blocker',
       description: 'Intentionally blocks the main thread to show the difference',
-      duration: 2000,
+      duration: 10000,
       code: `
         const startTime = Date.now();
-        const duration = 2000;
+        const duration = 10000;
         
         // This will definitely block the main thread
         function blockingTask() {
