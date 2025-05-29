@@ -201,6 +201,38 @@ export class SearchService {
       route: '/regex-tester',
       section: 'regex-testing',
       category: 'Regex Tester'
+    },
+
+    // Iframe Performance features
+    {
+      id: 'iframe-performance-monitor',
+      title: 'Performance Monitoring',
+      description: 'Real-time FPS monitoring for main thread and iframe performance',
+      keywords: ['iframe', 'performance', 'fps', 'monitoring', 'main thread', 'frame rate'],
+      component: 'IframePerformanceComponent',
+      route: '/iframe-performance',
+      section: 'monitoring',
+      category: 'Performance Testing'
+    },
+    {
+      id: 'iframe-performance-tests',
+      title: 'Performance Tests',
+      description: 'Test iframe isolation with CPU-intensive, DOM manipulation, animation, memory, and network tests',
+      keywords: ['iframe', 'cpu', 'dom', 'animation', 'memory', 'network', 'isolation', 'thread blocking'],
+      component: 'IframePerformanceComponent',
+      route: '/iframe-performance',
+      section: 'tests',
+      category: 'Performance Testing'
+    },
+    {
+      id: 'iframe-performance-results',
+      title: 'Performance Analysis',
+      description: 'Analyze test results to understand iframe performance impact and thread isolation',
+      keywords: ['iframe', 'analysis', 'results', 'frame drops', 'thread', 'isolation', 'performance impact'],
+      component: 'IframePerformanceComponent',
+      route: '/iframe-performance',
+      section: 'results',
+      category: 'Performance Testing'
     }
   ];
 

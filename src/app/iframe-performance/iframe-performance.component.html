@@ -1,0 +1,182 @@
+<div class="container">
+  <h2 class="title">Iframe Performance Testing</h2>
+  <p class="description">
+    Test how code execution inside iframes affects the main thread. This tool demonstrates iframe isolation 
+    and helps measure performance impact of various operations.
+  </p>
+
+  <!-- Performance Monitoring Section -->
+  <div class="section" [class.highlighted]="highlightedSection === 'monitoring'">
+    <h3>Real-time Performance Monitoring</h3>
+    <div class="monitoring-grid">
+      <div class="fps-monitor main-thread">
+        <span>Main Thread FPS</span>
+        <div class="fps-value" [ngClass]="mainThreadFpsClass">
+          {{mainThreadFPS}}
+        </div>
+        <div class="fps-status">
+          {{mainThreadStatus}} 
+          <span *ngIf="isRunning && baselineFPS !== 60">(Baseline: {{baselineFPS}})</span>
+        </div>
+      </div>
+      <div class="fps-monitor iframe">
+        <span>Iframe FPS</span>
+        <div class="fps-value" [ngClass]="iframeFpsClass">
+          {{iframeActive ? iframeFPS : 'N/A'}}
+        </div>
+        <div class="fps-status">
+          {{iframeStatus}}
+        </div>
+      </div>
+      <div class="test-status">
+        <span>Test Status</span>
+        <div class="status-value" [class.running]="isRunning" [class.idle]="!isRunning">
+          {{isRunning ? 'Running: ' + currentTest?.name : 'Idle'}}
+        </div>
+        <div class="fps-status" *ngIf="isRunning && isMainThreadStressed">
+          ⚠️ Main thread stress detected!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Selection Section -->
+  <div class="section" [class.highlighted]="highlightedSection === 'tests'">
+    <h3>Performance Tests</h3>
+    <div class="test-controls">
+      <button 
+        class="run-all-btn" 
+        (click)="runAllTests()" 
+        [disabled]="isRunning"
+      >
+        Run All Tests
+      </button>
+      <button 
+        class="clear-btn" 
+        (click)="clearResults()" 
+        [disabled]="testResults.length === 0"
+      >
+        Clear Results
+      </button>
+    </div>
+    
+    <div class="tests-grid">
+      <div 
+        *ngFor="let test of performanceTests" 
+        class="test-card"
+        [class.running]="currentTest?.name === test.name"
+      >
+        <div class="test-header">
+          <h4>{{test.name}}</h4>
+          <span class="duration">{{test.duration / 1000}}s</span>
+        </div>
+        <p class="test-description">{{test.description}}</p>
+        <button 
+          class="run-test-btn" 
+          (click)="runTest(test)" 
+          [disabled]="isRunning"
+        >
+          {{currentTest?.name === test.name ? 'Running...' : 'Run Test'}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Iframe Section -->
+  <div class="section" [class.highlighted]="highlightedSection === 'iframe'">
+    <h3>Test Environment</h3>
+    <div class="iframe-container">
+      <iframe 
+        #testIframe 
+        class="test-iframe"
+        sandbox="allow-scripts allow-same-origin"
+        title="Performance Test Environment"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="section" [class.highlighted]="highlightedSection === 'results'">
+    <h3>Test Results</h3>
+    
+    <div *ngIf="testResults.length === 0" class="no-results">
+      <p>No test results yet. Run some tests to see the performance impact analysis.</p>
+    </div>
+    
+    <div *ngIf="testResults.length > 0" class="results-container">
+      <div class="results-header">
+        <h4>Performance Analysis</h4>
+        <button class="copy-btn" (click)="copyResults()">Copy Results</button>
+      </div>
+      
+      <div class="analysis-summary">
+        <pre>{{getPerformanceAnalysis()}}</pre>
+      </div>
+
+      <div class="results-list">
+        <div 
+          *ngFor="let result of testResults; let i = index" 
+          class="result-item"
+          [class.blocked]="result.mainThreadBlocked"
+          [class.success]="!result.mainThreadBlocked"
+        >
+          <div class="result-header">
+            <h5>{{result.testName}}</h5>
+            <div class="result-badges">
+              <span 
+                class="badge" 
+                [class.blocked]="result.mainThreadBlocked"
+                [class.isolated]="!result.mainThreadBlocked"
+              >
+                {{result.mainThreadBlocked ? 'BLOCKED' : 'ISOLATED'}}
+              </span>
+              <span class="frame-drops">{{result.frameDrops}} frame drops</span>
+            </div>
+          </div>
+          <div class="result-details">
+            <p><strong>Description:</strong> {{result.description}}</p>
+            <p><strong>Execution Time:</strong> {{result.executionTime}}ms</p>
+            <p><strong>Main Thread Impact:</strong> 
+              {{result.mainThreadBlocked ? 'Significant performance impact detected' : 'Minimal impact on main thread'}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Information Section -->
+  <div class="section" [class.highlighted]="highlightedSection === 'info'">
+    <h3>About Iframe Performance Testing</h3>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Thread Isolation</h4>
+        <p>
+          Iframes run in separate execution contexts, which can help isolate heavy computations 
+          from the main thread. However, certain operations can still impact overall performance.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>FPS Monitoring</h4>
+        <p>
+          Frame rate monitoring helps identify when operations block the main thread. 
+          A significant drop in FPS indicates performance bottlenecks.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Performance Metrics</h4>
+        <p>
+          Tests measure execution time, frame drops, and thread blocking to provide 
+          comprehensive performance analysis of iframe-isolated code.
+        </p>
+      </div>
+      <div class="info-card">
+        <h4>Best Practices</h4>
+        <p>
+          Use iframes for heavy computations, but be aware that DOM manipulation and 
+          some operations may still affect overall page performance.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
