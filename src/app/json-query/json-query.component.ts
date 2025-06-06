@@ -151,8 +151,8 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     "SELECT * FROM ? WHERE age > 25",
     "SELECT name, age FROM ? WHERE gender = 'female'",
     "SELECT name, city FROM ? WHERE age < 30 AND gender = 'male'",
-    "SELECT gender, COUNT(*) as count, AVG(age) as average_age FROM ? GROUP BY gender",
-    "SELECT city, COUNT(*) as count FROM ? GROUP BY city ORDER BY count DESC",
+    "SELECT DISTINCT gender FROM ?",
+    "SELECT DISTINCT city FROM ? ORDER BY city",
     "SELECT * FROM ? WHERE company.size > 50",
     "SELECT name, company.name as company_name FROM ? WHERE company.department.employees > 20",
     "SELECT name, company.size FROM ? ORDER BY company.size DESC"
