@@ -233,6 +233,37 @@ export class SearchService {
       route: '/iframe-performance',
       section: 'results',
       category: 'Performance Testing'
+    },
+    // JSON Query features
+    {
+      id: 'json-query-main',
+      title: 'SQL-like JSON Query',
+      description: 'Query JSON data using SQL-like syntax for filtering and transforming data',
+      keywords: ['json', 'sql', 'query', 'filter', 'search', 'data', 'select', 'where', 'group by', 'order by'],
+      component: 'JsonQueryComponent',
+      route: '/json-query',
+      section: 'json-input',
+      category: 'Data Processing'
+    },
+    {
+      id: 'json-query-sql',
+      title: 'SQL Query for JSON',
+      description: 'Write SQL queries to filter, transform, and analyze JSON data structures',
+      keywords: ['sql', 'json', 'query', 'filter', 'where clause', 'select', 'conditions', 'data analysis'],
+      component: 'JsonQueryComponent',
+      route: '/json-query',
+      section: 'sql-query',
+      category: 'Data Processing'
+    },
+    {
+      id: 'json-query-results',
+      title: 'JSON Query Results',
+      description: 'View and analyze results from SQL queries on JSON data in table or JSON format',
+      keywords: ['results', 'output', 'table', 'json', 'data', 'query results', 'formatted output'],
+      component: 'JsonQueryComponent',
+      route: '/json-query',
+      section: 'query-results',
+      category: 'Data Processing'
     }
   ];
 

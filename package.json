@@ -21,6 +21,7 @@
     "@angular/router": "^19.2.0",
     "@types/d3": "^7.4.3",
     "@types/qrcode": "^1.5.5",
+    "alasql": "^4.6.6",
     "d3": "^7.9.0",
     "mathjs": "^13.0.0",
     "qrcode": "^1.5.4",
