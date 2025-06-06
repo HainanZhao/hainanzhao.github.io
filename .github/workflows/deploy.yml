@@ -74,9 +74,9 @@ jobs:
           ANGULAR_OUTPUT_DIR=""
           if [ -d "dist/debugi" ]; then # Assuming 'debugi' is your Angular project name or repo name
             ANGULAR_OUTPUT_DIR="dist/debugi"
-          elif [ -d "dist/browser" ]; then # Common for Angular 17+
-            ls -lah dist/browser
-            ANGULAR_OUTPUT_DIR="dist/browser"
+          elif [ -d "dist" ]; then # Common for Angular 17+
+            ls -lah dist
+            ANGULAR_OUTPUT_DIR="dist"
           else
             echo "ERROR: Angular build output directory not found. Please check your angular.json or build process."
             exit 1
@@ -92,7 +92,7 @@ jobs:
         with:
           # Upload the Angular build output directory.
           # This should be the same directory determined in the previous step.
-          path: dist/browser
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
