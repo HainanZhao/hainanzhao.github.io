@@ -23,7 +23,7 @@ This project is configured for deployment on GitHub Pages with proper SPA routin
    npm run build:gh-pages
    ```
 
-2. Deploy the contents of `dist/browser/` to your GitHub Pages repository
+2. Deploy the contents of `dist/` to your GitHub Pages repository
 
 3. The app will work correctly with direct URL access and page reloads
 
