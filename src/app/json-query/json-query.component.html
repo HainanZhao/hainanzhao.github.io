@@ -102,7 +102,7 @@
           <tr *ngFor="let row of queryResult.data; let i = index">
             <td *ngIf="showLineNumbers">{{i + 1}}</td>
             <td *ngFor="let column of getColumnNames()">
-              {{row[column] !== null && row[column] !== undefined ? row[column] : ''}}
+              {{formatTableCell(row[column])}}
             </td>
           </tr>
         </tbody>
@@ -147,6 +147,22 @@
           <li>Grouping: <code>SELECT gender, COUNT(*) as count FROM ? GROUP BY gender</code></li>
           <li>Limit results: <code>SELECT * FROM ? LIMIT 5</code></li>
         </ul>
+      </div>
+      
+      <div class="help-section">
+        <h4>Nested Object Queries</h4>
+        <p>You can query nested object properties using different approaches:</p>
+        <ul>
+          <li><strong>Direct dot notation:</strong> <code>SELECT * FROM ? WHERE company.size > 50</code></li>
+          <li><strong>Select nested property:</strong> <code>SELECT name, company.name as company_name FROM ?</code></li>
+          <li><strong>Deep nesting:</strong> <code>SELECT * FROM ? WHERE company.department.employees > 20</code></li>
+          <li><strong>Sorting by nested property:</strong> <code>SELECT * FROM ? ORDER BY company.size DESC</code></li>
+        </ul>
+        <p>For complex queries or when experiencing issues with direct dot notation, you can use the helper function:</p>
+        <ul>
+          <li><strong>Using the helper function:</strong> <code>SELECT name, getNestedValue(?, 'company.name') FROM ?</code></li>
+        </ul>
+        <p>The system automatically processes unquoted property paths and converts them to the appropriate format for nested object access.</p>
       </div>
     </div>
   </div>
