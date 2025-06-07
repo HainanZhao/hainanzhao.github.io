@@ -4,11 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:gh-pages": "ng build --configuration production",
+    "build": "ng build && npm run seo:generate",
+    "build:prod": "ng build --configuration production && npm run seo:generate",
+    "build:gh-pages": "ng build --configuration production && npm run seo:generate",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "seo:generate": "node scripts/generate-seo.js",
+    "seo:sitemap": "node scripts/generate-sitemap.js",
+    "seo:robots": "node scripts/generate-robots.js"
   },
   "private": true,
   "dependencies": {
