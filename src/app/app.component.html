@@ -20,6 +20,10 @@
         <span class="search-text">Search utilities</span>
         <span class="search-shortcut">⌘K</span>
       </button>
+      <button type="button" class="theme-toggle-button" (click)="toggleTheme()" [title]="'Switch to ' + (currentTheme === 'dark' ? 'light' : 'dark') + ' theme (Ctrl+Shift+T)'">
+        <i class="fas" [class.fa-sun]="currentTheme === 'dark'" [class.fa-moon]="currentTheme === 'light'"></i>
+        <span class="theme-toggle-text">{{ currentTheme === 'dark' ? 'Light' : 'Dark' }} mode</span>
+      </button>
     </div>
     <ul>
       <li>
