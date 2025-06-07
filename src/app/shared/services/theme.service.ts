@@ -24,12 +24,8 @@ export class ThemeService {
       return savedTheme;
     }
 
-    // Fallback to system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
-
-    // Default to dark theme
+    // Always default to dark theme (ignoring system preference)
+    // Users can manually switch to light theme if they prefer
     return 'dark';
   }
 
