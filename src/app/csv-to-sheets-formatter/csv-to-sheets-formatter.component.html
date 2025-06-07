@@ -39,7 +39,7 @@
     ></textarea>
 
     <div class="action-buttons">
-      <button class="btn btn-sm btn-danger" (click)="clearData()">Clear</button>
+      <button class="btn btn-secondary btn-danger" (click)="clearData()">Clear</button>
     </div>
   </section>
 
@@ -67,12 +67,7 @@
         class="sql-input"
       ></textarea>
     </div>
-    <button
-      (click)="executeQuery()"
-      class="btn btn-primary"
-      [disabled]="!csvInput || isLoading"
-      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0"
-    >
+    <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!csvInput || isLoading">
       <span *ngIf="!isLoading">Execute Query</span>
       <span *ngIf="isLoading">Executing...</span>
     </button>

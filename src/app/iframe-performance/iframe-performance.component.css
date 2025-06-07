@@ -5,14 +5,6 @@
   min-height: 100vh;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
 .description {
   text-align: center;
   color: var(--text-secondary);
@@ -22,21 +14,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-.section {
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.section.highlighted {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 8px rgba(0, 255, 157, 0.2);
-}
-
 /* Removed duplicate section h3 styling - now handled globally in styles.css */
 
 /* Performance Monitoring */

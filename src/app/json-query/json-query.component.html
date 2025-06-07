@@ -1,7 +1,8 @@
 <div class="container">
   <h2 class="title">JSON Query</h2>
+
   <!-- Input Section -->
-  <div class="section json-section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
+  <section class="section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Data</h3>
     <div class="action-buttons">
       <button (click)="loadSampleData()" class="btn btn-secondary sample-btn">Load Sample Data</button>
@@ -29,10 +30,10 @@
         <small>Format JSON can fix common issues like single quotes and missing quotes around property names.</small>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Query Section -->
-  <div class="section json-section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
+  <section class="section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
     <h3>SQL Query</h3>
     <p class="query-help">Use SQL syntax to query the JSON data. The data is referenced using '?' as a placeholder.</p>
     <div class="sample-queries">
@@ -55,20 +56,15 @@
         class="sql-input json-textarea"
       ></textarea>
     </div>
-    <button
-      (click)="executeQuery()"
-      class="btn btn-primary"
-      [disabled]="!jsonInput || !sqlQuery || isLoading"
-      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0"
-    >
+    <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!jsonInput || !sqlQuery || isLoading">
       <span *ngIf="!isLoading">Execute Query</span>
       <span *ngIf="isLoading">Executing...</span>
     </button>
-  </div>
+  </section>
 
   <!-- Results Section -->
-  <div
-    class="section json-section"
+  <section
+    class="section"
     id="query-results"
     *ngIf="queryResult.data.length > 0 || queryResult.error"
     [class.highlighted]="highlightedSection === 'query-results'"
@@ -95,10 +91,10 @@
         [options]="{ showLineNumbers: showLineNumbers, allowDownload: true, allowCopy: true }"
       ></app-data-display>
     </div>
-  </div>
+  </section>
 
   <!-- Help Section -->
-  <div class="section json-section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
+  <section class="section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
     <h3>SQL Query Guide</h3>
     <div class="help-content">
       <div class="help-section">
@@ -203,5 +199,5 @@
         </p>
       </div>
     </div>
-  </div>
+  </section>
 </div>

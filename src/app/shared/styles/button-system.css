@@ -189,7 +189,7 @@ button.success:active {
   gap: var(--spacing-sm);
   align-items: center;
   flex-wrap: wrap;
-  margin: var(--spacing-md) 0;
+  margin: var(--spacing-sm) 0;
 }
 
 /* Action buttons container (for action-heavy interfaces) */

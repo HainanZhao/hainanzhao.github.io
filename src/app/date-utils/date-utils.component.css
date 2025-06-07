@@ -1,39 +1,5 @@
 /* Flattened Date Utils Styles */
 
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--text-primary);
-}
-
-.section {
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
-  background-color: transparent;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-primary);
-  transition: var(--transition-smooth);
-}
-
-.section:hover {
-  border-color: var(--border-secondary);
-  background-color: rgba(255, 255, 255, 0.01);
-}
-
-/* Removed duplicate section h3 styling - now handled globally in styles.css */
-
-/* Search highlighting functionality */
-.section.highlighted {
-  background-color: rgba(var(--accent-primary-rgb), 0.15);
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow);
-  animation: pulse-highlight 2s ease-in-out;
-  transform: scale(1.01);
-  transition: all var(--transition-smooth);
-}
-
 @keyframes pulse-highlight {
   0%,
   100% {

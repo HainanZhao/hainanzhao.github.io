@@ -4,10 +4,16 @@
 /* JSON Query Specific Styles */
 
 .container {
-  padding: var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-xl);
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
 }
 
 .title {
@@ -37,12 +43,12 @@
 /* Query specific styles */
 .query-help {
   color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
   font-size: 0.9rem;
 }
 
 .sample-queries {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
 }
 
 .sample-queries span {
@@ -56,7 +62,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
 }
 
 .query-chip {
@@ -82,7 +88,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
 }
 
 .format-options {
@@ -106,14 +112,14 @@
 .execution-info {
   color: var(--text-secondary);
   font-size: 0.85rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
   font-style: italic;
 }
 
 /* Table results */
 .table-results {
   overflow-x: auto;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
   padding: 0;
   background: transparent;
   border: none;
@@ -153,7 +159,7 @@ tr:nth-child(even) {
 
 .help-section {
   background: var(--bg-tertiary);
-  padding: 1rem;
+  padding: var(--spacing-sm);
   border-radius: 8px;
 }
 
@@ -195,6 +201,15 @@ tr:nth-child(even) {
   border-radius: 4px;
   font-family: 'Courier New', monospace;
   font-size: 0.85rem;
+}
+
+/* Action buttons spacing */
+.action-buttons {
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
 }
 
 /* Component-specific responsive behavior */

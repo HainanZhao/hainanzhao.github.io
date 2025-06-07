@@ -9,36 +9,6 @@
   box-sizing: border-box;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--text-primary);
-}
-
-.section {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-  transition: var(--transition-smooth);
-}
-
-.section:hover {
-  border-color: var(--border-secondary);
-}
-
-/* Removed duplicate section h3 styling - now handled globally in styles.css */
-
-.section h4 {
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
 /* Form Elements */
 label {
   display: block;
@@ -51,14 +21,14 @@ textarea {
   width: 100%;
   min-height: 120px;
   resize: vertical;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 /* QR Code Controls */
 .qr-controls {
   display: flex;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   flex-wrap: wrap;
 }
 
@@ -165,13 +135,6 @@ textarea {
 
 .info-content strong {
   color: var(--text-primary);
-}
-
-/* Section highlighting for search results */
-.section.highlighted {
-  border: 2px solid var(--accent-primary);
-  box-shadow: var(--shadow-glow);
-  animation: highlightPulse 2s ease-in-out;
 }
 
 @keyframes highlightPulse {

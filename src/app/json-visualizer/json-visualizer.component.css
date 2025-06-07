@@ -226,12 +226,6 @@ select:focus {
   color: var(--accent-primary);
 }
 
-/* Section highlighting for search results - Updated for consistency */
-.section.highlighted {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
-  animation: highlightPulse 2s ease-in-out;
-}
 
 @keyframes highlightPulse {
   0% {

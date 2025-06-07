@@ -40,15 +40,6 @@
   opacity: 0.1;
 }
 
-.json-section h3 {
-  color: var(--accent-primary);
-  font-weight: 600;
-  margin-bottom: var(--spacing-md);
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 .json-section h3::before {
   content: '◊';
@@ -76,19 +67,12 @@
 
 /* Removed duplicate json-section h3 styling - now handled globally in styles.css */
 
-/* Common JSON Input Styles */
-.json-textarea-container {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
 .json-textarea {
   width: 100%;
   background: var(--json-input-bg);
   color: var(--json-input-text);
   border: 2px solid var(--json-input-border);
   border-radius: 8px;
-  padding: 1rem;
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   line-height: 1.6;
@@ -120,7 +104,7 @@
 .action-buttons {
   display: flex;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   flex-wrap: wrap;
   align-items: center;
 }
