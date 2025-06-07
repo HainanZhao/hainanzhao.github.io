@@ -1,6 +1,9 @@
 /* Import Global Button System */
 @import './app/shared/styles/button-system.css';
 
+/* Import Font Awesome Icons */
+@import '@fortawesome/fontawesome-free/css/all.css';
+
 /* Modern CSS Custom Properties */
 :root {
   /* Background colors - Ultra-warm dark theme for maximum eye comfort */
