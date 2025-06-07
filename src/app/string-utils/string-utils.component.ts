@@ -9,14 +9,14 @@ import { Subject, takeUntil } from 'rxjs';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './string-utils.component.html',
-  styleUrls: ['./string-utils.component.css']
+  styleUrls: ['./string-utils.component.css'],
 })
 export class StringUtilsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   highlightedSection = '';
 
   // Case conversion properties
-  inputText = 'Hello World! Visit https://github.com/hainanzhao/debugi';
+  inputText = 'Hello World! Visit https://debugi.com/';
   convertedText = '';
   selectedCaseType = '';
 
@@ -46,15 +46,13 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   includeSymbols: boolean = false;
   generatedPassword: string = '';
 
-
-
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
     // Subscribe to section highlighting
     this.searchService.highlightedSection$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(sectionId => {
+      .subscribe((sectionId) => {
         this.highlightedSection = sectionId;
       });
   }
@@ -80,10 +78,14 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     const words = this.inputText.toLowerCase().split(' ');
     const firstWord = words.shift();
     if (!firstWord) {
-        this.convertedText = '';
-        return;
+      this.convertedText = '';
+      return;
     }
-    this.convertedText = firstWord + words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    this.convertedText =
+      firstWord +
+      words
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
   }
 
   convertToPascalCase() {
@@ -92,7 +94,9 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
     const words = this.inputText.toLowerCase().split(' ');
-    this.convertedText = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    this.convertedText = words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
   }
 
   convertToKebabCase() {
@@ -142,13 +146,16 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
-    
+
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
     }
-    
+
     this.generatedCharacters = result;
   }
 
@@ -160,11 +167,13 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     let result = '';
-    
+
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
     }
-    
+
     this.generatedCharacters = result;
   }
 
@@ -176,11 +185,13 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
     const characters = '0123456789';
     let result = '';
-    
+
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
     }
-    
+
     this.generatedCharacters = result;
   }
 
@@ -192,11 +203,13 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
     const characters = '!@#$%^&*()_+-=[]{}|;:,.<>?';
     let result = '';
-    
+
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
     }
-    
+
     this.generatedCharacters = result;
   }
 
@@ -208,10 +221,17 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     }
 
     const text = this.inputText;
-    const words = text.trim().split(/\s+/).filter(word => word.length > 0);
-    const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
-    const paragraphs = text.split(/\n\s*\n/).filter(para => para.trim().length > 0);
-    
+    const words = text
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0);
+    const sentences = text
+      .split(/[.!?]+/)
+      .filter((sentence) => sentence.trim().length > 0);
+    const paragraphs = text
+      .split(/\n\s*\n/)
+      .filter((para) => para.trim().length > 0);
+
     // Character frequency
     const charFrequency: { [key: string]: number } = {};
     for (const char of text) {
@@ -231,7 +251,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
     // Most common words
     const commonWords = Object.entries(wordFrequency)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
 
     this.textAnalysis = {
@@ -240,11 +260,17 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       wordCount: words.length,
       sentenceCount: sentences.length,
       paragraphCount: paragraphs.length,
-      averageWordsPerSentence: sentences.length > 0 ? (words.length / sentences.length).toFixed(1) : 0,
-      averageCharsPerWord: words.length > 0 ? (text.replace(/\s/g, '').length / words.length).toFixed(1) : 0,
+      averageWordsPerSentence:
+        sentences.length > 0 ? (words.length / sentences.length).toFixed(1) : 0,
+      averageCharsPerWord:
+        words.length > 0
+          ? (text.replace(/\s/g, '').length / words.length).toFixed(1)
+          : 0,
       readingTime: Math.ceil(words.length / 200), // Assuming 200 WPM
       commonWords: commonWords,
-      charFrequency: Object.entries(charFrequency).sort(([,a], [,b]) => b - a).slice(0, 5)
+      charFrequency: Object.entries(charFrequency)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 5),
     };
   }
 
@@ -258,12 +284,17 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   }
 
   removeLineBreaks() {
-    this.manipulatedText = this.inputText.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+    this.manipulatedText = this.inputText
+      .replace(/\n/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   addLineNumbers() {
     const lines = this.inputText.split('\n');
-    this.manipulatedText = lines.map((line, index) => `${index + 1}. ${line}`).join('\n');
+    this.manipulatedText = lines
+      .map((line, index) => `${index + 1}. ${line}`)
+      .join('\n');
   }
 
   sortLines() {
@@ -374,7 +405,9 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       const data = encoder.encode(this.inputText);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      this.hashedText = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      this.hashedText = hashArray
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
     } catch (error) {
       this.hashedText = 'Error generating hash';
     }
@@ -383,12 +416,12 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   // Password Generation Methods
   generatePassword() {
     let charset = '';
-    
+
     if (this.includeUppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (this.includeLowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
     if (this.includeNumbers) charset += '0123456789';
     if (this.includeSymbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    
+
     if (!charset) {
       this.generatedPassword = 'Please select at least one character type';
       return;
@@ -398,7 +431,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.passwordLength; i++) {
       password += charset.charAt(Math.floor(Math.random() * charset.length));
     }
-    
+
     this.generatedPassword = password;
   }
 

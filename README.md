@@ -32,7 +32,7 @@ To run this project locally, you need to have Node.js and Angular CLI installed.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/hainanzhao/debugi.git
+    git clone https://github.com/HainanZhao/hainanzhao.github.io.git
     cd debugi
     ```
 
