@@ -1,13 +1,17 @@
 <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <!-- Simple high-contrast background -->
+  <!-- Dark background for high contrast -->
   <rect width="32" height="32" fill="#1a1a1a" rx="4"/>
   
-  <!-- Bold white "D" with maximum contrast -->
-  <text x="16" y="16" 
-        font-family="Arial Black, Arial, sans-serif" 
-        font-size="20" 
-        font-weight="900" 
-        fill="#ffffff" 
-        text-anchor="middle"
-        dominant-baseline="central">D</text>
+  <!-- Terminal window with D: prompt -->
+  <rect x="4" y="6" width="24" height="18" rx="2" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+  
+  <!-- D: prompt -->
+  <text x="6" y="17" 
+        font-family="Monaco, 'Courier New', monospace" 
+        font-size="8" 
+        font-weight="600" 
+        fill="#3b82f6">D:</text>
+  
+  <!-- Cursor line -->
+  <line x1="16" y1="19" x2="20" y2="19" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
