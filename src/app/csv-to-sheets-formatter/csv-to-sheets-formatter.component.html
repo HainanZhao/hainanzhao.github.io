@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="title">CSV Utilities</h2>
+  <h2 class="title">CSV Utilities & Query</h2>
 
   <!-- Configuration Section - One Line -->
   <section class="section" id="csv-conversion">
@@ -17,7 +17,7 @@
 
       <div class="config-item">
         <label>
-          <input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()" />
+          <input type="checkbox" [(ngModel)]="hasHeaders" />
           Has Headers
         </label>
       </div>
@@ -33,138 +33,81 @@
     <textarea
       id="csvInput"
       [(ngModel)]="csvInput"
+      (ngModelChange)="formatForSheets()"
       rows="6"
       placeholder="e.g., Name,Age,City,Email&#10;John Doe,30,New York,john@example.com&#10;Jane Smith,25,Los Angeles,jane@example.com"
-      (input)="analyzeCSV()"
     ></textarea>
 
     <div class="action-buttons">
-      <button class="btn btn-sm btn-primary" (click)="formatForSheets()">Convert</button>
-      <button class="btn btn-sm btn-secondary" (click)="analyzeCSV()">Analyze</button>
       <button class="btn btn-sm btn-danger" (click)="clearData()">Clear</button>
     </div>
   </section>
 
-  <!-- Data Manipulation Section - Compact 2-Row Layout -->
-  <section class="section" id="csv-manipulation" *ngIf="csvStats">
-    <h3>Data Manipulation</h3>
-
-    <!-- Row 1: Sort and Filter Controls -->
-    <div class="manipulation-row">
-      <div class="control-group-inline">
-        <h4>Sort:</h4>
-        <select [(ngModel)]="sortColumn">
-          <option value="-1">Select column...</option>
-          <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
-            {{ header }}
-          </option>
-        </select>
-        <select [(ngModel)]="sortDirection">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-        <button class="btn btn-sm btn-secondary" (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
-      </div>
-
-      <div class="control-group-inline">
-        <h4>Filter:</h4>
-        <select [(ngModel)]="filterColumn">
-          <option value="-1">Select column...</option>
-          <option *ngFor="let header of csvStats.headers; let i = index" [value]="i">
-            {{ header }}
-          </option>
-        </select>
-        <input type="text" [(ngModel)]="filterValue" placeholder="Filter value..." (input)="filterData()" />
+  <!-- Query Section -->
+  <section class="section" id="csv-query" *ngIf="csvInput.trim()">
+    <h3>SQL Query (Optional)</h3>
+    <p class="query-help">Use SQL syntax to query the CSV data. Leave empty to show all data.</p>
+    <div class="sample-queries">
+      <span>Sample queries:</span>
+      <div class="query-chips">
         <button
+          *ngFor="let query of sampleSqlQueries"
+          (click)="loadSampleQuery(query)"
           class="btn btn-sm btn-secondary"
-          (click)="filterData()"
-          [disabled]="filterColumn === -1 || !filterValue"
         >
-          Filter
+          {{ query }}
         </button>
       </div>
     </div>
-
-    <!-- Row 2: Data Operations -->
-    <div class="manipulation-row">
-      <div class="control-group-inline">
-        <h4>Operations:</h4>
-        <button class="btn btn-sm btn-secondary" (click)="removeDuplicates()">Remove Duplicates</button>
-        <button class="btn btn-sm btn-secondary" (click)="transoposeData()">Transpose</button>
-      </div>
+    <div class="textarea-container">
+      <textarea
+        [(ngModel)]="sqlQuery"
+        placeholder="Enter your SQL query here... (e.g., SELECT * FROM ? WHERE Age > 25)"
+        rows="4"
+        class="sql-input"
+      ></textarea>
     </div>
+    <button
+      (click)="executeQuery()"
+      class="btn btn-primary"
+      [disabled]="!csvInput || isLoading"
+      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0"
+    >
+      <span *ngIf="!isLoading">Execute Query</span>
+      <span *ngIf="isLoading">Executing...</span>
+    </button>
   </section>
 
   <!-- Output Section -->
-  <section class="section" id="csv-output" *ngIf="csvOutput">
+  <section class="section" id="csv-output" *ngIf="displayData.length > 0 || queryResult.error">
     <h3>Output</h3>
 
-    <div class="output-controls">
-      <div class="config-item">
-        <label for="outputFormat">Output Format:</label>
-        <select id="outputFormat" [(ngModel)]="outputFormat" (change)="formatForSheets()">
-          <option value="tabs">Tab-separated (Google Sheets)</option>
-          <option value="json">JSON</option>
-          <option value="sql">SQL</option>
-          <option value="html">HTML Table</option>
-          <option value="xml">XML</option>
-          <option value="markdown">Markdown</option>
-        </select>
-      </div>
-
-      <div class="action-buttons">
-        <button class="btn btn-sm btn-secondary copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
-        <button
-          class="btn btn-sm btn-primary download-btn"
-          (click)="
-            downloadAsFile(
-              csvOutput,
-              'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat),
-              outputFormat === 'json' ? 'application/json' : 'text/plain'
-            )
-          "
-        >
-          💾 Download
-        </button>
-      </div>
+    <!-- Query Status Info -->
+    <div *ngIf="isShowingQueryResults && queryResult.executionTime" class="execution-info">
+      Query executed in {{ queryResult.executionTime.toFixed(2) }}ms, returned {{ displayData.length }} records
+      <button class="btn btn-sm btn-secondary" (click)="clearQueryResults()" style="margin-left: 1rem">
+        Show Original Data
+      </button>
     </div>
 
-    <textarea
-      id="csvOutput"
-      [(ngModel)]="csvOutput"
-      rows="10"
-      readonly
-      placeholder="Converted data will appear here..."
-      class="output-textarea"
-    ></textarea>
-  </section>
-
-  <!-- CSV Statistics Section - Moved to Bottom -->
-  <section class="section" id="csv-analysis" *ngIf="csvStats">
-    <h3>CSV Statistics</h3>
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-label">Rows</span>
-        <span class="stat-value">{{ csvStats.rows }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Columns</span>
-        <span class="stat-value">{{ csvStats.columns }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Has Headers</span>
-        <span class="stat-value">{{ csvStats.hasHeaders ? 'Yes' : 'No' }}</span>
-      </div>
+    <!-- Error Message -->
+    <div *ngIf="queryResult.error" class="error-message">
+      <strong>Query Error:</strong>
+      {{ queryResult.error }}
     </div>
 
-    <div class="headers-section" *ngIf="csvStats.headers.length > 0">
-      <h4>Column Information</h4>
-      <div class="headers-list">
-        <div class="header-item" *ngFor="let header of csvStats.headers; let i = index">
-          <span class="header-name">{{ header }}</span>
-          <span class="header-type">{{ csvStats.dataTypes[i] }}</span>
-        </div>
-      </div>
-    </div>
+    <!-- Data Display -->
+    <app-data-display
+      *ngIf="displayData.length > 0"
+      [data]="displayData"
+      [format]="outputFormat"
+      [tableName]="displayTableName"
+      [hasHeaders]="hasHeaders"
+      [options]="{
+        showLineNumbers: showLineNumbers,
+        allowDownload: true,
+        allowCopy: true,
+      }"
+    ></app-data-display>
   </section>
 </div>

@@ -37,7 +37,7 @@ module.exports = tseslint.config(
         },
       ],
       // Prettier integration
-      "prettier/prettier": "warn",
+      "prettier/prettier": "error",
       // Relaxed rules for better developer experience
       "@typescript-eslint/no-inferrable-types": "off", // Allow explicit types for clarity
       "@typescript-eslint/no-explicit-any": "warn", // Error for 'any' to test enforcement

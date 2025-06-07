@@ -74,20 +74,6 @@
     [class.highlighted]="highlightedSection === 'query-results'"
   >
     <h3>Query Results</h3>
-    <div class="result-options">
-      <div class="format-options">
-        <span>Display format:</span>
-        <label>
-          <input type="radio" [(ngModel)]="resultFormat" value="table" />
-          Table
-        </label>
-        <label>
-          <input type="radio" [(ngModel)]="resultFormat" value="json" />
-          JSON
-        </label>
-      </div>
-      <button (click)="copyResults()" class="btn btn-secondary copy-btn">Copy Results</button>
-    </div>
 
     <div *ngIf="queryResult.executionTime" class="execution-info">
       Query executed in {{ queryResult.executionTime }}ms, returned {{ queryResult.data.length }} records
@@ -99,29 +85,15 @@
       {{ queryResult.error }}
     </div>
 
-    <!-- Table Results -->
-    <div *ngIf="resultFormat === 'table' && queryResult.data.length > 0" class="table-results json-display-area">
-      <table>
-        <thead>
-          <tr>
-            <th *ngIf="showLineNumbers">#</th>
-            <th *ngFor="let column of getColumnNames()">{{ column }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of queryResult.data; let i = index">
-            <td *ngIf="showLineNumbers">{{ i + 1 }}</td>
-            <td *ngFor="let column of getColumnNames()">
-              {{ formatTableCell(row[column]) }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- JSON Results -->
-    <div *ngIf="resultFormat === 'json' && queryResult.data.length > 0" class="json-results json-display-area">
-      <pre class="json-code">{{ formatJsonOutput() }}</pre>
+    <!-- Results Display using DataDisplayComponent -->
+    <div *ngIf="queryResult.data.length > 0">
+      <app-data-display
+        [data]="queryResult.data"
+        [format]="outputFormat"
+        [tableName]="'query_results'"
+        [hasHeaders]="true"
+        [options]="{ showLineNumbers: showLineNumbers, allowDownload: true, allowCopy: true }"
+      ></app-data-display>
     </div>
   </div>
 
@@ -186,7 +158,7 @@
           </li>
           <li>
             Grouping:
-            <code>SELECT gender, COUNT(*) as count FROM ? GROUP BY gender</code>
+            <code>SELECT gender, COUNT(*) as total FROM ? GROUP BY gender</code>
           </li>
           <li>
             Limit results:

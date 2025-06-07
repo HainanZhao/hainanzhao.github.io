@@ -1,0 +1,66 @@
+<!-- Data Display Component Template -->
+<div class="data-display" *ngIf="data && data.length > 0">
+  <!-- Format Selector -->
+  <div class="display-controls">
+    <div class="config-item">
+      <label for="displayFormat">Display Format:</label>
+      <select id="displayFormat" [(ngModel)]="format" (change)="updateOutput()">
+        <option value="table">Table View</option>
+        <option value="json">JSON</option>
+        <option value="csv">CSV</option>
+        <option value="tabs">Tab-separated</option>
+        <option value="sql">SQL</option>
+        <option value="html">HTML Table</option>
+        <option value="xml">XML</option>
+        <option value="markdown">Markdown</option>
+      </select>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="output-actions">
+      <button *ngIf="options.allowCopy" class="btn btn-sm btn-secondary copy-btn" (click)="copyCurrentOutput()">
+        📋 Copy
+      </button>
+      <button
+        *ngIf="options.allowDownload"
+        class="btn btn-sm btn-primary download-btn"
+        (click)="downloadCurrentOutput()"
+      >
+        💾 Download
+      </button>
+    </div>
+  </div>
+
+  <!-- Data Count Info -->
+  <div class="data-info">Showing {{ data.length }} record(s)</div>
+
+  <!-- Table View -->
+  <div *ngIf="format === 'table'" class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th *ngIf="options.showLineNumbers">#</th>
+          <th *ngFor="let column of getDataKeys()">{{ column }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data; let i = index" [attr.data-index]="i">
+          <td *ngIf="options.showLineNumbers" class="line-number">{{ i + 1 }}</td>
+          <td *ngFor="let column of getDataKeys()">
+            {{ formatTableCell(row[column]) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Text Output (JSON, SQL, etc.) -->
+  <div *ngIf="format !== 'table'" class="text-output">
+    <textarea [value]="convertedOutput" rows="15" readonly class="output-textarea"></textarea>
+  </div>
+</div>
+
+<!-- Empty State -->
+<div *ngIf="!data || data.length === 0" class="empty-state">
+  <p>No data to display</p>
+</div>

@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../shared/services/search.service';
+import { DataDisplayComponent } from '../shared/components/data-display/data-display.component';
 import alasql from 'alasql';
-
-interface QueryResult {
-  data: Record<string, unknown>[];
-  error?: string;
-  executionTime?: number;
-}
+import {
+  QueryResult,
+  preprocessSqlQuery,
+  configureAlaSqlForNestedProperties,
+  transformDataForNestedQueries,
+} from '../shared/utils/query-utils';
 
 @Component({
   selector: 'app-json-query',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DataDisplayComponent],
   templateUrl: './json-query.component.html',
   styleUrl: './json-query.component.css',
 })
@@ -164,7 +165,7 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
   jsonFormatError: string | null = null;
 
   // Display options
-  resultFormat: 'table' | 'json' = 'table';
+  outputFormat: 'table' | 'json' | 'tabs' | 'csv' | 'sql' | 'html' | 'xml' | 'markdown' = 'table';
   showLineNumbers = true;
 
   // Highlighting
@@ -196,7 +197,7 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
 
     // Initialize with sample data
     this.jsonInput = JSON.stringify(this.sampleJsonData, null, 2);
-    this.sqlQuery = "SELECT name, age FROM ? WHERE age > 20 AND gender = 'male'";
+    this.sqlQuery = 'SELECT city, COUNT(*) FROM ? GROUP BY city';
   }
 
   ngOnDestroy(): void {
@@ -226,13 +227,13 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
       const startTime = performance.now();
 
       // Configure AlaSQL for proper nested property handling
-      this.configureAlaSqlForNestedProperties();
+      configureAlaSqlForNestedProperties();
 
       // Transform data to support nested queries by flattening properties
-      const transformedData = this.transformDataForNestedQueries(jsonData);
+      const transformedData = transformDataForNestedQueries(jsonData);
 
       // Preprocess the SQL query to handle quoted nested property paths
-      const processedQuery = this.preprocessSqlQuery(this.sqlQuery);
+      const processedQuery = preprocessSqlQuery(this.sqlQuery);
 
       console.log('Original query:', this.sqlQuery);
       console.log('Processed query:', processedQuery);
@@ -256,126 +257,6 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     } finally {
       this.isLoading = false;
     }
-  }
-
-  /**
-   * Preprocesses the SQL query to handle unquoted property paths with dot notation
-   * Converts company.name to company->name for AlaSQL's native property access
-   * Quoted strings are treated as regular string literals and not processed
-   * @param query The original SQL query
-   * @returns The processed SQL query
-   */
-  private preprocessSqlQuery(query: string): string {
-    // Process unquoted property paths with dot notation
-    // This approach uses a context-aware strategy:
-    // 1. We avoid modifying dot notation right after FROM, JOIN as those are likely table aliases
-    // 2. We look for patterns like "word.word" that are likely property paths
-    // 3. We preserve quoted strings as regular string literals
-
-    // Split into contexts: SELECT, FROM, WHERE, etc.
-    const sqlParts = query.split(/\b(FROM|WHERE|ORDER BY|GROUP BY|HAVING|JOIN|ON)\b/i);
-
-    // Process each part separately to maintain context awareness
-    for (let i = 0; i < sqlParts.length; i++) {
-      const part = sqlParts[i];
-      const upperPart = part.trim().toUpperCase();
-
-      // Skip processing the SQL keywords themselves
-      if (['FROM', 'WHERE', 'ORDER BY', 'GROUP BY', 'HAVING', 'JOIN', 'ON'].includes(upperPart)) {
-        continue;
-      }
-
-      // Don't process the part right after FROM or JOIN as it's likely a table reference
-      if (i > 0 && ['FROM', 'JOIN'].includes(sqlParts[i - 1].trim().toUpperCase())) {
-        continue;
-      }
-
-      // Process other parts for property path patterns (word.word)
-      // This regex matches patterns like "field.name" but not string literals like 'text.more'
-      sqlParts[i] = part.replace(/\b(\w+)\.(\w+)(\.\w+)*\b(?!'|")/g, match => {
-        return match.replace(/\./g, '->');
-      });
-    }
-
-    return sqlParts.join('');
-  }
-
-  /**
-   * Configures AlaSQL to properly handle nested object properties
-   * This ensures both dot notation (obj.prop.subprop) and arrow notation (obj->prop->subprop)
-   * work correctly in queries
-   */
-  private configureAlaSqlForNestedProperties(): void {
-    // Add a custom function to access nested properties using a string path
-    // @ts-expect-error - alasql.fn has an index signature for custom functions
-    alasql.fn.getNestedValue = function (obj: Record<string, unknown>, path: string): unknown {
-      if (!obj || !path) return undefined;
-
-      const parts = path.split('.');
-      let current = obj as unknown as Record<string, unknown>;
-
-      for (const part of parts) {
-        if (current === null || current === undefined) {
-          return undefined;
-        }
-        current = current[part] as unknown as Record<string, unknown>;
-      }
-
-      return current;
-    };
-
-    // Register the -> operator for property access if it doesn't exist
-    try {
-      // Define a custom operator for -> to access nested properties
-      alasql('CREATE FUNCTION ARROW(a,b) RETURNS a[b]');
-      alasql('CREATE OPERATOR -> AS ARROW');
-    } catch {
-      // If operator already exists or can't be created, we'll still have the flattened properties
-      console.log('Arrow operator already exists or could not be defined');
-    }
-  }
-
-  /**
-   * Flattens a nested object into a single-level object with dot notation keys
-   * Example: { a: { b: 1 } } becomes { 'a.b': 1 }
-   */
-  private flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string, unknown> {
-    return Object.keys(obj).reduce((acc: Record<string, unknown>, key: string) => {
-      const prefixedKey = prefix ? `${prefix}.${key}` : key;
-
-      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-        // Recursively flatten nested objects
-        Object.assign(acc, this.flattenObject(obj[key] as Record<string, unknown>, prefixedKey));
-      } else {
-        // Add primitive values or arrays directly
-        acc[prefixedKey] = obj[key];
-      }
-
-      return acc;
-    }, {});
-  }
-
-  /**
-   * Transforms the input data by adding flattened properties
-   * This preserves the original structure while adding flattened access
-   */
-  private transformDataForNestedQueries(
-    data: Record<string, unknown>[]
-  ): Record<string, unknown>[] {
-    return data.map(item => {
-      const flattened = this.flattenObject(item);
-      // Return original item with flattened properties merged in
-      return { ...item, ...flattened };
-    });
-  }
-
-  getColumnNames(): string[] {
-    if (this.queryResult.data.length === 0) return [];
-    return Object.keys(this.queryResult.data[0]);
-  }
-
-  formatJsonOutput(): string {
-    return JSON.stringify(this.queryResult.data, null, 2);
   }
 
   prettifyJson(): void {
@@ -432,34 +313,5 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     this.jsonInput = '';
     this.queryResult = { data: [] };
     this.jsonFormatError = null;
-  }
-
-  copyResults(): void {
-    const textToCopy =
-      this.resultFormat === 'json'
-        ? this.formatJsonOutput()
-        : JSON.stringify(this.queryResult.data);
-
-    navigator.clipboard
-      .writeText(textToCopy)
-      .catch(err => console.error('Failed to copy text: ', err));
-  }
-
-  /**
-   * Formats a cell value for display in the table
-   * Handles nested objects, arrays, and other complex types
-   */
-  formatTableCell(value: unknown): string {
-    if (value === null || value === undefined) {
-      return '';
-    }
-
-    if (typeof value === 'object') {
-      // For objects and arrays, show a simplified JSON representation
-      return JSON.stringify(value);
-    }
-
-    // For primitive values, just convert to string
-    return String(value);
   }
 }
