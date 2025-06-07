@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="title">JSON Visualizer</h2>
-  
+
   <!-- JSON Input Section -->
   <section id="json-input" class="section json-section" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Input</h3>
@@ -11,49 +11,59 @@
       <button (click)="parseJson()" class="btn btn-primary">Parse & Visualize</button>
     </div>
     <div class="textarea-container json-textarea-container">
-      <textarea 
-        id="jsonInput" 
-        [(ngModel)]="jsonInput" 
-        rows="10" 
+      <textarea
+        id="jsonInput"
+        [(ngModel)]="jsonInput"
+        rows="10"
         placeholder="Enter valid JSON data..."
         (input)="parseJson()"
         class="json-input json-textarea"
       ></textarea>
       <div *ngIf="errorMessage" class="error-message json-error-message">
-        <strong>Error:</strong> {{ errorMessage }}
+        <strong>Error:</strong>
+        {{ errorMessage }}
       </div>
     </div>
   </section>
 
   <!-- Visualization Controls -->
-  <section id="visualization-controls" class="section" [class.highlighted]="highlightedSection === 'visualization-controls'" *ngIf="parsedJson && !errorMessage">
+  <section
+    id="visualization-controls"
+    class="section"
+    [class.highlighted]="highlightedSection === 'visualization-controls'"
+    *ngIf="parsedJson && !errorMessage"
+  >
     <h3>Visualization Options</h3>
     <label for="visualizationType">Visualization Type:</label>
-    <select 
-      id="visualizationType" 
-      [(ngModel)]="visualizationType" 
-      (change)="onVisualizationTypeChange()"
-    >
+    <select id="visualizationType" [(ngModel)]="visualizationType" (change)="onVisualizationTypeChange()">
       <option value="tree">Tree Layout</option>
       <option value="hierarchy">Bubble Hierarchy</option>
       <option value="network">Network Graph</option>
     </select>
-    
+
     <div class="visualization-info">
       <div *ngIf="visualizationType === 'tree'">
-        <strong>Tree Layout:</strong> Displays JSON structure as a hierarchical tree with parent-child relationships.
+        <strong>Tree Layout:</strong>
+        Displays JSON structure as a hierarchical tree with parent-child relationships.
       </div>
       <div *ngIf="visualizationType === 'hierarchy'">
-        <strong>Bubble Hierarchy:</strong> Shows JSON structure as nested circles, with size representing depth.
+        <strong>Bubble Hierarchy:</strong>
+        Shows JSON structure as nested circles, with size representing depth.
       </div>
       <div *ngIf="visualizationType === 'network'">
-        <strong>Network Graph:</strong> Interactive force-directed graph where you can drag nodes around.
+        <strong>Network Graph:</strong>
+        Interactive force-directed graph where you can drag nodes around.
       </div>
     </div>
   </section>
 
   <!-- Visualization Section -->
-  <section id="json-visualization" class="section visualization-section" [class.highlighted]="highlightedSection === 'json-visualization'" *ngIf="parsedJson && !errorMessage">
+  <section
+    id="json-visualization"
+    class="section visualization-section"
+    [class.highlighted]="highlightedSection === 'json-visualization'"
+    *ngIf="parsedJson && !errorMessage"
+  >
     <h3>Visualization</h3>
     <div #svgContainer class="svg-container"></div>
   </section>

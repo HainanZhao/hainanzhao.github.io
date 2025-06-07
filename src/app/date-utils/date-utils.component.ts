@@ -10,7 +10,7 @@ import * as dateUtils from '../shared/utils/date-utils';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './date-utils.component.html',
-  styleUrls: ['./date-utils.component.css']
+  styleUrls: ['./date-utils.component.css'],
 })
 export class DateUtilsComponent implements OnInit, OnDestroy {
   dateInput: string = new Date().toISOString().split('T')[0];
@@ -22,18 +22,20 @@ export class DateUtilsComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.highlightSubscription = this.searchService.highlightedSection$.subscribe((section: string | null) => {
-      if (section) {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add('highlighted');
-            setTimeout(() => element.classList.remove('highlighted'), 3000);
-          }
-        }, 100);
+    this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
+      (section: string | null) => {
+        if (section) {
+          setTimeout(() => {
+            const element = document.getElementById(section);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              element.classList.add('highlighted');
+              setTimeout(() => element.classList.remove('highlighted'), 3000);
+            }
+          }, 100);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {

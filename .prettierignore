@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.angular/
+
+# IDE files
+.vscode/
+.idea/
+
+# Generated files
+coverage/
+.nyc_output/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Angular specific
+*.ngfactory.ts
+*.ngstyle.ts
+
+# Root HTML files (not Angular templates)
+src/index.html

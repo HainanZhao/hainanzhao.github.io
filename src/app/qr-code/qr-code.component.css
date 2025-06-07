@@ -175,13 +175,13 @@ textarea {
 }
 
 @keyframes highlightPulse {
-  0% { 
+  0% {
     box-shadow: var(--shadow-glow);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 25px rgba(var(--accent-primary-rgb), 0.6);
   }
-  100% { 
+  100% {
     box-shadow: var(--shadow-glow);
   }
 }
@@ -192,16 +192,16 @@ textarea {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .size-control,
   .error-level-control {
     min-width: auto;
   }
-  
+
   .button-group {
     flex-direction: column;
   }
-  
+
   .button-group button {
     width: 100%;
   }

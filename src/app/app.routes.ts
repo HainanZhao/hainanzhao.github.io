@@ -25,5 +25,5 @@ export const routes: Routes = [
   { path: 'regex-tester', component: RegexTesterComponent },
   { path: 'iframe-performance', component: IframePerformanceComponent },
   { path: 'json-query', component: JsonQueryComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
 ];

@@ -10,11 +10,11 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './global-search.component.html',
-  styleUrls: ['./global-search.component.css']
+  styleUrls: ['./global-search.component.css'],
 })
 export class GlobalSearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-  
+
   searchQuery = '';
   searchResults: SearchableItem[] = [];
   selectedIndex = -1;
@@ -28,24 +28,20 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to search visibility
-    this.searchService.isSearchVisible$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(isVisible => {
-        this.isVisible = isVisible;
-        if (isVisible) {
-          setTimeout(() => this.focusInput(), 100);
-        } else {
-          this.resetSearch();
-        }
-      });
+    this.searchService.isSearchVisible$.pipe(takeUntil(this.destroy$)).subscribe(isVisible => {
+      this.isVisible = isVisible;
+      if (isVisible) {
+        setTimeout(() => this.focusInput(), 100);
+      } else {
+        this.resetSearch();
+      }
+    });
 
     // Subscribe to search results
-    this.searchService.searchResults$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(results => {
-        this.searchResults = results;
-        this.selectedIndex = results.length > 0 ? 0 : -1;
-      });
+    this.searchService.searchResults$.pipe(takeUntil(this.destroy$)).subscribe(results => {
+      this.searchResults = results;
+      this.selectedIndex = results.length > 0 ? 0 : -1;
+    });
   }
 
   ngOnDestroy() {
@@ -112,9 +108,9 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
 
   navigateResults(direction: number) {
     if (this.searchResults.length === 0) return;
-    
+
     this.selectedIndex += direction;
-    
+
     if (this.selectedIndex < 0) {
       this.selectedIndex = this.searchResults.length - 1;
     } else if (this.selectedIndex >= this.searchResults.length) {
@@ -136,7 +132,7 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
 
   navigateToResult(item: SearchableItem) {
     this.hideSearch();
-    
+
     // Navigate to the route
     this.router.navigate([item.route]).then(() => {
       // After navigation, highlight the section if specified
@@ -152,10 +148,10 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
   private scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
+      element.scrollIntoView({
+        behavior: 'smooth',
         block: 'start',
-        inline: 'nearest'
+        inline: 'nearest',
       });
     }
   }
@@ -174,7 +170,7 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
 
   getCategoryIcon(category: string): string {
     const icons: Record<string, string> = {
-      'Calculator': 'fas fa-calculator',
+      Calculator: 'fas fa-calculator',
       'String Utils': 'fas fa-font',
       'CSV Utils': 'fas fa-file-csv',
       'JSON Visualizer': 'fas fa-code',
@@ -188,17 +184,17 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
       'Data Processing': 'fas fa-cogs',
       'Text & String': 'fas fa-font',
       'Numbers & Math': 'fas fa-calculator',
-      'Development': 'fas fa-code',
+      Development: 'fas fa-code',
       'Date & Time': 'fas fa-calendar-alt',
-      'Utilities': 'fas fa-tools',
-      'Array & Data': 'fas fa-list'
+      Utilities: 'fas fa-tools',
+      'Array & Data': 'fas fa-list',
     };
     return icons[category] || 'fas fa-cogs';
   }
 
   highlightText(text: string, query: string): string {
     if (!query) return text;
-    
+
     const regex = new RegExp(`(${query})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
   }

@@ -13,7 +13,7 @@ export interface SearchableItem {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchService {
   private searchableItems: SearchableItem[] = [
@@ -21,44 +21,90 @@ export class SearchService {
     {
       id: 'calc-basic',
       title: 'Basic Calculator',
-      description: 'Perform basic arithmetic operations like addition, subtraction, multiplication, and division',
-      keywords: ['calculator', 'math', 'arithmetic', 'add', 'subtract', 'multiply', 'divide', 'plus', 'minus'],
+      description:
+        'Perform basic arithmetic operations like addition, subtraction, multiplication, and division',
+      keywords: [
+        'calculator',
+        'math',
+        'arithmetic',
+        'add',
+        'subtract',
+        'multiply',
+        'divide',
+        'plus',
+        'minus',
+      ],
       component: 'CalculatorComponent',
       route: '/calculator',
       section: 'basic-operations',
-      category: 'Calculator'
+      category: 'Calculator',
     },
 
     // String Utils features
     {
       id: 'string-case',
       title: 'Case Converter',
-      description: 'Convert text between different cases: uppercase, lowercase, camelCase, PascalCase, kebab-case, snake_case',
-      keywords: ['case', 'convert', 'uppercase', 'lowercase', 'camel', 'pascal', 'kebab', 'snake', 'text', 'string'],
+      description:
+        'Convert text between different cases: uppercase, lowercase, camelCase, PascalCase, kebab-case, snake_case',
+      keywords: [
+        'case',
+        'convert',
+        'uppercase',
+        'lowercase',
+        'camel',
+        'pascal',
+        'kebab',
+        'snake',
+        'text',
+        'string',
+      ],
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'case-conversion',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'text-analysis',
       title: 'Text Analysis',
-      description: 'Analyze text properties: character count, word count, reading time, common words',
-      keywords: ['text', 'analysis', 'count', 'characters', 'words', 'sentences', 'reading', 'time', 'frequency'],
+      description:
+        'Analyze text properties: character count, word count, reading time, common words',
+      keywords: [
+        'text',
+        'analysis',
+        'count',
+        'characters',
+        'words',
+        'sentences',
+        'reading',
+        'time',
+        'frequency',
+      ],
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'text-analysis',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'text-manipulation',
       title: 'Text Manipulation',
-      description: 'Find and replace, reverse text, remove spaces, sort lines, remove duplicates, extract data',
-      keywords: ['find', 'replace', 'reverse', 'sort', 'duplicate', 'extract', 'email', 'url', 'number', 'manipulation'],
+      description:
+        'Find and replace, reverse text, remove spaces, sort lines, remove duplicates, extract data',
+      keywords: [
+        'find',
+        'replace',
+        'reverse',
+        'sort',
+        'duplicate',
+        'extract',
+        'email',
+        'url',
+        'number',
+        'manipulation',
+      ],
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'text-manipulation',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'encoding-decoding',
@@ -68,7 +114,7 @@ export class SearchService {
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'encoding-decoding',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'hash-generation',
@@ -78,7 +124,7 @@ export class SearchService {
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'hash-generation',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'qr-code-generator',
@@ -88,17 +134,26 @@ export class SearchService {
       component: 'QrCodeComponent',
       route: '/qr-code',
       section: 'qr-code-generator',
-      category: 'QR Code'
+      category: 'QR Code',
     },
     {
       id: 'password-generator',
       title: 'Password Generator',
       description: 'Generate secure passwords with customizable length and character types',
-      keywords: ['password', 'generate', 'random', 'secure', 'uppercase', 'lowercase', 'numbers', 'symbols'],
+      keywords: [
+        'password',
+        'generate',
+        'random',
+        'secure',
+        'uppercase',
+        'lowercase',
+        'numbers',
+        'symbols',
+      ],
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'password-generator',
-      category: 'String Utils'
+      category: 'String Utils',
     },
     {
       id: 'random-characters',
@@ -108,7 +163,7 @@ export class SearchService {
       component: 'StringUtilsComponent',
       route: '/string-utils',
       section: 'random-generator',
-      category: 'String Utils'
+      category: 'String Utils',
     },
 
     // CSV Utils features
@@ -120,7 +175,7 @@ export class SearchService {
       component: 'CsvToSheetsFormatterComponent',
       route: '/csv-formatter',
       section: 'csv-conversion',
-      category: 'CSV Utils'
+      category: 'CSV Utils',
     },
     {
       id: 'csv-analysis',
@@ -130,7 +185,7 @@ export class SearchService {
       component: 'CsvToSheetsFormatterComponent',
       route: '/csv-formatter',
       section: 'csv-analysis',
-      category: 'CSV Utils'
+      category: 'CSV Utils',
     },
     {
       id: 'csv-manipulation',
@@ -140,7 +195,7 @@ export class SearchService {
       component: 'CsvToSheetsFormatterComponent',
       route: '/csv-formatter',
       section: 'csv-manipulation',
-      category: 'CSV Utils'
+      category: 'CSV Utils',
     },
 
     // Date Utils features
@@ -152,7 +207,7 @@ export class SearchService {
       component: 'DateUtilsComponent',
       route: '/date-utils',
       section: 'date-conversion',
-      category: 'Date Utils'
+      category: 'Date Utils',
     },
 
     // Number Utils features
@@ -164,7 +219,7 @@ export class SearchService {
       component: 'NumberUtilsComponent',
       route: '/number-utils',
       section: 'number-conversion',
-      category: 'Number Utils'
+      category: 'Number Utils',
     },
 
     // Array Utils features
@@ -176,7 +231,7 @@ export class SearchService {
       component: 'ArrayUtilsComponent',
       route: '/array-utils',
       section: 'array-manipulation',
-      category: 'Array Utils'
+      category: 'Array Utils',
     },
 
     // JSON Visualizer features
@@ -188,7 +243,7 @@ export class SearchService {
       component: 'JsonVisualizerComponent',
       route: '/json-visualizer',
       section: 'json-visualization',
-      category: 'JSON Visualizer'
+      category: 'JSON Visualizer',
     },
 
     // Regex Tester features
@@ -200,7 +255,7 @@ export class SearchService {
       component: 'RegexTesterComponent',
       route: '/regex-tester',
       section: 'regex-testing',
-      category: 'Regex Tester'
+      category: 'Regex Tester',
     },
 
     // Iframe Performance features
@@ -212,48 +267,87 @@ export class SearchService {
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'monitoring',
-      category: 'Iframe Performance'
+      category: 'Iframe Performance',
     },
     {
       id: 'iframe-performance-tests',
       title: 'Performance Tests',
-      description: 'Test iframe isolation with CPU-intensive, DOM manipulation, animation, memory, and network tests',
-      keywords: ['iframe', 'cpu', 'dom', 'animation', 'memory', 'network', 'isolation', 'thread blocking'],
+      description:
+        'Test iframe isolation with CPU-intensive, DOM manipulation, animation, memory, and network tests',
+      keywords: [
+        'iframe',
+        'cpu',
+        'dom',
+        'animation',
+        'memory',
+        'network',
+        'isolation',
+        'thread blocking',
+      ],
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'tests',
-      category: 'Iframe Performance'
+      category: 'Iframe Performance',
     },
     {
       id: 'iframe-performance-results',
       title: 'Performance Analysis',
-      description: 'Analyze test results to understand iframe performance impact and thread isolation',
-      keywords: ['iframe', 'analysis', 'results', 'frame drops', 'thread', 'isolation', 'performance impact'],
+      description:
+        'Analyze test results to understand iframe performance impact and thread isolation',
+      keywords: [
+        'iframe',
+        'analysis',
+        'results',
+        'frame drops',
+        'thread',
+        'isolation',
+        'performance impact',
+      ],
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'results',
-      category: 'Iframe Performance'
+      category: 'Iframe Performance',
     },
     // JSON Query features
     {
       id: 'json-query-main',
       title: 'SQL-like JSON Query',
       description: 'Query JSON data using SQL-like syntax for filtering and transforming data',
-      keywords: ['json', 'sql', 'query', 'filter', 'search', 'data', 'select', 'where', 'group by', 'order by'],
+      keywords: [
+        'json',
+        'sql',
+        'query',
+        'filter',
+        'search',
+        'data',
+        'select',
+        'where',
+        'group by',
+        'order by',
+      ],
       component: 'JsonQueryComponent',
       route: '/json-query',
       section: 'json-input',
-      category: 'Data Processing'
+      category: 'Data Processing',
     },
     {
       id: 'json-query-sql',
       title: 'SQL Query for JSON',
       description: 'Write SQL queries to filter, transform, and analyze JSON data structures',
-      keywords: ['sql', 'json', 'query', 'filter', 'where clause', 'select', 'conditions', 'data analysis'],
+      keywords: [
+        'sql',
+        'json',
+        'query',
+        'filter',
+        'where clause',
+        'select',
+        'conditions',
+        'data analysis',
+      ],
       component: 'JsonQueryComponent',
       route: '/json-query',
       section: 'sql-query',
-      category: 'Data Processing'
+      category: 'Data Processing',
     },
     {
       id: 'json-query-results',
@@ -263,7 +357,7 @@ export class SearchService {
       component: 'JsonQueryComponent',
       route: '/json-query',
       section: 'query-results',
-      category: 'Data Processing'
+      category: 'Data Processing',
     },
 
     // About page
@@ -271,12 +365,21 @@ export class SearchService {
       id: 'about-page',
       title: 'About Debugi',
       description: 'Learn about Debugi features, available tools, keyboard shortcuts, and more',
-      keywords: ['about', 'info', 'help', 'features', 'tools', 'shortcuts', 'debugi', 'information'],
+      keywords: [
+        'about',
+        'info',
+        'help',
+        'features',
+        'tools',
+        'shortcuts',
+        'debugi',
+        'information',
+      ],
       component: 'AboutComponent',
       route: '/about',
       section: 'about-info',
-      category: 'Information'
-    }
+      category: 'Information',
+    },
   ];
 
   private searchResults = new BehaviorSubject<SearchableItem[]>([]);
@@ -295,22 +398,26 @@ export class SearchService {
 
     const lowercaseQuery = query.toLowerCase();
     const results = this.searchableItems.filter(item => {
-      return item.title.toLowerCase().includes(lowercaseQuery) ||
-             item.description.toLowerCase().includes(lowercaseQuery) ||
-             item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseQuery)) ||
-             item.category.toLowerCase().includes(lowercaseQuery);
+      return (
+        item.title.toLowerCase().includes(lowercaseQuery) ||
+        item.description.toLowerCase().includes(lowercaseQuery) ||
+        item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseQuery)) ||
+        item.category.toLowerCase().includes(lowercaseQuery)
+      );
     });
 
     // Sort by relevance (exact matches first, then partial matches)
     results.sort((a, b) => {
-      const aExactMatch = a.title.toLowerCase() === lowercaseQuery || 
-                         a.keywords.some(k => k.toLowerCase() === lowercaseQuery);
-      const bExactMatch = b.title.toLowerCase() === lowercaseQuery || 
-                         b.keywords.some(k => k.toLowerCase() === lowercaseQuery);
-      
+      const aExactMatch =
+        a.title.toLowerCase() === lowercaseQuery ||
+        a.keywords.some(k => k.toLowerCase() === lowercaseQuery);
+      const bExactMatch =
+        b.title.toLowerCase() === lowercaseQuery ||
+        b.keywords.some(k => k.toLowerCase() === lowercaseQuery);
+
       if (aExactMatch && !bExactMatch) return -1;
       if (!aExactMatch && bExactMatch) return 1;
-      
+
       // Then sort by title length (shorter titles first for more specific matches)
       return a.title.length - b.title.length;
     });
@@ -330,7 +437,7 @@ export class SearchService {
 
   highlightSection(sectionId: string) {
     this.highlightedSection.next(sectionId);
-    
+
     // Auto-hide highlight after 3 seconds
     setTimeout(() => {
       this.highlightedSection.next('');

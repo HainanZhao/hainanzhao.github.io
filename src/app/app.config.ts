@@ -6,8 +6,8 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    { provide: APP_BASE_HREF, useValue: '/' }
-  ]
+    { provide: APP_BASE_HREF, useValue: '/' },
+  ],
 };

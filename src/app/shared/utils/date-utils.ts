@@ -8,10 +8,10 @@
 export function formatDate(
   date: Date,
   locale: string = 'en-US',
-  options: Intl.DateTimeFormatOptions = { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   }
 ): string {
   return new Intl.DateTimeFormat(locale, options).format(date);
@@ -22,9 +22,11 @@ export function formatDate(
  */
 export function isToday(date: Date): boolean {
   const today = new Date();
-  return date.getDate() === today.getDate() &&
+  return (
+    date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear();
+    date.getFullYear() === today.getFullYear()
+  );
 }
 
 /**

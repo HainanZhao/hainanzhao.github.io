@@ -10,7 +10,7 @@ import { evaluate } from 'mathjs';
   standalone: true, // Mark as standalone
   imports: [FormsModule, CommonModule], // Import FormsModule and CommonModule
   templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css']
+  styleUrls: ['./calculator.component.css'],
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
   expression: string = '';
@@ -22,18 +22,20 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.highlightSubscription = this.searchService.highlightedSection$.subscribe((section: string | null) => {
-      if (section) {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add('highlighted');
-            setTimeout(() => element.classList.remove('highlighted'), 3000);
-          }
-        }, 100);
+    this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
+      (section: string | null) => {
+        if (section) {
+          setTimeout(() => {
+            const element = document.getElementById(section);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              element.classList.add('highlighted');
+              setTimeout(() => element.classList.remove('highlighted'), 3000);
+            }
+          }, 100);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {

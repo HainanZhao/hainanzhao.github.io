@@ -1,11 +1,17 @@
 <div class="container">
   <h2 class="title">String Utilities</h2>
-  
+
   <!-- String Case Conversion Section -->
   <section id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
     <h3>String Case Converter</h3>
-    <textarea id="inputText" [(ngModel)]="inputText" rows="3" placeholder="Enter text to convert..." (input)="analyzeText()"></textarea>
-  
+    <textarea
+      id="inputText"
+      [(ngModel)]="inputText"
+      rows="3"
+      placeholder="Enter text to convert..."
+      (input)="analyzeText()"
+    ></textarea>
+
     <div class="case-options">
       <div class="case-selector">
         <label for="caseType">Select case type:</label>
@@ -20,7 +26,7 @@
         </select>
       </div>
     </div>
-  
+
     <div class="result" *ngIf="convertedText">
       <span class="result-label">Converted Text:</span>
       <span class="result-text">{{ convertedText }}</span>
@@ -29,7 +35,12 @@
   </section>
 
   <!-- Text Analysis Section -->
-  <section id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'" *ngIf="textAnalysis.characterCount">
+  <section
+    id="text-analysis"
+    class="section"
+    [class.highlighted]="highlightedSection === 'text-analysis'"
+    *ngIf="textAnalysis.characterCount"
+  >
     <h3>Text Analysis</h3>
     <div class="analysis-grid">
       <div class="stat-item">
@@ -57,13 +68,11 @@
         <span class="stat-value">{{ textAnalysis.readingTime }} min</span>
       </div>
     </div>
-    
+
     <div class="analysis-details" *ngIf="textAnalysis.commonWords?.length > 0">
       <h4>Most Common Words</h4>
       <ul>
-        <li *ngFor="let word of textAnalysis.commonWords">
-          {{ word[0] }}: {{ word[1] }} times
-        </li>
+        <li *ngFor="let word of textAnalysis.commonWords">{{ word[0] }}: {{ word[1] }} times</li>
       </ul>
     </div>
   </section>
@@ -71,7 +80,7 @@
   <!-- Text Manipulation Section -->
   <section id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
     <h3>Text Manipulation</h3>
-    
+
     <div class="manipulation-options">
       <div class="basic-operations">
         <h4>Text Operations</h4>
@@ -88,7 +97,7 @@
           </select>
         </div>
       </div>
-      
+
       <div class="extraction-operations">
         <h4>Extract Data</h4>
         <div class="extract-buttons">
@@ -98,7 +107,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="result" *ngIf="manipulatedText">
       <span class="result-label">Result:</span>
       <span class="result-text">{{ manipulatedText }}</span>
@@ -109,7 +118,7 @@
   <!-- Encoding/Decoding Section -->
   <section id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
     <h3>Encoding & Decoding</h3>
-    
+
     <div class="encoding-options">
       <div class="encode-group">
         <h4>Encoding</h4>
@@ -119,7 +128,7 @@
           <button class="btn btn-secondary" (click)="encodeHTML()">HTML</button>
         </div>
       </div>
-      
+
       <div class="decode-group">
         <h4>Decoding</h4>
         <div class="decode-buttons">
@@ -129,13 +138,13 @@
         </div>
       </div>
     </div>
-    
+
     <div class="result" *ngIf="encodedText">
       <span class="result-label">Encoded Text:</span>
       <span class="result-text">{{ encodedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(encodedText)">📋 Copy</button>
     </div>
-    
+
     <div class="result" *ngIf="decodedText">
       <span class="result-label">Decoded Text:</span>
       <span class="result-text">{{ decodedText }}</span>
@@ -146,12 +155,12 @@
   <!-- Hash Generation Section -->
   <section id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
     <h3>Hash Generation</h3>
-    
+
     <div class="hash-buttons">
       <button class="btn btn-secondary" (click)="generateSHA256()">Generate SHA-256</button>
       <button class="btn btn-secondary" (click)="generateMD5()">Generate MD5 (Demo)</button>
     </div>
-    
+
     <div class="result" *ngIf="hashedText">
       <span class="result-label">Hash:</span>
       <span class="result-text hash-text">{{ hashedText }}</span>
@@ -162,26 +171,38 @@
   <!-- Password Generator Section -->
   <section id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
     <h3>Password Generator</h3>
-    
+
     <div class="password-controls">
       <div class="length-control">
         <label for="passwordLength">Length:</label>
-        <input type="number" id="passwordLength" [(ngModel)]="passwordLength" min="4" max="128">
+        <input type="number" id="passwordLength" [(ngModel)]="passwordLength" min="4" max="128" />
       </div>
-      
+
       <div class="options-group">
-        <label><input type="checkbox" [(ngModel)]="includeUppercase"> Uppercase (A-Z)</label>
-        <label><input type="checkbox" [(ngModel)]="includeLowercase"> Lowercase (a-z)</label>
-        <label><input type="checkbox" [(ngModel)]="includeNumbers"> Numbers (0-9)</label>
-        <label><input type="checkbox" [(ngModel)]="includeSymbols"> Symbols (#$%)</label>
+        <label>
+          <input type="checkbox" [(ngModel)]="includeUppercase" />
+          Uppercase (A-Z)
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="includeLowercase" />
+          Lowercase (a-z)
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="includeNumbers" />
+          Numbers (0-9)
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="includeSymbols" />
+          Symbols (#$%)
+        </label>
       </div>
     </div>
-    
+
     <div class="password-buttons">
       <button class="btn btn-primary" (click)="generatePassword()">Generate Password</button>
       <button class="btn btn-secondary" (click)="generateMultiplePasswords(5)">Generate 5 Passwords</button>
     </div>
-    
+
     <div class="result" *ngIf="generatedPassword">
       <span class="result-label">Generated Password(s):</span>
       <span class="result-text password-text">{{ generatedPassword }}</span>
@@ -193,23 +214,23 @@
   <section id="random-generator" class="section" [class.highlighted]="highlightedSection === 'random-generator'">
     <h3>Random Character Generator</h3>
     <label for="characterCount">Number of characters:</label>
-    <input 
-      type="number" 
-      id="characterCount" 
-      [(ngModel)]="characterCount" 
-      min="1" 
+    <input
+      type="number"
+      id="characterCount"
+      [(ngModel)]="characterCount"
+      min="1"
       max="1000"
       placeholder="Enter number of characters"
       (keyup.enter)="generateRandomCharacters()"
-    >
-  
+    />
+
     <div class="random-buttons">
       <button class="btn btn-primary" (click)="generateRandomCharacters()">Generate Mixed (A-Z, a-z, 0-9)</button>
       <button class="btn btn-secondary" (click)="generateRandomLetters()">Letters Only</button>
       <button class="btn btn-secondary" (click)="generateRandomNumbers()">Numbers Only</button>
       <button class="btn btn-secondary" (click)="generateRandomSpecialChars()">Special Characters</button>
     </div>
-  
+
     <div class="result" *ngIf="generatedCharacters">
       <span class="result-label">Generated Characters ({{ generatedCharacters.length }}):</span>
       <span class="result-text">{{ generatedCharacters }}</span>

@@ -12,18 +12,18 @@
   --bg-tertiary: #2f2f34;
   --bg-hover: #38383c;
   --bg-accent: #2a2a2f;
-  
+
   /* Text colors - Softer, cream-tinted whites for reduced eye strain */
   --text-primary: #f2f2f7;
   --text-secondary: #e5e5ea;
   --text-tertiary: #aeaeb2;
   --text-muted: #8e8e93;
-  
+
   /* Border colors - Warmer, subtle grays */
   --border-primary: #38383d;
   --border-secondary: #48484d;
   --border-accent: #58585d;
-  
+
   /* Modern accent colors - Muted, comfortable tones */
   --accent-primary: #5ac8fa;
   --accent-primary-rgb: 90, 200, 250;
@@ -31,18 +31,18 @@
   --accent-success: #30d158;
   --accent-warning: #ff9f0a;
   --accent-error: #ff453a;
-  
+
   /* Gradients - Ultra-soft, comfortable gradients */
   --gradient-primary: linear-gradient(135deg, #5ac8fa 0%, #af52de 100%);
   --gradient-accent: linear-gradient(135deg, #af52de 0%, #ff6b6b 100%);
-  
+
   /* Shadows - Minimal, warm shadows for reduced eye strain */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
   --shadow-md: 0 3px 5px -1px rgb(0 0 0 / 0.06), 0 2px 3px -2px rgb(0 0 0 / 0.06);
   --shadow-lg: 0 8px 10px -3px rgb(0 0 0 / 0.06), 0 3px 5px -4px rgb(0 0 0 / 0.06);
   --shadow-glow: 0 0 8px rgb(90 200 250 / 0.15);
   --shadow-focus: 0 0 0 2px rgba(90, 200, 250, 0.12);
-  
+
   /* JSON Input Specific Colors - Enhanced for better visibility */
   --json-input-bg: #242428;
   --json-input-bg-focus: #28282c;
@@ -50,11 +50,11 @@
   --json-input-border: #404047;
   --json-input-border-hover: #52525a;
   --json-input-placeholder: #a1a1aa;
-  
+
   /* JSON Message Colors */
   --json-error-bg: rgba(255, 68, 58, 0.1);
   --json-info-bg: rgba(90, 200, 250, 0.1);
-  
+
   /* Spacing system */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -62,33 +62,35 @@
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
-  
+
   /* Border radius */
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --border-radius-xl: 16px;
-  
+
   /* Typography */
-  --font-mono: 'Fira Code', 'Menlo', 'Monaco', 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', monospace;
-  
+  --font-mono:
+    'Fira Code', 'Menlo', 'Monaco', 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono',
+    monospace;
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-smooth: 0.3s ease;
   --transition-slow: 0.5s ease;
-  
+
   /* Mobile-specific spacing variables */
   --mobile-container-padding: 0.5rem;
   --mobile-section-padding: 0.75rem;
   --mobile-element-margin: 0.5rem;
   --mobile-element-gap: 0.375rem;
-  
+
   /* Small mobile overrides */
   --small-mobile-container-padding: 0.25rem;
   --small-mobile-section-padding: 0.5rem;
   --small-mobile-element-margin: 0.375rem;
   --small-mobile-element-gap: 0.25rem;
-  
+
   /* Tiny mobile overrides */
   --tiny-mobile-container-padding: 0.125rem;
   --tiny-mobile-section-padding: 0.375rem;
@@ -104,18 +106,18 @@ body.theme-light {
   --bg-tertiary: #f1f5f9;
   --bg-hover: #e2e8f0;
   --bg-accent: #f1f5f9;
-  
+
   /* Text colors - Dark on light */
   --text-primary: #1e293b;
   --text-secondary: #475569;
   --text-tertiary: #64748b;
   --text-muted: #94a3b8;
-  
+
   /* Border colors - Light grays */
   --border-primary: #e2e8f0;
   --border-secondary: #cbd5e1;
   --border-accent: #94a3b8;
-  
+
   /* Accent colors remain the same for consistency */
   --accent-primary: #3b82f6;
   --accent-primary-rgb: 59, 130, 246;
@@ -123,18 +125,18 @@ body.theme-light {
   --accent-success: #10b981;
   --accent-warning: #f59e0b;
   --accent-error: #ef4444;
-  
+
   /* Gradients for light theme */
   --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-  
+
   /* Shadows for light theme */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-glow: 0 0 8px rgb(59 130 246 / 0.15);
   --shadow-focus: 0 0 0 2px rgba(59, 130, 246, 0.12);
-  
+
   /* JSON Input Specific Colors - Enhanced for light theme */
   --json-input-bg: #ffffff;
   --json-input-bg-focus: #f8fafc;
@@ -142,7 +144,7 @@ body.theme-light {
   --json-input-border: #cbd5e1;
   --json-input-border-hover: #94a3b8;
   --json-input-placeholder: #64748b;
-  
+
   /* JSON Message Colors */
   --json-error-bg: rgba(239, 68, 68, 0.1);
   --json-info-bg: rgba(59, 130, 246, 0.1);
@@ -151,11 +153,22 @@ body.theme-light {
 /* Modern Base styles */
 * {
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   margin: 0;
   padding: 0;
   background: var(--bg-primary);
@@ -164,26 +177,45 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Typography improvements */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.3;
   margin: 0 0 1rem 0;
   color: var(--text-primary);
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1.125rem;
+}
+h6 {
+  font-size: 1rem;
+}
 
 /* Section Header Styling - Beautiful gradient text for all section headers */
-.section h3, 
+.section h3,
 .json-section h3,
 section h3 {
   font-size: 1rem;
@@ -220,7 +252,8 @@ nav ul li a {
   transition: background-color 0.2s;
 }
 
-nav ul li a:hover, nav ul li a.active {
+nav ul li a:hover,
+nav ul li a.active {
   background-color: #404040;
   color: #ffffff;
 }
@@ -251,7 +284,7 @@ nav ul li a:hover, nav ul li a.active {
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   border: 1px solid #404040;
 }
 
@@ -263,10 +296,10 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 /* Modern Form Elements */
-input[type="text"], 
-input[type="number"], 
-input[type="date"],
-input[type="email"],
+input[type='text'],
+input[type='number'],
+input[type='date'],
+input[type='email'],
 textarea {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
@@ -281,10 +314,10 @@ textarea {
   transition: var(--transition-smooth);
 }
 
-input[type="text"]:focus, 
-input[type="number"]:focus, 
-input[type="date"]:focus,
-input[type="email"]:focus,
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='date']:focus,
+input[type='email']:focus,
 textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
@@ -292,10 +325,10 @@ textarea:focus {
   box-shadow: var(--shadow-focus);
 }
 
-input[type="text"]:hover, 
-input[type="number"]:hover, 
-input[type="date"]:hover,
-input[type="email"]:hover,
+input[type='text']:hover,
+input[type='number']:hover,
+input[type='date']:hover,
+input[type='email']:hover,
 textarea:hover {
   border-color: var(--border-secondary);
 }
@@ -542,7 +575,7 @@ section button,
 
 .toggle-slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 18px;
   width: 18px;
   left: 2px;
@@ -579,12 +612,12 @@ section button,
   .container {
     padding: 1rem;
   }
-  
+
   .section {
     padding: 1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .input-group {
     padding: 1rem;
     margin-bottom: 1rem;
@@ -595,86 +628,91 @@ section button,
   .container {
     padding: var(--mobile-container-padding) !important;
   }
-  
+
   .section {
     padding: var(--mobile-section-padding);
     margin-bottom: var(--mobile-element-margin);
     border-radius: var(--border-radius-md);
   }
-  
+
   .input-group {
     padding: var(--mobile-section-padding);
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   /* Title and heading optimizations */
-  .title, h1 {
+  .title,
+  h1 {
     font-size: 1.5rem;
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   h2 {
     font-size: 1.375rem;
     margin-bottom: calc(var(--mobile-element-margin) * 0.75);
   }
-  
+
   h3 {
     font-size: 1.125rem;
     margin-bottom: calc(var(--mobile-element-margin) * 0.75);
   }
-  
-  h4, h5, h6 {
+
+  h4,
+  h5,
+  h6 {
     font-size: 1rem;
     margin-bottom: calc(var(--mobile-element-margin) * 0.5);
   }
-  
+
   /* Description and paragraph optimizations */
-  .description, p {
+  .description,
+  p {
     font-size: 0.95rem;
     margin-bottom: var(--mobile-element-margin);
     line-height: 1.5;
   }
-  
+
   /* Form element optimizations */
-  input[type="text"], 
-  input[type="number"], 
-  input[type="date"],
-  input[type="email"],
+  input[type='text'],
+  input[type='number'],
+  input[type='date'],
+  input[type='email'],
   textarea {
     padding: var(--mobile-element-gap) var(--mobile-element-margin);
     font-size: 0.9rem;
     margin-bottom: var(--mobile-element-gap);
   }
-  
+
   /* Button optimizations */
-  button, .btn {
+  button,
+  .btn {
     padding: var(--mobile-element-gap) var(--mobile-element-margin);
     font-size: 0.875rem;
     margin-bottom: var(--mobile-element-gap);
   }
-  
+
   .button-group {
     gap: var(--mobile-element-gap);
     margin: var(--mobile-element-margin) 0;
   }
-  
+
   /* Navigation optimizations */
   nav {
     padding: var(--mobile-element-gap);
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   nav ul li a {
     padding: var(--mobile-element-gap) var(--mobile-element-margin);
     font-size: 0.9rem;
   }
-  
+
   /* Result display optimizations */
   .result {
     padding: var(--mobile-section-padding);
     margin-top: var(--mobile-element-margin);
   }
-  
+
   .result-label {
     margin-bottom: calc(var(--mobile-element-gap) * 0.75);
     font-size: 0.85rem;
@@ -685,90 +723,95 @@ section button,
   .container {
     padding: var(--small-mobile-container-padding) !important;
   }
-  
+
   .section {
     padding: var(--small-mobile-section-padding);
     margin-bottom: var(--small-mobile-element-margin);
     border-radius: var(--border-radius-sm);
   }
-  
+
   .input-group {
     padding: var(--small-mobile-section-padding);
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
+
   /* Enhanced title and heading scaling */
-  .title, h1 {
+  .title,
+  h1 {
     font-size: 1.375rem;
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
+
   h2 {
     font-size: 1.25rem;
     margin-bottom: calc(var(--small-mobile-element-margin) * 0.75);
   }
-  
+
   h3 {
     font-size: 1.125rem;
     margin-bottom: calc(var(--small-mobile-element-margin) * 0.75);
   }
-  
-  h4, h5, h6 {
+
+  h4,
+  h5,
+  h6 {
     font-size: 0.95rem;
     margin-bottom: calc(var(--small-mobile-element-margin) * 0.5);
   }
-  
+
   /* Enhanced text optimizations */
-  .description, p {
+  .description,
+  p {
     font-size: 0.9rem;
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
+
   /* Enhanced form elements */
-  input[type="text"], 
-  input[type="number"], 
-  input[type="date"],
-  input[type="email"],
+  input[type='text'],
+  input[type='number'],
+  input[type='date'],
+  input[type='email'],
   textarea {
     padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
     font-size: 0.85rem;
     margin-bottom: var(--small-mobile-element-gap);
   }
-  
+
   /* Enhanced button styling */
-  button, .btn {
+  button,
+  .btn {
     padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
     font-size: 0.8rem;
     margin-bottom: var(--small-mobile-element-gap);
   }
-  
+
   .button-group {
     gap: var(--small-mobile-element-gap);
     margin: var(--small-mobile-element-margin) 0;
   }
-  
+
   /* Enhanced navigation */
   nav {
     padding: var(--small-mobile-element-gap);
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
+
   nav ul li a {
     padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
     font-size: 0.85rem;
   }
-  
+
   /* Enhanced result display */
   .result {
     padding: var(--small-mobile-section-padding);
     margin-top: var(--small-mobile-element-margin);
   }
-  
+
   .result-label {
     margin-bottom: calc(var(--small-mobile-element-gap) * 0.75);
     font-size: 0.8rem;
   }
-  
+
   /* Badge optimizations */
   .badge {
     padding: calc(var(--small-mobile-element-gap) * 0.5) var(--small-mobile-element-gap);
@@ -780,89 +823,94 @@ section button,
   .container {
     padding: var(--tiny-mobile-container-padding) !important;
   }
-  
+
   .section {
     padding: var(--tiny-mobile-section-padding);
     margin-bottom: var(--tiny-mobile-element-margin);
   }
-  
+
   .input-group {
     padding: var(--tiny-mobile-section-padding);
     margin-bottom: var(--tiny-mobile-element-margin);
   }
-  
+
   /* Maximum title and heading compression */
-  .title, h1 {
+  .title,
+  h1 {
     font-size: 1.25rem;
     margin-bottom: var(--tiny-mobile-element-margin);
   }
-  
+
   h2 {
     font-size: 1.125rem;
     margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.75);
   }
-  
+
   h3 {
     font-size: 1rem;
     margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.75);
   }
-  
-  h4, h5, h6 {
+
+  h4,
+  h5,
+  h6 {
     font-size: 0.9rem;
     margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.5);
   }
-  
+
   /* Maximum text compression */
-  .description, p {
+  .description,
+  p {
     font-size: 0.85rem;
     margin-bottom: var(--tiny-mobile-element-margin);
   }
-  
+
   /* Maximum form element compression */
-  input[type="text"], 
-  input[type="number"], 
-  input[type="date"],
-  input[type="email"],
+  input[type='text'],
+  input[type='number'],
+  input[type='date'],
+  input[type='email'],
   textarea {
     padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
     font-size: 0.8rem;
     margin-bottom: var(--tiny-mobile-element-gap);
   }
-  
+
   /* Maximum button compression */
-  button, .btn {
+  button,
+  .btn {
     padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
     font-size: 0.75rem;
     margin-bottom: var(--tiny-mobile-element-gap);
   }
-  
+
   .button-group {
     gap: var(--tiny-mobile-element-gap);
     margin: var(--tiny-mobile-element-margin) 0;
   }
-  
+
   /* Maximum navigation compression */
   nav {
     padding: var(--tiny-mobile-element-gap);
     margin-bottom: var(--tiny-mobile-element-margin);
   }
-  
+
   nav ul li a {
     padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
     font-size: 0.8rem;
   }
-  
+
   /* Maximum result display compression */
   .result {
     padding: var(--tiny-mobile-section-padding);
     margin-top: var(--tiny-mobile-element-margin);
   }
-  
+
   .result-label {
     margin-bottom: calc(var(--tiny-mobile-element-gap) * 0.75);
     font-size: 0.75rem;
   }
-  
+
   /* Maximum badge compression */
   .badge {
     padding: calc(var(--tiny-mobile-element-gap) * 0.5) var(--tiny-mobile-element-gap);
@@ -876,7 +924,7 @@ section button,
   .textarea-container {
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   /* Action button groups */
   .actions {
     gap: var(--mobile-element-gap);
@@ -884,74 +932,86 @@ section button,
     justify-content: flex-start;
     flex-wrap: wrap;
   }
-  
+
   /* Sample/chip buttons */
-  .sample-queries, .query-chips, .chips {
+  .sample-queries,
+  .query-chips,
+  .chips {
     margin-bottom: var(--mobile-element-margin);
   }
-  
-  .query-chip, .chip {
+
+  .query-chip,
+  .chip {
     max-width: 180px;
     padding: calc(var(--mobile-element-gap) * 0.5) var(--mobile-element-margin);
     font-size: 0.8rem;
     margin-bottom: var(--mobile-element-gap);
   }
-  
+
   /* Table optimizations */
-  .table-results, table {
+  .table-results,
+  table {
     font-size: 0.85rem;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: var(--mobile-element-gap);
   }
-  
+
   /* Error messages and hints */
-  .error-message, .format-hint, .help-text {
+  .error-message,
+  .format-hint,
+  .help-text {
     margin-bottom: var(--mobile-element-margin);
     padding: var(--mobile-element-margin);
     font-size: 0.85rem;
   }
-  
+
   /* Execution info and status */
-  .execution-info, .status-text {
+  .execution-info,
+  .status-text {
     margin-bottom: var(--mobile-element-margin);
     font-size: 0.8rem;
   }
-  
+
   /* Help sections */
   .help-content {
     grid-template-columns: 1fr;
     gap: var(--mobile-element-margin);
   }
-  
+
   .help-section {
     padding: var(--mobile-section-padding);
   }
-  
+
   .help-section h4 {
     font-size: 0.95rem;
     margin-bottom: var(--mobile-element-gap);
   }
-  
+
   .help-section pre {
     padding: var(--mobile-element-margin);
     font-size: 0.8rem;
   }
-  
-  .help-section p, .help-section li {
+
+  .help-section p,
+  .help-section li {
     font-size: 0.85rem;
   }
-  
+
   /* Result options and format controls */
-  .result-options, .format-options {
+  .result-options,
+  .format-options {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--mobile-element-margin);
   }
-  
+
   /* Copy and action buttons */
-  .copy-btn, .clear-btn, .execute-btn {
+  .copy-btn,
+  .clear-btn,
+  .execute-btn {
     width: 100%;
     margin: var(--mobile-element-gap) 0;
   }
@@ -962,28 +1022,32 @@ section button,
   .textarea-container {
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
+
   .actions {
     gap: var(--small-mobile-element-gap);
     margin-bottom: var(--small-mobile-element-margin);
   }
-  
-  .query-chip, .chip {
+
+  .query-chip,
+  .chip {
     max-width: 140px;
     font-size: 0.75rem;
     padding: calc(var(--small-mobile-element-gap) * 0.5) var(--small-mobile-element-margin);
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: var(--small-mobile-element-gap);
     font-size: 0.75rem;
   }
-  
-  .error-message, .format-hint, .help-text {
+
+  .error-message,
+  .format-hint,
+  .help-text {
     padding: var(--small-mobile-element-margin);
     font-size: 0.8rem;
   }
-  
+
   .help-section pre {
     padding: var(--small-mobile-element-margin);
     font-size: 0.75rem;
@@ -992,18 +1056,22 @@ section button,
 
 @media (max-width: 360px) {
   /* Maximum compression for tiny screens */
-  .query-chip, .chip {
+  .query-chip,
+  .chip {
     max-width: 120px;
     font-size: 0.7rem;
     padding: calc(var(--tiny-mobile-element-gap) * 0.5) var(--tiny-mobile-element-margin);
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: var(--tiny-mobile-element-gap);
     font-size: 0.7rem;
   }
-  
-  .error-message, .format-hint, .help-text {
+
+  .error-message,
+  .format-hint,
+  .help-text {
     padding: var(--tiny-mobile-element-margin);
     font-size: 0.75rem;
   }
@@ -1015,49 +1083,57 @@ section button,
   .flex-row {
     flex-direction: column;
   }
-  
+
   .flex-center {
     align-items: flex-start;
   }
-  
+
   /* Grid utilities */
   .grid-2 {
     grid-template-columns: 1fr;
   }
-  
+
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   /* Input containers */
-  .input-container, .form-container {
+  .input-container,
+  .form-container {
     padding: var(--mobile-section-padding);
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   /* Control groups */
-  .control-group, .form-group {
+  .control-group,
+  .form-group {
     margin-bottom: var(--mobile-element-margin);
   }
-  
+
   /* Options and settings */
-  .options, .settings, .config {
+  .options,
+  .settings,
+  .config {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   /* Results and output */
-  .output, .results, .preview {
+  .output,
+  .results,
+  .preview {
     margin-top: var(--mobile-element-margin);
     padding: var(--mobile-section-padding);
   }
-  
+
   /* Status and info displays */
-  .status, .info, .stats {
+  .status,
+  .info,
+  .stats {
     font-size: 0.85rem;
     margin-bottom: var(--mobile-element-margin);
   }
@@ -1067,7 +1143,7 @@ section button,
   .grid-3 {
     grid-template-columns: 1fr;
   }
-  
+
   .grid-4 {
     grid-template-columns: 1fr;
   }
@@ -1078,14 +1154,14 @@ section button,
   /* Force minimal container padding on all components */
   .container,
   .app-container,
-  [class*="container"] {
+  [class*='container'] {
     padding: var(--mobile-container-padding) !important;
     margin: 0 !important;
   }
-  
+
   /* Ensure sections also use minimal padding */
   .section,
-  [class*="section"] {
+  [class*='section'] {
     padding: var(--mobile-section-padding) !important;
     margin-bottom: var(--mobile-element-margin) !important;
   }
@@ -1094,12 +1170,12 @@ section button,
 @media (max-width: 480px) {
   .container,
   .app-container,
-  [class*="container"] {
+  [class*='container'] {
     padding: var(--small-mobile-container-padding) !important;
   }
-  
+
   .section,
-  [class*="section"] {
+  [class*='section'] {
     padding: var(--small-mobile-section-padding) !important;
   }
 }
@@ -1107,12 +1183,12 @@ section button,
 @media (max-width: 360px) {
   .container,
   .app-container,
-  [class*="container"] {
+  [class*='container'] {
     padding: var(--tiny-mobile-container-padding) !important;
   }
-  
+
   .section,
-  [class*="section"] {
+  [class*='section'] {
     padding: var(--tiny-mobile-section-padding) !important;
   }
 }

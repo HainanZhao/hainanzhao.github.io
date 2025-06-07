@@ -9,7 +9,7 @@ import { ThemeService, Theme } from './shared/services/theme.service';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, GlobalSearchComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'common-utils-ui';

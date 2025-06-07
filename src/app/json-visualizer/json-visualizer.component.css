@@ -118,15 +118,15 @@ select:focus {
 }
 
 :host ::ng-deep .node-boolean circle {
-  fill: #FF9800;
+  fill: #ff9800;
 }
 
 :host ::ng-deep .node-object circle {
-  fill: #9C27B0;
+  fill: #9c27b0;
 }
 
 :host ::ng-deep .node-array circle {
-  fill: #F44336;
+  fill: #f44336;
 }
 
 :host ::ng-deep .node text {
@@ -184,23 +184,23 @@ select:focus {
 }
 
 :host ::ng-deep .network-node-string circle {
-  fill: #4CAF50;
+  fill: #4caf50;
 }
 
 :host ::ng-deep .network-node-number circle {
-  fill: #2196F3;
+  fill: #2196f3;
 }
 
 :host ::ng-deep .network-node-boolean circle {
-  fill: #FF9800;
+  fill: #ff9800;
 }
 
 :host ::ng-deep .network-node-object circle {
-  fill: #9C27B0;
+  fill: #9c27b0;
 }
 
 :host ::ng-deep .network-node-array circle {
-  fill: #F44336;
+  fill: #f44336;
 }
 
 :host ::ng-deep .network-node text {
@@ -234,13 +234,13 @@ select:focus {
 }
 
 @keyframes highlightPulse {
-  0% { 
+  0% {
     box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 30px rgba(0, 255, 157, 0.4);
   }
-  100% { 
+  100% {
     box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   }
 }
@@ -250,7 +250,7 @@ select:focus {
   .visualization-container {
     overflow-x: scroll;
   }
-  
+
   .svg-container {
     min-width: 1000px;
     min-height: 600px;

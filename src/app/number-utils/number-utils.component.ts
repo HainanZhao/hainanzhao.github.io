@@ -10,7 +10,7 @@ import * as numberUtils from '../shared/utils/number-utils';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './number-utils.component.html',
-  styleUrls: ['./number-utils.component.css']
+  styleUrls: ['./number-utils.component.css'],
 })
 export class NumberUtilsComponent implements OnInit, OnDestroy {
   numberInput: number = 123.456;
@@ -24,18 +24,20 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.highlightSubscription = this.searchService.highlightedSection$.subscribe((section: string | null) => {
-      if (section) {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add('highlighted');
-            setTimeout(() => element.classList.remove('highlighted'), 3000);
-          }
-        }, 100);
+    this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
+      (section: string | null) => {
+        if (section) {
+          setTimeout(() => {
+            const element = document.getElementById(section);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              element.classList.add('highlighted');
+              setTimeout(() => element.classList.remove('highlighted'), 3000);
+            }
+          }, 100);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {
@@ -53,6 +55,8 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
   }
 
   applyClamp() {
-    this.numberResult = numberUtils.clamp(this.numberInput, this.minValue, this.maxValue).toString();
+    this.numberResult = numberUtils
+      .clamp(this.numberInput, this.minValue, this.maxValue)
+      .toString();
   }
 }

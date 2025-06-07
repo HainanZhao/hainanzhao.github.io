@@ -4,12 +4,12 @@ import { BehaviorSubject } from 'rxjs';
 export type Theme = 'dark' | 'light';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   private readonly THEME_KEY = 'debugi-theme';
   private readonly themeSubject = new BehaviorSubject<Theme>(this.getInitialTheme());
-  
+
   public theme$ = this.themeSubject.asObservable();
 
   constructor() {
@@ -50,13 +50,13 @@ export class ThemeService {
 
   private applyTheme(theme: Theme): void {
     const body = document.body;
-    
+
     // Remove existing theme classes
     body.classList.remove('theme-dark', 'theme-light');
-    
+
     // Add new theme class
     body.classList.add(`theme-${theme}`);
-    
+
     // Update meta theme-color for mobile browsers
     this.updateMetaThemeColor(theme);
   }

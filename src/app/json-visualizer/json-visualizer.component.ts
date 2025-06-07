@@ -18,14 +18,14 @@ interface JsonNode {
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './json-visualizer.component.html',
-  styleUrls: ['./json-visualizer.component.css']
+  styleUrls: ['./json-visualizer.component.css'],
 })
 export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('svgContainer', { static: false }) svgContainer!: ElementRef;
-  
+
   private destroy$ = new Subject<void>();
   highlightedSection = '';
-  
+
   jsonInput: string = `{
   "name": "John Doe",
   "age": 30,
@@ -53,20 +53,18 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
 
   private svg: any;
   private width = 1000; // Increased from 800
-  private height = 800;  // Increased from 600
+  private height = 800; // Increased from 600
   private margin = { top: 20, right: 120, bottom: 20, left: 120 };
 
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
     this.parseJson();
-    
+
     // Subscribe to section highlighting
-    this.searchService.highlightedSection$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(sectionId => {
-        this.highlightedSection = sectionId;
-      });
+    this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
+      this.highlightedSection = sectionId;
+    });
   }
 
   ngOnDestroy() {
@@ -93,7 +91,7 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
           this.visualizeJson();
         }
       }, 0);
-    } catch (error) {
+    } catch {
       this.errorMessage = 'Invalid JSON format';
       this.parsedJson = null;
     }
@@ -105,8 +103,9 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
     }
 
     d3.select(this.svgContainer.nativeElement).selectAll('*').remove();
-    
-    this.svg = d3.select(this.svgContainer.nativeElement)
+
+    this.svg = d3
+      .select(this.svgContainer.nativeElement)
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
@@ -118,7 +117,7 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
     const node: JsonNode = {
       name: name,
       type: Array.isArray(obj) ? 'array' : typeof obj,
-      value: obj
+      value: obj,
     };
 
     if (obj !== null && typeof obj === 'object') {
@@ -149,7 +148,7 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
     this.svg.selectAll('*').remove();
 
     const root = this.convertToHierarchy(this.parsedJson, 'JSON');
-    
+
     if (this.visualizationType === 'tree') {
       this.createTreeVisualization(root);
     } else if (this.visualizationType === 'hierarchy') {
@@ -160,40 +159,50 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   private createTreeVisualization(root: JsonNode) {
-    const treeLayout = d3.tree<JsonNode>()
-      .size([this.height - this.margin.top - this.margin.bottom, 
-             this.width - this.margin.left - this.margin.right]);
+    const treeLayout = d3
+      .tree<JsonNode>()
+      .size([
+        this.height - this.margin.top - this.margin.bottom,
+        this.width - this.margin.left - this.margin.right,
+      ]);
 
     const hierarchy = d3.hierarchy(root);
     const treeData = treeLayout(hierarchy);
 
     // Links
-    this.svg.selectAll('.link')
+    this.svg
+      .selectAll('.link')
       .data(treeData.links())
       .enter()
       .append('path')
       .attr('class', 'link')
-      .attr('d', d3.linkHorizontal()
-        .x((d: any) => d.y)
-        .y((d: any) => d.x)
+      .attr(
+        'd',
+        d3
+          .linkHorizontal()
+          .x((d: any) => d.y)
+          .y((d: any) => d.x)
       );
 
     // Nodes
-    const nodes = this.svg.selectAll('.node')
+    const nodes = this.svg
+      .selectAll('.node')
       .data(treeData.descendants())
       .enter()
       .append('g')
       .attr('class', 'node')
       .attr('transform', (d: any) => `translate(${d.y},${d.x})`);
 
-    nodes.append('circle')
+    nodes
+      .append('circle')
       .attr('r', 8)
       .attr('class', (d: any) => `node-${d.data.type}`);
 
-    nodes.append('text')
+    nodes
+      .append('text')
       .attr('dy', '0.35em')
-      .attr('x', (d: any) => d.children ? -12 : 12)
-      .style('text-anchor', (d: any) => d.children ? 'end' : 'start')
+      .attr('x', (d: any) => (d.children ? -12 : 12))
+      .style('text-anchor', (d: any) => (d.children ? 'end' : 'start'))
       .text((d: any) => {
         if (d.data.type === 'object' || d.data.type === 'array') {
           return d.data.name;
@@ -203,30 +212,37 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   private createHierarchyVisualization(root: JsonNode) {
-    const pack = d3.pack<JsonNode>()
-      .size([this.width - this.margin.left - this.margin.right, 
-             this.height - this.margin.top - this.margin.bottom])
+    const pack = d3
+      .pack<JsonNode>()
+      .size([
+        this.width - this.margin.left - this.margin.right,
+        this.height - this.margin.top - this.margin.bottom,
+      ])
       .padding(3);
 
-    const hierarchy = d3.hierarchy(root)
-      .sum((d: JsonNode) => d.children ? 0 : 1)
+    const hierarchy = d3
+      .hierarchy(root)
+      .sum((d: JsonNode) => (d.children ? 0 : 1))
       .sort((a, b) => (b.value || 0) - (a.value || 0));
 
     const packedData = pack(hierarchy);
 
-    const nodes = this.svg.selectAll('.bubble')
+    const nodes = this.svg
+      .selectAll('.bubble')
       .data(packedData.descendants())
       .enter()
       .append('g')
       .attr('class', 'bubble')
       .attr('transform', (d: any) => `translate(${d.x},${d.y})`);
 
-    nodes.append('circle')
+    nodes
+      .append('circle')
       .attr('r', (d: any) => d.r)
       .attr('class', (d: any) => `bubble-${d.data.type}`)
-      .style('opacity', (d: any) => d.children ? 0.3 : 0.8);
+      .style('opacity', (d: any) => (d.children ? 0.3 : 0.8));
 
-    nodes.append('text')
+    nodes
+      .append('text')
       .attr('dy', '0.35em')
       .style('text-anchor', 'middle')
       .style('font-size', (d: any) => Math.min(d.r / 3, 12) + 'px')
@@ -247,13 +263,13 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
         name: node.name,
         type: node.type,
         value: node.value,
-        group: node.type
+        group: node.type,
       });
 
       if (parentId !== undefined) {
         links.push({
           source: parentId,
-          target: nodeId
+          target: nodeId,
         });
       }
 
@@ -264,51 +280,71 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
 
     traverse(root);
 
-    const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(100))
+    const simulation = d3
+      .forceSimulation(nodes)
+      .force(
+        'link',
+        d3
+          .forceLink(links)
+          .id((d: any) => d.id)
+          .distance(100)
+      )
       .force('charge', d3.forceManyBody().strength(-300))
-      .force('center', d3.forceCenter(
-        (this.width - this.margin.left - this.margin.right) / 2,
-        (this.height - this.margin.top - this.margin.bottom) / 2
-      ));
+      .force(
+        'center',
+        d3.forceCenter(
+          (this.width - this.margin.left - this.margin.right) / 2,
+          (this.height - this.margin.top - this.margin.bottom) / 2
+        )
+      );
 
-    const link = this.svg.append('g')
+    const link = this.svg
+      .append('g')
       .selectAll('.network-link')
       .data(links)
       .enter()
       .append('line')
       .attr('class', 'network-link');
 
-    const node = this.svg.append('g')
+    const node = this.svg
+      .append('g')
       .selectAll('.network-node')
       .data(nodes)
       .enter()
       .append('g')
       .attr('class', 'network-node')
-      .call(d3.drag<any, any>()
-        .on('start', (event, d) => {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
-        })
-        .on('drag', (event, d) => {
-          d.fx = event.x;
-          d.fy = event.y;
-        })
-        .on('end', (event, d) => {
-          if (!event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        }));
+      .call(
+        d3
+          .drag<any, any>()
+          .on('start', (event, d) => {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+          })
+          .on('drag', (event, d) => {
+            d.fx = event.x;
+            d.fy = event.y;
+          })
+          .on('end', (event, d) => {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+          })
+      );
 
-    node.append('circle')
+    node
+      .append('circle')
       .attr('r', 12)
       .attr('class', (d: any) => `network-node-${d.type}`);
 
-    node.append('text')
+    node
+      .append('text')
       .attr('dy', '0.35em')
       .attr('x', 15)
-      .text((d: any) => `${d.name}${d.type !== 'object' && d.type !== 'array' ? ': ' + this.formatValue(d.value) : ''}`);
+      .text(
+        (d: any) =>
+          `${d.name}${d.type !== 'object' && d.type !== 'array' ? ': ' + this.formatValue(d.value) : ''}`
+      );
 
     simulation.on('tick', () => {
       link
@@ -317,8 +353,7 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
         .attr('x2', (d: any) => d.target.x)
         .attr('y2', (d: any) => d.target.y);
 
-      node
-        .attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+      node.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
     });
   }
 

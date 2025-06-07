@@ -10,10 +10,9 @@ describe('CalculatorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         FormsModule, // Needed because the component uses ngModel
-        CalculatorComponent // Import the standalone component
-      ]
-    })
-    .compileComponents();
+        CalculatorComponent, // Import the standalone component
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CalculatorComponent);
     component = fixture.componentInstance;
@@ -62,7 +61,7 @@ describe('CalculatorComponent', () => {
       component.evaluateExpression();
       expect(component.result).toBe(4);
     });
-    
+
     // Parentheses
     it('should evaluate "(1 + 2) * 3" to 9 (parentheses)', () => {
       component.expression = '(1 + 2) * 3';

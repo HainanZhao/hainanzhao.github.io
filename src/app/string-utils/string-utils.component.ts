@@ -50,11 +50,9 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to section highlighting
-    this.searchService.highlightedSection$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((sectionId) => {
-        this.highlightedSection = sectionId;
-      });
+    this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
+      this.highlightedSection = sectionId;
+    });
   }
 
   ngOnDestroy() {
@@ -82,10 +80,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
     this.convertedText =
-      firstWord +
-      words
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join('');
+      firstWord + words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
   }
 
   convertToPascalCase() {
@@ -94,9 +89,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
     const words = this.inputText.toLowerCase().split(' ');
-    this.convertedText = words
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
+    this.convertedText = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
   }
 
   convertToKebabCase() {
@@ -146,14 +139,11 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
 
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
     this.generatedCharacters = result;
@@ -169,9 +159,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     let result = '';
 
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
     this.generatedCharacters = result;
@@ -187,9 +175,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     let result = '';
 
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
     this.generatedCharacters = result;
@@ -205,9 +191,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     let result = '';
 
     for (let i = 0; i < this.characterCount; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
     this.generatedCharacters = result;
@@ -224,16 +208,12 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     const words = text
       .trim()
       .split(/\s+/)
-      .filter((word) => word.length > 0);
-    const sentences = text
-      .split(/[.!?]+/)
-      .filter((sentence) => sentence.trim().length > 0);
-    const paragraphs = text
-      .split(/\n\s*\n/)
-      .filter((para) => para.trim().length > 0);
+      .filter(word => word.length > 0);
+    const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
+    const paragraphs = text.split(/\n\s*\n/).filter(para => para.trim().length > 0);
 
     // Character frequency
-    const charFrequency: { [key: string]: number } = {};
+    const charFrequency: Record<string, number> = {};
     for (const char of text) {
       if (char !== ' ' && char !== '\n') {
         charFrequency[char] = (charFrequency[char] || 0) + 1;
@@ -241,7 +221,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     }
 
     // Word frequency
-    const wordFrequency: { [key: string]: number } = {};
+    const wordFrequency: Record<string, number> = {};
     for (const word of words) {
       const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
       if (cleanWord) {
@@ -263,9 +243,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       averageWordsPerSentence:
         sentences.length > 0 ? (words.length / sentences.length).toFixed(1) : 0,
       averageCharsPerWord:
-        words.length > 0
-          ? (text.replace(/\s/g, '').length / words.length).toFixed(1)
-          : 0,
+        words.length > 0 ? (text.replace(/\s/g, '').length / words.length).toFixed(1) : 0,
       readingTime: Math.ceil(words.length / 200), // Assuming 200 WPM
       commonWords: commonWords,
       charFrequency: Object.entries(charFrequency)
@@ -284,17 +262,12 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   }
 
   removeLineBreaks() {
-    this.manipulatedText = this.inputText
-      .replace(/\n/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    this.manipulatedText = this.inputText.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
   addLineNumbers() {
     const lines = this.inputText.split('\n');
-    this.manipulatedText = lines
-      .map((line, index) => `${index + 1}. ${line}`)
-      .join('\n');
+    this.manipulatedText = lines.map((line, index) => `${index + 1}. ${line}`).join('\n');
   }
 
   sortLines() {
@@ -355,7 +328,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   encodeBase64() {
     try {
       this.encodedText = btoa(this.inputText);
-    } catch (error) {
+    } catch {
       this.encodedText = 'Error: Unable to encode text';
     }
   }
@@ -363,7 +336,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   decodeBase64() {
     try {
       this.decodedText = atob(this.inputText);
-    } catch (error) {
+    } catch {
       this.decodedText = 'Error: Invalid Base64 string';
     }
   }
@@ -375,7 +348,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   decodeURL() {
     try {
       this.decodedText = decodeURIComponent(this.inputText);
-    } catch (error) {
+    } catch {
       this.decodedText = 'Error: Invalid URL encoding';
     }
   }
@@ -405,10 +378,8 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       const data = encoder.encode(this.inputText);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      this.hashedText = hashArray
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join('');
-    } catch (error) {
+      this.hashedText = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch {
       this.hashedText = 'Error generating hash';
     }
   }

@@ -1,117 +1,130 @@
 <div class="container">
-  <h2 class="title">JSON Query</h2>  
+  <h2 class="title">JSON Query</h2>
   <!-- Input Section -->
   <div class="section json-section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Data</h3>
     <div class="action-buttons">
       <button (click)="loadSampleData()" class="btn btn-secondary sample-btn">Load Sample Data</button>
-      <button (click)="prettifyJson()" class="btn btn-secondary" title="Formats JSON and attempts to fix common syntax errors">Format JSON</button>
+      <button
+        (click)="prettifyJson()"
+        class="btn btn-secondary"
+        title="Formats JSON and attempts to fix common syntax errors"
+      >
+        Format JSON
+      </button>
       <button (click)="clearData()" class="btn btn-danger">Clear</button>
     </div>
     <div class="textarea-container json-textarea-container">
-      <textarea 
-        [(ngModel)]="jsonInput" 
+      <textarea
+        [(ngModel)]="jsonInput"
         placeholder="Paste your JSON data here..."
         rows="10"
         class="json-input json-textarea"
       ></textarea>
       <div *ngIf="jsonFormatError" class="error-message json-error-message">
-        <strong>Error:</strong> {{jsonFormatError}}
+        <strong>Error:</strong>
+        {{ jsonFormatError }}
       </div>
       <div *ngIf="!jsonFormatError" class="format-hint json-info-message">
         <small>Format JSON can fix common issues like single quotes and missing quotes around property names.</small>
       </div>
     </div>
   </div>
-  
+
   <!-- Query Section -->
   <div class="section json-section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
     <h3>SQL Query</h3>
-    <p class="query-help">
-      Use SQL syntax to query the JSON data. The data is referenced using '?' as a placeholder.
-    </p>
+    <p class="query-help">Use SQL syntax to query the JSON data. The data is referenced using '?' as a placeholder.</p>
     <div class="sample-queries">
       <span>Sample queries:</span>
       <div class="query-chips">
-        <button 
-          *ngFor="let query of sampleSqlQueries" 
-          (click)="loadSampleQuery(query)" 
+        <button
+          *ngFor="let query of sampleSqlQueries"
+          (click)="loadSampleQuery(query)"
           class="btn btn-sm btn-secondary"
         >
-          {{query}}
+          {{ query }}
         </button>
       </div>
     </div>
     <div class="textarea-container json-textarea-container">
-      <textarea 
-        [(ngModel)]="sqlQuery" 
+      <textarea
+        [(ngModel)]="sqlQuery"
         placeholder="Enter your SQL query here... (e.g., SELECT * FROM ? WHERE age > 25)"
         rows="4"
         class="sql-input json-textarea"
       ></textarea>
     </div>
-    <button 
-      (click)="executeQuery()" 
+    <button
+      (click)="executeQuery()"
       class="btn btn-primary"
       [disabled]="!jsonInput || !sqlQuery || isLoading"
-      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0;"
+      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0"
     >
       <span *ngIf="!isLoading">Execute Query</span>
       <span *ngIf="isLoading">Executing...</span>
     </button>
   </div>
-  
+
   <!-- Results Section -->
-  <div class="section json-section" id="query-results" *ngIf="queryResult.data.length > 0 || queryResult.error" [class.highlighted]="highlightedSection === 'query-results'">
+  <div
+    class="section json-section"
+    id="query-results"
+    *ngIf="queryResult.data.length > 0 || queryResult.error"
+    [class.highlighted]="highlightedSection === 'query-results'"
+  >
     <h3>Query Results</h3>
     <div class="result-options">
       <div class="format-options">
         <span>Display format:</span>
         <label>
-          <input type="radio" [(ngModel)]="resultFormat" value="table"> Table
+          <input type="radio" [(ngModel)]="resultFormat" value="table" />
+          Table
         </label>
         <label>
-          <input type="radio" [(ngModel)]="resultFormat" value="json"> JSON
+          <input type="radio" [(ngModel)]="resultFormat" value="json" />
+          JSON
         </label>
       </div>
       <button (click)="copyResults()" class="btn btn-secondary copy-btn">Copy Results</button>
     </div>
-    
+
     <div *ngIf="queryResult.executionTime" class="execution-info">
-      Query executed in {{queryResult.executionTime}}ms, returned {{queryResult.data.length}} records
+      Query executed in {{ queryResult.executionTime }}ms, returned {{ queryResult.data.length }} records
     </div>
-    
+
     <!-- Error Message -->
     <div *ngIf="queryResult.error" class="error-message json-error-message">
-      <strong>Error:</strong> {{queryResult.error}}
+      <strong>Error:</strong>
+      {{ queryResult.error }}
     </div>
-    
+
     <!-- Table Results -->
     <div *ngIf="resultFormat === 'table' && queryResult.data.length > 0" class="table-results json-display-area">
       <table>
         <thead>
           <tr>
             <th *ngIf="showLineNumbers">#</th>
-            <th *ngFor="let column of getColumnNames()">{{column}}</th>
+            <th *ngFor="let column of getColumnNames()">{{ column }}</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let row of queryResult.data; let i = index">
-            <td *ngIf="showLineNumbers">{{i + 1}}</td>
+            <td *ngIf="showLineNumbers">{{ i + 1 }}</td>
             <td *ngFor="let column of getColumnNames()">
-              {{formatTableCell(row[column])}}
+              {{ formatTableCell(row[column]) }}
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    
+
     <!-- JSON Results -->
     <div *ngIf="resultFormat === 'json' && queryResult.data.length > 0" class="json-results json-display-area">
-      <pre class="json-code">{{formatJsonOutput()}}</pre>
+      <pre class="json-code">{{ formatJsonOutput() }}</pre>
     </div>
   </div>
-  
+
   <!-- Help Section -->
   <div class="section json-section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
     <h3>SQL Query Guide</h3>
@@ -121,45 +134,101 @@
         <pre>SELECT column1, column2 FROM ? WHERE condition</pre>
         <p>Use '?' as a placeholder for your JSON data</p>
       </div>
-      
+
       <div class="help-section">
         <h4>Common Operations</h4>
         <ul>
-          <li><strong>SELECT:</strong> SELECT column1, column2, ... (or * for all columns)</li>
-          <li><strong>WHERE:</strong> WHERE age > 25 AND gender = 'male'</li>
-          <li><strong>ORDER BY:</strong> ORDER BY column [ASC|DESC]</li>
-          <li><strong>GROUP BY:</strong> GROUP BY column</li>
-          <li><strong>LIMIT:</strong> LIMIT 10</li>
-          <li><strong>Aggregations:</strong> COUNT(*), SUM(column), AVG(column), MIN(column), MAX(column)</li>
+          <li>
+            <strong>SELECT:</strong>
+            SELECT column1, column2, ... (or * for all columns)
+          </li>
+          <li>
+            <strong>WHERE:</strong>
+            WHERE age > 25 AND gender = 'male'
+          </li>
+          <li>
+            <strong>ORDER BY:</strong>
+            ORDER BY column [ASC|DESC]
+          </li>
+          <li>
+            <strong>GROUP BY:</strong>
+            GROUP BY column
+          </li>
+          <li>
+            <strong>LIMIT:</strong>
+            LIMIT 10
+          </li>
+          <li>
+            <strong>Aggregations:</strong>
+            COUNT(*), SUM(column), AVG(column), MIN(column), MAX(column)
+          </li>
         </ul>
       </div>
-      
+
       <div class="help-section">
         <h4>Examples</h4>
         <ul>
-          <li>Select all records: <code>SELECT * FROM ?</code></li>
-          <li>Filter by condition: <code>SELECT * FROM ? WHERE age > 30</code></li>
-          <li>Multiple conditions: <code>SELECT name, age FROM ? WHERE age > 25 AND gender = 'male'</code></li>
-          <li>Sorting results: <code>SELECT * FROM ? ORDER BY age DESC</code></li>
-          <li>Grouping: <code>SELECT gender, COUNT(*) as count FROM ? GROUP BY gender</code></li>
-          <li>Limit results: <code>SELECT * FROM ? LIMIT 5</code></li>
+          <li>
+            Select all records:
+            <code>SELECT * FROM ?</code>
+          </li>
+          <li>
+            Filter by condition:
+            <code>SELECT * FROM ? WHERE age > 30</code>
+          </li>
+          <li>
+            Multiple conditions:
+            <code>SELECT name, age FROM ? WHERE age > 25 AND gender = 'male'</code>
+          </li>
+          <li>
+            Sorting results:
+            <code>SELECT * FROM ? ORDER BY age DESC</code>
+          </li>
+          <li>
+            Grouping:
+            <code>SELECT gender, COUNT(*) as count FROM ? GROUP BY gender</code>
+          </li>
+          <li>
+            Limit results:
+            <code>SELECT * FROM ? LIMIT 5</code>
+          </li>
         </ul>
       </div>
-      
+
       <div class="help-section">
         <h4>Nested Object Queries</h4>
         <p>You can query nested object properties using different approaches:</p>
         <ul>
-          <li><strong>Direct dot notation:</strong> <code>SELECT * FROM ? WHERE company.size > 50</code></li>
-          <li><strong>Select nested property:</strong> <code>SELECT name, company.name as company_name FROM ?</code></li>
-          <li><strong>Deep nesting:</strong> <code>SELECT * FROM ? WHERE company.department.employees > 20</code></li>
-          <li><strong>Sorting by nested property:</strong> <code>SELECT * FROM ? ORDER BY company.size DESC</code></li>
+          <li>
+            <strong>Direct dot notation:</strong>
+            <code>SELECT * FROM ? WHERE company.size > 50</code>
+          </li>
+          <li>
+            <strong>Select nested property:</strong>
+            <code>SELECT name, company.name as company_name FROM ?</code>
+          </li>
+          <li>
+            <strong>Deep nesting:</strong>
+            <code>SELECT * FROM ? WHERE company.department.employees > 20</code>
+          </li>
+          <li>
+            <strong>Sorting by nested property:</strong>
+            <code>SELECT * FROM ? ORDER BY company.size DESC</code>
+          </li>
         </ul>
-        <p>For complex queries or when experiencing issues with direct dot notation, you can use the helper function:</p>
+        <p>
+          For complex queries or when experiencing issues with direct dot notation, you can use the helper function:
+        </p>
         <ul>
-          <li><strong>Using the helper function:</strong> <code>SELECT name, getNestedValue(?, 'company.name') FROM ?</code></li>
+          <li>
+            <strong>Using the helper function:</strong>
+            <code>SELECT name, getNestedValue(?, 'company.name') FROM ?</code>
+          </li>
         </ul>
-        <p>The system automatically processes unquoted property paths and converts them to the appropriate format for nested object access.</p>
+        <p>
+          The system automatically processes unquoted property paths and converts them to the appropriate format for
+          nested object access.
+        </p>
       </div>
     </div>
   </div>

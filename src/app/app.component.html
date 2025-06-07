@@ -5,13 +5,13 @@
         <div class="app-logo">
           <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
             <!-- Debug/terminal icon -->
-            <rect x="2" y="4" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <rect x="2" y="4" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" />
             <!-- D: prompt instead of >_ -->
             <text x="6" y="16" fill="currentColor" font-family="monospace" font-size="8" font-weight="600">D:</text>
-            <line x1="18" y1="18" x2="24" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="18" y1="18" x2="24" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             <!-- Subtle circuit pattern -->
-            <circle cx="26" cy="8" r="1" fill="currentColor" opacity="0.3"/>
-            <circle cx="26" cy="20" r="1" fill="currentColor" opacity="0.3"/>
+            <circle cx="26" cy="8" r="1" fill="currentColor" opacity="0.3" />
+            <circle cx="26" cy="20" r="1" fill="currentColor" opacity="0.3" />
           </svg>
         </div>
       </div>
@@ -20,7 +20,12 @@
         <span class="search-text">Search utilities</span>
         <span class="search-shortcut">⌘K</span>
       </button>
-      <button type="button" class="theme-toggle-button" (click)="toggleTheme()" [title]="'Switch to ' + (currentTheme === 'dark' ? 'light' : 'dark') + ' theme (Ctrl+Shift+T)'">
+      <button
+        type="button"
+        class="theme-toggle-button"
+        (click)="toggleTheme()"
+        [title]="'Switch to ' + (currentTheme === 'dark' ? 'light' : 'dark') + ' theme (Ctrl+Shift+T)'"
+      >
         <i class="fas" [class.fa-sun]="currentTheme === 'dark'" [class.fa-moon]="currentTheme === 'light'"></i>
         <span class="theme-toggle-text">{{ currentTheme === 'dark' ? 'Light' : 'Dark' }} mode</span>
       </button>
@@ -104,7 +109,7 @@
   <div class="content-area">
     <router-outlet></router-outlet>
   </div>
-  
+
   <!-- Global Search Component -->
   <app-global-search></app-global-search>
 </div>

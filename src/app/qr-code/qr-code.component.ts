@@ -9,7 +9,7 @@ import * as QRCode from 'qrcode';
   selector: 'app-qr-code',
   imports: [FormsModule, CommonModule],
   templateUrl: './qr-code.component.html',
-  styleUrl: './qr-code.component.css'
+  styleUrl: './qr-code.component.css',
 })
 export class QrCodeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -25,11 +25,9 @@ export class QrCodeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to section highlighting
-    this.searchService.highlightedSection$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(sectionId => {
-        this.highlightedSection = sectionId;
-      });
+    this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
+      this.highlightedSection = sectionId;
+    });
 
     // Generate initial QR code
     this.generateQRCode();
@@ -54,8 +52,8 @@ export class QrCodeComponent implements OnInit, OnDestroy {
         width: this.qrCodeSize,
         color: {
           dark: '#000000',
-          light: '#FFFFFF'
-        }
+          light: '#FFFFFF',
+        },
       });
     } catch (error) {
       console.error('Error generating QR code:', error);

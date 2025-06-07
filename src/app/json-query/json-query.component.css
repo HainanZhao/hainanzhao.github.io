@@ -202,12 +202,12 @@ tr:nth-child(even) {
   .help-content {
     grid-template-columns: 1fr;
   }
-  
+
   .result-options {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .query-chips {
     justify-content: flex-start;
   }

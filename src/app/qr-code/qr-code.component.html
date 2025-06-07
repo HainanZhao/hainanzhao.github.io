@@ -2,11 +2,7 @@
   <h2 class="title">QR Code Generator</h2>
 
   <!-- QR Code Generator Section -->
-  <section
-    id="qr-code-generator"
-    class="section"
-    [class.highlighted]="highlightedSection === 'qr-code-generator'"
-  >
+  <section id="qr-code-generator" class="section" [class.highlighted]="highlightedSection === 'qr-code-generator'">
     <h3>Generate QR Code</h3>
     <textarea
       id="qrInput"
@@ -32,11 +28,7 @@
 
       <div class="error-level-control">
         <label for="qrErrorLevel">Error Correction:</label>
-        <select
-          id="qrErrorLevel"
-          [(ngModel)]="qrCodeErrorLevel"
-          (change)="generateQRCode()"
-        >
+        <select id="qrErrorLevel" [(ngModel)]="qrCodeErrorLevel" (change)="generateQRCode()">
           <option value="L">Low (7%)</option>
           <option value="M">Medium (15%)</option>
           <option value="Q">Quartile (25%)</option>
@@ -46,14 +38,8 @@
     </div>
 
     <div class="action-buttons">
-      <button class="btn btn-primary" (click)="generateQRCode()">
-        Generate QR Code
-      </button>
-      <button
-        class="btn btn-secondary download-btn"
-        (click)="downloadQRCode()"
-        *ngIf="qrCodeDataURL"
-      >
+      <button class="btn btn-primary" (click)="generateQRCode()">Generate QR Code</button>
+      <button class="btn btn-secondary download-btn" (click)="downloadQRCode()" *ngIf="qrCodeDataURL">
         Download QR Code
       </button>
       <button class="btn btn-danger" (click)="clearQRCode()">Clear</button>
@@ -63,48 +49,19 @@
     <div class="examples-section">
       <h4>Quick Examples:</h4>
       <div class="btn-group">
-        <button
-          (click)="loadQRExample()"
-          class="btn btn-sm btn-secondary sample-btn"
-        >
-          Website URL
-        </button>
-        <button
-          (click)="loadTextExample()"
-          class="btn btn-sm btn-secondary sample-btn"
-        >
-          Text Message
-        </button>
-        <button
-          (click)="loadContactExample()"
-          class="btn btn-sm btn-secondary sample-btn"
-        >
-          Contact Card
-        </button>
-        <button
-          (click)="loadWifiExample()"
-          class="btn btn-sm btn-secondary sample-btn"
-        >
-          WiFi Network
-        </button>
+        <button (click)="loadQRExample()" class="btn btn-sm btn-secondary sample-btn">Website URL</button>
+        <button (click)="loadTextExample()" class="btn btn-sm btn-secondary sample-btn">Text Message</button>
+        <button (click)="loadContactExample()" class="btn btn-sm btn-secondary sample-btn">Contact Card</button>
+        <button (click)="loadWifiExample()" class="btn btn-sm btn-secondary sample-btn">WiFi Network</button>
       </div>
     </div>
 
     <div class="qr-result" *ngIf="qrCodeDataURL">
       <span class="result-label">Generated QR Code:</span>
       <div class="qr-display">
-        <img
-          [src]="qrCodeDataURL"
-          [alt]="'QR Code for: ' + inputText"
-          class="qr-image"
-        />
+        <img [src]="qrCodeDataURL" [alt]="'QR Code for: ' + inputText" class="qr-image" />
       </div>
-      <button
-        class="btn btn-secondary copy-btn"
-        (click)="copyToClipboard(qrCodeDataURL)"
-      >
-        📋 Copy Data URL
-      </button>
+      <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(qrCodeDataURL)">📋 Copy Data URL</button>
     </div>
   </section>
 
@@ -114,15 +71,21 @@
     <div class="info-content">
       <h4>Error Correction Levels:</h4>
       <ul>
-        <li><strong>Low (7%):</strong> Smallest size, basic error recovery</li>
         <li>
-          <strong>Medium (15%):</strong> Good balance of size and reliability
+          <strong>Low (7%):</strong>
+          Smallest size, basic error recovery
         </li>
         <li>
-          <strong>Quartile (25%):</strong> Higher reliability for damaged codes
+          <strong>Medium (15%):</strong>
+          Good balance of size and reliability
         </li>
         <li>
-          <strong>High (30%):</strong> Maximum error recovery, larger size
+          <strong>Quartile (25%):</strong>
+          Higher reliability for damaged codes
+        </li>
+        <li>
+          <strong>High (30%):</strong>
+          Maximum error recovery, larger size
         </li>
       </ul>
 

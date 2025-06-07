@@ -282,7 +282,9 @@ textarea:hover {
   border-color: var(--border-secondary);
 }
 
-select, input[type="text"], input[type="number"] {
+select,
+input[type='text'],
+input[type='number'] {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
   border-radius: var(--border-radius-md);
@@ -292,21 +294,27 @@ select, input[type="text"], input[type="number"] {
   transition: var(--transition-smooth);
 }
 
-select:focus, input[type="text"]:focus, input[type="number"]:focus {
+select:focus,
+input[type='text']:focus,
+input[type='number']:focus {
   outline: none;
   border-color: var(--accent-primary);
   background-color: var(--bg-hover);
   box-shadow: var(--shadow-focus);
 }
 
-select:focus, input[type="text"]:focus, input[type="number"]:focus {
+select:focus,
+input[type='text']:focus,
+input[type='number']:focus {
   outline: none;
   border-color: var(--accent-primary);
   background-color: var(--bg-hover);
   box-shadow: var(--shadow-focus);
 }
 
-select:hover, input[type="text"]:hover, input[type="number"]:hover {
+select:hover,
+input[type='text']:hover,
+input[type='number']:hover {
   border-color: var(--border-secondary);
 }
 
@@ -323,11 +331,12 @@ select:hover, input[type="text"]:hover, input[type="number"]:hover {
 }
 
 @keyframes pulse-highlight {
-  0%, 100% { 
+  0%,
+  100% {
     background-color: rgba(13, 115, 119, 0.15);
     box-shadow: 0 0 10px rgba(13, 115, 119, 0.3);
   }
-  50% { 
+  50% {
     background-color: rgba(13, 115, 119, 0.25);
     box-shadow: 0 0 20px rgba(13, 115, 119, 0.5);
   }
@@ -339,36 +348,36 @@ select:hover, input[type="text"]:hover, input[type="number"]:hover {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .config-item {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .headers-list {
     grid-template-columns: 1fr;
   }
-  
+
   /* Responsive manipulation controls */
   .manipulation-row {
     flex-direction: column;
   }
-  
+
   .control-group-inline {
     min-width: auto;
     flex-wrap: wrap;
   }
-  
+
   .control-group-inline select,
   .control-group-inline input {
     min-width: 100px;
     flex: 1;
   }
-  
+
   .output-controls {
     flex-direction: column;
     gap: var(--spacing-sm);

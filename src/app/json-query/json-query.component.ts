@@ -16,175 +16,175 @@ interface QueryResult {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './json-query.component.html',
-  styleUrl: './json-query.component.css'
+  styleUrl: './json-query.component.css',
 })
 export class JsonQueryComponent implements OnInit, OnDestroy {
   // Input data
   jsonInput = '';
   sqlQuery = '';
-  
+
   // Sample data for demonstration
   sampleJsonData = [
-    { 
-      id: 1, 
-      name: 'John', 
-      age: 28, 
-      gender: 'male', 
+    {
+      id: 1,
+      name: 'John',
+      age: 28,
+      gender: 'male',
       city: 'New York',
-      company: { 
-        name: 'Tech Solutions', 
+      company: {
+        name: 'Tech Solutions',
         size: 120,
-        department: { 
+        department: {
           name: 'Engineering',
-          employees: 45
-        }
-      }
+          employees: 45,
+        },
+      },
     },
-    { 
-      id: 2, 
-      name: 'Lisa', 
-      age: 24, 
-      gender: 'female', 
+    {
+      id: 2,
+      name: 'Lisa',
+      age: 24,
+      gender: 'female',
       city: 'Los Angeles',
-      company: { 
+      company: {
         name: 'Digital Creatives',
         size: 35,
-        department: { 
+        department: {
           name: 'Design',
-          employees: 12
-        }
-      }
+          employees: 12,
+        },
+      },
     },
-    { 
-      id: 3, 
-      name: 'Ahmed', 
-      age: 32, 
-      gender: 'male', 
+    {
+      id: 3,
+      name: 'Ahmed',
+      age: 32,
+      gender: 'male',
       city: 'Chicago',
-      company: { 
+      company: {
         name: 'Data Insights',
         size: 85,
-        department: { 
+        department: {
           name: 'Analytics',
-          employees: 28
-        }
-      }
+          employees: 28,
+        },
+      },
     },
-    { 
-      id: 4, 
-      name: 'Sophia', 
-      age: 19, 
-      gender: 'female', 
+    {
+      id: 4,
+      name: 'Sophia',
+      age: 19,
+      gender: 'female',
       city: 'Miami',
-      company: { 
+      company: {
         name: 'Fresh Startups',
         size: 15,
-        department: { 
+        department: {
           name: 'Marketing',
-          employees: 5
-        }
-      }
+          employees: 5,
+        },
+      },
     },
-    { 
-      id: 5, 
-      name: 'Michael', 
-      age: 45, 
-      gender: 'male', 
+    {
+      id: 5,
+      name: 'Michael',
+      age: 45,
+      gender: 'male',
       city: 'Seattle',
-      company: { 
+      company: {
         name: 'Enterprise Solutions',
         size: 500,
-        department: { 
+        department: {
           name: 'Leadership',
-          employees: 12
-        }
-      }
+          employees: 12,
+        },
+      },
     },
-    { 
-      id: 6, 
-      name: 'Emma', 
-      age: 29, 
-      gender: 'female', 
+    {
+      id: 6,
+      name: 'Emma',
+      age: 29,
+      gender: 'female',
       city: 'Boston',
-      company: { 
+      company: {
         name: 'Health Innovations',
         size: 75,
-        department: { 
+        department: {
           name: 'Research',
-          employees: 30
-        }
-      }
+          employees: 30,
+        },
+      },
     },
-    { 
-      id: 7, 
-      name: 'David', 
-      age: 17, 
-      gender: 'male', 
+    {
+      id: 7,
+      name: 'David',
+      age: 17,
+      gender: 'male',
       city: 'Austin',
-      company: { 
+      company: {
         name: 'EdTech Futures',
         size: 25,
-        department: { 
+        department: {
           name: 'Development',
-          employees: 10
-        }
-      }
+          employees: 10,
+        },
+      },
     },
-    { 
-      id: 8, 
-      name: 'Olivia', 
-      age: 21, 
-      gender: 'female', 
+    {
+      id: 8,
+      name: 'Olivia',
+      age: 21,
+      gender: 'female',
       city: 'Portland',
-      company: { 
+      company: {
         name: 'Green Initiatives',
         size: 40,
-        department: { 
+        department: {
           name: 'Sustainability',
-          employees: 15
-        }
-      }
-    }
+          employees: 15,
+        },
+      },
+    },
   ];
-  
+
   sampleSqlQueries = [
-    "SELECT * FROM ? WHERE age > 25",
+    'SELECT * FROM ? WHERE age > 25',
     "SELECT name, age FROM ? WHERE gender = 'female'",
     "SELECT name, city FROM ? WHERE age < 30 AND gender = 'male'",
-    "SELECT DISTINCT gender FROM ?",
-    "SELECT DISTINCT city FROM ? ORDER BY city",
-    "SELECT * FROM ? WHERE company.size > 50",
-    "SELECT name, company.name as company_name FROM ? WHERE company.department.employees > 20",
-    "SELECT name, company.size FROM ? ORDER BY company.size DESC"
+    'SELECT DISTINCT gender FROM ?',
+    'SELECT DISTINCT city FROM ? ORDER BY city',
+    'SELECT * FROM ? WHERE company.size > 50',
+    'SELECT name, company.name as company_name FROM ? WHERE company.department.employees > 20',
+    'SELECT name, company.size FROM ? ORDER BY company.size DESC',
   ];
-  
+
   // Output state
   queryResult: QueryResult = { data: [] };
   isLoading = false;
   jsonFormatError: string | null = null;
-  
+
   // Display options
   resultFormat: 'table' | 'json' = 'table';
   showLineNumbers = true;
-  
+
   // Highlighting
   highlightedSection = '';
   private highlightSubscription?: Subscription;
-  
+
   constructor(private searchService: SearchService) {}
-  
+
   ngOnInit(): void {
     // Subscribe to search highlights
     this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
       (sectionId: string) => {
         this.highlightedSection = sectionId;
-        
+
         if (sectionId) {
           const element = document.getElementById(sectionId);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'center' });
             element.classList.add('highlighted');
-            
+
             // Remove highlight after 3 seconds
             setTimeout(() => {
               element.classList.remove('highlighted');
@@ -193,71 +193,71 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
         }
       }
     );
-    
+
     // Initialize with sample data
     this.jsonInput = JSON.stringify(this.sampleJsonData, null, 2);
     this.sqlQuery = "SELECT name, age FROM ? WHERE age > 20 AND gender = 'male'";
   }
-  
+
   ngOnDestroy(): void {
     if (this.highlightSubscription) {
       this.highlightSubscription.unsubscribe();
     }
   }
-  
+
   loadSampleData(): void {
     this.jsonInput = JSON.stringify(this.sampleJsonData, null, 2);
     this.jsonFormatError = null;
   }
-  
+
   loadSampleQuery(query: string): void {
     this.sqlQuery = query;
   }
-  
+
   executeQuery(): void {
     this.isLoading = true;
     this.queryResult = { data: [] };
-    
+
     try {
       // Parse JSON input
       const jsonData = JSON.parse(this.jsonInput);
-      
+
       // Record start time for performance measurement
       const startTime = performance.now();
-      
+
       // Configure AlaSQL for proper nested property handling
       this.configureAlaSqlForNestedProperties();
-      
+
       // Transform data to support nested queries by flattening properties
       const transformedData = this.transformDataForNestedQueries(jsonData);
-      
+
       // Preprocess the SQL query to handle quoted nested property paths
       const processedQuery = this.preprocessSqlQuery(this.sqlQuery);
-      
+
       console.log('Original query:', this.sqlQuery);
       console.log('Processed query:', processedQuery);
-      
+
       // Execute SQL query using alasql
       const result = alasql(processedQuery, [transformedData]) as Record<string, unknown>[];
-      
+
       // Calculate execution time
       const executionTime = performance.now() - startTime;
-      
+
       this.queryResult = {
         data: result,
-        executionTime: Math.round(executionTime)
+        executionTime: Math.round(executionTime),
       };
     } catch (error) {
       console.error('Query execution error:', error);
       this.queryResult = {
         data: [],
-        error: error instanceof Error ? error.message : String(error)
+        error: error instanceof Error ? error.message : String(error),
       };
     } finally {
       this.isLoading = false;
     }
   }
-  
+
   /**
    * Preprocesses the SQL query to handle unquoted property paths with dot notation
    * Converts company.name to company->name for AlaSQL's native property access
@@ -271,59 +271,59 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     // 1. We avoid modifying dot notation right after FROM, JOIN as those are likely table aliases
     // 2. We look for patterns like "word.word" that are likely property paths
     // 3. We preserve quoted strings as regular string literals
-    
+
     // Split into contexts: SELECT, FROM, WHERE, etc.
     const sqlParts = query.split(/\b(FROM|WHERE|ORDER BY|GROUP BY|HAVING|JOIN|ON)\b/i);
-    
+
     // Process each part separately to maintain context awareness
     for (let i = 0; i < sqlParts.length; i++) {
       const part = sqlParts[i];
       const upperPart = part.trim().toUpperCase();
-      
+
       // Skip processing the SQL keywords themselves
       if (['FROM', 'WHERE', 'ORDER BY', 'GROUP BY', 'HAVING', 'JOIN', 'ON'].includes(upperPart)) {
         continue;
       }
-      
+
       // Don't process the part right after FROM or JOIN as it's likely a table reference
-      if (i > 0 && ['FROM', 'JOIN'].includes(sqlParts[i-1].trim().toUpperCase())) {
+      if (i > 0 && ['FROM', 'JOIN'].includes(sqlParts[i - 1].trim().toUpperCase())) {
         continue;
       }
-      
+
       // Process other parts for property path patterns (word.word)
       // This regex matches patterns like "field.name" but not string literals like 'text.more'
-      sqlParts[i] = part.replace(/\b(\w+)\.(\w+)(\.\w+)*\b(?!'|")/g, (match) => {
+      sqlParts[i] = part.replace(/\b(\w+)\.(\w+)(\.\w+)*\b(?!'|")/g, match => {
         return match.replace(/\./g, '->');
       });
     }
-    
+
     return sqlParts.join('');
   }
-  
+
   /**
    * Configures AlaSQL to properly handle nested object properties
-   * This ensures both dot notation (obj.prop.subprop) and arrow notation (obj->prop->subprop) 
+   * This ensures both dot notation (obj.prop.subprop) and arrow notation (obj->prop->subprop)
    * work correctly in queries
    */
   private configureAlaSqlForNestedProperties(): void {
     // Add a custom function to access nested properties using a string path
     // @ts-expect-error - alasql.fn has an index signature for custom functions
-    alasql.fn.getNestedValue = function(obj: Record<string, unknown>, path: string): unknown {
+    alasql.fn.getNestedValue = function (obj: Record<string, unknown>, path: string): unknown {
       if (!obj || !path) return undefined;
-      
+
       const parts = path.split('.');
       let current = obj as unknown as Record<string, unknown>;
-      
+
       for (const part of parts) {
         if (current === null || current === undefined) {
           return undefined;
         }
         current = current[part] as unknown as Record<string, unknown>;
       }
-      
+
       return current;
     };
-    
+
     // Register the -> operator for property access if it doesn't exist
     try {
       // Define a custom operator for -> to access nested properties
@@ -334,7 +334,7 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
       console.log('Arrow operator already exists or could not be defined');
     }
   }
-  
+
   /**
    * Flattens a nested object into a single-level object with dot notation keys
    * Example: { a: { b: 1 } } becomes { 'a.b': 1 }
@@ -342,22 +342,15 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
   private flattenObject(obj: Record<string, unknown>, prefix = ''): Record<string, unknown> {
     return Object.keys(obj).reduce((acc: Record<string, unknown>, key: string) => {
       const prefixedKey = prefix ? `${prefix}.${key}` : key;
-      
-      if (
-        typeof obj[key] === 'object' && 
-        obj[key] !== null && 
-        !Array.isArray(obj[key])
-      ) {
+
+      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
         // Recursively flatten nested objects
-        Object.assign(
-          acc, 
-          this.flattenObject(obj[key] as Record<string, unknown>, prefixedKey)
-        );
+        Object.assign(acc, this.flattenObject(obj[key] as Record<string, unknown>, prefixedKey));
       } else {
         // Add primitive values or arrays directly
         acc[prefixedKey] = obj[key];
       }
-      
+
       return acc;
     }, {});
   }
@@ -366,23 +359,25 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
    * Transforms the input data by adding flattened properties
    * This preserves the original structure while adding flattened access
    */
-  private transformDataForNestedQueries(data: Record<string, unknown>[]): Record<string, unknown>[] {
+  private transformDataForNestedQueries(
+    data: Record<string, unknown>[]
+  ): Record<string, unknown>[] {
     return data.map(item => {
       const flattened = this.flattenObject(item);
       // Return original item with flattened properties merged in
       return { ...item, ...flattened };
     });
   }
-  
+
   getColumnNames(): string[] {
     if (this.queryResult.data.length === 0) return [];
     return Object.keys(this.queryResult.data[0]);
   }
-  
+
   formatJsonOutput(): string {
     return JSON.stringify(this.queryResult.data, null, 2);
   }
-  
+
   prettifyJson(): void {
     try {
       // First attempt to parse as-is
@@ -394,26 +389,26 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
       } catch (initialError) {
         // If standard parsing fails, try to fix common issues
         let correctedJson = this.jsonInput;
-        
+
         // Fix common JavaScript-style comments
         correctedJson = correctedJson.replace(/\/\/.*$/gm, ''); // Remove single line comments
         correctedJson = correctedJson.replace(/\/\*[\s\S]*?\*\//g, ''); // Remove multi-line comments
-        
+
         // Fix trailing commas in arrays and objects
         correctedJson = correctedJson.replace(/,(\s*[\]}])/g, '$1');
-        
+
         // Fix missing quotes around property names (matches words followed by colon)
         correctedJson = correctedJson.replace(/(\s*)(\w+)(\s*):/g, '$1"$2"$3:');
-        
+
         // Fix single quotes to double quotes for property names
         correctedJson = correctedJson.replace(/'([^']*?)'(\s*):/g, '"$1"$2:');
-        
+
         // Fix single quotes around string values (but avoid replacing already valid double-quoted strings)
         const singleQuoteRegex = /:(\s*)'(.*?)'/g;
         while (singleQuoteRegex.test(correctedJson)) {
           correctedJson = correctedJson.replace(singleQuoteRegex, ':$1"$2"');
         }
-        
+
         // Try to parse the fixed JSON
         try {
           const parsedCorrectedJson = JSON.parse(correctedJson);
@@ -426,27 +421,30 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
       }
     } catch (error) {
       console.error('Invalid JSON format', error);
-      this.jsonFormatError = error instanceof Error 
-        ? `${error.message}. Try enclosing property names in double quotes and string values in double quotes.`
-        : 'Invalid JSON format';
+      this.jsonFormatError =
+        error instanceof Error
+          ? `${error.message}. Try enclosing property names in double quotes and string values in double quotes.`
+          : 'Invalid JSON format';
     }
   }
-  
+
   clearData(): void {
     this.jsonInput = '';
     this.queryResult = { data: [] };
     this.jsonFormatError = null;
   }
-  
+
   copyResults(): void {
-    const textToCopy = this.resultFormat === 'json' 
-      ? this.formatJsonOutput() 
-      : JSON.stringify(this.queryResult.data);
-      
-    navigator.clipboard.writeText(textToCopy)
+    const textToCopy =
+      this.resultFormat === 'json'
+        ? this.formatJsonOutput()
+        : JSON.stringify(this.queryResult.data);
+
+    navigator.clipboard
+      .writeText(textToCopy)
       .catch(err => console.error('Failed to copy text: ', err));
   }
-  
+
   /**
    * Formats a cell value for display in the table
    * Handles nested objects, arrays, and other complex types
@@ -455,12 +453,12 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     if (value === null || value === undefined) {
       return '';
     }
-    
+
     if (typeof value === 'object') {
       // For objects and arrays, show a simplified JSON representation
       return JSON.stringify(value);
     }
-    
+
     // For primitive values, just convert to string
     return String(value);
   }

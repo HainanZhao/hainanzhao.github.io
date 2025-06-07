@@ -295,12 +295,12 @@ nav ul li a.active i {
   .app-container {
     flex-direction: column;
   }
-  
+
   nav {
     width: 100%;
     padding: 12px 16px;
   }
-  
+
   .nav-header {
     flex-direction: row;
     align-items: center;
@@ -308,49 +308,49 @@ nav ul li a.active i {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
   }
-  
+
   /* Make the title much smaller on mobile */
   .app-title {
     padding: 4px 8px;
   }
-  
+
   .search-button {
     width: auto;
     min-width: 100px;
     padding: 8px 12px;
     font-size: 0.8rem;
   }
-  
+
   .theme-toggle-button {
     width: auto;
     min-width: 80px;
     padding: 8px 10px;
     font-size: 0.75rem;
   }
-  
+
   .search-text {
     display: none;
   }
-  
+
   .theme-toggle-text {
     display: none;
   }
-  
+
   .search-shortcut {
     display: none;
   }
-  
+
   nav ul {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2px;
   }
-  
+
   nav ul li {
     flex: 1;
     min-width: 60px;
   }
-  
+
   /* Show only icons on mobile */
   nav ul li a {
     flex-direction: column;
@@ -361,13 +361,13 @@ nav ul li a.active i {
     min-height: 60px;
     justify-content: center;
   }
-  
+
   nav ul li a i {
     width: 20px;
     height: 20px;
     font-size: 20px;
   }
-  
+
   .content-area {
     padding: 1rem;
   }
@@ -378,33 +378,33 @@ nav ul li a.active i {
   nav {
     padding: 8px 12px;
   }
-  
+
   .nav-header {
     margin-bottom: 0.75rem;
     padding-bottom: 0.75rem;
   }
-  
+
   /* Even smaller title on very small screens */
   .search-button {
     min-width: 80px;
     padding: 6px 8px;
   }
-  
+
   .theme-toggle-button {
     min-width: 60px;
     padding: 6px 8px;
   }
-  
+
   nav ul li {
     min-width: 50px;
   }
-  
+
   nav ul li a {
     padding: 8px 2px;
     font-size: 0.7rem;
     min-height: 50px;
   }
-  
+
   nav ul li a i {
     width: 18px;
     height: 18px;
@@ -419,11 +419,11 @@ nav ul li a.active i {
     padding: 10px 4px;
     min-height: 45px;
   }
-  
+
   nav ul li a span:not(.sr-only) {
     display: none;
   }
-  
+
   nav ul li a i {
     width: 16px;
     height: 16px;

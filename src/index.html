@@ -1,81 +1,93 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Debugi</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64x64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="favicon-128x128.png">
-  <link rel="icon" type="image/png" sizes="256x256" href="favicon-256x256.png">
-  
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  
-  <!-- Android Chrome Icons -->
-  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-  
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="manifest.json">
-  
-  <!-- App Description -->
-  <meta name="description" content="DebugI - Comprehensive developer tools collection with calculator, string utilities, JSON visualizer, QR code generator, regex tester, and data formatters. Free online debugging tools for developers.">
-  <meta name="keywords" content="developer tools, debugging tools, JSON visualizer, string utilities, regex tester, QR code generator, calculator, developer utilities, web tools, programming tools, JSON query, CSV formatter, date utilities">
-  <meta name="author" content="DebugI">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#3b82f6">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://debugi.com/">
-  <meta property="og:title" content="DebugI - Developer Tools Collection">
-  <meta property="og:description" content="Comprehensive suite of developer tools including JSON visualizer, string utilities, regex tester, QR code generator, and more. Free online debugging tools for developers.">
-  <meta property="og:image" content="https://debugi.com/android-chrome-512x512.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:site_name" content="DebugI">
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://debugi.com/">
-  <meta property="twitter:title" content="DebugI - Developer Tools Collection">
-  <meta property="twitter:description" content="Comprehensive suite of developer tools including JSON visualizer, string utilities, regex tester, QR code generator, and more.">
-  <meta property="twitter:image" content="https://debugi.com/android-chrome-512x512.png">
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://debugi.com/">
-  
-  <!-- DNS Prefetch for better performance -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com">
-  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-  
-  <script>
-    // GitHub Pages SPA redirect handler for root domain deployment
-    (function(l) {
-      // Handle query parameter redirects from 404 page
-      if (l.search.startsWith('?/')) {
-        var path = l.search.slice(2) + l.hash;
-        window.history.replaceState(null, null, path || '/');
-      }
-      // Handle sessionStorage redirects from 404.html
-      else {
-        var redirect = sessionStorage.getItem('spa-redirect');
-        if (redirect) {
-          sessionStorage.removeItem('spa-redirect');
-          window.history.replaceState(null, null, redirect);
+  <head>
+    <meta charset="utf-8" />
+    <title>Debugi</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64x64.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="favicon-128x128.png" />
+    <link rel="icon" type="image/png" sizes="256x256" href="favicon-256x256.png" />
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <!-- Android Chrome Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- App Description -->
+    <meta
+      name="description"
+      content="DebugI - Comprehensive developer tools collection with calculator, string utilities, JSON visualizer, QR code generator, regex tester, and data formatters. Free online debugging tools for developers."
+    />
+    <meta
+      name="keywords"
+      content="developer tools, debugging tools, JSON visualizer, string utilities, regex tester, QR code generator, calculator, developer utilities, web tools, programming tools, JSON query, CSV formatter, date utilities"
+    />
+    <meta name="author" content="DebugI" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#3b82f6" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://debugi.com/" />
+    <meta property="og:title" content="DebugI - Developer Tools Collection" />
+    <meta
+      property="og:description"
+      content="Comprehensive suite of developer tools including JSON visualizer, string utilities, regex tester, QR code generator, and more. Free online debugging tools for developers."
+    />
+    <meta property="og:image" content="https://debugi.com/android-chrome-512x512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" content="DebugI" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://debugi.com/" />
+    <meta property="twitter:title" content="DebugI - Developer Tools Collection" />
+    <meta
+      property="twitter:description"
+      content="Comprehensive suite of developer tools including JSON visualizer, string utilities, regex tester, QR code generator, and more."
+    />
+    <meta property="twitter:image" content="https://debugi.com/android-chrome-512x512.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://debugi.com/" />
+
+    <!-- DNS Prefetch for better performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+
+    <script>
+      // GitHub Pages SPA redirect handler for root domain deployment
+      (function (l) {
+        // Handle query parameter redirects from 404 page
+        if (l.search.startsWith('?/')) {
+          var path = l.search.slice(2) + l.hash;
+          window.history.replaceState(null, null, path || '/');
         }
-      }
-    }(window.location))
-  </script>
-</head>
-<body>
-  <app-root></app-root>
-</body>
+        // Handle sessionStorage redirects from 404.html
+        else {
+          var redirect = sessionStorage.getItem('spa-redirect');
+          if (redirect) {
+            sessionStorage.removeItem('spa-redirect');
+            window.history.replaceState(null, null, redirect);
+          }
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

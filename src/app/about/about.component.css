@@ -148,29 +148,29 @@
   .about-container {
     padding: 1rem;
   }
-  
+
   .about-header h1 {
     font-size: 2rem;
   }
-  
+
   .about-section h2 {
     font-size: 1.3rem;
   }
-  
+
   .tools-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 0.75rem;
   }
-  
+
   .tool-item {
     padding: 0.5rem 0.75rem;
     font-size: 0.9rem;
   }
-  
+
   .features-list {
     grid-template-columns: 1fr;
   }
-  
+
   .shortcut-item {
     flex-direction: column;
     align-items: flex-start;
@@ -182,15 +182,15 @@
   .about-container {
     padding: 0.75rem;
   }
-  
+
   .about-header {
     margin-bottom: 2rem;
   }
-  
+
   .about-content {
     gap: 2rem;
   }
-  
+
   .tools-grid {
     grid-template-columns: 1fr;
   }

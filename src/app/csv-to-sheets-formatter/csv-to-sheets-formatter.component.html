@@ -14,11 +14,14 @@
           <option value="|">Pipe (|)</option>
         </select>
       </div>
-      
+
       <div class="config-item">
-        <label><input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()"> Has Headers</label>
+        <label>
+          <input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()" />
+          Has Headers
+        </label>
       </div>
-      
+
       <button class="btn btn-sm btn-secondary sample-btn" (click)="loadSampleData()">Load Sample Data</button>
     </div>
   </section>
@@ -27,14 +30,14 @@
   <section class="section" id="csv-input">
     <h3>CSV Input</h3>
     <label for="csvInput">Paste CSV Data:</label>
-    <textarea 
-      id="csvInput" 
-      [(ngModel)]="csvInput" 
-      rows="6" 
+    <textarea
+      id="csvInput"
+      [(ngModel)]="csvInput"
+      rows="6"
       placeholder="e.g., Name,Age,City,Email&#10;John Doe,30,New York,john@example.com&#10;Jane Smith,25,Los Angeles,jane@example.com"
       (input)="analyzeCSV()"
     ></textarea>
-    
+
     <div class="action-buttons">
       <button class="btn btn-sm btn-primary" (click)="formatForSheets()">Convert</button>
       <button class="btn btn-sm btn-secondary" (click)="analyzeCSV()">Analyze</button>
@@ -45,7 +48,7 @@
   <!-- Data Manipulation Section - Compact 2-Row Layout -->
   <section class="section" id="csv-manipulation" *ngIf="csvStats">
     <h3>Data Manipulation</h3>
-    
+
     <!-- Row 1: Sort and Filter Controls -->
     <div class="manipulation-row">
       <div class="control-group-inline">
@@ -62,7 +65,7 @@
         </select>
         <button class="btn btn-sm btn-secondary" (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
       </div>
-      
+
       <div class="control-group-inline">
         <h4>Filter:</h4>
         <select [(ngModel)]="filterColumn">
@@ -71,16 +74,17 @@
             {{ header }}
           </option>
         </select>
-        <input 
-          type="text" 
-          [(ngModel)]="filterValue" 
-          placeholder="Filter value..."
-          (input)="filterData()"
+        <input type="text" [(ngModel)]="filterValue" placeholder="Filter value..." (input)="filterData()" />
+        <button
+          class="btn btn-sm btn-secondary"
+          (click)="filterData()"
+          [disabled]="filterColumn === -1 || !filterValue"
         >
-        <button class="btn btn-sm btn-secondary" (click)="filterData()" [disabled]="filterColumn === -1 || !filterValue">Filter</button>
+          Filter
+        </button>
       </div>
     </div>
-    
+
     <!-- Row 2: Data Operations -->
     <div class="manipulation-row">
       <div class="control-group-inline">
@@ -94,7 +98,7 @@
   <!-- Output Section -->
   <section class="section" id="csv-output" *ngIf="csvOutput">
     <h3>Output</h3>
-    
+
     <div class="output-controls">
       <div class="config-item">
         <label for="outputFormat">Output Format:</label>
@@ -107,18 +111,29 @@
           <option value="markdown">Markdown</option>
         </select>
       </div>
-      
+
       <div class="action-buttons">
         <button class="btn btn-sm btn-secondary copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
-        <button class="btn btn-sm btn-primary download-btn" (click)="downloadAsFile(csvOutput, 'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat), outputFormat === 'json' ? 'application/json' : 'text/plain')">💾 Download</button>
+        <button
+          class="btn btn-sm btn-primary download-btn"
+          (click)="
+            downloadAsFile(
+              csvOutput,
+              'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat),
+              outputFormat === 'json' ? 'application/json' : 'text/plain'
+            )
+          "
+        >
+          💾 Download
+        </button>
       </div>
     </div>
-    
-    <textarea 
-      id="csvOutput" 
-      [(ngModel)]="csvOutput" 
-      rows="10" 
-      readonly 
+
+    <textarea
+      id="csvOutput"
+      [(ngModel)]="csvOutput"
+      rows="10"
+      readonly
       placeholder="Converted data will appear here..."
       class="output-textarea"
     ></textarea>
@@ -141,7 +156,7 @@
         <span class="stat-value">{{ csvStats.hasHeaders ? 'Yes' : 'No' }}</span>
       </div>
     </div>
-    
+
     <div class="headers-section" *ngIf="csvStats.headers.length > 0">
       <h4>Column Information</h4>
       <div class="headers-list">

@@ -25,7 +25,9 @@
   transition: opacity 0.3s ease;
   z-index: -1;
   padding: 1px;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
 }
 
@@ -61,13 +63,13 @@
 }
 
 @keyframes jsonHighlightPulse {
-  0% { 
+  0% {
     box-shadow: 0 0 8px rgba(0, 255, 157, 0.2);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 12px rgba(0, 255, 157, 0.4);
   }
-  100% { 
+  100% {
     box-shadow: 0 0 8px rgba(0, 255, 157, 0.2);
   }
 }
@@ -114,7 +116,8 @@
 }
 
 /* Common Action Button Styles */
-.json-actions, .action-buttons {
+.json-actions,
+.action-buttons {
   display: flex;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
@@ -215,7 +218,7 @@
   .json-actions {
     flex-direction: column;
   }
-  
+
   .json-textarea {
     min-height: 150px;
   }

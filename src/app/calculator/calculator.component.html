@@ -1,12 +1,18 @@
 <div class="container">
   <h2 class="title">Expression Calculator</h2>
-  
+
   <section class="section" id="calculator">
     <h3>Math Expression Calculator</h3>
-    <input type="text" id="expression" [(ngModel)]="expression" placeholder="(1 + 2) * 3" (keydown.enter)="evaluateExpression()">
-  
+    <input
+      type="text"
+      id="expression"
+      [(ngModel)]="expression"
+      placeholder="(1 + 2) * 3"
+      (keydown.enter)="evaluateExpression()"
+    />
+
     <button class="btn btn-primary" (click)="evaluateExpression()">Calculate</button>
-  
+
     <div class="result" *ngIf="result">
       <span class="result-label">Result:</span>
       <span>{{ result }}</span>

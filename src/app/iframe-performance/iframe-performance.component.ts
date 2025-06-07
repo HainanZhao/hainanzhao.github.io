@@ -24,11 +24,11 @@ interface TestResult {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './iframe-performance.component.html',
-  styleUrls: ['./iframe-performance.component.css']
+  styleUrls: ['./iframe-performance.component.css'],
 })
 export class IframePerformanceComponent implements OnInit, OnDestroy {
   @ViewChild('testIframe', { static: false }) testIframe!: ElementRef<HTMLIFrameElement>;
-  
+
   private destroy$ = new Subject<void>();
   highlightedSection = '';
 
@@ -38,7 +38,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
   testResults: TestResult[] = [];
   mainThreadFPS = 0;
   iframeFPS = 0;
-  
+
   // Enhanced monitoring
   public mainThreadFrameId = 0;
   public lastMainThreadTime = 0;
@@ -47,7 +47,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
   public fpsHistory: number[] = [];
   public isMainThreadStressed = false;
   public iframeActive = false;
-  
+
   // Iframe monitoring
   public iframeFrameId = 0;
   public lastIframeTime = 0;
@@ -86,7 +86,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
         }
         
         heavyTask();
-      `
+      `,
     },
     {
       name: 'DOM Manipulation',
@@ -123,7 +123,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
         }
         
         domTask();
-      `
+      `,
     },
     {
       name: 'Animation Stress Test',
@@ -166,7 +166,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
             result: 'Animation stress test completed'
           }, '*');
         }, duration);
-      `
+      `,
     },
     {
       name: 'Memory Allocation',
@@ -200,7 +200,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
         }
         
         memoryTask();
-      `
+      `,
     },
     {
       name: 'Network Simulation',
@@ -253,7 +253,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
         }
         
         networkTask();
-      `
+      `,
     },
     {
       name: 'Main Thread Blocker',
@@ -285,8 +285,8 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
         }
         
         blockingTask();
-      `
-    }
+      `,
+    },
   ];
 
   constructor(private searchService: SearchService) {}
@@ -299,10 +299,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
 
     // Listen for messages from iframe
     window.addEventListener('message', this.handleIframeMessage.bind(this));
-    
+
     // Start monitoring main thread FPS
     this.startMainThreadMonitoring();
-    
+
     // Initialize iframe with baseline monitoring
     this.initializeIframeMonitoring();
   }
@@ -386,15 +386,17 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
       this.mainThreadFrameCount++;
 
       if (now - this.lastMainThreadTime >= 1000) {
-        const currentFPS = Math.round(this.mainThreadFrameCount * 1000 / (now - this.lastMainThreadTime));
+        const currentFPS = Math.round(
+          (this.mainThreadFrameCount * 1000) / (now - this.lastMainThreadTime)
+        );
         this.mainThreadFPS = currentFPS;
-        
+
         // Update FPS history for stress detection
         this.fpsHistory.push(currentFPS);
         if (this.fpsHistory.length > 5) {
           this.fpsHistory.shift();
         }
-        
+
         // Establish baseline FPS when not running tests
         if (!this.isRunning && this.fpsHistory.length >= 3) {
           const avgFPS = this.fpsHistory.reduce((a, b) => a + b, 0) / this.fpsHistory.length;
@@ -402,17 +404,17 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
             this.baselineFPS = Math.min(60, avgFPS);
           }
         }
-        
+
         // Detect main thread stress
-        this.isMainThreadStressed = this.isRunning && (currentFPS < this.baselineFPS * 0.7);
-        
+        this.isMainThreadStressed = this.isRunning && currentFPS < this.baselineFPS * 0.7;
+
         this.mainThreadFrameCount = 0;
         this.lastMainThreadTime = now;
       }
 
       this.mainThreadFrameId = requestAnimationFrame(monitorFPS);
     };
-    
+
     this.lastMainThreadTime = performance.now();
     monitorFPS();
   }
@@ -502,8 +504,10 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     if (!this.currentTest || !this.isRunning) return;
 
     const finalFPS = this.mainThreadFPS;
-    const averageTestFPS = this.fpsHistory.length > 0 ? 
-      this.fpsHistory.reduce((a, b) => a + b, 0) / this.fpsHistory.length : finalFPS;
+    const averageTestFPS =
+      this.fpsHistory.length > 0
+        ? this.fpsHistory.reduce((a, b) => a + b, 0) / this.fpsHistory.length
+        : finalFPS;
 
     // More sophisticated blocking detection
     const fpsDropPercentage = ((this.baselineFPS - averageTestFPS) / this.baselineFPS) * 100;
@@ -514,7 +518,7 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
       mainThreadBlocked,
       executionTime: this.currentTest.duration,
       frameDrops: Math.max(0, this.baselineFPS - averageTestFPS),
-      description: result
+      description: result,
     };
 
     this.testResults.unshift(testResult);
@@ -535,11 +539,11 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
     if (this.isRunning) return;
 
     let currentIndex = 0;
-    
+
     const runNext = () => {
       if (currentIndex < this.performanceTests.length) {
         this.runTest(this.performanceTests[currentIndex]);
-        
+
         // Wait for test to complete before running next
         const checkComplete = () => {
           if (!this.isRunning) {
@@ -549,11 +553,11 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
             setTimeout(checkComplete, 100);
           }
         };
-        
+
         setTimeout(checkComplete, 100);
       }
     };
-    
+
     runNext();
   }
 
@@ -568,24 +572,28 @@ export class IframePerformanceComponent implements OnInit, OnDestroy {
 
     const blockedTests = this.testResults.filter(r => r.mainThreadBlocked).length;
     const totalTests = this.testResults.length;
-    const averageFrameDrops = this.testResults.reduce((sum, r) => sum + r.frameDrops, 0) / totalTests;
+    const averageFrameDrops =
+      this.testResults.reduce((sum, r) => sum + r.frameDrops, 0) / totalTests;
 
     return `
 Analysis of ${totalTests} tests:
-• Main thread blocked: ${blockedTests}/${totalTests} tests (${Math.round(blockedTests/totalTests*100)}%)
+• Main thread blocked: ${blockedTests}/${totalTests} tests (${Math.round((blockedTests / totalTests) * 100)}%)
 • Average frame drops: ${Math.round(averageFrameDrops)} FPS
-• Iframe isolation: ${blockedTests === 0 ? 'Perfect' : blockedTests < totalTests/2 ? 'Good' : 'Poor'}
+• Iframe isolation: ${blockedTests === 0 ? 'Perfect' : blockedTests < totalTests / 2 ? 'Good' : 'Poor'}
     `.trim();
   }
 
   copyResults() {
-    const results = this.testResults.map(r => 
-      `${r.testName}: ${r.mainThreadBlocked ? 'BLOCKED' : 'OK'} (${r.frameDrops} frame drops)`
-    ).join('\n');
-    
+    const results = this.testResults
+      .map(
+        r =>
+          `${r.testName}: ${r.mainThreadBlocked ? 'BLOCKED' : 'OK'} (${r.frameDrops} frame drops)`
+      )
+      .join('\n');
+
     const analysis = this.getPerformanceAnalysis();
     const output = `Iframe Performance Test Results\n\n${results}\n\n${analysis}`;
-    
+
     navigator.clipboard.writeText(output);
   }
 

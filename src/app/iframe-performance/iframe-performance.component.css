@@ -46,7 +46,8 @@
   gap: 1rem;
 }
 
-.fps-monitor, .test-status {
+.fps-monitor,
+.test-status {
   background: var(--bg-tertiary);
   border-radius: 8px;
   padding: 1rem;
@@ -54,7 +55,8 @@
   border: 2px solid var(--border-color);
 }
 
-.fps-monitor span, .test-status span {
+.fps-monitor span,
+.test-status span {
   display: block;
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -62,13 +64,15 @@
   font-weight: 500;
 }
 
-.fps-value, .status-value {
+.fps-value,
+.status-value {
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Courier New', monospace;
 }
 
-.fps-value.good, .status-value.idle {
+.fps-value.good,
+.status-value.idle {
   color: var(--success-color);
 }
 
@@ -96,11 +100,12 @@
 }
 
 @keyframes stressed-pulse {
-  0%, 100% { 
+  0%,
+  100% {
     color: var(--accent-error);
     transform: scale(1);
   }
-  50% { 
+  50% {
     color: var(--accent-error);
     transform: scale(1.05);
   }
@@ -120,8 +125,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 /* Test Controls */
@@ -132,7 +142,8 @@
   flex-wrap: wrap;
 }
 
-.run-all-btn, .clear-btn {
+.run-all-btn,
+.clear-btn {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
@@ -161,7 +172,8 @@
   transform: translateY(-2px);
 }
 
-.run-all-btn:disabled, .clear-btn:disabled {
+.run-all-btn:disabled,
+.clear-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
@@ -194,8 +206,13 @@
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(0, 255, 157, 0.6); }
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.6);
+  }
 }
 
 .test-header {
@@ -459,7 +476,8 @@
     flex-direction: column;
   }
 
-  .run-all-btn, .clear-btn {
+  .run-all-btn,
+  .clear-btn {
     width: 100%;
   }
 

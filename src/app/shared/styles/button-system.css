@@ -6,7 +6,8 @@
    ============================================================================= */
 
 /* Base button styles - applies to all buttons */
-.btn, button {
+.btn,
+button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -28,20 +29,23 @@
 }
 
 /* Focus styles for accessibility */
-.btn:focus, button:focus {
+.btn:focus,
+button:focus {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
 /* Disabled state */
-.btn:disabled, button:disabled {
+.btn:disabled,
+button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none !important;
 }
 
-.btn:disabled:hover, button:disabled:hover {
+.btn:disabled:hover,
+button:disabled:hover {
   transform: none;
   box-shadow: none;
 }
@@ -59,14 +63,22 @@
 */
 
 /* PRIMARY BUTTON - Main actions */
-.btn-primary, .btn, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]) {
+.btn-primary,
+.btn,
+button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not(
+    [class*='success']
+  ) {
   background: transparent;
   color: var(--accent-primary);
   border: 2px solid var(--accent-primary);
   box-shadow: none;
 }
 
-.btn-primary:hover, .btn:hover, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]):hover {
+.btn-primary:hover,
+.btn:hover,
+button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not(
+    [class*='success']
+  ):hover {
   background: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
@@ -74,7 +86,11 @@
   box-shadow: none;
 }
 
-.btn-primary:active, .btn:active, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]):active {
+.btn-primary:active,
+.btn:active,
+button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not(
+    [class*='success']
+  ):active {
   background: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
@@ -84,14 +100,16 @@
 }
 
 /* SECONDARY BUTTON - Supporting actions */
-.btn-secondary, button.secondary {
+.btn-secondary,
+button.secondary {
   background: transparent;
   color: var(--text-secondary);
   border: 2px solid var(--border-primary);
   box-shadow: none;
 }
 
-.btn-secondary:hover, button.secondary:hover {
+.btn-secondary:hover,
+button.secondary:hover {
   background: transparent;
   color: var(--text-primary);
   border-color: var(--border-secondary);
@@ -99,7 +117,8 @@
   box-shadow: none;
 }
 
-.btn-secondary:active, button.secondary:active {
+.btn-secondary:active,
+button.secondary:active {
   background: var(--bg-hover);
   color: var(--text-primary);
   border-color: var(--border-secondary);
@@ -107,16 +126,22 @@
 }
 
 /* DANGER BUTTON - Destructive actions (maps to secondary style) */
-.btn-danger, button.danger,
-.btn-tertiary, .btn-success, button.success {
+.btn-danger,
+button.danger,
+.btn-tertiary,
+.btn-success,
+button.success {
   background: transparent;
   color: var(--text-secondary);
   border: 2px solid var(--border-primary);
   box-shadow: none;
 }
 
-.btn-danger:hover, button.danger:hover,
-.btn-tertiary:hover, .btn-success:hover, button.success:hover {
+.btn-danger:hover,
+button.danger:hover,
+.btn-tertiary:hover,
+.btn-success:hover,
+button.success:hover {
   background: transparent;
   color: var(--text-primary);
   border-color: var(--border-secondary);
@@ -124,8 +149,11 @@
   box-shadow: none;
 }
 
-.btn-danger:active, button.danger:active,
-.btn-tertiary:active, .btn-success:active, button.success:active {
+.btn-danger:active,
+button.danger:active,
+.btn-tertiary:active,
+.btn-success:active,
+button.success:active {
   background: var(--bg-hover);
   color: var(--text-primary);
   border-color: var(--border-secondary);
@@ -349,19 +377,20 @@
   .btn-toolbar {
     gap: var(--spacing-xs);
   }
-  
-  .btn, button {
+
+  .btn,
+  button {
     font-size: 0.85rem;
     padding: 0.4rem 0.8rem;
     min-height: 36px;
   }
-  
+
   .btn-lg {
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
     min-height: 42px;
   }
-  
+
   /* Stack buttons vertically on very small screens */
   @media (max-width: 480px) {
     .btn-group,
@@ -369,8 +398,9 @@
       flex-direction: column;
       align-items: stretch;
     }
-    
-    .btn, button {
+
+    .btn,
+    button {
       width: 100%;
       justify-content: center;
     }
@@ -382,7 +412,8 @@
    ============================================================================= */
 
 /* Ripple effect for better interaction feedback */
-.btn::before, button::before {
+.btn::before,
+button::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -392,23 +423,28 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
   pointer-events: none;
   z-index: 1;
 }
 
-.btn:active::before, button:active::before {
+.btn:active::before,
+button:active::before {
   width: 100px;
   height: 100px;
 }
 
 /* Loading state for buttons with async operations */
-.btn-loading, button.loading {
+.btn-loading,
+button.loading {
   pointer-events: none;
   opacity: 0.8;
 }
 
-.btn-loading::after, button.loading::after {
+.btn-loading::after,
+button.loading::after {
   content: '';
   position: absolute;
   width: 16px;
@@ -420,6 +456,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

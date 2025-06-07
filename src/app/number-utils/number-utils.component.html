@@ -1,16 +1,16 @@
 <div class="container">
   <h2 class="title">Number Utilities</h2>
-  
+
   <section class="section" id="number-conversion">
     <h3>Number Operations</h3>
-    <input id="numberInput" type="number" [(ngModel)]="numberInput" step="0.01">
-    
+    <input id="numberInput" type="number" [(ngModel)]="numberInput" step="0.01" />
+
     <div class="clamp-inputs">
       <label for="minValue">Min Value (for clamp):</label>
-      <input id="minValue" type="number" [(ngModel)]="minValue">
-      
+      <input id="minValue" type="number" [(ngModel)]="minValue" />
+
       <label for="maxValue">Max Value (for clamp):</label>
-      <input id="maxValue" type="number" [(ngModel)]="maxValue">
+      <input id="maxValue" type="number" [(ngModel)]="maxValue" />
     </div>
 
     <div class="btn-group">
@@ -21,7 +21,7 @@
 
     <div class="result" *ngIf="numberResult">
       <span class="result-label">Result:</span>
-      <span>{{numberResult}}</span>
+      <span>{{ numberResult }}</span>
     </div>
   </section>
 </div>

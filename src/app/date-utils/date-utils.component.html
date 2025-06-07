@@ -1,10 +1,10 @@
 <div class="container">
   <h2 class="title">Date Utilities</h2>
-  
+
   <section class="section" id="date-conversion">
     <h3>Date Operations</h3>
-    <input id="dateInput" type="date" [(ngModel)]="dateInput">
-    
+    <input id="dateInput" type="date" [(ngModel)]="dateInput" />
+
     <div class="btn-group">
       <button class="btn btn-primary" (click)="formatSelectedDate()">Format Date</button>
       <button class="btn btn-secondary" (click)="checkIfToday()">Check if Today</button>
@@ -13,7 +13,7 @@
 
     <div class="result" *ngIf="dateResult">
       <span class="result-label">Result:</span>
-      <span>{{dateResult}}</span>
+      <span>{{ dateResult }}</span>
     </div>
   </section>
 </div>

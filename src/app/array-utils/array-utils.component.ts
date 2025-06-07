@@ -10,7 +10,7 @@ import * as arrayUtils from '../shared/utils/array-utils';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './array-utils.component.html',
-  styleUrls: ['./array-utils.component.css']
+  styleUrls: ['./array-utils.component.css'],
 })
 export class ArrayUtilsComponent implements OnInit, OnDestroy {
   arrayInput: string = '1,2,3,4,5';
@@ -24,18 +24,20 @@ export class ArrayUtilsComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this.highlightSubscription = this.searchService.highlightedSection$.subscribe((section: string | null) => {
-      if (section) {
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add('highlighted');
-            setTimeout(() => element.classList.remove('highlighted'), 3000);
-          }
-        }, 100);
+    this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
+      (section: string | null) => {
+        if (section) {
+          setTimeout(() => {
+            const element = document.getElementById(section);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              element.classList.add('highlighted');
+              setTimeout(() => element.classList.remove('highlighted'), 3000);
+            }
+          }, 100);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {
