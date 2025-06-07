@@ -10,6 +10,7 @@ import { RegexTesterComponent } from './regex-tester/regex-tester.component';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { IframePerformanceComponent } from './iframe-performance/iframe-performance.component';
 import { JsonQueryComponent } from './json-query/json-query.component';
+import { AboutComponent } from './about/about.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/calculator', pathMatch: 'full' }, // Default route
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'json-visualizer', component: JsonVisualizerComponent },
   { path: 'regex-tester', component: RegexTesterComponent },
   { path: 'iframe-performance', component: IframePerformanceComponent },
-  { path: 'json-query', component: JsonQueryComponent }
+  { path: 'json-query', component: JsonQueryComponent },
+  { path: 'about', component: AboutComponent }
 ];

@@ -264,6 +264,18 @@ export class SearchService {
       route: '/json-query',
       section: 'query-results',
       category: 'Data Processing'
+    },
+
+    // About page
+    {
+      id: 'about-page',
+      title: 'About Debugi',
+      description: 'Learn about Debugi features, available tools, keyboard shortcuts, and more',
+      keywords: ['about', 'info', 'help', 'features', 'tools', 'shortcuts', 'debugi', 'information'],
+      component: 'AboutComponent',
+      route: '/about',
+      section: 'about-info',
+      category: 'Information'
     }
   ];
 
