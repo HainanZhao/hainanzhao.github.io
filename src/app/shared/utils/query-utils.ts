@@ -6,14 +6,10 @@ export interface QueryResult {
   executionTime?: number;
 }
 
-/**
- * Preprocesses the SQL query to handle unquoted property paths with dot notation
- * Converts company.name to company->name for AlaSQL's native property access
- * Quoted strings are treated as regular string literals and not processed
- * @param query The original SQL query
- * @returns The processed SQL query
- */
 export function preprocessSqlQuery(query: string): string {
+  // First handle reserved keyword aliases
+  const processedQuery = handleReservedKeywordAliases(query);
+
   // Process unquoted property paths with dot notation
   // This approach uses a context-aware strategy:
   // 1. We avoid modifying dot notation right after FROM, JOIN as those are likely table aliases
@@ -21,7 +17,7 @@ export function preprocessSqlQuery(query: string): string {
   // 3. We preserve quoted strings as regular string literals
 
   // Split into contexts: SELECT, FROM, WHERE, etc.
-  const sqlParts = query.split(/\b(FROM|WHERE|ORDER BY|GROUP BY|HAVING|JOIN|ON)\b/i);
+  const sqlParts = processedQuery.split(/\b(FROM|WHERE|ORDER BY|GROUP BY|HAVING|JOIN|ON)\b/i);
 
   // Process each part separately to maintain context awareness
   for (let i = 0; i < sqlParts.length; i++) {
@@ -46,6 +42,213 @@ export function preprocessSqlQuery(query: string): string {
   }
 
   return sqlParts.join('');
+}
+
+/**
+ * Handles reserved keyword conflicts in SQL aliases by quoting them
+ * @param query The SQL query string
+ * @returns The query with potentially conflicting aliases quoted
+ */
+function handleReservedKeywordAliases(query: string): string {
+  // Common SQL reserved keywords that might be used as aliases
+  const reservedKeywords = [
+    'COUNT',
+    'SUM',
+    'AVG',
+    'MIN',
+    'MAX',
+    'TOTAL',
+    'VALUE',
+    'VALUES',
+    'KEY',
+    'KEYS',
+    'INDEX',
+    'ORDER',
+    'GROUP',
+    'HAVING',
+    'WHERE',
+    'SELECT',
+    'FROM',
+    'INSERT',
+    'UPDATE',
+    'DELETE',
+    'CREATE',
+    'DROP',
+    'ALTER',
+    'TABLE',
+    'DATABASE',
+    'SCHEMA',
+    'PRIMARY',
+    'FOREIGN',
+    'UNIQUE',
+    'NOT',
+    'NULL',
+    'DEFAULT',
+    'CHECK',
+    'CONSTRAINT',
+    'REFERENCES',
+    'CASCADE',
+    'RESTRICT',
+    'SET',
+    'ACTION',
+    'MATCH',
+    'PARTIAL',
+    'FULL',
+    'SIMPLE',
+    'INITIALLY',
+    'DEFERRED',
+    'IMMEDIATE',
+    'DEFERRABLE',
+    'TRANSACTION',
+    'COMMIT',
+    'ROLLBACK',
+    'SAVEPOINT',
+    'RELEASE',
+    'START',
+    'BEGIN',
+    'END',
+    'CASE',
+    'WHEN',
+    'THEN',
+    'ELSE',
+    'IF',
+    'WHILE',
+    'FOR',
+    'LOOP',
+    'REPEAT',
+    'UNTIL',
+    'RETURN',
+    'FUNCTION',
+    'PROCEDURE',
+    'TRIGGER',
+    'VIEW',
+    'MATERIALIZED',
+    'TEMPORARY',
+    'TEMP',
+    'GLOBAL',
+    'LOCAL',
+    'SESSION',
+    'SYSTEM',
+    'USER',
+    'CURRENT',
+    'TIMESTAMP',
+    'DATE',
+    'TIME',
+    'INTERVAL',
+    'YEAR',
+    'MONTH',
+    'DAY',
+    'HOUR',
+    'MINUTE',
+    'SECOND',
+    'ZONE',
+    'EXTRACT',
+    'POSITION',
+    'SUBSTRING',
+    'TRIM',
+    'UPPER',
+    'LOWER',
+    'LENGTH',
+    'CHAR',
+    'VARCHAR',
+    'TEXT',
+    'BOOLEAN',
+    'INTEGER',
+    'DECIMAL',
+    'NUMERIC',
+    'REAL',
+    'DOUBLE',
+    'PRECISION',
+    'SMALLINT',
+    'BIGINT',
+    'SERIAL',
+    'AUTOINCREMENT',
+    'IDENTITY',
+    'GENERATED',
+    'ALWAYS',
+    'BY',
+    'AS',
+    'STORED',
+    'VIRTUAL',
+    'COLUMN',
+    'COLUMNS',
+    'ROW',
+    'ROWS',
+    'FIRST',
+    'LAST',
+    'NEXT',
+    'PRIOR',
+    'ABSOLUTE',
+    'RELATIVE',
+    'FORWARD',
+    'BACKWARD',
+    'SCROLL',
+    'INSENSITIVE',
+    'ASENSITIVE',
+    'CURSOR',
+    'OPEN',
+    'CLOSE',
+    'FETCH',
+    'MOVE',
+    'DECLARE',
+    'ALLOCATE',
+    'DEALLOCATE',
+    'PREPARE',
+    'EXECUTE',
+    'IMMEDIATE',
+    'DESCRIBE',
+    'EXCEPTION',
+    'SIGNAL',
+    'RESIGNAL',
+    'UNDO',
+    'HANDLER',
+    'CONTINUE',
+    'EXIT',
+    'CONDITION',
+    'SQLSTATE',
+    'SQLCODE',
+    'SQLERROR',
+    'SQLWARNING',
+    'FOUND',
+    'GOTO',
+    'LEAVE',
+    'ITERATE',
+    'CALL',
+    'DYNAMIC',
+    'SQL',
+    'DESCRIPTOR',
+    'AREA',
+    'GET',
+    'PUT',
+    'USING',
+    'INTO',
+    'BULK',
+    'COLLECT',
+    'FORALL',
+    'SAVE',
+    'EXCEPTIONS',
+    'INDICES',
+    'BETWEEN',
+    'CURSOR_NAME',
+    'SQLEXCEPTION',
+  ];
+
+  // Create a set for faster lookup
+  const reservedSet = new Set(reservedKeywords.map(k => k.toUpperCase()));
+
+  // Regex to match AS/as followed by an identifier
+  // This captures: AS identifier or as identifier
+  const aliasRegex = /\b(AS|as)\s+([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
+
+  return query.replace(aliasRegex, (match, asKeyword, identifier) => {
+    // Check if the identifier is a reserved keyword
+    if (reservedSet.has(identifier.toUpperCase())) {
+      // Quote it with square brackets for AlaSQL
+      return `${asKeyword} [${identifier}]`;
+    }
+    // Return unchanged if not a reserved keyword
+    return match;
+  });
 }
 
 /**
