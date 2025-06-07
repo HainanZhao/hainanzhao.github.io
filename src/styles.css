@@ -58,6 +58,24 @@
   --transition-fast: 0.15s ease;
   --transition-smooth: 0.3s ease;
   --transition-slow: 0.5s ease;
+  
+  /* Mobile-specific spacing variables */
+  --mobile-container-padding: 0.5rem;
+  --mobile-section-padding: 0.75rem;
+  --mobile-element-margin: 0.5rem;
+  --mobile-element-gap: 0.375rem;
+  
+  /* Small mobile overrides */
+  --small-mobile-container-padding: 0.25rem;
+  --small-mobile-section-padding: 0.5rem;
+  --small-mobile-element-margin: 0.375rem;
+  --small-mobile-element-gap: 0.25rem;
+  
+  /* Tiny mobile overrides */
+  --tiny-mobile-container-padding: 0.125rem;
+  --tiny-mobile-section-padding: 0.375rem;
+  --tiny-mobile-element-margin: 0.25rem;
+  --tiny-mobile-element-gap: 0.125rem;
 }
 
 /* Modern Base styles */
@@ -124,16 +142,20 @@ nav ul li a:hover, nav ul li a.active {
 .container {
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: var(--spacing-xl);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
 .title {
   margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  font-size: 1.25rem;
-  font-weight: 500;
+  margin-bottom: var(--spacing-xl);
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--text-primary);
+  text-align: center;
 }
 
 /* Input group styles */
@@ -499,32 +521,557 @@ button.success, .btn.success {
   background-color: white;
 }
 
-/* Responsive design improvements */
-@media (max-width: 768px) {
+/* ================================
+   COMPREHENSIVE MOBILE RESPONSIVE DESIGN
+   ================================ */
+
+/* Global container responsive design */
+.container {
+  padding: 2rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Progressive responsive breakpoints */
+@media (max-width: 1024px) {
+  .container {
+    padding: 1rem;
+  }
+  
   .section {
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-group {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--mobile-container-padding) !important;
+  }
+  
+  .section {
+    padding: var(--mobile-section-padding);
+    margin-bottom: var(--mobile-element-margin);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .input-group {
+    padding: var(--mobile-section-padding);
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  /* Title and heading optimizations */
+  .title, h1 {
+    font-size: 1.5rem;
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  h2 {
+    font-size: 1.375rem;
+    margin-bottom: calc(var(--mobile-element-margin) * 0.75);
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    margin-bottom: calc(var(--mobile-element-margin) * 0.75);
+  }
+  
+  h4, h5, h6 {
+    font-size: 1rem;
+    margin-bottom: calc(var(--mobile-element-margin) * 0.5);
+  }
+  
+  /* Description and paragraph optimizations */
+  .description, p {
+    font-size: 0.95rem;
+    margin-bottom: var(--mobile-element-margin);
+    line-height: 1.5;
+  }
+  
+  /* Form element optimizations */
+  input[type="text"], 
+  input[type="number"], 
+  input[type="date"],
+  input[type="email"],
+  textarea {
+    padding: var(--mobile-element-gap) var(--mobile-element-margin);
+    font-size: 0.9rem;
+    margin-bottom: var(--mobile-element-gap);
+  }
+  
+  /* Button optimizations */
+  button, .btn {
+    padding: var(--mobile-element-gap) var(--mobile-element-margin);
+    font-size: 0.875rem;
+    margin-bottom: var(--mobile-element-gap);
   }
   
   .button-group {
+    gap: var(--mobile-element-gap);
+    margin: var(--mobile-element-margin) 0;
+  }
+  
+  /* Navigation optimizations */
+  nav {
+    padding: var(--mobile-element-gap);
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  nav ul li a {
+    padding: var(--mobile-element-gap) var(--mobile-element-margin);
+    font-size: 0.9rem;
+  }
+  
+  /* Result display optimizations */
+  .result {
+    padding: var(--mobile-section-padding);
+    margin-top: var(--mobile-element-margin);
+  }
+  
+  .result-label {
+    margin-bottom: calc(var(--mobile-element-gap) * 0.75);
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--small-mobile-container-padding) !important;
+  }
+  
+  .section {
+    padding: var(--small-mobile-section-padding);
+    margin-bottom: var(--small-mobile-element-margin);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  .input-group {
+    padding: var(--small-mobile-section-padding);
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  /* Enhanced title and heading scaling */
+  .title, h1 {
+    font-size: 1.375rem;
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: calc(var(--small-mobile-element-margin) * 0.75);
+  }
+  
+  h3 {
+    font-size: 1.125rem;
+    margin-bottom: calc(var(--small-mobile-element-margin) * 0.75);
+  }
+  
+  h4, h5, h6 {
+    font-size: 0.95rem;
+    margin-bottom: calc(var(--small-mobile-element-margin) * 0.5);
+  }
+  
+  /* Enhanced text optimizations */
+  .description, p {
+    font-size: 0.9rem;
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  /* Enhanced form elements */
+  input[type="text"], 
+  input[type="number"], 
+  input[type="date"],
+  input[type="email"],
+  textarea {
+    padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
+    font-size: 0.85rem;
+    margin-bottom: var(--small-mobile-element-gap);
+  }
+  
+  /* Enhanced button styling */
+  button, .btn {
+    padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
+    font-size: 0.8rem;
+    margin-bottom: var(--small-mobile-element-gap);
+  }
+  
+  .button-group {
+    gap: var(--small-mobile-element-gap);
+    margin: var(--small-mobile-element-margin) 0;
+  }
+  
+  /* Enhanced navigation */
+  nav {
+    padding: var(--small-mobile-element-gap);
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  nav ul li a {
+    padding: var(--small-mobile-element-gap) var(--small-mobile-element-margin);
+    font-size: 0.85rem;
+  }
+  
+  /* Enhanced result display */
+  .result {
+    padding: var(--small-mobile-section-padding);
+    margin-top: var(--small-mobile-element-margin);
+  }
+  
+  .result-label {
+    margin-bottom: calc(var(--small-mobile-element-gap) * 0.75);
+    font-size: 0.8rem;
+  }
+  
+  /* Badge optimizations */
+  .badge {
+    padding: calc(var(--small-mobile-element-gap) * 0.5) var(--small-mobile-element-gap);
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: var(--tiny-mobile-container-padding) !important;
+  }
+  
+  .section {
+    padding: var(--tiny-mobile-section-padding);
+    margin-bottom: var(--tiny-mobile-element-margin);
+  }
+  
+  .input-group {
+    padding: var(--tiny-mobile-section-padding);
+    margin-bottom: var(--tiny-mobile-element-margin);
+  }
+  
+  /* Maximum title and heading compression */
+  .title, h1 {
+    font-size: 1.25rem;
+    margin-bottom: var(--tiny-mobile-element-margin);
+  }
+  
+  h2 {
+    font-size: 1.125rem;
+    margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.75);
+  }
+  
+  h3 {
+    font-size: 1rem;
+    margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.75);
+  }
+  
+  h4, h5, h6 {
+    font-size: 0.9rem;
+    margin-bottom: calc(var(--tiny-mobile-element-margin) * 0.5);
+  }
+  
+  /* Maximum text compression */
+  .description, p {
+    font-size: 0.85rem;
+    margin-bottom: var(--tiny-mobile-element-margin);
+  }
+  
+  /* Maximum form element compression */
+  input[type="text"], 
+  input[type="number"], 
+  input[type="date"],
+  input[type="email"],
+  textarea {
+    padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
+    font-size: 0.8rem;
+    margin-bottom: var(--tiny-mobile-element-gap);
+  }
+  
+  /* Maximum button compression */
+  button, .btn {
+    padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
+    font-size: 0.75rem;
+    margin-bottom: var(--tiny-mobile-element-gap);
+  }
+  
+  .button-group {
+    gap: var(--tiny-mobile-element-gap);
+    margin: var(--tiny-mobile-element-margin) 0;
+  }
+  
+  /* Maximum navigation compression */
+  nav {
+    padding: var(--tiny-mobile-element-gap);
+    margin-bottom: var(--tiny-mobile-element-margin);
+  }
+  
+  nav ul li a {
+    padding: var(--tiny-mobile-element-gap) var(--tiny-mobile-element-margin);
+    font-size: 0.8rem;
+  }
+  
+  /* Maximum result display compression */
+  .result {
+    padding: var(--tiny-mobile-section-padding);
+    margin-top: var(--tiny-mobile-element-margin);
+  }
+  
+  .result-label {
+    margin-bottom: calc(var(--tiny-mobile-element-gap) * 0.75);
+    font-size: 0.75rem;
+  }
+  
+  /* Maximum badge compression */
+  .badge {
+    padding: calc(var(--tiny-mobile-element-gap) * 0.5) var(--tiny-mobile-element-gap);
+    font-size: 0.65rem;
+  }
+}
+
+/* Component-specific mobile optimizations that apply across all pages */
+@media (max-width: 768px) {
+  /* Textarea specific optimizations */
+  .textarea-container {
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  /* Action button groups */
+  .actions {
+    gap: var(--mobile-element-gap);
+    margin-bottom: var(--mobile-element-margin);
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  /* Sample/chip buttons */
+  .sample-queries, .query-chips, .chips {
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  .query-chip, .chip {
+    max-width: 180px;
+    padding: calc(var(--mobile-element-gap) * 0.5) var(--mobile-element-margin);
+    font-size: 0.8rem;
+    margin-bottom: var(--mobile-element-gap);
+  }
+  
+  /* Table optimizations */
+  .table-results, table {
+    font-size: 0.85rem;
+  }
+  
+  th, td {
+    padding: var(--mobile-element-gap);
+  }
+  
+  /* Error messages and hints */
+  .error-message, .format-hint, .help-text {
+    margin-bottom: var(--mobile-element-margin);
+    padding: var(--mobile-element-margin);
+    font-size: 0.85rem;
+  }
+  
+  /* Execution info and status */
+  .execution-info, .status-text {
+    margin-bottom: var(--mobile-element-margin);
+    font-size: 0.8rem;
+  }
+  
+  /* Help sections */
+  .help-content {
+    grid-template-columns: 1fr;
+    gap: var(--mobile-element-margin);
+  }
+  
+  .help-section {
+    padding: var(--mobile-section-padding);
+  }
+  
+  .help-section h4 {
+    font-size: 0.95rem;
+    margin-bottom: var(--mobile-element-gap);
+  }
+  
+  .help-section pre {
+    padding: var(--mobile-element-margin);
+    font-size: 0.8rem;
+  }
+  
+  .help-section p, .help-section li {
+    font-size: 0.85rem;
+  }
+  
+  /* Result options and format controls */
+  .result-options, .format-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mobile-element-margin);
+  }
+  
+  /* Copy and action buttons */
+  .copy-btn, .clear-btn, .execute-btn {
+    width: 100%;
+    margin: var(--mobile-element-gap) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Enhanced mobile optimizations for small screens */
+  .textarea-container {
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  .actions {
+    gap: var(--small-mobile-element-gap);
+    margin-bottom: var(--small-mobile-element-margin);
+  }
+  
+  .query-chip, .chip {
+    max-width: 140px;
+    font-size: 0.75rem;
+    padding: calc(var(--small-mobile-element-gap) * 0.5) var(--small-mobile-element-margin);
+  }
+  
+  th, td {
+    padding: var(--small-mobile-element-gap);
+    font-size: 0.75rem;
+  }
+  
+  .error-message, .format-hint, .help-text {
+    padding: var(--small-mobile-element-margin);
+    font-size: 0.8rem;
+  }
+  
+  .help-section pre {
+    padding: var(--small-mobile-element-margin);
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Maximum compression for tiny screens */
+  .query-chip, .chip {
+    max-width: 120px;
+    font-size: 0.7rem;
+    padding: calc(var(--tiny-mobile-element-gap) * 0.5) var(--tiny-mobile-element-margin);
+  }
+  
+  th, td {
+    padding: var(--tiny-mobile-element-gap);
+    font-size: 0.7rem;
+  }
+  
+  .error-message, .format-hint, .help-text {
+    padding: var(--tiny-mobile-element-margin);
+    font-size: 0.75rem;
+  }
+}
+
+/* Additional global responsive classes for common component patterns */
+@media (max-width: 768px) {
+  /* Layout utilities */
+  .flex-row {
     flex-direction: column;
   }
   
-  button, .btn {
-    width: 100%;
-    margin-right: 0 !important;
-    margin-bottom: var(--spacing-sm);
+  .flex-center {
+    align-items: flex-start;
   }
   
-  .config-group {
+  /* Grid utilities */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Input containers */
+  .input-container, .form-container {
+    padding: var(--mobile-section-padding);
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  /* Control groups */
+  .control-group, .form-group {
+    margin-bottom: var(--mobile-element-margin);
+  }
+  
+  /* Options and settings */
+  .options, .settings, .config {
     flex-direction: column;
     align-items: stretch;
   }
   
-  /* Stack buttons vertically on mobile */
-  section button:not(:last-child),
-  .section button:not(:last-child) {
-    margin-right: 0;
-    margin-bottom: var(--spacing-sm);
+  /* Results and output */
+  .output, .results, .preview {
+    margin-top: var(--mobile-element-margin);
+    padding: var(--mobile-section-padding);
+  }
+  
+  /* Status and info displays */
+  .status, .info, .stats {
+    font-size: 0.85rem;
+    margin-bottom: var(--mobile-element-margin);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Aggressive mobile optimization for all pages */
+@media (max-width: 768px) {
+  /* Force minimal container padding on all components */
+  .container,
+  .app-container,
+  [class*="container"] {
+    padding: var(--mobile-container-padding) !important;
+    margin: 0 !important;
+  }
+  
+  /* Ensure sections also use minimal padding */
+  .section,
+  [class*="section"] {
+    padding: var(--mobile-section-padding) !important;
+    margin-bottom: var(--mobile-element-margin) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .app-container,
+  [class*="container"] {
+    padding: var(--small-mobile-container-padding) !important;
+  }
+  
+  .section,
+  [class*="section"] {
+    padding: var(--small-mobile-section-padding) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .container,
+  .app-container,
+  [class*="container"] {
+    padding: var(--tiny-mobile-container-padding) !important;
+  }
+  
+  .section,
+  [class*="section"] {
+    padding: var(--tiny-mobile-section-padding) !important;
   }
 }

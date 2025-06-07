@@ -1,5 +1,13 @@
 /* Flattened JSON Visualizer Styles */
 
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
 .section {
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-md);
@@ -281,22 +289,22 @@ select:focus {
   }
 }
 
-/* Responsive Design */
+/* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
   .visualization-container {
     overflow-x: scroll;
   }
   
   .svg-container {
-    min-width: 1000px; /* Updated to match new width */
-    min-height: 600px;  /* Smaller height on mobile */
+    min-width: 1000px;
+    min-height: 600px;
   }
 
   .visualization-section {
-    min-height: 700px; /* Smaller on mobile */
+    min-height: 700px;
   }
 
   .visualization-section .visualization-container {
-    min-height: 650px; /* Smaller on mobile */
+    min-height: 650px;
   }
 }

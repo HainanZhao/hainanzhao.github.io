@@ -1,5 +1,13 @@
 /* Flattened Array Utils Styles */
 
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
 .section {
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-md);

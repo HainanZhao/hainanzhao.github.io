@@ -1,3 +1,13 @@
+/* Flattened Regex Tester Styles */
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
 /* Modern Regex Tester Styles */
 
 .section {
@@ -224,7 +234,7 @@
 /* No Matches */
 .no-matches {
   text-align: center;
-  padding: 2rem;
+  padding: var(--spacing-xl);
   color: #888;
   font-style: italic;
 }
@@ -365,19 +375,14 @@
   }
 }
 
-/* Responsive Design */
+/* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
   .results-summary {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
   }
   
   .examples-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .help-content {
     grid-template-columns: 1fr;
   }
   

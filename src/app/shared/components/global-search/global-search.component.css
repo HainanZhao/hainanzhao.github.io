@@ -374,7 +374,7 @@ kbd {
   background: var(--text-tertiary);
 }
 
-/* Responsive design */
+/* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
   .search-overlay {
     padding-top: 5vh;
@@ -386,7 +386,6 @@ kbd {
   }
   
   .keyboard-shortcuts {
-    gap: 0.5rem;
     flex-wrap: wrap;
   }
   
@@ -396,10 +395,5 @@ kbd {
   
   .category-items {
     gap: 0.375rem;
-  }
-  
-  .suggestion-item {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
   }
 }

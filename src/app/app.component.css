@@ -26,14 +26,113 @@ nav {
 
 .app-title {
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
+  position: relative;
+  padding: 8px 16px;
+}
+
+.app-logo-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.05em;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.app-logo-text:hover {
+  transform: scale(1.05);
+}
+
+.logo-letter {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+}
+
+.logo-letter:hover {
+  transform: translateY(-4px) rotate(5deg);
+  animation: letterBounce 0.6s infinite alternate;
+}
+
+@keyframes letterBounce {
+  0% { transform: translateY(-4px) rotate(5deg) scale(1); }
+  100% { transform: translateY(-6px) rotate(-5deg) scale(1.1); }
+}
+
+/* Individual letter styling with different colors */
+.logo-d {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0s;
+}
+
+.logo-e {
+  background: linear-gradient(135deg, #4ecdc4, #6fe6dd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0.1s;
+}
+
+.logo-b {
+  background: linear-gradient(135deg, #45b7d1, #68c5e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0.2s;
+}
+
+.logo-u {
+  background: linear-gradient(135deg, #96ceb4, #b3dcc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0.3s;
+}
+
+.logo-g {
+  background: linear-gradient(135deg, #feca57, #fed976);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0.4s;
+}
+
+.logo-i {
+  background: linear-gradient(135deg, #ff9ff3, #ffb3f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation-delay: 0.5s;
+}
+
+/* Auto-animation for the whole logo */
+.app-logo-text {
+  animation: logoGlow 4s infinite ease-in-out;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.3));
+  }
+  25% {
+    filter: drop-shadow(0 0 8px rgba(78, 205, 196, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(69, 183, 209, 0.3));
+  }
+  75% {
+    filter: drop-shadow(0 0 7px rgba(254, 202, 87, 0.4));
+  }
 }
 
 .app-logo {
@@ -177,7 +276,7 @@ nav ul li a.active svg {
 
 .content-area {
   flex-grow: 1;
-  padding: 32px;
+  padding: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
   overflow-y: auto;
@@ -202,7 +301,7 @@ nav ul li a.active svg {
   background: var(--text-muted);
 }
 
-/* Responsive design */
+/* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
@@ -210,7 +309,7 @@ nav ul li a.active svg {
   
   nav {
     width: 100%;
-    padding: 1rem;
+    padding: 12px 16px;
   }
   
   .nav-header {
@@ -218,35 +317,120 @@ nav ul li a.active svg {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
+    padding-bottom: 1rem;
   }
   
+  /* Make the title much smaller on mobile */
   .app-title {
-    font-size: 1.25rem;
+    padding: 4px 8px;
+  }
+  
+  .app-logo-text {
+    font-size: 1.5rem;
   }
   
   .search-button {
     width: auto;
-    min-width: 120px;
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .search-text {
+    display: none;
+  }
+  
+  .search-shortcut {
+    display: none;
   }
   
   nav ul {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 2px;
   }
   
   nav ul li {
     flex: 1;
-    min-width: 120px;
+    min-width: 60px;
   }
   
+  /* Show only icons on mobile */
   nav ul li a {
+    flex-direction: column;
     text-align: center;
-    padding: 8px 12px;
-    font-size: 0.875rem;
+    padding: 12px 4px;
+    font-size: 0.75rem;
+    gap: 4px;
+    min-height: 60px;
+    justify-content: center;
+  }
+  
+  nav ul li a svg {
+    width: 20px;
+    height: 20px;
   }
   
   .content-area {
     padding: 1rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  nav {
+    padding: 8px 12px;
+  }
+  
+  .nav-header {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  /* Even smaller title on very small screens */
+  .app-logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .search-button {
+    min-width: 80px;
+    padding: 6px 8px;
+  }
+  
+  nav ul li {
+    min-width: 50px;
+  }
+  
+  nav ul li a {
+    padding: 8px 2px;
+    font-size: 0.7rem;
+    min-height: 50px;
+  }
+  
+  nav ul li a svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Very small devices - hide text completely, show only icons */
+@media (max-width: 360px) {
+  .app-logo-text {
+    font-size: 1rem;
+  }
+  
+  /* Hide navigation text completely on very small screens */
+  nav ul li a {
+    padding: 10px 4px;
+    min-height: 45px;
+  }
+  
+  nav ul li a span:not(.sr-only) {
+    display: none;
+  }
+  
+  nav ul li a svg {
+    width: 16px;
+    height: 16px;
   }
 }

@@ -1,8 +1,21 @@
+/* Flattened CSV Formatter Styles */
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
 /* CSV Formatter Styles - Following Standard Design Pattern */
 
 .container {
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: var(--spacing-xl);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 .section {
@@ -402,43 +415,29 @@ button:disabled {
   }
 }
 
-/* Responsive Design - Updated for Standard Pattern */
+/* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-sm);
-  }
-  
-  .section {
-    padding: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-  }
-  
   .config-group {
     flex-direction: column;
     align-items: stretch;
-    gap: var(--spacing-sm);
   }
   
   .config-item {
     flex-direction: column;
     align-items: stretch;
-    gap: var(--spacing-xs);
   }
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
   }
   
   .headers-list {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
   }
   
   /* Responsive manipulation controls */
   .manipulation-row {
     flex-direction: column;
-    gap: var(--spacing-sm);
   }
   
   .control-group-inline {
