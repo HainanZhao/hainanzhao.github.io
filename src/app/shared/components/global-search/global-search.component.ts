@@ -87,7 +87,7 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
-    if (this.isVisible && !target.closest('.search-modal')) {
+    if (this.isVisible && !target.closest('.search-modal') && !target.closest('.search-button')) {
       this.hideSearch();
     }
   }

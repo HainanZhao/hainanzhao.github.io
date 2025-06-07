@@ -163,6 +163,9 @@ nav {
   text-align: left;
   width: 100%;
   font-weight: 500;
+  position: relative;
+  z-index: 10;
+  user-select: none;
 }
 
 .search-button:hover {
