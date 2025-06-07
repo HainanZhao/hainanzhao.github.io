@@ -1,4 +1,14 @@
-/* Flattened JSON Visualizer Styles */
+/* Import shared JSON styles for consistency */
+@import '../shared/styles/json-common.css';
+
+/* JSON Visualizer Specific Styles */
+
+.container {
+  padding: var(--spacing-xl);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
 
 .title {
   font-size: 2rem;
@@ -8,58 +18,15 @@
   color: var(--text-primary);
 }
 
-.section {
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
-  background-color: transparent;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-primary);
-  transition: var(--transition-smooth);
-}
-
-.section:hover {
-  border-color: var(--border-secondary);
-  background-color: rgba(255, 255, 255, 0.01);
-}
-
-.section h3 {
-  color: var(--accent-primary);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1rem;
-  font-weight: 500;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* JSON Input Styles */
-textarea {
-  min-height: 150px;
-  resize: vertical;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
-  transition: var(--transition-smooth);
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-focus);
-}
+/* Override specific styles for visualization controls */
 
 select {
   width: 200px;
   padding: var(--spacing-sm);
   background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-md);
+  border-radius: 6px;
   font-size: 0.9rem;
   transition: var(--transition-smooth);
 }
@@ -76,7 +43,7 @@ select:focus {
   overflow-x: auto;
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-md);
+  border-radius: 8px;
   padding: var(--spacing-sm);
   transition: var(--transition-smooth);
 }
@@ -92,11 +59,12 @@ select:focus {
 
 /* Make the visualization section larger */
 .visualization-section {
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
-  background-color: transparent;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
   min-height: 700px; /* Reduced from 900px */
 }
 
@@ -109,23 +77,23 @@ select:focus {
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  color: #888;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .error-text {
-  color: #f44336;
+  color: var(--accent-error);
   margin: 0;
 }
 
 .info-text {
-  color: #888;
+  color: var(--text-muted);
   margin: 0;
 }
 
 /* D3 SVG Styles */
 :host ::ng-deep svg {
-  background-color: #1a1a1a;
+  background-color: var(--bg-primary);
   border-radius: 4px;
 }
 
@@ -242,50 +210,38 @@ select:focus {
   pointer-events: none;
 }
 
-/* Error Styles */
-.error {
-  background-color: #d32f2f;
-  color: white;
-  padding: 0.75rem;
-  border-radius: 4px;
-  margin-top: 0.5rem;
-}
-
-.error-label {
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-}
+/* Error Styles - Removed, using consistent error-message class */
 
 /* Visualization Info */
 .visualization-info {
   margin-top: 0.5rem;
   padding: 0.75rem;
-  background-color: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 4px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
   font-size: 0.9rem;
 }
 
 .visualization-info strong {
-  color: #0d7377;
+  color: var(--accent-primary);
 }
 
-/* Section highlighting for search results */
+/* Section highlighting for search results - Updated for consistency */
 .section.highlighted {
-  border: 2px solid var(--accent-color);
-  box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.4);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   animation: highlightPulse 2s ease-in-out;
 }
 
 @keyframes highlightPulse {
   0% { 
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   }
   50% { 
-    box-shadow: 0 0 25px rgba(var(--accent-color-rgb), 0.6);
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.4);
   }
   100% { 
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
   }
 }
 

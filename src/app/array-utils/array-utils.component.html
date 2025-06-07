@@ -3,11 +3,12 @@
   
   <section class="section" id="array-manipulation">
     <h3>Array Manipulation</h3>
-    <label for="arrayInput">Enter comma-separated values:</label>
     <input id="arrayInput" type="text" [(ngModel)]="arrayInput" placeholder="1, 2, 3, 4, 5">
     
-    <button (click)="shuffleArray()">Shuffle Array</button>
-    <button (click)="uniqueArray()">Get Unique Values</button>
+    <div class="btn-group">
+      <button class="btn btn-secondary" (click)="shuffleArray()">Shuffle Array</button>
+      <button class="btn btn-secondary" (click)="uniqueArray()">Get Unique Values</button>
+    </div>
 
     <div class="result" *ngIf="arrayResult">
       <span class="result-label">Result:</span>
@@ -20,7 +21,7 @@
     <label for="rangeInput">Enter number to create range (1 to N):</label>
     <input id="rangeInput" type="number" [(ngModel)]="rangeInput" placeholder="10" min="1">
     
-    <button (click)="createRange()">Create Range</button>
+    <button class="btn btn-primary" (click)="createRange()">Create Range</button>
 
     <div class="result" *ngIf="rangeResult">
       <span class="result-label">Range Result:</span>

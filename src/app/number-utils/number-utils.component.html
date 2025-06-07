@@ -3,7 +3,6 @@
   
   <section class="section" id="number-conversion">
     <h3>Number Operations</h3>
-    <label for="numberInput">Enter number:</label>
     <input id="numberInput" type="number" [(ngModel)]="numberInput" step="0.01">
     
     <div class="clamp-inputs">
@@ -14,9 +13,11 @@
       <input id="maxValue" type="number" [(ngModel)]="maxValue">
     </div>
 
-    <button (click)="applyRounding()">Round</button>
-    <button (click)="applyFormatCurrency()">Format as Currency</button>
-    <button (click)="applyClamp()">Clamp</button>
+    <div class="btn-group">
+      <button class="btn btn-secondary" (click)="applyRounding()">Round</button>
+      <button class="btn btn-primary" (click)="applyFormatCurrency()">Format as Currency</button>
+      <button class="btn btn-secondary" (click)="applyClamp()">Clamp</button>
+    </div>
 
     <div class="result" *ngIf="numberResult">
       <span class="result-label">Result:</span>

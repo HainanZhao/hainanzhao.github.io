@@ -32,8 +32,10 @@
       </small>
     </div>
     
-    <button (click)="testRegex()">Test Regex</button>
-    <button (click)="clearAll()">Clear All</button>
+    <div class="action-buttons">
+      <button class="btn btn-primary" (click)="testRegex()">Test Regex</button>
+      <button class="btn btn-danger" (click)="clearAll()">Clear All</button>
+    </div>
     
     <div class="error" *ngIf="testResult && !testResult.isValid">
       <span class="error-label">Error:</span>
@@ -79,7 +81,7 @@
       <div class="match-item" *ngFor="let match of testResult.matches; let i = index">
         <div class="match-header">
           <span class="match-number">Match {{ i + 1 }}</span>
-          <button class="copy-btn" (click)="copyToClipboard(match.match)" title="Copy to clipboard">📋</button>
+          <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(match.match)" title="Copy to clipboard">📋</button>
         </div>
         <div class="match-details">
           <div class="match-value">
@@ -121,7 +123,7 @@
       <div class="example-item" *ngFor="let example of regexExamples">
         <div class="example-header">
           <h4>{{ example.name }}</h4>
-          <button (click)="loadExample(example)">Load Example</button>
+          <button class="btn btn-sm btn-secondary sample-btn" (click)="loadExample(example)">Load Example</button>
         </div>
         <div class="example-pattern">
           <strong>Pattern:</strong> <code>/{{ example.pattern }}/{{ example.flags }}</code>

@@ -1,35 +1,31 @@
 <div class="container">
-  <h2 class="title">JSON Query</h2>
-  <p class="description">
-    Query JSON data using SQL-like syntax. Enter your JSON data and SQL query below.
-  </p>
-  
+  <h2 class="title">JSON Query</h2>  
   <!-- Input Section -->
-  <div class="section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
+  <div class="section json-section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Data</h3>
-    <div class="actions">
-      <button (click)="loadSampleData()" class="sample-btn sample-btn-small">Load Sample Data</button>
-      <button (click)="prettifyJson()" class="prettify-btn" title="Formats JSON and attempts to fix common syntax errors">Format JSON</button>
-      <button (click)="clearData()" class="clear-btn">Clear</button>
+    <div class="action-buttons">
+      <button (click)="loadSampleData()" class="btn btn-secondary sample-btn">Load Sample Data</button>
+      <button (click)="prettifyJson()" class="btn btn-secondary" title="Formats JSON and attempts to fix common syntax errors">Format JSON</button>
+      <button (click)="clearData()" class="btn btn-danger">Clear</button>
     </div>
-    <div class="textarea-container">
+    <div class="textarea-container json-textarea-container">
       <textarea 
         [(ngModel)]="jsonInput" 
         placeholder="Paste your JSON data here..."
         rows="10"
-        class="json-input"
+        class="json-input json-textarea"
       ></textarea>
-      <div *ngIf="jsonFormatError" class="error-message">
+      <div *ngIf="jsonFormatError" class="error-message json-error-message">
         <strong>Error:</strong> {{jsonFormatError}}
       </div>
-      <div *ngIf="!jsonFormatError" class="format-hint">
+      <div *ngIf="!jsonFormatError" class="format-hint json-info-message">
         <small>Format JSON can fix common issues like single quotes and missing quotes around property names.</small>
       </div>
     </div>
   </div>
   
   <!-- Query Section -->
-  <div class="section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
+  <div class="section json-section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
     <h3>SQL Query</h3>
     <p class="query-help">
       Use SQL syntax to query the JSON data. The data is referenced using '?' as a placeholder.
@@ -40,24 +36,25 @@
         <button 
           *ngFor="let query of sampleSqlQueries" 
           (click)="loadSampleQuery(query)" 
-          class="query-chip"
+          class="btn btn-sm btn-secondary"
         >
           {{query}}
         </button>
       </div>
     </div>
-    <div class="textarea-container">
+    <div class="textarea-container json-textarea-container">
       <textarea 
         [(ngModel)]="sqlQuery" 
         placeholder="Enter your SQL query here... (e.g., SELECT * FROM ? WHERE age > 25)"
         rows="4"
-        class="sql-input"
+        class="sql-input json-textarea"
       ></textarea>
     </div>
     <button 
       (click)="executeQuery()" 
-      class="execute-btn"
+      class="btn btn-primary"
       [disabled]="!jsonInput || !sqlQuery || isLoading"
+      style="padding: 0.75rem 1.5rem; font-size: 1rem; min-width: 200px; display: block; margin: 1rem 0;"
     >
       <span *ngIf="!isLoading">Execute Query</span>
       <span *ngIf="isLoading">Executing...</span>
@@ -65,7 +62,7 @@
   </div>
   
   <!-- Results Section -->
-  <div class="section" id="query-results" *ngIf="queryResult.data.length > 0 || queryResult.error" [class.highlighted]="highlightedSection === 'query-results'">
+  <div class="section json-section" id="query-results" *ngIf="queryResult.data.length > 0 || queryResult.error" [class.highlighted]="highlightedSection === 'query-results'">
     <h3>Query Results</h3>
     <div class="result-options">
       <div class="format-options">
@@ -77,7 +74,7 @@
           <input type="radio" [(ngModel)]="resultFormat" value="json"> JSON
         </label>
       </div>
-      <button (click)="copyResults()" class="copy-btn">Copy Results</button>
+      <button (click)="copyResults()" class="btn btn-secondary copy-btn">Copy Results</button>
     </div>
     
     <div *ngIf="queryResult.executionTime" class="execution-info">
@@ -85,12 +82,12 @@
     </div>
     
     <!-- Error Message -->
-    <div *ngIf="queryResult.error" class="error-message">
+    <div *ngIf="queryResult.error" class="error-message json-error-message">
       <strong>Error:</strong> {{queryResult.error}}
     </div>
     
     <!-- Table Results -->
-    <div *ngIf="resultFormat === 'table' && queryResult.data.length > 0" class="table-results">
+    <div *ngIf="resultFormat === 'table' && queryResult.data.length > 0" class="table-results json-display-area">
       <table>
         <thead>
           <tr>
@@ -110,13 +107,13 @@
     </div>
     
     <!-- JSON Results -->
-    <div *ngIf="resultFormat === 'json' && queryResult.data.length > 0" class="json-results">
-      <pre>{{formatJsonOutput()}}</pre>
+    <div *ngIf="resultFormat === 'json' && queryResult.data.length > 0" class="json-results json-display-area">
+      <pre class="json-code">{{formatJsonOutput()}}</pre>
     </div>
   </div>
   
   <!-- Help Section -->
-  <div class="section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
+  <div class="section json-section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
     <h3>SQL Query Guide</h3>
     <div class="help-content">
       <div class="help-section">

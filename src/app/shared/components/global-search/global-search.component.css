@@ -64,7 +64,7 @@
 
 .search-input {
   width: 100%;
-  padding: 16px 48px 16px 48px;
+  padding: 16px 56px 16px 48px;
   border: 1px solid var(--border-secondary);
   border-radius: var(--radius-lg);
   background: var(--bg-primary);
@@ -86,23 +86,40 @@
 
 .close-button {
   position: absolute;
-  right: 12px;
+  right: 16px;
+  top: 8px;
   background: none;
   border: none;
-  color: var(--text-tertiary);
+  color: #888;
   font-size: 1.5rem;
   cursor: pointer;
   padding: 8px;
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
+  line-height: 1;
+  /* Override global button system completely */
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  will-change: auto;
+  /* Reset any inherited button styles */
+  min-height: auto !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
 .close-button:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+  /* Override global button system on hover */
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
 }
 
 .search-content {
@@ -161,6 +178,15 @@
   flex-shrink: 0;
   margin-top: 2px;
   color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent-primary);
 }
 
 .result-content {

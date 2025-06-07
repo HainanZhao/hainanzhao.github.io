@@ -22,16 +22,7 @@
   background-color: rgba(255, 255, 255, 0.01);
 }
 
-.section h3 {
-  color: var(--accent-primary);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1rem;
-  font-weight: 500;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Removed duplicate section h3 styling - now handled globally in styles.css */
 
 .section h4 {
   color: var(--accent-secondary);
@@ -267,4 +258,58 @@ textarea {
   .options-group {
     flex-direction: column;
   }
+}
+
+/* Consolidated Button Groups */
+.case-options, .manipulation-options, .encoding-options {
+  margin-bottom: var(--spacing-md);
+}
+
+.case-selector, .operation-selector {
+  margin-bottom: var(--spacing-sm);
+}
+
+.case-selector select, .operation-selector select {
+  width: 100%;
+  max-width: 300px;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.basic-operations, .extraction-operations {
+  margin-bottom: var(--spacing-md);
+}
+
+.extraction-operations {
+  border-top: 1px solid var(--border-primary);
+  padding-top: var(--spacing-md);
+}
+
+.extract-buttons, .encode-buttons, .decode-buttons, .hash-buttons, .password-buttons, .random-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.encoding-options {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.encode-group, .decode-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.password-buttons, .random-buttons {
+  margin-top: var(--spacing-md);
+}
+
+.clear-btn {
+  width: 100%;
 }

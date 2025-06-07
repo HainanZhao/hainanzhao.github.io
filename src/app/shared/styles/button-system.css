@@ -1,0 +1,425 @@
+/* Global Button System - Consistent across all components */
+/* This file defines the standard button system for the entire application */
+
+/* =============================================================================
+   BUTTON FOUNDATION
+   ============================================================================= */
+
+/* Base button styles - applies to all buttons */
+.btn, button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-md);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 32px;
+  box-sizing: border-box;
+}
+
+/* Focus styles for accessibility */
+.btn:focus, button:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.btn:disabled, button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:disabled:hover, button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* =============================================================================
+   BUTTON VARIANTS - Simplified System (Primary & Secondary Only)
+   ============================================================================= */
+
+/* 
+   SIMPLIFIED BUTTON SYSTEM:
+   - PRIMARY: Outlined by default, fills on hover (main actions)
+   - SECONDARY: Subtle outlined buttons (supporting actions)
+   - All other variants (tertiary, danger, success) now map to secondary style
+   - This reduces visual complexity and provides consistent UX
+*/
+
+/* PRIMARY BUTTON - Main actions */
+.btn-primary, .btn, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]) {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  box-shadow: none;
+}
+
+.btn-primary:hover, .btn:hover, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]):hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:active, .btn:active, button:not([class*="btn-"]):not([class*="secondary"]):not([class*="danger"]):not([class*="success"]):active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  transform: none;
+  box-shadow: none;
+  filter: brightness(0.9);
+}
+
+/* SECONDARY BUTTON - Supporting actions */
+.btn-secondary, button.secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-primary);
+  box-shadow: none;
+}
+
+.btn-secondary:hover, button.secondary:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary:active, button.secondary:active {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+}
+
+/* DANGER BUTTON - Destructive actions (maps to secondary style) */
+.btn-danger, button.danger,
+.btn-tertiary, .btn-success, button.success {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-primary);
+  box-shadow: none;
+}
+
+.btn-danger:hover, button.danger:hover,
+.btn-tertiary:hover, .btn-success:hover, button.success:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-danger:active, button.danger:active,
+.btn-tertiary:active, .btn-success:active, button.success:active {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+}
+
+/* =============================================================================
+   BUTTON SIZES
+   ============================================================================= */
+
+/* Small buttons */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  min-height: 28px;
+}
+
+/* Large buttons */
+.btn-lg {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  min-height: 40px;
+  font-weight: 600;
+}
+
+/* =============================================================================
+   BUTTON GROUPS AND LAYOUTS
+   ============================================================================= */
+
+/* Button group container */
+.btn-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  margin: var(--spacing-md) 0;
+}
+
+/* Action buttons container (for action-heavy interfaces) */
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: var(--spacing-lg) 0;
+}
+
+/* Button toolbar for grouped controls */
+.btn-toolbar {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  flex-wrap: wrap;
+  margin: var(--spacing-md) 0;
+}
+
+.btn-toolbar .btn,
+.btn-toolbar button {
+  margin: 0;
+}
+
+/* =============================================================================
+   SPECIAL BUTTON TYPES
+   ============================================================================= */
+
+/* Copy button - follows secondary style by default, but respects primary when combined */
+.copy-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-primary);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.copy-btn:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+}
+
+/* When copy-btn is used with btn-primary, btn-primary styles take precedence */
+.btn-primary.copy-btn {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+}
+
+.btn-primary.copy-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Download button - follows secondary style by default, but respects primary when combined */
+.download-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-primary);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.download-btn:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+/* When download-btn is used with btn-primary, btn-primary styles take precedence */
+.btn-primary.download-btn {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+}
+
+.btn-primary.download-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Sample data button - inherits from btn-secondary or btn-primary */
+/* When sample-btn is used with btn-primary, ensure primary styles take precedence */
+.btn-primary.sample-btn {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+}
+
+.btn-primary.sample-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Close button (for modals, panels) */
+.close-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 0.25rem;
+  min-height: auto;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* =============================================================================
+   LEGACY BUTTON SUPPORT
+   ============================================================================= */
+
+/* Support for existing JSON component button classes */
+.json-btn {
+  /* Inherits all base button styles from .btn */
+  position: relative;
+}
+
+.json-btn-primary {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  box-shadow: none;
+}
+
+.json-btn-secondary,
+.json-btn-tertiary,
+.json-btn-danger {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-primary);
+}
+
+/* Hover states for json buttons */
+.json-btn-primary:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.json-btn-secondary:hover,
+.json-btn-tertiary:hover,
+.json-btn-danger:hover {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+}
+
+/* Active states for json buttons */
+.json-btn-primary:active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  filter: brightness(0.9);
+}
+
+.json-btn-secondary:active,
+.json-btn-tertiary:active,
+.json-btn-danger:active {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+}
+
+/* =============================================================================
+   RESPONSIVE BEHAVIOR
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .btn-group,
+  .action-buttons,
+  .btn-toolbar {
+    gap: var(--spacing-xs);
+  }
+  
+  .btn, button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    min-height: 36px;
+  }
+  
+  .btn-lg {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    min-height: 42px;
+  }
+  
+  /* Stack buttons vertically on very small screens */
+  @media (max-width: 480px) {
+    .btn-group,
+    .action-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .btn, button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+/* =============================================================================
+   BUTTON ANIMATION ENHANCEMENTS
+   ============================================================================= */
+
+/* Ripple effect for better interaction feedback */
+.btn::before, button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn:active::before, button:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* Loading state for buttons with async operations */
+.btn-loading, button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-loading::after, button.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

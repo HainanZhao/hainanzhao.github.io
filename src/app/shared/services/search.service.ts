@@ -212,7 +212,7 @@ export class SearchService {
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'monitoring',
-      category: 'Performance Testing'
+      category: 'Iframe Performance'
     },
     {
       id: 'iframe-performance-tests',
@@ -222,7 +222,7 @@ export class SearchService {
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'tests',
-      category: 'Performance Testing'
+      category: 'Iframe Performance'
     },
     {
       id: 'iframe-performance-results',
@@ -232,7 +232,7 @@ export class SearchService {
       component: 'IframePerformanceComponent',
       route: '/iframe-performance',
       section: 'results',
-      category: 'Performance Testing'
+      category: 'Iframe Performance'
     },
     // JSON Query features
     {

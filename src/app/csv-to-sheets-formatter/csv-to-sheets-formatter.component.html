@@ -19,7 +19,7 @@
         <label><input type="checkbox" [(ngModel)]="hasHeaders" (change)="analyzeCSV()"> Has Headers</label>
       </div>
       
-      <button class="sample-btn" (click)="loadSampleData()">Load Sample Data</button>
+      <button class="btn btn-sm btn-secondary sample-btn" (click)="loadSampleData()">Load Sample Data</button>
     </div>
   </section>
 
@@ -35,9 +35,11 @@
       (input)="analyzeCSV()"
     ></textarea>
     
-    <button (click)="formatForSheets()">Convert</button>
-    <button (click)="analyzeCSV()">Analyze</button>
-    <button (click)="clearData()">Clear</button>
+    <div class="action-buttons">
+      <button class="btn btn-sm btn-primary" (click)="formatForSheets()">Convert</button>
+      <button class="btn btn-sm btn-secondary" (click)="analyzeCSV()">Analyze</button>
+      <button class="btn btn-sm btn-danger" (click)="clearData()">Clear</button>
+    </div>
   </section>
 
   <!-- Data Manipulation Section - Compact 2-Row Layout -->
@@ -58,7 +60,7 @@
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-        <button (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
+        <button class="btn btn-sm btn-secondary" (click)="sortData()" [disabled]="sortColumn === -1">Sort</button>
       </div>
       
       <div class="control-group-inline">
@@ -75,7 +77,7 @@
           placeholder="Filter value..."
           (input)="filterData()"
         >
-        <button (click)="filterData()" [disabled]="filterColumn === -1 || !filterValue">Filter</button>
+        <button class="btn btn-sm btn-secondary" (click)="filterData()" [disabled]="filterColumn === -1 || !filterValue">Filter</button>
       </div>
     </div>
     
@@ -83,8 +85,8 @@
     <div class="manipulation-row">
       <div class="control-group-inline">
         <h4>Operations:</h4>
-        <button (click)="removeDuplicates()">Remove Duplicates</button>
-        <button (click)="transoposeData()">Transpose</button>
+        <button class="btn btn-sm btn-secondary" (click)="removeDuplicates()">Remove Duplicates</button>
+        <button class="btn btn-sm btn-secondary" (click)="transoposeData()">Transpose</button>
       </div>
     </div>
   </section>
@@ -107,8 +109,8 @@
       </div>
       
       <div class="action-buttons">
-        <button class="copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
-        <button class="download-btn" (click)="downloadAsFile(csvOutput, 'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat), outputFormat === 'json' ? 'application/json' : 'text/plain')">💾 Download</button>
+        <button class="btn btn-sm btn-secondary copy-btn" (click)="copyToClipboard(csvOutput)">📋 Copy</button>
+        <button class="btn btn-sm btn-primary download-btn" (click)="downloadAsFile(csvOutput, 'converted_data.' + (outputFormat === 'tabs' ? 'tsv' : outputFormat), outputFormat === 'json' ? 'application/json' : 'text/plain')">💾 Download</button>
       </div>
     </div>
     

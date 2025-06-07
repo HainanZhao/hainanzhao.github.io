@@ -34,118 +34,35 @@ nav {
   padding: 8px 16px;
 }
 
-.app-logo-text {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 800;
+.app-logo {
   display: flex;
   align-items: center;
-  letter-spacing: -0.05em;
-  position: relative;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.app-logo-text:hover {
-  transform: scale(1.05);
-}
-
-.logo-letter {
-  display: inline-block;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.2s ease;
+  padding: 12px;
+  border-radius: var(--radius-lg);
   position: relative;
+  width: 56px;
+  height: 56px;
 }
 
-.logo-letter:hover {
-  transform: translateY(-4px) rotate(5deg);
-  animation: letterBounce 0.6s infinite alternate;
+.app-logo:hover {
+  background: rgba(var(--accent-primary-rgb), 0.05);
+  transform: translateY(-1px);
 }
 
-@keyframes letterBounce {
-  0% { transform: translateY(-4px) rotate(5deg) scale(1); }
-  100% { transform: translateY(-6px) rotate(-5deg) scale(1.1); }
-}
-
-/* Individual letter styling with different colors */
-.logo-d {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0s;
-}
-
-.logo-e {
-  background: linear-gradient(135deg, #4ecdc4, #6fe6dd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0.1s;
-}
-
-.logo-b {
-  background: linear-gradient(135deg, #45b7d1, #68c5e0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0.2s;
-}
-
-.logo-u {
-  background: linear-gradient(135deg, #96ceb4, #b3dcc4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0.3s;
-}
-
-.logo-g {
-  background: linear-gradient(135deg, #feca57, #fed976);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0.4s;
-}
-
-.logo-i {
-  background: linear-gradient(135deg, #ff9ff3, #ffb3f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation-delay: 0.5s;
-}
-
-/* Auto-animation for the whole logo */
-.app-logo-text {
-  animation: logoGlow 4s infinite ease-in-out;
-}
-
-@keyframes logoGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.3));
-  }
-  25% {
-    filter: drop-shadow(0 0 8px rgba(78, 205, 196, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 6px rgba(69, 183, 209, 0.3));
-  }
-  75% {
-    filter: drop-shadow(0 0 7px rgba(254, 202, 87, 0.4));
-  }
-}
-
-.app-logo {
-  width: 140px;
+.logo-icon {
+  width: 32px;
   height: 32px;
-  flex-shrink: 0;
+  color: var(--accent-primary);
+  transition: all 0.2s ease;
 }
 
-.app-name {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.app-logo:hover .logo-icon {
+  color: var(--accent-primary);
+  filter: drop-shadow(0 2px 8px rgba(var(--accent-primary-rgb), 0.3));
+  transform: scale(1.05);
 }
 
 .search-button {
@@ -328,10 +245,6 @@ nav ul li a.active svg {
     padding: 4px 8px;
   }
   
-  .app-logo-text {
-    font-size: 1.5rem;
-  }
-  
   .search-button {
     width: auto;
     min-width: 100px;
@@ -391,10 +304,6 @@ nav ul li a.active svg {
   }
   
   /* Even smaller title on very small screens */
-  .app-logo-text {
-    font-size: 1.2rem;
-  }
-  
   .search-button {
     min-width: 80px;
     padding: 6px 8px;
@@ -418,10 +327,6 @@ nav ul li a.active svg {
 
 /* Very small devices - hide text completely, show only icons */
 @media (max-width: 360px) {
-  .app-logo-text {
-    font-size: 1rem;
-  }
-  
   /* Hide navigation text completely on very small screens */
   nav ul li a {
     padding: 10px 4px;

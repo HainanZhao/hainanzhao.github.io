@@ -32,16 +32,7 @@
   background-color: rgba(255, 255, 255, 0.01);
 }
 
-.section h3 {
-  color: var(--accent-primary);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1rem;
-  font-weight: 500;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Removed duplicate section h3 styling - now handled globally in styles.css */
 
 .section h4 {
   color: var(--accent-secondary);
@@ -87,24 +78,7 @@
   box-shadow: var(--shadow-focus);
 }
 
-.sample-btn {
-  background: var(--gradient-primary);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-sm);
-}
-
-.sample-btn:hover {
-  background-color: #0d7377;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
+/* Removed custom sample button styling to use global button system */
 
 /* Statistics Grid - Standard Layout */
 .stats-grid {
@@ -139,10 +113,6 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--accent-primary);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 /* Headers Section - Standard Layout */
@@ -253,32 +223,7 @@
   align-items: center;
 }
 
-.copy-btn, .download-btn {
-  background: var(--gradient-primary);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-sm);
-}
-
-.copy-btn:hover, .download-btn:hover {
-  background-color: #0d7377;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.download-btn {
-  background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
-}
-
-.download-btn:hover {
-  background-color: #388e3c;
-}
+/* Removed custom button styling to use global button system */
 
 .output-textarea {
   width: 100%;
@@ -365,34 +310,7 @@ select:hover, input[type="text"]:hover, input[type="number"]:hover {
   border-color: var(--border-secondary);
 }
 
-/* Button Styling - Standard Pattern */
-button {
-  background: var(--gradient-primary);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-sm);
-}
-
-button:hover:not(:disabled) {
-  background-color: #0d7377;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-button:disabled {
-  background-color: var(--bg-muted);
-  color: var(--text-muted);
-  cursor: not-allowed;
-  opacity: 0.6;
-  transform: none;
-  box-shadow: none;
-}
+/* Removed custom button styling to use global button system */
 
 /* Search highlighting functionality */
 .section.highlighted {

@@ -1,41 +1,44 @@
+/* Import Global Button System */
+@import './app/shared/styles/button-system.css';
+
 /* Modern CSS Custom Properties */
 :root {
-  /* Background colors - Modern dark theme */
-  --bg-primary: #0f0f0f;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #242424;
-  --bg-hover: #2a2a2a;
-  --bg-accent: #161618;
+  /* Background colors - Ultra-warm dark theme for maximum eye comfort */
+  --bg-primary: #1c1c1e;
+  --bg-secondary: #26262a;
+  --bg-tertiary: #2f2f34;
+  --bg-hover: #38383c;
+  --bg-accent: #2a2a2f;
   
-  /* Text colors */
-  --text-primary: #ffffff;
-  --text-secondary: #e4e4e7;
-  --text-tertiary: #a1a1aa;
-  --text-muted: #71717a;
+  /* Text colors - Softer, cream-tinted whites for reduced eye strain */
+  --text-primary: #f2f2f7;
+  --text-secondary: #e5e5ea;
+  --text-tertiary: #aeaeb2;
+  --text-muted: #8e8e93;
   
-  /* Border colors */
-  --border-primary: #27272a;
-  --border-secondary: #3f3f46;
-  --border-accent: #52525b;
+  /* Border colors - Warmer, subtle grays */
+  --border-primary: #38383d;
+  --border-secondary: #48484d;
+  --border-accent: #58585d;
   
-  /* Modern accent colors */
-  --accent-primary: #3b82f6;
-  --accent-primary-rgb: 59, 130, 246;
-  --accent-secondary: #8b5cf6;
-  --accent-success: #10b981;
-  --accent-warning: #f59e0b;
-  --accent-error: #ef4444;
+  /* Modern accent colors - Muted, comfortable tones */
+  --accent-primary: #5ac8fa;
+  --accent-primary-rgb: 90, 200, 250;
+  --accent-secondary: #af52de;
+  --accent-success: #30d158;
+  --accent-warning: #ff9f0a;
+  --accent-error: #ff453a;
   
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  /* Gradients - Ultra-soft, comfortable gradients */
+  --gradient-primary: linear-gradient(135deg, #5ac8fa 0%, #af52de 100%);
+  --gradient-accent: linear-gradient(135deg, #af52de 0%, #ff6b6b 100%);
   
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 20px rgb(59 130 246 / 0.3);
-  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  /* Shadows - Minimal, warm shadows for reduced eye strain */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-md: 0 3px 5px -1px rgb(0 0 0 / 0.06), 0 2px 3px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 8px 10px -3px rgb(0 0 0 / 0.06), 0 3px 5px -4px rgb(0 0 0 / 0.06);
+  --shadow-glow: 0 0 8px rgb(90 200 250 / 0.15);
+  --shadow-focus: 0 0 0 2px rgba(90, 200, 250, 0.12);
   
   /* Spacing system */
   --spacing-xs: 0.25rem;
@@ -109,6 +112,21 @@ h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 h5 { font-size: 1.125rem; }
 h6 { font-size: 1rem; }
+
+/* Section Header Styling - Beautiful gradient text for all section headers */
+.section h3, 
+.json-section h3,
+section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
 
 /* Navigation styles */
 nav {
@@ -213,7 +231,7 @@ textarea:hover {
   border-color: var(--border-secondary);
 }
 
-/* Modern Button Styles */
+/* Modern Button Styles - Now handled by button-system.css */
 .button-group {
   display: flex;
   gap: var(--spacing-sm);
@@ -232,52 +250,6 @@ section button:not(:last-child),
 section button,
 .section button {
   margin-bottom: var(--spacing-xs);
-}
-
-button, .btn {
-  background: var(--gradient-primary);
-  color: var(--text-primary);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-}
-
-button:hover, .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-button:active, .btn:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Button variants */
-button.secondary, .btn.secondary {
-  background: transparent;
-  border: 1px solid var(--border-secondary);
-  color: var(--text-secondary);
-}
-
-button.secondary:hover, .btn.secondary:hover {
-  background-color: var(--bg-hover);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-}
-
-button.danger, .btn.danger {
-  background: linear-gradient(135deg, var(--accent-error) 0%, #dc2626 100%);
-}
-
-button.success, .btn.success {
-  background: linear-gradient(135deg, var(--accent-success) 0%, #059669 100%);
 }
 
 /* Modern Result Display */

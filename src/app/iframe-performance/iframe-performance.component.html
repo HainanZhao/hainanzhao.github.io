@@ -43,16 +43,16 @@
   <!-- Test Selection Section -->
   <div class="section" [class.highlighted]="highlightedSection === 'tests'">
     <h3>Performance Tests</h3>
-    <div class="test-controls">
+    <div class="action-buttons">
       <button 
-        class="run-all-btn" 
+        class="btn btn-primary" 
         (click)="runAllTests()" 
         [disabled]="isRunning"
       >
         Run All Tests
       </button>
       <button 
-        class="clear-btn" 
+        class="btn btn-danger" 
         (click)="clearResults()" 
         [disabled]="testResults.length === 0"
       >
@@ -72,7 +72,7 @@
         </div>
         <p class="test-description">{{test.description}}</p>
         <button 
-          class="run-test-btn" 
+          class="btn btn-secondary" 
           (click)="runTest(test)" 
           [disabled]="isRunning"
         >

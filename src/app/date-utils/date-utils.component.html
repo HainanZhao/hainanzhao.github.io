@@ -3,12 +3,13 @@
   
   <section class="section" id="date-conversion">
     <h3>Date Operations</h3>
-    <label for="dateInput">Select date:</label>
     <input id="dateInput" type="date" [(ngModel)]="dateInput">
     
-    <button (click)="formatSelectedDate()">Format Date</button>
-    <button (click)="checkIfToday()">Check if Today</button>
-    <button (click)="addDaysToDate()">Add 7 Days</button>
+    <div class="btn-group">
+      <button class="btn btn-primary" (click)="formatSelectedDate()">Format Date</button>
+      <button class="btn btn-secondary" (click)="checkIfToday()">Check if Today</button>
+      <button class="btn btn-secondary" (click)="addDaysToDate()">Add 7 Days</button>
+    </div>
 
     <div class="result" *ngIf="dateResult">
       <span class="result-label">Result:</span>

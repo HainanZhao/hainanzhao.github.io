@@ -31,7 +31,7 @@
             (click)="selectResult(item, i)"
             (mouseenter)="selectedIndex = i"
           >
-            <div class="result-icon">{{getCategoryIcon(item.category)}}</div>
+            <div class="result-icon" [innerHTML]="getCategoryIcon(item.category)"></div>
             <div class="result-content">
               <div class="result-title" [innerHTML]="highlightText(item.title, searchQuery)"></div>
               <div class="result-description" [innerHTML]="highlightText(item.description, searchQuery)"></div>

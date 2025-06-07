@@ -18,6 +18,7 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   // Case conversion properties
   inputText = 'Hello World! Visit https://github.com/hainanzhao/debugi';
   convertedText = '';
+  selectedCaseType = '';
 
   // Random character generation properties
   characterCount: number = 10;
@@ -27,9 +28,8 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   textAnalysis: any = {};
 
   // Text manipulation properties
-  findText: string = '';
-  replaceText: string = '';
   manipulatedText: string = '';
+  selectedTextOperation = '';
 
   // Encoding/Decoding properties
   encodedText: string = '';
@@ -109,6 +109,31 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       return;
     }
     this.convertedText = this.inputText.toLowerCase().replace(/\s+/g, '_');
+  }
+
+  convertToSelectedCase() {
+    switch (this.selectedCaseType) {
+      case 'uppercase':
+        this.convertToUppercase();
+        break;
+      case 'lowercase':
+        this.convertToLowercase();
+        break;
+      case 'camelCase':
+        this.convertToCamelCase();
+        break;
+      case 'pascalCase':
+        this.convertToPascalCase();
+        break;
+      case 'kebabCase':
+        this.convertToKebabCase();
+        break;
+      case 'snakeCase':
+        this.convertToSnakeCase();
+        break;
+      default:
+        this.convertedText = '';
+    }
   }
 
   generateRandomCharacters() {
@@ -224,16 +249,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   }
 
   // Text Manipulation Methods
-  findAndReplace() {
-    if (!this.inputText || !this.findText) {
-      this.manipulatedText = this.inputText;
-      return;
-    }
-
-    const regex = new RegExp(this.findText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-    this.manipulatedText = this.inputText.replace(regex, this.replaceText);
-  }
-
   reverseText() {
     this.manipulatedText = this.inputText.split('').reverse().join('');
   }
@@ -278,6 +293,31 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     const numberRegex = /\b\d+(?:\.\d+)?\b/g;
     const numbers = this.inputText.match(numberRegex) || [];
     this.manipulatedText = numbers.join('\n');
+  }
+
+  performTextOperation() {
+    switch (this.selectedTextOperation) {
+      case 'reverse':
+        this.reverseText();
+        break;
+      case 'removeSpaces':
+        this.removeExtraSpaces();
+        break;
+      case 'removeLineBreaks':
+        this.removeLineBreaks();
+        break;
+      case 'addLineNumbers':
+        this.addLineNumbers();
+        break;
+      case 'sortLines':
+        this.sortLines();
+        break;
+      case 'removeDuplicates':
+        this.removeDuplicateLines();
+        break;
+      default:
+        this.manipulatedText = '';
+    }
   }
 
   // Encoding/Decoding Methods

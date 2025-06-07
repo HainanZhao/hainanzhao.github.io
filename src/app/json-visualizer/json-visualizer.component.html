@@ -2,25 +2,26 @@
   <h2 class="title">JSON Visualizer</h2>
   
   <!-- JSON Input Section -->
-  <section id="json-input" class="section" [class.highlighted]="highlightedSection === 'json-input'">
+  <section id="json-input" class="section json-section" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Input</h3>
-    <label for="jsonInput">Enter JSON data:</label>
-    <textarea 
-      id="jsonInput" 
-      [(ngModel)]="jsonInput" 
-      rows="8" 
-      placeholder="Enter valid JSON data..."
-      (input)="parseJson()"
-    ></textarea>
-    
-    <button (click)="parseJson()">Parse & Visualize</button>
-    <button (click)="loadSampleData('simple')">Load Simple Sample</button>
-    <button (click)="loadSampleData('complex')">Load Complex Sample</button>
-    <button (click)="loadSampleData('array')">Load Array Sample</button>
-    
-    <div class="error" *ngIf="errorMessage">
-      <span class="error-label">Error:</span>
-      <span>{{ errorMessage }}</span>
+    <div class="action-buttons">
+      <button (click)="loadSampleData('simple')" class="btn btn-secondary sample-btn">Simple Sample</button>
+      <button (click)="loadSampleData('complex')" class="btn btn-secondary sample-btn">Complex Sample</button>
+      <button (click)="loadSampleData('array')" class="btn btn-secondary sample-btn">Array Sample</button>
+      <button (click)="parseJson()" class="btn btn-primary">Parse & Visualize</button>
+    </div>
+    <div class="textarea-container json-textarea-container">
+      <textarea 
+        id="jsonInput" 
+        [(ngModel)]="jsonInput" 
+        rows="10" 
+        placeholder="Enter valid JSON data..."
+        (input)="parseJson()"
+        class="json-input json-textarea"
+      ></textarea>
+      <div *ngIf="errorMessage" class="error-message json-error-message">
+        <strong>Error:</strong> {{ errorMessage }}
+      </div>
     </div>
   </section>
 

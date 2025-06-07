@@ -34,18 +34,10 @@
 
 .section.highlighted {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+  box-shadow: 0 0 8px rgba(0, 255, 157, 0.2);
 }
 
-.section h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+/* Removed duplicate section h3 styling - now handled globally in styles.css */
 
 /* Performance Monitoring */
 .monitoring-grid {
@@ -105,11 +97,11 @@
 
 @keyframes stressed-pulse {
   0%, 100% { 
-    color: var(--error-color);
+    color: var(--accent-error);
     transform: scale(1);
   }
   50% { 
-    color: #ff6b6b;
+    color: var(--accent-error);
     transform: scale(1.05);
   }
 }
@@ -165,7 +157,7 @@
 }
 
 .clear-btn:hover:not(:disabled) {
-  background: #dc2626;
+  background: var(--accent-error);
   transform: translateY(-2px);
 }
 
@@ -271,7 +263,7 @@
   width: 100%;
   height: 100%;
   border: none;
-  background: #1a1a1a;
+  background: var(--bg-primary);
 }
 
 /* Results */
