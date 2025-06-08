@@ -12,3 +12,58 @@
     box-shadow: 0 0 12px rgba(var(--accent-primary-rgb), 0.5);
   }
 }
+
+/* Examples Section */
+.examples-section {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-primary);
+  padding-top: 1rem;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.example-btn {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  transition: all 0.2s ease;
+}
+
+.example-btn:hover {
+  background-color: var(--accent-secondary);
+  color: var(--text-on-accent);
+  transform: translateY(-2px);
+}
+
+/* Help Section */
+.help-content {
+  background-color: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.help-content h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-primary);
+}
+
+.help-content ul {
+  padding-left: 1.5rem;
+}
+
+.help-content li {
+  margin-bottom: 0.5rem;
+}
+
+.help-content strong {
+  color: var(--accent-secondary);
+}

@@ -50,7 +50,25 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         this.result = ''; // Clear result if expression is empty
         return;
       }
-      this.result = evaluate(this.expression);
+
+      // Handle "where" expressions (e.g., "2x^2 - 5x + 3 where x = 2")
+      if (this.expression.includes(' where ')) {
+        const [expr, assignment] = this.expression.split(' where ');
+        const [variable, value] = assignment.split('=').map(part => part.trim());
+        const substitutedExpr = expr.replace(new RegExp(variable, 'g'), `(${value})`);
+        this.result = evaluate(substitutedExpr);
+      } else {
+        this.result = evaluate(this.expression);
+      }
+
+      // Format result for better readability if it's a number
+      if (typeof this.result === 'number') {
+        // Use toFixed() for long decimals but preserve integers
+        this.result =
+          this.result % 1 !== 0 && Math.abs(this.result) < 10000
+            ? parseFloat(this.result.toFixed(6))
+            : this.result;
+      }
     } catch (error) {
       this.result = 'Error: Invalid expression';
       console.error('Error evaluating expression:', error);
@@ -89,12 +107,14 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   loadUnitConversionExample() {
-    this.expression = '5 inch to cm + 2 kg to pound';
+    this.expression = '5 inch to cm';
     this.evaluateExpression();
   }
 
   loadFinancialExample() {
-    this.expression = 'pmt(0.07/12, 5*12, 25000)';
+    // Calculate monthly payment for a loan: P * r * (1 + r)^n / ((1 + r)^n - 1)
+    // where P = principal, r = monthly interest rate, n = number of payments
+    this.expression = '25000 * (0.07/12) * (1 + 0.07/12)^(5*12) / ((1 + 0.07/12)^(5*12) - 1)';
     this.evaluateExpression();
   }
 }

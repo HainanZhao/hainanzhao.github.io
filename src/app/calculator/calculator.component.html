@@ -16,5 +16,47 @@
     <div class="result" *ngIf="result">
       <span>{{ result }}</span>
     </div>
+
+    <div class="examples-section">
+      <h4>Try Complex Examples:</h4>
+      <div class="examples-grid">
+        <button class="btn btn-secondary example-btn" (click)="loadSimpleExample()">Basic Arithmetic</button>
+        <button class="btn btn-secondary example-btn" (click)="loadTrigExample()">Trigonometry</button>
+        <button class="btn btn-secondary example-btn" (click)="loadAlgebraExample()">Algebra</button>
+        <button class="btn btn-secondary example-btn" (click)="loadMatrixExample()">Matrix Operations</button>
+        <button class="btn btn-secondary example-btn" (click)="loadCalculusExample()">Calculus</button>
+        <button class="btn btn-secondary example-btn" (click)="loadStatisticsExample()">Statistics</button>
+        <button class="btn btn-secondary example-btn" (click)="loadUnitConversionExample()">Unit Conversion</button>
+        <button class="btn btn-secondary example-btn" (click)="loadFinancialExample()">Financial</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="help">
+    <h3>Calculator Help</h3>
+    <div class="help-content">
+      <h4>Supported Operations:</h4>
+      <ul>
+        <li><strong>Basic:</strong> + (add), - (subtract), * (multiply), / (divide), ^ (power), % (modulo)</li>
+        <li><strong>Trigonometric:</strong> sin(), cos(), tan(), asin(), acos(), atan()</li>
+        <li><strong>Logarithmic:</strong> log(), ln(), log10()</li>
+        <li><strong>Statistical:</strong> mean(), median(), std(), min(), max()</li>
+        <li><strong>Matrix:</strong> det(), inv(), transpose(), cross(), dot()</li>
+        <li><strong>Calculus:</strong> derivative()</li>
+        <li><strong>Units:</strong> compatible unit conversions (e.g., 5 inch to cm)</li>
+        <li><strong>Financial:</strong> loan payment calculations using compound interest formulas</li>
+      </ul>
+      
+      <h4>Using Variables:</h4>
+      <p>You can use variables in expressions like: "2x^2 + 3x - 5 where x = 2"</p>
+      
+      <h4>Example Expressions:</h4>
+      <ul>
+        <li>sqrt(16) + cbrt(27)</li>
+        <li>log(1000, 10) * ln(e^3)</li>
+        <li>sin(45 deg)^2 + cos(45 deg)^2</li>
+        <li>mean([1, 2, 3, 4, 5]) - median([1, 2, 3, 4, 100])</li>
+      </ul>
+    </div>
   </section>
 </div>
