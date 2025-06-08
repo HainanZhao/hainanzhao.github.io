@@ -56,4 +56,45 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       console.error('Error evaluating expression:', error);
     }
   }
+
+  // Complex math examples
+  loadSimpleExample() {
+    this.expression = '(2 + 3) * 4 - 6';
+    this.evaluateExpression();
+  }
+
+  loadTrigExample() {
+    this.expression = 'sin(45 deg) + cos(30 deg)';
+    this.evaluateExpression();
+  }
+
+  loadAlgebraExample() {
+    this.expression = '2x^2 - 5x + 3 where x = 2';
+    this.evaluateExpression();
+  }
+
+  loadMatrixExample() {
+    this.expression = 'det([1, 2; 3, 4])';
+    this.evaluateExpression();
+  }
+
+  loadCalculusExample() {
+    this.expression = 'derivative("x^2 + 2*x", "x")';
+    this.evaluateExpression();
+  }
+
+  loadStatisticsExample() {
+    this.expression = 'mean([1, 2, 3, 4, 5]) + std([1, 2, 3, 4, 5])';
+    this.evaluateExpression();
+  }
+
+  loadUnitConversionExample() {
+    this.expression = '5 inch to cm + 2 kg to pound';
+    this.evaluateExpression();
+  }
+
+  loadFinancialExample() {
+    this.expression = 'pmt(0.07/12, 5*12, 25000)';
+    this.evaluateExpression();
+  }
 }

@@ -121,15 +121,16 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
       .attr('height', this.height)
       .attr('viewBox', `0 0 ${this.width} ${this.height}`) // Add viewBox for responsiveness
       .attr('preserveAspectRatio', 'xMidYMid meet'); // Preserve aspect ratio
-      
+
     // Create a separate group for zoom transformations
-    this.svgGroup = svgElement.append('g')
+    this.svgGroup = svgElement
+      .append('g')
       .attr('class', 'zoom-group')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
-      
+
     // Set the svg to the inner group where we'll draw the visualization
     this.svg = this.svgGroup;
-    
+
     // Initialize zoom behavior
     this.setupZoom();
   }
@@ -479,7 +480,7 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
       const transform = d3.zoomIdentity
         .translate(this.margin.left, this.margin.top)
         .scale(this.currentZoom);
-        
+
       d3.select(this.svgContainer.nativeElement)
         .select('svg')
         .transition()
@@ -490,9 +491,10 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
 
   private setupZoom() {
     // Initialize D3 zoom behavior
-    this.zoom = d3.zoom()
+    this.zoom = d3
+      .zoom()
       .scaleExtent([0.1, 4]) // Set min/max zoom
-      .on('zoom', (event) => {
+      .on('zoom', event => {
         // Update current zoom level
         this.currentZoom = event.transform.k;
         // Apply the zoomed transform to the SVG group
