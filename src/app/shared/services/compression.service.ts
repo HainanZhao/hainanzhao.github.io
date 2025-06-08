@@ -84,7 +84,7 @@ export class CompressionService {
 
       // Convert to base64 for URL-safe storage
       const base64 = btoa(String.fromCharCode(...compressed));
-      
+
       // Add compression marker prefix
       return `pako:${base64}`;
     } catch (error) {

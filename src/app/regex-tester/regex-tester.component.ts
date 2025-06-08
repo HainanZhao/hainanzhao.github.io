@@ -73,7 +73,7 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
         if (state.flags) {
           this.flags = state.flags;
         }
-        
+
         // Run test if we have both pattern and test string from shared URL
         if (state.regexPattern && state.testString) {
           this.testRegex();
