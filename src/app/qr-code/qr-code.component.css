@@ -52,15 +52,6 @@ textarea {
   flex-wrap: wrap;
 }
 
-/* Examples Section */
-.examples-section {
-  margin: var(--spacing-md) 0;
-  padding: var(--spacing-sm);
-  background: var(--bg-tertiary);
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-primary);
-}
-
 /* QR Code Result Display */
 .qr-result {
   margin-top: var(--spacing-lg);

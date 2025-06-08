@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
 import { UrlStateService } from '../shared/services/url-state.service';
+import { CompressionService } from '../shared/services/compression.service';
 import { Subscription } from 'rxjs';
 import alasql from 'alasql';
 import {
@@ -76,7 +77,8 @@ Alice Brown,28,Houston,alice@example.com`;
 
   constructor(
     private searchService: SearchService,
-    private urlStateService: UrlStateService
+    private urlStateService: UrlStateService,
+    private compressionService: CompressionService
   ) {}
 
   ngOnInit() {

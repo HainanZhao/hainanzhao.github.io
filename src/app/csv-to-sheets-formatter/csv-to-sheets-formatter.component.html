@@ -40,7 +40,10 @@
 
     <div class="action-buttons">
       <button class="btn btn-secondary btn-danger" (click)="clearData()">Clear</button>
-      <button class="btn btn-success share-btn" (click)="shareCsv($event)" *ngIf="csvInput.trim()">Share CSV</button>
+      <button class="btn btn-success share-btn" (click)="shareCsv($event)" *ngIf="csvInput.trim()">
+        <i class="fas fa-share-alt"></i>
+        Share CSV
+      </button>
     </div>
   </section>
 

@@ -42,19 +42,11 @@
       <button class="btn btn-secondary download-btn" (click)="downloadQRCode()" *ngIf="qrCodeDataURL">
         Download QR Code
       </button>
-      <button class="btn btn-success share-btn" (click)="shareQr($event)" *ngIf="qrCodeDataURL">Share QR</button>
+      <button class="btn btn-success share-btn" (click)="shareQr($event)" *ngIf="qrCodeDataURL">
+        <i class="fas fa-share-alt"></i>
+        Share QR
+      </button>
       <button class="btn btn-danger" (click)="clearQRCode()">Clear</button>
-    </div>
-
-    <!-- Example Buttons -->
-    <div class="examples-section">
-      <h4>Quick Examples:</h4>
-      <div class="btn-group">
-        <button (click)="loadQRExample()" class="btn btn-sm btn-secondary sample-btn">Website URL</button>
-        <button (click)="loadTextExample()" class="btn btn-sm btn-secondary sample-btn">Text Message</button>
-        <button (click)="loadContactExample()" class="btn btn-sm btn-secondary sample-btn">Contact Card</button>
-        <button (click)="loadWifiExample()" class="btn btn-sm btn-secondary sample-btn">WiFi Network</button>
-      </div>
     </div>
 
     <div class="qr-result" *ngIf="qrCodeDataURL">

@@ -12,6 +12,15 @@
   }
 }
 
+/* Button Group for Calculate and Share buttons */
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 /* Examples Section */
 .examples-section {
   margin-top: 1rem;
@@ -71,8 +80,6 @@
 .result {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
-  padding: 1rem;
   background-color: var(--bg-secondary);
   border-radius: 0.5rem;
   font-size: 1.2rem;

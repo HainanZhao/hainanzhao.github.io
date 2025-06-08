@@ -59,23 +59,48 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
     });
 
     // Load regex data from URL if present
-    const savedPattern = this.urlStateService.getStateFromUrl(this.PATTERN_PARAM_KEY);
-    const savedTestString = this.urlStateService.getStateFromUrl(this.TEST_PARAM_KEY);
-    const savedFlags = this.urlStateService.getStateFromUrl(this.FLAGS_PARAM_KEY);
+    // First try to load from the new JSON format (from share function)
+    const sharedState = this.urlStateService.getStateFromUrl('regex');
+    if (sharedState) {
+      try {
+        const state = JSON.parse(sharedState);
+        if (state.regexPattern) {
+          this.regexPattern = state.regexPattern;
+        }
+        if (state.testString) {
+          this.testString = state.testString;
+        }
+        if (state.flags) {
+          this.flags = state.flags;
+        }
+        
+        // Run test if we have both pattern and test string from shared URL
+        if (state.regexPattern && state.testString) {
+          this.testRegex();
+        }
+      } catch (error) {
+        console.warn('Failed to parse shared regex state:', error);
+      }
+    } else {
+      // Fallback to legacy individual parameters
+      const savedPattern = this.urlStateService.getStateFromUrl(this.PATTERN_PARAM_KEY);
+      const savedTestString = this.urlStateService.getStateFromUrl(this.TEST_PARAM_KEY);
+      const savedFlags = this.urlStateService.getStateFromUrl(this.FLAGS_PARAM_KEY);
 
-    if (savedPattern) {
-      this.regexPattern = savedPattern;
-    }
-    if (savedTestString) {
-      this.testString = savedTestString;
-    }
-    if (savedFlags) {
-      this.flags = savedFlags;
-    }
+      if (savedPattern) {
+        this.regexPattern = savedPattern;
+      }
+      if (savedTestString) {
+        this.testString = savedTestString;
+      }
+      if (savedFlags) {
+        this.flags = savedFlags;
+      }
 
-    // Run test if we have both pattern and test string from URL
-    if (savedPattern && savedTestString) {
-      this.testRegex();
+      // Run test if we have both pattern and test string from URL
+      if (savedPattern && savedTestString) {
+        this.testRegex();
+      }
     }
   }
 
