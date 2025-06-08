@@ -57,11 +57,9 @@
     </div>
 
     <div class="qr-result" *ngIf="qrCodeDataURL">
-      <span class="result-label">Generated QR Code:</span>
       <div class="qr-display">
         <img [src]="qrCodeDataURL" [alt]="'QR Code for: ' + inputText" class="qr-image" />
       </div>
-      <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(qrCodeDataURL)">📋 Copy Data URL</button>
     </div>
   </section>
 

@@ -13,7 +13,7 @@ button {
   justify-content: center;
   gap: 0.5rem;
   padding: var(--spacing-xs) var(--spacing-sm);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--border-radius-md);
   font-family: inherit;
   font-size: 0.85rem;
@@ -21,11 +21,13 @@ button {
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   position: relative;
   overflow: hidden;
   min-height: 32px;
   box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Focus styles for accessibility */
@@ -70,7 +72,7 @@ button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not
   ) {
   background: transparent;
   color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
+  border: 1px solid var(--accent-primary);
   box-shadow: none;
 }
 
@@ -102,15 +104,18 @@ button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not
 /* SECONDARY BUTTON - Supporting actions */
 .btn-secondary,
 button.secondary {
-  background: transparent;
+  background: var(--bg-secondary);
   color: var(--text-secondary);
-  border: 2px solid var(--border-primary);
+  border: 1px solid var(--border-primary);
   box-shadow: none;
+  position: relative;
+  border-left-width: 3px;
+  border-left-color: var(--border-secondary);
 }
 
 .btn-secondary:hover,
 button.secondary:hover {
-  background: transparent;
+  background: var(--bg-hover);
   color: var(--text-primary);
   border-color: var(--border-secondary);
   transform: none;
@@ -119,21 +124,22 @@ button.secondary:hover {
 
 .btn-secondary:active,
 button.secondary:active {
-  background: var(--bg-hover);
+  background: var(--bg-active);
   color: var(--text-primary);
   border-color: var(--border-secondary);
   transform: none;
+  box-shadow: none;
 }
 
-/* DANGER BUTTON - Destructive actions (maps to secondary style) */
+/* DANGER BUTTON - Destructive actions (maps to secondary style with danger color accent) */
 .btn-danger,
 button.danger,
 .btn-tertiary,
 .btn-success,
 button.success {
-  background: transparent;
+  background: var(--bg-secondary);
   color: var(--text-secondary);
-  border: 2px solid var(--border-primary);
+  border: 1px solid var(--border-primary);
   box-shadow: none;
 }
 
@@ -142,7 +148,7 @@ button.danger:hover,
 .btn-tertiary:hover,
 .btn-success:hover,
 button.success:hover {
-  background: transparent;
+  background: var(--bg-hover);
   color: var(--text-primary);
   border-color: var(--border-secondary);
   transform: none;
@@ -154,10 +160,23 @@ button.danger:active,
 .btn-tertiary:active,
 .btn-success:active,
 button.success:active {
-  background: var(--bg-hover);
+  background: var(--bg-active);
   color: var(--text-primary);
   border-color: var(--border-secondary);
   transform: none;
+  box-shadow: none;
+}
+
+/* Add specific accent color for danger buttons */
+.btn-danger,
+button.danger {
+  border-left: 3px solid var(--color-danger, #dc3545);
+}
+
+/* Add specific accent color for success buttons */
+.btn-success,
+button.success {
+  border-left: 3px solid var(--color-success, #28a745);
 }
 
 /* =============================================================================
@@ -217,98 +236,85 @@ button.success:active {
 }
 
 /* =============================================================================
-   SPECIAL BUTTON TYPES
+   SPECIALIZED BUTTON TYPES
    ============================================================================= */
 
-/* Copy button - follows secondary style by default, but respects primary when combined */
+/* Copy Buttons - Used for clipboard operations */
 .copy-btn {
-  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-left-width: 3px;
+  border-left-color: var(--accent-tertiary, #6c757d);
   color: var(--text-secondary);
-  border: 2px solid var(--border-primary);
-  font-size: 0.85rem;
-  padding: 0.4rem 0.8rem;
+  box-shadow: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
 }
 
 .copy-btn:hover {
-  background: transparent;
-  color: var(--text-primary);
+  background-color: var(--bg-hover);
   border-color: var(--border-secondary);
-  transform: none;
-}
-
-/* When copy-btn is used with btn-primary, btn-primary styles take precedence */
-.btn-primary.copy-btn {
-  background: transparent;
-  color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
-}
-
-.btn-primary.copy-btn:hover {
-  background: var(--accent-primary);
-  color: white;
-  border-color: var(--accent-primary);
-}
-
-/* Download button - follows secondary style by default, but respects primary when combined */
-.download-btn {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 2px solid var(--border-primary);
-  font-size: 0.85rem;
-  padding: 0.4rem 0.8rem;
-}
-
-.download-btn:hover {
-  background: transparent;
   color: var(--text-primary);
-  border-color: var(--border-secondary);
-  transform: none;
   box-shadow: none;
 }
 
-/* When download-btn is used with btn-primary, btn-primary styles take precedence */
-.btn-primary.download-btn {
-  background: transparent;
-  color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
+.copy-btn:active {
+  background-color: var(--bg-active);
+  box-shadow: none;
+  transform: none;
 }
 
-.btn-primary.download-btn:hover {
-  background: var(--accent-primary);
-  color: white;
-  border-color: var(--accent-primary);
-}
-
-/* Sample data button - inherits from btn-secondary or btn-primary */
-/* When sample-btn is used with btn-primary, ensure primary styles take precedence */
-.btn-primary.sample-btn {
-  background: transparent;
-  color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
-}
-
-.btn-primary.sample-btn:hover {
-  background: var(--accent-primary);
-  color: white;
-  border-color: var(--accent-primary);
-}
-
-/* Close button (for modals, panels) */
-.close-btn {
-  background: transparent;
+/* Sample Buttons - For loading example data */
+.sample-btn {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-left-width: 3px;
+  border-left-color: var(--accent-tertiary, #6c757d);
   color: var(--text-secondary);
-  border: none;
-  padding: 0.25rem;
-  min-height: auto;
-  font-size: 1.2rem;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  box-shadow: none;
 }
 
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+.sample-btn:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-secondary);
+  border-left-color: var(--accent-tertiary, #6c757d);
   color: var(--text-primary);
+  box-shadow: none;
+}
+
+.sample-btn:active {
+  background-color: var(--bg-active);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Download Buttons - For downloading content */
+.download-btn {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-left-width: 3px;
+  border-left-color: var(--accent-secondary, #17a2b8);
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.download-btn:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-secondary);
+  border-left-color: var(--accent-secondary, #17a2b8);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.download-btn:active {
+  background-color: var(--bg-active);
+  box-shadow: none;
+  transform: none;
 }
 
 /* =============================================================================
@@ -331,9 +337,10 @@ button.success:active {
 .json-btn-secondary,
 .json-btn-tertiary,
 .json-btn-danger {
-  background: transparent;
+  background: var(--bg-secondary);
   color: var(--text-secondary);
-  border: 2px solid var(--border-primary);
+  border: 1px solid var(--border-primary);
+  border-left-width: 3px;
 }
 
 /* Hover states for json buttons */
@@ -346,7 +353,7 @@ button.success:active {
 .json-btn-secondary:hover,
 .json-btn-tertiary:hover,
 .json-btn-danger:hover {
-  background: transparent;
+  background: var(--bg-hover);
   color: var(--text-primary);
   border-color: var(--border-secondary);
 }
@@ -362,7 +369,7 @@ button.success:active {
 .json-btn-secondary:active,
 .json-btn-tertiary:active,
 .json-btn-danger:active {
-  background: var(--bg-hover);
+  background: var(--bg-active);
   color: var(--text-primary);
   border-color: var(--border-secondary);
 }
@@ -411,29 +418,10 @@ button.success:active {
    BUTTON ANIMATION ENHANCEMENTS
    ============================================================================= */
 
-/* Ripple effect for better interaction feedback */
+/* Simplified hover feedback - no ripples for flat design */
 .btn::before,
 button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.3s ease,
-    height 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.btn:active::before,
-button:active::before {
-  width: 100px;
-  height: 100px;
+  display: none;
 }
 
 /* Loading state for buttons with async operations */

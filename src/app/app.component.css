@@ -44,7 +44,7 @@ nav {
   border-radius: var(--radius-lg);
   position: relative;
   width: 56px;
-  height: 56px;
+  height: 28px;
 }
 
 .app-logo:hover {

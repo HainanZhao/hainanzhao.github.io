@@ -29,11 +29,19 @@
 
 .config-item select {
   padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background: var(--input-bg);
-  color: var(--text-color);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
   min-width: 150px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'><path d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  padding-right: 30px;
+  cursor: pointer;
 }
 
 .output-actions {

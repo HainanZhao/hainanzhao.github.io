@@ -28,7 +28,6 @@
     </div>
 
     <div class="result" *ngIf="convertedText">
-      <span class="result-label">Converted Text:</span>
       <span class="result-text">{{ convertedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(convertedText)">📋 Copy</button>
     </div>
@@ -109,7 +108,6 @@
     </div>
 
     <div class="result" *ngIf="manipulatedText">
-      <span class="result-label">Result:</span>
       <span class="result-text">{{ manipulatedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(manipulatedText)">📋 Copy</button>
     </div>
@@ -204,7 +202,6 @@
     </div>
 
     <div class="result" *ngIf="generatedPassword">
-      <span class="result-label">Generated Password(s):</span>
       <span class="result-text password-text">{{ generatedPassword }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(generatedPassword)">📋 Copy</button>
     </div>
@@ -232,7 +229,6 @@
     </div>
 
     <div class="result" *ngIf="generatedCharacters">
-      <span class="result-label">Generated Characters ({{ generatedCharacters.length }}):</span>
       <span class="result-text">{{ generatedCharacters }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(generatedCharacters)">📋 Copy</button>
     </div>

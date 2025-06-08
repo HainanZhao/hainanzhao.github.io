@@ -101,11 +101,4 @@ END:VCARD`;
     this.inputText = '';
     this.qrCodeDataURL = '';
   }
-
-  // Utility Methods
-  copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text).then(() => {
-      // Could add a toast notification here
-    });
-  }
 }

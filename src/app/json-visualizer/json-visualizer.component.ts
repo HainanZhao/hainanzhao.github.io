@@ -52,9 +52,14 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
   visualizationType: 'tree' | 'hierarchy' | 'network' = 'tree';
 
   private svg: any;
-  private width = 1000; // Increased from 800
+  private width = 1000; // Will be calculated dynamically
   private height = 800; // Increased from 600
   private margin = { top: 20, right: 120, bottom: 20, left: 120 };
+
+  private svgGroup: any; // Group for zoom operations
+  private zoom: any; // D3 zoom behavior
+  private currentZoom = 1; // Track zoom level
+  private zoomStep = 0.3; // Amount to zoom in/out per click
 
   constructor(private searchService: SearchService) {}
 
@@ -104,13 +109,29 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
 
     d3.select(this.svgContainer.nativeElement).selectAll('*').remove();
 
-    this.svg = d3
+    // Calculate width based on container
+    const containerWidth = this.svgContainer.nativeElement.clientWidth || this.width;
+    this.width = Math.max(containerWidth, 800); // Ensure minimum width of 800px
+
+    // Create the main SVG element
+    const svgElement = d3
       .select(this.svgContainer.nativeElement)
       .append('svg')
-      .attr('width', this.width)
+      .attr('width', '100%') // Set width to 100%
       .attr('height', this.height)
-      .append('g')
+      .attr('viewBox', `0 0 ${this.width} ${this.height}`) // Add viewBox for responsiveness
+      .attr('preserveAspectRatio', 'xMidYMid meet'); // Preserve aspect ratio
+      
+    // Create a separate group for zoom transformations
+    this.svgGroup = svgElement.append('g')
+      .attr('class', 'zoom-group')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+      
+    // Set the svg to the inner group where we'll draw the visualization
+    this.svg = this.svgGroup;
+    
+    // Initialize zoom behavior
+    this.setupZoom();
   }
 
   private convertToHierarchy(obj: any, name: string = 'root'): JsonNode {
@@ -434,5 +455,54 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
         break;
     }
     this.parseJson();
+  }
+
+  // Zoom functions
+  zoomIn() {
+    this.currentZoom += this.zoomStep;
+    this.applyZoom();
+  }
+
+  zoomOut() {
+    this.currentZoom = Math.max(0.1, this.currentZoom - this.zoomStep);
+    this.applyZoom();
+  }
+
+  resetZoom() {
+    this.currentZoom = 1;
+    this.applyZoom();
+  }
+
+  private applyZoom() {
+    // Apply zoom transformation to the SVG group
+    if (this.svgGroup && this.zoom) {
+      const transform = d3.zoomIdentity
+        .translate(this.margin.left, this.margin.top)
+        .scale(this.currentZoom);
+        
+      d3.select(this.svgContainer.nativeElement)
+        .select('svg')
+        .transition()
+        .duration(300)
+        .call(this.zoom.transform, transform);
+    }
+  }
+
+  private setupZoom() {
+    // Initialize D3 zoom behavior
+    this.zoom = d3.zoom()
+      .scaleExtent([0.1, 4]) // Set min/max zoom
+      .on('zoom', (event) => {
+        // Update current zoom level
+        this.currentZoom = event.transform.k;
+        // Apply the zoomed transform to the SVG group
+        this.svgGroup.attr('transform', event.transform);
+      });
+
+    // Apply zoom behavior to the SVG
+    d3.select(this.svgContainer.nativeElement)
+      .select('svg')
+      .call(this.zoom)
+      .on('dblclick.zoom', null); // Disable double-click zoom
   }
 }

@@ -65,6 +65,11 @@
     *ngIf="parsedJson && !errorMessage"
   >
     <h3>Visualization</h3>
+    <div class="zoom-controls">
+      <button class="btn btn-secondary zoom-btn" (click)="zoomIn()">Zoom In (+)</button>
+      <button class="btn btn-secondary zoom-btn" (click)="resetZoom()">Reset</button>
+      <button class="btn btn-secondary zoom-btn" (click)="zoomOut()">Zoom Out (-)</button>
+    </div>
     <div #svgContainer class="svg-container"></div>
   </section>
 </div>

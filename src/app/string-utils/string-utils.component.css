@@ -171,7 +171,7 @@
 
 .clear-btn {
   background: linear-gradient(135deg, var(--accent-error) 0%, #dc2626 100%);
-  color: var(--text-primary);
+  color: white;
   border: none;
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--border-radius-md);
@@ -247,12 +247,6 @@ textarea {
 .operation-selector select {
   width: 100%;
   max-width: 300px;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--border-radius-sm);
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  font-size: 0.9rem;
 }
 
 .basic-operations,
