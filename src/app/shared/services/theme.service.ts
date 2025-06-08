@@ -13,15 +13,22 @@ export class ThemeService {
   public theme$ = this.themeSubject.asObservable();
 
   constructor() {
-    this.applyTheme(this.themeSubject.value);
+    // Apply theme only if not already applied by the initialization script
+    const currentTheme = this.themeSubject.value;
+    if (!document.body.classList.contains(`theme-${currentTheme}`)) {
+      this.applyTheme(currentTheme);
+    }
     this.setupKeyboardShortcut();
   }
 
   private getInitialTheme(): Theme {
-    // Check localStorage first
-    const savedTheme = localStorage.getItem(this.THEME_KEY) as Theme;
-    if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
-      return savedTheme;
+    // Check if we're in a browser environment
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      // Check localStorage first
+      const savedTheme = localStorage.getItem(this.THEME_KEY) as Theme;
+      if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+        return savedTheme;
+      }
     }
 
     // Always default to dark theme (ignoring system preference)
@@ -45,7 +52,10 @@ export class ThemeService {
   }
 
   private saveTheme(theme: Theme): void {
-    localStorage.setItem(this.THEME_KEY, theme);
+    // Only save if we're in a browser environment
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem(this.THEME_KEY, theme);
+    }
   }
 
   private applyTheme(theme: Theme): void {

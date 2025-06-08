@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run lint && ng build && npm run seo:generate",
-    "build:prod": "npm run lint && ng build --configuration production && npm run seo:generate",
-    "build:gh-pages": "npm run lint && ng build --configuration production && npm run seo:generate",
+    "build:prod": "npm run lint && ng build --configuration production && npm run prerender:advanced && npm run seo:generate",
+    "build:gh-pages": "npm run build:prod",
     "build:no-lint": "ng build && npm run seo:generate",
     "build:prod:no-lint": "ng build --configuration production && npm run seo:generate",
     "watch": "ng build --watch --configuration development",
@@ -18,7 +18,10 @@
     "format:lint": "npm run format && npm run lint:fix",
     "seo:generate": "node scripts/generate-seo.js",
     "seo:sitemap": "node scripts/generate-sitemap.js",
-    "seo:robots": "node scripts/generate-robots.js"
+    "seo:robots": "node scripts/generate-robots.js",
+    "prerender": "node scripts/prerender.js",
+    "prerender:advanced": "node scripts/prerender-advanced.js",
+    "build:ssg": "npm run lint && ng build --configuration production && npm run prerender && npm run seo:generate"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +55,7 @@
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
+    "express": "^5.1.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -59,6 +63,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.5.3",
+    "puppeteer": "^24.10.0",
     "sharp": "^0.34.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.32.1"
