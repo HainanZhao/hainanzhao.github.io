@@ -1,45 +1,6 @@
 <div class="container">
   <h2 class="title">Number Utilities</h2>
-  <p class="subtitle">Essential number operations and conversions for developers</p>
-  <!-- Basic Number Operations -->
-  <section class="section" id="basic-operations">
-    <h3>Basic Operations</h3>
-    <div class="input-group">
-      <label for="numberInput">Number:</label>
-      <input id="numberInput" type="number" [(ngModel)]="numberInput" step="0.01" (input)="calculateBasicOps()" />
-
-      <label for="decimalPlaces">Decimal Places:</label>
-      <input
-        id="decimalPlaces"
-        type="number"
-        [(ngModel)]="decimalPlaces"
-        min="0"
-        max="10"
-        (input)="calculateBasicOps()"
-      />
-    </div>
-
-    <div class="clamp-inputs">
-      <div>
-        <label for="minValue">Min (for clamp):</label>
-        <input id="minValue" type="number" [(ngModel)]="minValue" (input)="calculateBasicOps()" />
-      </div>
-
-      <div>
-        <label for="maxValue">Max (for clamp):</label>
-        <input id="maxValue" type="number" [(ngModel)]="maxValue" (input)="calculateBasicOps()" />
-      </div>
-    </div>
-
-    <div class="btn-group">
-      <button class="btn btn-secondary" (click)="calculateBasicOps()">Calculate</button>
-      <button class="btn btn-primary" (click)="generateRandomNumber()">Random Number</button>
-    </div>
-
-    <div class="result" *ngIf="basicResult">
-      <span>{{ basicResult }}</span>
-    </div>
-  </section>
+  <p class="subtitle">Advanced number operations and conversions for developers</p>
 
   <!-- Byte Conversion -->
   <section class="section" id="byte-conversion">
@@ -111,9 +72,9 @@
     </div>
   </section>
 
-  <!-- Number Formatting -->
+  <!-- Locale-Aware Number Formatting -->
   <section class="section" id="number-formatting">
-    <h3>Number Formatting</h3>
+    <h3>Locale-Aware Number Formatting</h3>
     <div class="input-group">
       <label for="formatInput">Number:</label>
       <input id="formatInput" type="number" [(ngModel)]="formatInput" (input)="formatNumber()" />

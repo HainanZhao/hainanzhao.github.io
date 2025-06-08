@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "common-utils-ui": {
+    "debugi": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
@@ -85,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "common-utils-ui:build:production"
+              "buildTarget": "debugi:build:production"
             },
             "development": {
-              "buildTarget": "common-utils-ui:build:development"
+              "buildTarget": "debugi:build:development"
             }
           },
           "defaultConfiguration": "development"

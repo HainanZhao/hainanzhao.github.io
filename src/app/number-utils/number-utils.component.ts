@@ -22,13 +22,6 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   highlightedSection = '';
 
-  // Basic operations
-  numberInput: number = 123.456;
-  decimalPlaces: number = 2;
-  minValue: number = 0;
-  maxValue: number = 100;
-  basicResult: string = '';
-
   // Byte conversion
   bytesInput: number = 1024;
   bytesResult: string = '';
@@ -114,7 +107,6 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
   }
 
   performAllCalculations() {
-    this.calculateBasicOps();
     this.convertBytes();
     this.parseByteString();
     this.convertBase();
@@ -122,14 +114,6 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
     this.convertUnits();
     this.formatDuration();
     this.calculateCompound();
-  }
-
-  calculateBasicOps() {
-    const rounded = numberUtils.roundTo(this.numberInput, this.decimalPlaces);
-    const currency = numberUtils.formatCurrency(this.numberInput);
-    const clamped = numberUtils.clamp(this.numberInput, this.minValue, this.maxValue);
-
-    this.basicResult = `Rounded: ${rounded} | Currency: ${currency} | Clamped: ${clamped}`;
   }
 
   convertBytes() {
@@ -181,14 +165,8 @@ export class NumberUtilsComponent implements OnInit, OnDestroy {
     this.compoundResult = numberUtils.formatCurrency(result);
   }
 
-  generateRandomNumber() {
-    this.numberInput = numberUtils.randomBetween(1, 1000) + Math.random();
-    this.calculateBasicOps();
-  }
-
   clearAll() {
     // Reset all values to defaults
-    this.numberInput = 123.456;
     this.bytesInput = 1024;
     this.baseInput = '255';
     this.fromBase = 10;

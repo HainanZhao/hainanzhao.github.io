@@ -12,7 +12,7 @@ import { ThemeService, Theme } from './shared/services/theme.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'common-utils-ui';
+  title = 'debugi';
   currentTheme: Theme = 'dark';
 
   constructor(

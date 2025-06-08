@@ -1,4 +1,4 @@
-/* Flattened Date Utils Styles */
+/* Date Utils Enhanced Styles */
 
 @keyframes pulse-highlight {
   0%,
@@ -10,4 +10,37 @@
     background-color: rgba(var(--accent-primary-rgb), 0.25);
     box-shadow: 0 0 12px rgba(var(--accent-primary-rgb), 0.5);
   }
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.controls .form-control {
+  flex: 1;
+  min-width: 200px;
+}
+
+.controls input[type="number"] {
+  width: 100px !important;
+  flex: none;
+}
+
+.result {
+  background: var(--bg-tertiary);
+  padding: 1rem;
+  border-radius: var(--border-radius-md);
+  margin-top: 1rem;
+  border-left: 3px solid var(--accent-primary);
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+.result strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }

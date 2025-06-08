@@ -1,18 +1,102 @@
 <div class="container">
   <h2 class="title">Date Utilities</h2>
+  <p class="subtitle">Advanced date manipulation and formatting tools for developers</p>
 
-  <section class="section" id="date-conversion">
-    <h3>Date Operations</h3>
-    <input id="dateInput" type="date" [(ngModel)]="dateInput" />
+  <!-- Primary Date Input -->
+  <section class="section" id="date-input">
+    <h3>Date Input</h3>
+    <input id="dateInput" type="date" [(ngModel)]="dateInput" class="form-control" />
+  </section>
 
-    <div class="btn-group">
-      <button class="btn btn-primary" (click)="formatSelectedDate()">Format Date</button>
-      <button class="btn btn-secondary" (click)="checkIfToday()">Check if Today</button>
-      <button class="btn btn-secondary" (click)="addDaysToDate()">Add 7 Days</button>
+  <!-- Format & Convert -->
+  <section class="section" id="format-convert">
+    <h3>Format & Convert</h3>
+    <div class="controls">
+      <select [(ngModel)]="formatType" class="form-control">
+        <option *ngFor="let format of formatOptions" [value]="format">{{ format | titlecase }}</option>
+      </select>
+      <button class="btn btn-primary" (click)="formatDate()">Format</button>
     </div>
+    <div class="controls">
+      <input type="text" [(ngModel)]="timestampInput" placeholder="Unix timestamp" class="form-control" />
+      <input type="text" [(ngModel)]="isoInput" placeholder="ISO 8601 string" class="form-control" />
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" (click)="convertFromTimestamp()">From TS</button>
+      <button class="btn btn-secondary" (click)="convertToTimestamp()">To TS</button>
+      <button class="btn btn-secondary" (click)="convertFromISO()">From ISO</button>
+      <button class="btn btn-secondary" (click)="convertToISO()">To ISO</button>
+    </div>
+    <div class="result" *ngIf="formatResult">
+      <strong>Formatted:</strong>
+      {{ formatResult }}
+    </div>
+    <div class="result" *ngIf="timestampResult">
+      <strong>Timestamp:</strong>
+      {{ timestampResult }}
+    </div>
+    <div class="result" *ngIf="isoResult">
+      <strong>ISO:</strong>
+      {{ isoResult }}
+    </div>
+  </section>
 
-    <div class="result" *ngIf="dateResult">
-      <span>{{ dateResult }}</span>
+  <!-- Parse & Validate -->
+  <section class="section" id="parse-validate">
+    <h3>Parse & Validate</h3>
+    <div class="controls">
+      <input type="text" [(ngModel)]="flexDateInput" placeholder="Any date format" class="form-control" />
+      <button class="btn btn-primary" (click)="validateDate()">Parse</button>
+    </div>
+    <div class="result" *ngIf="validationResult">
+      <strong>Result:</strong>
+      {{ validationResult }}
+    </div>
+  </section>
+
+  <!-- Timezone & Calculations -->
+  <section class="section" id="timezone-calc">
+    <h3>Timezone & Calculations</h3>
+    <div class="controls">
+      <select [(ngModel)]="timezone" class="form-control">
+        <option *ngFor="let tz of timezones" [value]="tz">{{ tz }}</option>
+      </select>
+      <button class="btn btn-primary" (click)="formatInTimezone()">Convert TZ</button>
+    </div>
+    <div class="controls">
+      <input type="number" [(ngModel)]="addTimeAmount" placeholder="Amount" class="form-control" style="width: 100px" />
+      <select [(ngModel)]="addTimeUnit" class="form-control">
+        <option *ngFor="let unit of timeUnits" [value]="unit">{{ unit }}</option>
+      </select>
+      <button class="btn btn-primary" (click)="addTime()">Add Time</button>
+    </div>
+    <div class="result" *ngIf="timezoneResult">
+      <strong>{{ timezone }}:</strong>
+      {{ timezoneResult }}
+    </div>
+    <div class="result" *ngIf="addTimeResult">
+      <strong>Result:</strong>
+      {{ addTimeResult }}
+    </div>
+  </section>
+
+  <!-- Period Operations -->
+  <section class="section" id="period-ops">
+    <h3>Period Operations</h3>
+    <div class="btn-group">
+      <button class="btn btn-secondary" (click)="getStartOfWeek()">Week</button>
+      <button class="btn btn-secondary" (click)="getStartOfMonth()">Month</button>
+      <button class="btn btn-secondary" (click)="getStartOfYear()">Year</button>
+      <button class="btn btn-primary" (click)="checkWeekend()">Weekend?</button>
+      <button class="btn btn-primary" (click)="calculateBusinessDays()">Biz Days</button>
+    </div>
+    <div class="result" *ngIf="periodResult">
+      <strong>Period:</strong>
+      {{ periodResult }}
+    </div>
+    <div class="result" *ngIf="businessDayResult">
+      <strong>Result:</strong>
+      {{ businessDayResult }}
     </div>
   </section>
 </div>

@@ -4,7 +4,7 @@
   <!-- JWT Input Section -->
   <section id="jwt-input" class="section" [class.highlighted]="highlightedSection === 'jwt-input'">
     <h3>JWT Token Input</h3>
-    
+
     <div class="input-group">
       <label for="jwtToken">JWT Token</label>
       <textarea
@@ -65,7 +65,8 @@
   <section class="section" *ngIf="parseError">
     <div class="error-message">
       <i class="fas fa-exclamation-triangle"></i>
-      <strong>Parse Error:</strong> {{ parseError }}
+      <strong>Parse Error:</strong>
+      {{ parseError }}
     </div>
   </section>
 
@@ -74,14 +75,15 @@
     <h3>Validation Status</h3>
     <div class="validation-status">
       <div class="status-badge" [class]="getValidationClass()">
-        <i class="fas" 
-           [class.fa-check-circle]="getValidationStatus() === 'Valid'"
-           [class.fa-times-circle]="getValidationStatus() === 'Expired' || getValidationStatus() === 'Invalid structure'"
-           [class.fa-exclamation-triangle]="getValidationStatus() === 'Not yet valid'">
-        </i>
+        <i
+          class="fas"
+          [class.fa-check-circle]="getValidationStatus() === 'Valid'"
+          [class.fa-times-circle]="getValidationStatus() === 'Expired' || getValidationStatus() === 'Invalid structure'"
+          [class.fa-exclamation-triangle]="getValidationStatus() === 'Not yet valid'"
+        ></i>
         {{ getValidationStatus() }}
       </div>
-      
+
       <div class="status-details" *ngIf="parsedJwt.timeToExpiry">
         <span class="detail-label">Time to expiry:</span>
         <span class="detail-value">{{ parsedJwt.timeToExpiry }}</span>
@@ -93,7 +95,12 @@
   <section id="jwt-header" class="section" [class.highlighted]="highlightedSection === 'jwt-header'" *ngIf="parsedJwt">
     <div class="results-header">
       <h3>JWT Header</h3>
-      <button type="button" class="copy-btn" (click)="copyToClipboard(formatJson(parsedJwt.header))" title="Copy header to clipboard">
+      <button
+        type="button"
+        class="copy-btn"
+        (click)="copyToClipboard(formatJson(parsedJwt.header))"
+        title="Copy header to clipboard"
+      >
         <i class="fas fa-copy"></i>
         Copy Header
       </button>
@@ -103,19 +110,19 @@
       <div class="json-display">
         <pre>{{ formatJson(parsedJwt.header) }}</pre>
       </div>
-      
+
       <div class="header-info">
         <div class="info-item">
           <span class="info-label">Algorithm:</span>
           <span class="info-value">{{ parsedJwt.header.alg }}</span>
         </div>
         <div class="info-description">{{ getAlgorithmInfo(parsedJwt.header.alg) }}</div>
-        
+
         <div class="info-item" *ngIf="parsedJwt.header.typ">
           <span class="info-label">Type:</span>
           <span class="info-value">{{ parsedJwt.header.typ }}</span>
         </div>
-        
+
         <div class="info-item" *ngIf="parsedJwt.header.kid">
           <span class="info-label">Key ID:</span>
           <span class="info-value">{{ parsedJwt.header.kid }}</span>
@@ -125,10 +132,20 @@
   </section>
 
   <!-- JWT Payload Section -->
-  <section id="jwt-payload" class="section" [class.highlighted]="highlightedSection === 'jwt-payload'" *ngIf="parsedJwt">
+  <section
+    id="jwt-payload"
+    class="section"
+    [class.highlighted]="highlightedSection === 'jwt-payload'"
+    *ngIf="parsedJwt"
+  >
     <div class="results-header">
       <h3>JWT Payload</h3>
-      <button type="button" class="copy-btn" (click)="copyToClipboard(formatJson(parsedJwt.payload))" title="Copy payload to clipboard">
+      <button
+        type="button"
+        class="copy-btn"
+        (click)="copyToClipboard(formatJson(parsedJwt.payload))"
+        title="Copy payload to clipboard"
+      >
         <i class="fas fa-copy"></i>
         Copy Payload
       </button>
@@ -138,14 +155,21 @@
       <div class="json-display">
         <pre>{{ formatJson(parsedJwt.payload) }}</pre>
       </div>
-      
+
       <div class="payload-info">
         <h4>Standard Claims</h4>
         <div class="claims-grid">
-          <div class="claim-item" *ngFor="let claim of parsedJwt.payload | keyvalue" [hidden]="!isStandardClaim(claim.key)">
+          <div
+            class="claim-item"
+            *ngFor="let claim of parsedJwt.payload | keyvalue"
+            [hidden]="!isStandardClaim(claim.key)"
+          >
             <div class="claim-header">
               <span class="claim-name">{{ claim.key }}</span>
-              <span class="claim-value" *ngIf="claim.key === 'exp' || claim.key === 'iat' || claim.key === 'nbf'; else normalValue">
+              <span
+                class="claim-value"
+                *ngIf="claim.key === 'exp' || claim.key === 'iat' || claim.key === 'nbf'; else normalValue"
+              >
                 {{ formatTimestamp(claim.value) }}
               </span>
               <ng-template #normalValue>
@@ -156,9 +180,15 @@
           </div>
         </div>
 
-        <h4 *ngIf="(parsedJwt.payload | keyvalue).length > ['iss','sub','aud','exp','nbf','iat','jti'].length">Custom Claims</h4>
+        <h4 *ngIf="(parsedJwt.payload | keyvalue).length > ['iss', 'sub', 'aud', 'exp', 'nbf', 'iat', 'jti'].length">
+          Custom Claims
+        </h4>
         <div class="claims-grid">
-          <div class="claim-item" *ngFor="let claim of parsedJwt.payload | keyvalue" [hidden]="isStandardClaim(claim.key)">
+          <div
+            class="claim-item"
+            *ngFor="let claim of parsedJwt.payload | keyvalue"
+            [hidden]="isStandardClaim(claim.key)"
+          >
             <div class="claim-header">
               <span class="claim-name">{{ claim.key }}</span>
               <span class="claim-value">{{ claim.value }}</span>
@@ -171,10 +201,20 @@
   </section>
 
   <!-- JWT Signature Section -->
-  <section id="jwt-signature" class="section" [class.highlighted]="highlightedSection === 'jwt-signature'" *ngIf="parsedJwt">
+  <section
+    id="jwt-signature"
+    class="section"
+    [class.highlighted]="highlightedSection === 'jwt-signature'"
+    *ngIf="parsedJwt"
+  >
     <div class="results-header">
       <h3>JWT Signature</h3>
-      <button type="button" class="copy-btn" (click)="copyToClipboard(parsedJwt.signature)" title="Copy signature to clipboard">
+      <button
+        type="button"
+        class="copy-btn"
+        (click)="copyToClipboard(parsedJwt.signature)"
+        title="Copy signature to clipboard"
+      >
         <i class="fas fa-copy"></i>
         Copy Signature
       </button>
@@ -184,13 +224,20 @@
       <div class="signature-display">
         <code>{{ parsedJwt.signature }}</code>
       </div>
-      
+
       <div class="signature-info">
-        <p><strong>Algorithm:</strong> {{ parsedJwt.header.alg }}</p>
-        <p><strong>Description:</strong> {{ getAlgorithmInfo(parsedJwt.header.alg) }}</p>
+        <p>
+          <strong>Algorithm:</strong>
+          {{ parsedJwt.header.alg }}
+        </p>
+        <p>
+          <strong>Description:</strong>
+          {{ getAlgorithmInfo(parsedJwt.header.alg) }}
+        </p>
         <p class="signature-note">
           <i class="fas fa-info-circle"></i>
-          The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+          The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message
+          wasn't changed along the way.
         </p>
       </div>
     </div>
@@ -199,36 +246,21 @@
   <!-- JWT Generator Section -->
   <section id="jwt-generator" class="section" [class.highlighted]="highlightedSection === 'jwt-generator'">
     <h3>JWT Generator</h3>
-    
+
     <div class="generator-grid">
       <div class="generator-section">
         <h4>Header</h4>
-        <textarea
-          [(ngModel)]="headerInput"
-          placeholder="JWT Header JSON"
-          rows="6"
-          class="code-input"
-        ></textarea>
+        <textarea [(ngModel)]="headerInput" placeholder="JWT Header JSON" rows="6" class="code-input"></textarea>
       </div>
 
       <div class="generator-section">
         <h4>Payload</h4>
-        <textarea
-          [(ngModel)]="payloadInput"
-          placeholder="JWT Payload JSON"
-          rows="6"
-          class="code-input"
-        ></textarea>
+        <textarea [(ngModel)]="payloadInput" placeholder="JWT Payload JSON" rows="6" class="code-input"></textarea>
       </div>
 
       <div class="generator-section">
         <h4>Secret Key</h4>
-        <input
-          type="text"
-          [(ngModel)]="secretKey"
-          placeholder="Secret key for signing"
-          class="secret-input"
-        />
+        <input type="text" [(ngModel)]="secretKey" placeholder="Secret key for signing" class="secret-input" />
         <p class="secret-note">
           <i class="fas fa-lock"></i>
           This is for demonstration only. In production, use proper cryptographic libraries.
@@ -251,10 +283,13 @@
   <!-- JWT Information Section -->
   <section class="section">
     <h3>About JWT (JSON Web Tokens)</h3>
-    
+
     <div class="info-grid">
       <div class="info-card">
-        <h4><i class="fas fa-shield-alt"></i> Security</h4>
+        <h4>
+          <i class="fas fa-shield-alt"></i>
+          Security
+        </h4>
         <ul>
           <li>Tokens are signed, not encrypted</li>
           <li>Never put sensitive data in the payload</li>
@@ -264,27 +299,57 @@
       </div>
 
       <div class="info-card">
-        <h4><i class="fas fa-clock"></i> Expiration</h4>
+        <h4>
+          <i class="fas fa-clock"></i>
+          Expiration
+        </h4>
         <ul>
-          <li><strong>exp:</strong> Token expires after this time</li>
-          <li><strong>nbf:</strong> Token not valid before this time</li>
-          <li><strong>iat:</strong> Token was issued at this time</li>
+          <li>
+            <strong>exp:</strong>
+            Token expires after this time
+          </li>
+          <li>
+            <strong>nbf:</strong>
+            Token not valid before this time
+          </li>
+          <li>
+            <strong>iat:</strong>
+            Token was issued at this time
+          </li>
           <li>Always check expiration on the server</li>
         </ul>
       </div>
 
       <div class="info-card">
-        <h4><i class="fas fa-key"></i> Algorithms</h4>
+        <h4>
+          <i class="fas fa-key"></i>
+          Algorithms
+        </h4>
         <ul>
-          <li><strong>HS256:</strong> HMAC with shared secret</li>
-          <li><strong>RS256:</strong> RSA with public/private keys</li>
-          <li><strong>ES256:</strong> ECDSA with public/private keys</li>
-          <li><strong>none:</strong> Unsigned (dangerous!)</li>
+          <li>
+            <strong>HS256:</strong>
+            HMAC with shared secret
+          </li>
+          <li>
+            <strong>RS256:</strong>
+            RSA with public/private keys
+          </li>
+          <li>
+            <strong>ES256:</strong>
+            ECDSA with public/private keys
+          </li>
+          <li>
+            <strong>none:</strong>
+            Unsigned (dangerous!)
+          </li>
         </ul>
       </div>
 
       <div class="info-card">
-        <h4><i class="fas fa-users"></i> Use Cases</h4>
+        <h4>
+          <i class="fas fa-users"></i>
+          Use Cases
+        </h4>
         <ul>
           <li>Authentication & Authorization</li>
           <li>Secure information exchange</li>
@@ -298,7 +363,7 @@
   <!-- Raw Data Section -->
   <section class="section" *ngIf="showRawData && parsedJwt">
     <h3>Raw Token Data</h3>
-    
+
     <div class="raw-data-grid">
       <div class="raw-section">
         <h4>Header (Base64URL)</h4>
