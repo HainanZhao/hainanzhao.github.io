@@ -216,33 +216,6 @@
     </div>
   </section>
 
-  <!-- Random Character Generator Section -->
-  <section id="random-generator" class="section" [class.highlighted]="highlightedSection === 'random-generator'">
-    <h3>Random Character Generator</h3>
-    <label for="characterCount">Number of characters:</label>
-    <input
-      type="number"
-      id="characterCount"
-      [(ngModel)]="characterCount"
-      min="1"
-      max="1000"
-      placeholder="Enter number of characters"
-      (keyup.enter)="generateRandomCharacters()"
-    />
-
-    <div class="random-buttons">
-      <button class="btn btn-primary" (click)="generateRandomCharacters()">Generate Mixed (A-Z, a-z, 0-9)</button>
-      <button class="btn btn-secondary" (click)="generateRandomLetters()">Letters Only</button>
-      <button class="btn btn-secondary" (click)="generateRandomNumbers()">Numbers Only</button>
-      <button class="btn btn-secondary" (click)="generateRandomSpecialChars()">Special Characters</button>
-    </div>
-
-    <div class="result" *ngIf="generatedCharacters">
-      <span class="result-text">{{ generatedCharacters }}</span>
-      <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(generatedCharacters)">📋 Copy</button>
-    </div>
-  </section>
-
   <!-- Clear All Section -->
   <section class="section">
     <button class="btn btn-secondary clear-btn" (click)="clearAllFields()">Clear All Fields</button>

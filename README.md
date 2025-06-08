@@ -16,7 +16,6 @@ This is utils application providing a collection of common utility tools for dev
 - **Hash Generation**: SHA-256, MD5 cryptographic hashes
 - **QR Code Generator**: Generate QR codes with customizable size and error correction
 - **Password Generator**: Secure password generation with customizable options
-- **Random Character Generator**: Generate random text, numbers, or special characters
 
 ### Data Utilities
 - **JSON Visualizer**: Format and visualize JSON data
