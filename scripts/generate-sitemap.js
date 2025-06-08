@@ -77,6 +77,21 @@ const ROUTE_CONFIG = {
     priority: '0.7',
     changefreq: 'monthly',
     title: 'JSON Query - SQL for JSON Data'
+  },
+  '/diff-viewer': {
+    priority: '0.7',
+    changefreq: 'monthly',
+    title: 'Diff Viewer - Compare Text & Code'
+  },
+  '/jwt-parser': {
+    priority: '0.7',
+    changefreq: 'monthly',
+    title: 'JWT Parser - Decode & Validate Tokens'
+  },
+  '/about': {
+    priority: '0.5',
+    changefreq: 'yearly',
+    title: 'About - Developer Tools Information'
   }
 };
 
