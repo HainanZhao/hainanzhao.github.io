@@ -90,7 +90,8 @@
 .close-button {
   position: absolute;
   right: 16px;
-  top: 8px;
+  top: 50%;
+  transform: translateY(-50%) !important;
   background: none;
   border: none;
   color: #888;
@@ -104,25 +105,34 @@
   width: 32px;
   height: 32px;
   line-height: 1;
-  /* Override global button system completely */
-  transform: none !important;
-  transition: none !important;
+  /* Enhanced overrides to prevent any animations */
+  transition: background-color 0.2s ease !important; /* Only allow background transition */
   animation: none !important;
   will-change: auto;
   /* Reset any inherited button styles */
   min-height: auto !important;
   box-sizing: border-box !important;
   overflow: visible !important;
+  /* Additional overrides to prevent movement */
+  margin: 0 !important;
+  border-width: 0 !important;
 }
 
 .close-button:hover {
   background: rgba(0, 0, 0, 0.05);
   color: #666;
-  /* Override global button system on hover */
-  transform: none !important;
+  /* Override global button system on hover while preserving vertical centering */
+  transform: translateY(-50%) !important;
   transition: none !important;
   animation: none !important;
   box-shadow: none !important;
+}
+
+/* Add specific rule for active (click) state to prevent any position shifts */
+.close-button:active {
+  transform: translateY(-50%) !important;
+  transition: none !important;
+  animation: none !important;
 }
 
 .search-content {

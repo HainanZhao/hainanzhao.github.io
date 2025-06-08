@@ -73,7 +73,7 @@
   color: var(--json-input-text);
   border: 2px solid var(--json-input-border);
   border-radius: 8px;
-  font-family: 'Courier New', monospace;
+  font-family:  monospace;
   font-size: 1rem;
   line-height: 1.6;
   resize: vertical;
@@ -175,7 +175,7 @@
   border: 1px solid var(--border-primary);
   border-radius: 8px;
   padding: 1rem;
-  font-family: 'Courier New', monospace;
+  font-family:  monospace;
   font-size: 0.9rem;
   line-height: 1.5;
   overflow-x: auto;
@@ -190,7 +190,7 @@
 .json-code {
   background: var(--bg-tertiary);
   color: var(--text-primary);
-  font-family: 'Courier New', monospace;
+  font-family: monospace;
   font-size: 0.9rem;
   line-height: 1.5;
   white-space: pre-wrap;
