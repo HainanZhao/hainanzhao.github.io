@@ -10,6 +10,7 @@ import { RegexTesterComponent } from './regex-tester/regex-tester.component';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { IframePerformanceComponent } from './iframe-performance/iframe-performance.component';
 import { JsonQueryComponent } from './json-query/json-query.component';
+import { DiffViewerComponent } from './diff-viewer/diff-viewer.component';
 import { AboutComponent } from './about/about.component';
 
 export const routes: Routes = [
@@ -25,5 +26,6 @@ export const routes: Routes = [
   { path: 'regex-tester', component: RegexTesterComponent },
   { path: 'iframe-performance', component: IframePerformanceComponent },
   { path: 'json-query', component: JsonQueryComponent },
+  { path: 'diff-viewer', component: DiffViewerComponent },
   { path: 'about', component: AboutComponent },
 ];
