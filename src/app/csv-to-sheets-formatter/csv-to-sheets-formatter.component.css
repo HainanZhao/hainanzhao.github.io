@@ -543,6 +543,8 @@ input[type='number']:hover {
   justify-content: flex-end;
 }
 
+/* Share button styles now handled by global button system in button-system.css */
+
 /* Responsive layout for conversion controls */
 @media (max-width: 768px) {
   .conversion-controls {

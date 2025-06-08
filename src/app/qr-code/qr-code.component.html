@@ -42,6 +42,7 @@
       <button class="btn btn-secondary download-btn" (click)="downloadQRCode()" *ngIf="qrCodeDataURL">
         Download QR Code
       </button>
+      <button class="btn btn-success share-btn" (click)="shareQr($event)" *ngIf="qrCodeDataURL">Share QR</button>
       <button class="btn btn-danger" (click)="clearQRCode()">Clear</button>
     </div>
 

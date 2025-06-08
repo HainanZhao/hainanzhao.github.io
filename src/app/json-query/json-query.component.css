@@ -83,6 +83,15 @@
   color: var(--bg-primary);
 }
 
+/* Query action buttons */
+.query-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+/* Share button styling is now handled by the global button system */
+
 /* Results area */
 .result-options {
   display: flex;

@@ -35,6 +35,14 @@
 
     <div class="action-buttons">
       <button class="btn btn-primary" (click)="testRegex()">Test Regex</button>
+      <button
+        class="btn btn-secondary share-btn"
+        (click)="shareRegex($event)"
+        [disabled]="!regexPattern || !testString"
+        title="Copy shareable URL to clipboard"
+      >
+        Share Regex
+      </button>
       <button class="btn btn-danger" (click)="clearAll()">Clear All</button>
     </div>
 

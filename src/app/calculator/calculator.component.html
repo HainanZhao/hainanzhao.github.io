@@ -8,13 +8,17 @@
       id="expression"
       [(ngModel)]="expression"
       placeholder="(1 + 2) * 3"
-      (keydown.enter)="evaluateExpression()"
+      (keydown.enter)="evaluateExpression(true)"
     />
 
-    <button class="btn btn-primary" (click)="evaluateExpression()">Calculate</button>
+    <button class="btn btn-primary" (click)="evaluateExpression(true)">Calculate</button>
 
     <div class="result" *ngIf="result">
       <span>{{ result }}</span>
+      <button class="btn btn-share" *ngIf="expression" (click)="shareCalculation($event)">
+        <i class="fas fa-share-alt"></i>
+        Share
+      </button>
     </div>
 
     <div class="examples-section">
@@ -37,19 +41,43 @@
     <div class="help-content">
       <h4>Supported Operations:</h4>
       <ul>
-        <li><strong>Basic:</strong> + (add), - (subtract), * (multiply), / (divide), ^ (power), % (modulo)</li>
-        <li><strong>Trigonometric:</strong> sin(), cos(), tan(), asin(), acos(), atan()</li>
-        <li><strong>Logarithmic:</strong> log(), ln(), log10()</li>
-        <li><strong>Statistical:</strong> mean(), median(), std(), min(), max()</li>
-        <li><strong>Matrix:</strong> det(), inv(), transpose(), cross(), dot()</li>
-        <li><strong>Calculus:</strong> derivative()</li>
-        <li><strong>Units:</strong> compatible unit conversions (e.g., 5 inch to cm)</li>
-        <li><strong>Financial:</strong> loan payment calculations using compound interest formulas</li>
+        <li>
+          <strong>Basic:</strong>
+          + (add), - (subtract), * (multiply), / (divide), ^ (power), % (modulo)
+        </li>
+        <li>
+          <strong>Trigonometric:</strong>
+          sin(), cos(), tan(), asin(), acos(), atan()
+        </li>
+        <li>
+          <strong>Logarithmic:</strong>
+          log(), ln(), log10()
+        </li>
+        <li>
+          <strong>Statistical:</strong>
+          mean(), median(), std(), min(), max()
+        </li>
+        <li>
+          <strong>Matrix:</strong>
+          det(), inv(), transpose(), cross(), dot()
+        </li>
+        <li>
+          <strong>Calculus:</strong>
+          derivative()
+        </li>
+        <li>
+          <strong>Units:</strong>
+          compatible unit conversions (e.g., 5 inch to cm)
+        </li>
+        <li>
+          <strong>Financial:</strong>
+          loan payment calculations using compound interest formulas
+        </li>
       </ul>
-      
+
       <h4>Using Variables:</h4>
       <p>You can use variables in expressions like: "2x^2 + 3x - 5 where x = 2"</p>
-      
+
       <h4>Example Expressions:</h4>
       <ul>
         <li>sqrt(16) + cbrt(27)</li>

@@ -317,6 +317,9 @@
   }
 }
 
+/* Share button styles */
+/* Share button styles now handled by global button system in button-system.css */
+
 /* Component-specific responsive behavior (non-duplicate) */
 @media (max-width: 768px) {
   .results-summary {

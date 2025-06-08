@@ -214,7 +214,8 @@ h6 {
   font-size: 1rem;
 }
 
-section, .section {
+section,
+.section {
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-md);
   background-color: transparent;
@@ -417,7 +418,7 @@ select:disabled {
     background-color: ButtonFace;
     color: ButtonText;
   }
-  
+
   select:focus {
     outline: 2px solid Highlight;
   }

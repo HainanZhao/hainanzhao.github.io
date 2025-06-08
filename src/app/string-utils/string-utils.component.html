@@ -4,13 +4,23 @@
   <!-- String Case Conversion Section -->
   <section id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
     <h3>String Case Converter</h3>
-    <textarea
-      id="inputText"
-      [(ngModel)]="inputText"
-      rows="3"
-      placeholder="Enter text to convert..."
-      (input)="analyzeText()"
-    ></textarea>
+    <div class="input-section">
+      <textarea
+        id="inputText"
+        [(ngModel)]="inputText"
+        rows="3"
+        placeholder="Enter text to convert..."
+        (input)="analyzeText(); updateUrlWithText()"
+      ></textarea>
+      <button
+        class="btn btn-secondary share-btn"
+        (click)="shareText($event)"
+        [disabled]="!inputText"
+        title="Copy shareable URL to clipboard"
+      >
+        Share Text
+      </button>
+    </div>
 
     <div class="case-options">
       <div class="case-selector">
@@ -138,13 +148,11 @@
     </div>
 
     <div class="result" *ngIf="encodedText">
-      <span class="result-label">Encoded Text:</span>
       <span class="result-text">{{ encodedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(encodedText)">📋 Copy</button>
     </div>
 
     <div class="result" *ngIf="decodedText">
-      <span class="result-label">Decoded Text:</span>
       <span class="result-text">{{ decodedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(decodedText)">📋 Copy</button>
     </div>

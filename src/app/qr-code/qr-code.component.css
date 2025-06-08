@@ -117,6 +117,9 @@ textarea {
   color: var(--accent-primary);
 }
 
+/* Share button styling */
+/* Share button styles now handled by global button system in button-system.css */
+
 /* Information Section */
 .info-section {
   background: var(--bg-tertiary);

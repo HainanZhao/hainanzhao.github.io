@@ -210,7 +210,6 @@ select:focus {
   color: var(--accent-primary);
 }
 
-
 @keyframes highlightPulse {
   0% {
     box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);

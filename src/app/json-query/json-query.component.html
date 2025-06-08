@@ -56,10 +56,20 @@
         class="sql-input json-textarea"
       ></textarea>
     </div>
-    <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!jsonInput || !sqlQuery || isLoading">
-      <span *ngIf="!isLoading">Execute Query</span>
-      <span *ngIf="isLoading">Executing...</span>
-    </button>
+    <div class="query-actions">
+      <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!jsonInput || !sqlQuery || isLoading">
+        <span *ngIf="!isLoading">Execute Query</span>
+        <span *ngIf="isLoading">Executing...</span>
+      </button>
+      <button
+        (click)="shareQuery($event)"
+        class="btn btn-secondary share-btn"
+        [disabled]="!sqlQuery"
+        title="Copy shareable URL to clipboard"
+      >
+        Share Query
+      </button>
+    </div>
   </section>
 
   <!-- Results Section -->

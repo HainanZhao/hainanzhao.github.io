@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { Subscription } from 'rxjs';
 import alasql from 'alasql';
 import {
@@ -73,7 +74,10 @@ Jane Smith,25,Los Angeles,jane@example.com
 Bob Johnson,35,Chicago,bob@example.com
 Alice Brown,28,Houston,alice@example.com`;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
 
   ngOnInit() {
     this.highlightSubscription = this.searchService.highlightedSection$.subscribe(
@@ -90,6 +94,9 @@ Alice Brown,28,Houston,alice@example.com`;
         }
       }
     );
+
+    // Load URL state on init
+    this.loadUrlState();
   }
 
   ngOnDestroy() {
@@ -106,6 +113,9 @@ Alice Brown,28,Houston,alice@example.com`;
 
     const lines = this.parseCSV(this.csvInput);
     this.csvData = this.convertLinesToObjects(lines);
+
+    // Update URL state after formatting
+    this.updateUrlWithCsvState();
   }
 
   private convertLinesToObjects(lines: string[][]): Record<string, unknown>[] {
@@ -211,6 +221,9 @@ Alice Brown,28,Houston,alice@example.com`;
         data: Array.isArray(result) ? result : [result],
         executionTime: performance.now() - startTime,
       };
+
+      // Update URL state after successful query
+      this.updateUrlWithCsvState();
     } catch (error) {
       console.error('Query execution error:', error);
       this.queryResult = {
@@ -229,5 +242,46 @@ Alice Brown,28,Houston,alice@example.com`;
 
   getQueryResultKeys(): string[] {
     return getQueryResultKeys(this.queryResult.data);
+  }
+
+  private loadUrlState(): void {
+    const csvDataString = this.urlStateService.getStateFromUrl('csv');
+    if (csvDataString) {
+      try {
+        const csvData = JSON.parse(csvDataString);
+        this.csvInput = csvData.csvInput || '';
+        this.delimiter = csvData.delimiter || ',';
+        this.hasHeaders = csvData.hasHeaders !== undefined ? csvData.hasHeaders : true;
+        this.sqlQuery = csvData.sqlQuery || '';
+
+        // Format CSV input on load
+        if (this.csvInput) {
+          this.formatForSheets();
+        }
+      } catch (error) {
+        console.error('Error parsing CSV URL state:', error);
+      }
+    }
+  }
+
+  private updateUrlWithCsvState(): void {
+    const state = {
+      csvInput: this.csvInput,
+      delimiter: this.delimiter,
+      hasHeaders: this.hasHeaders,
+      sqlQuery: this.sqlQuery,
+    };
+    this.urlStateService.updateUrlState('csv', JSON.stringify(state));
+  }
+
+  shareCsv(event?: Event): void {
+    const state = {
+      csvInput: this.csvInput,
+      delimiter: this.delimiter,
+      hasHeaders: this.hasHeaders,
+      sqlQuery: this.sqlQuery,
+    };
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback('csv', JSON.stringify(state), buttonElement);
   }
 }

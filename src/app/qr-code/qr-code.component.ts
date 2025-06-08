@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import * as QRCode from 'qrcode';
 
@@ -21,13 +22,19 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   qrCodeErrorLevel: 'L' | 'M' | 'Q' | 'H' = 'M';
   qrCodeSize = 256;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
 
   ngOnInit() {
     // Subscribe to section highlighting
     this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
       this.highlightedSection = sectionId;
     });
+
+    // Load URL state on init
+    this.loadUrlState();
 
     // Generate initial QR code
     this.generateQRCode();
@@ -55,6 +62,9 @@ export class QrCodeComponent implements OnInit, OnDestroy {
           light: '#FFFFFF',
         },
       });
+
+      // Update URL state after successful generation
+      this.updateUrlWithQrState();
     } catch (error) {
       console.error('Error generating QR code:', error);
       this.qrCodeDataURL = '';
@@ -100,5 +110,38 @@ END:VCARD`;
   clearQRCode() {
     this.inputText = '';
     this.qrCodeDataURL = '';
+  }
+
+  private loadUrlState(): void {
+    const qrDataString = this.urlStateService.getStateFromUrl('qr');
+    if (qrDataString) {
+      try {
+        const qrData = JSON.parse(qrDataString);
+        this.inputText = qrData.inputText || 'Visit our app: https://debugi.com/';
+        this.qrCodeErrorLevel = qrData.qrCodeErrorLevel || 'M';
+        this.qrCodeSize = qrData.qrCodeSize || 256;
+      } catch (error) {
+        console.error('Error parsing QR URL state:', error);
+      }
+    }
+  }
+
+  private updateUrlWithQrState(): void {
+    const state = {
+      inputText: this.inputText,
+      qrCodeErrorLevel: this.qrCodeErrorLevel,
+      qrCodeSize: this.qrCodeSize,
+    };
+    this.urlStateService.updateUrlState('qr', JSON.stringify(state));
+  }
+
+  shareQr(event?: Event): void {
+    const state = {
+      inputText: this.inputText,
+      qrCodeErrorLevel: this.qrCodeErrorLevel,
+      qrCodeSize: this.qrCodeSize,
+    };
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback('qr', JSON.stringify(state), buttonElement);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -46,18 +47,46 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   includeSymbols: boolean = false;
   generatedPassword: string = '';
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
+
+  // URL sharing constant
+  private readonly TEXT_PARAM_KEY = 'text';
 
   ngOnInit() {
     // Subscribe to section highlighting
     this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
       this.highlightedSection = sectionId;
     });
+
+    // Load text from URL if present
+    const savedText = this.urlStateService.getStateFromUrl(this.TEXT_PARAM_KEY);
+    if (savedText) {
+      this.inputText = savedText;
+    }
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  // URL sharing method
+  shareText(event?: Event): void {
+    if (!this.inputText) {
+      return;
+    }
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback(this.TEXT_PARAM_KEY, this.inputText, buttonElement);
+  }
+
+  // Update URL when text changes
+  updateUrlWithText(): void {
+    if (this.inputText) {
+      this.urlStateService.updateUrlState(this.TEXT_PARAM_KEY, this.inputText, { replace: true });
+    }
   }
 
   convertToUppercase() {

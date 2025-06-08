@@ -2,7 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { Subject, takeUntil } from 'rxjs';
+
+interface RegexExample {
+  name: string;
+  pattern: string;
+  flags: string;
+  testString: string;
+}
 
 interface RegexMatch {
   match: string;
@@ -34,13 +42,41 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
   flags: string = 'g';
   testResult: TestResult | null = null;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
+
+  // URL sharing constants
+  private readonly PATTERN_PARAM_KEY = 'pattern';
+  private readonly TEST_PARAM_KEY = 'test';
+  private readonly FLAGS_PARAM_KEY = 'flags';
 
   ngOnInit() {
     // Subscribe to section highlighting
     this.searchService.highlightedSection$.pipe(takeUntil(this.destroy$)).subscribe(sectionId => {
       this.highlightedSection = sectionId;
     });
+
+    // Load regex data from URL if present
+    const savedPattern = this.urlStateService.getStateFromUrl(this.PATTERN_PARAM_KEY);
+    const savedTestString = this.urlStateService.getStateFromUrl(this.TEST_PARAM_KEY);
+    const savedFlags = this.urlStateService.getStateFromUrl(this.FLAGS_PARAM_KEY);
+
+    if (savedPattern) {
+      this.regexPattern = savedPattern;
+    }
+    if (savedTestString) {
+      this.testString = savedTestString;
+    }
+    if (savedFlags) {
+      this.flags = savedFlags;
+    }
+
+    // Run test if we have both pattern and test string from URL
+    if (savedPattern && savedTestString) {
+      this.testRegex();
+    }
   }
 
   ngOnDestroy() {
@@ -102,11 +138,46 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
     },
   ];
 
+  // URL state management methods
+  private updateUrlWithRegexState(): void {
+    const state = {
+      [this.PATTERN_PARAM_KEY]: this.regexPattern,
+      [this.TEST_PARAM_KEY]: this.testString,
+      [this.FLAGS_PARAM_KEY]: this.flags,
+    };
+
+    // Update URL with all regex state at once
+    Object.entries(state).forEach(([key, value]) => {
+      if (value) {
+        this.urlStateService.updateUrlState(key, value, { replace: true });
+      }
+    });
+  }
+
+  shareRegex(event?: Event): void {
+    if (!this.regexPattern || !this.testString) {
+      return;
+    }
+
+    // Create state object with regex parameters
+    const state = {
+      regexPattern: this.regexPattern,
+      testString: this.testString,
+      flags: this.flags,
+    };
+
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback('regex', JSON.stringify(state), buttonElement);
+  }
+
   testRegex() {
     if (!this.regexPattern || !this.testString) {
       this.testResult = null;
       return;
     }
+
+    // Update URL with current state
+    this.updateUrlWithRegexState();
 
     try {
       const regex = new RegExp(this.regexPattern, this.flags);
@@ -167,7 +238,7 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadExample(example: any) {
+  loadExample(example: RegexExample) {
     this.regexPattern = example.pattern;
     this.flags = example.flags;
     this.testString = example.testString;

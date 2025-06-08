@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { DataDisplayComponent } from '../shared/components/data-display/data-display.component';
 import alasql from 'alasql';
 import {
@@ -172,7 +173,13 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
   highlightedSection = '';
   private highlightSubscription?: Subscription;
 
-  constructor(private searchService: SearchService) {}
+  // URL sharing state
+  private readonly QUERY_PARAM_KEY = 'q';
+
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
 
   ngOnInit(): void {
     // Subscribe to search highlights
@@ -195,9 +202,17 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
       }
     );
 
+    // Load query from URL if present
+    const savedQuery = this.urlStateService.getStateFromUrl(this.QUERY_PARAM_KEY);
+    if (savedQuery) {
+      this.sqlQuery = savedQuery;
+    } else {
+      // Use default query if none in URL
+      this.sqlQuery = 'SELECT city, COUNT(*) FROM ? GROUP BY city';
+    }
+
     // Initialize with sample data
     this.jsonInput = JSON.stringify(this.sampleJsonData, null, 2);
-    this.sqlQuery = 'SELECT city, COUNT(*) FROM ? GROUP BY city';
   }
 
   ngOnDestroy(): void {
@@ -218,6 +233,9 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
   executeQuery(): void {
     this.isLoading = true;
     this.queryResult = { data: [] };
+
+    // Save the query to URL for sharing
+    this.urlStateService.updateUrlState(this.QUERY_PARAM_KEY, this.sqlQuery);
 
     try {
       // Parse JSON input
@@ -307,6 +325,11 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
           ? `${error.message}. Try enclosing property names in double quotes and string values in double quotes.`
           : 'Invalid JSON format';
     }
+  }
+
+  shareQuery(event?: Event): void {
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback(this.QUERY_PARAM_KEY, this.sqlQuery, buttonElement);
   }
 
   clearData(): void {

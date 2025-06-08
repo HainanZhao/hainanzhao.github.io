@@ -21,7 +21,10 @@ button {
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
   position: relative;
   overflow: hidden;
   min-height: 32px;
@@ -315,6 +318,77 @@ button.success {
   background-color: var(--bg-active);
   box-shadow: none;
   transform: none;
+}
+
+/* Share Buttons - For URL sharing functionality */
+.share-btn,
+.btn-share,
+button.share {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  border-left-width: 3px;
+  border-left-color: var(--accent-success, #28a745);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.share-btn:hover,
+.btn-share:hover,
+button.share:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  border-left-color: var(--accent-success, #28a745);
+  box-shadow: none;
+  transform: none;
+}
+
+.share-btn:active,
+.btn-share:active,
+button.share:active {
+  background: var(--bg-active);
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+  border-left-color: var(--accent-success, #28a745);
+  box-shadow: none;
+  transform: none;
+}
+
+.share-btn:disabled,
+.btn-share:disabled,
+button.share:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border-color: var(--border-primary);
+  border-left-color: var(--border-primary);
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Share button icon styling */
+.share-btn i,
+.btn-share i,
+button.share i {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.share-btn:hover i,
+.btn-share:hover i,
+button.share:hover i {
+  opacity: 1;
 }
 
 /* =============================================================================

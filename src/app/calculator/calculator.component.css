@@ -1,6 +1,5 @@
 /* Flattened Calculator Styles */
 
-
 @keyframes pulse-highlight {
   0%,
   100% {
@@ -67,3 +66,21 @@
 .help-content strong {
   color: var(--accent-secondary);
 }
+
+/* Result and Share Button */
+.result {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.result span {
+  flex-grow: 1;
+}
+
+/* Share button styles now handled by global button system in button-system.css */

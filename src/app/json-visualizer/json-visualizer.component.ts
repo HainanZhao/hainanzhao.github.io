@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } fr
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../shared/services/search.service';
+import { UrlStateService } from '../shared/services/url-state.service';
 import { Subject, takeUntil } from 'rxjs';
 import * as d3 from 'd3';
 
@@ -61,9 +62,15 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
   private currentZoom = 1; // Track zoom level
   private zoomStep = 0.3; // Amount to zoom in/out per click
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private urlStateService: UrlStateService
+  ) {}
 
   ngOnInit() {
+    // Load URL state first
+    this.loadUrlState();
+
     this.parseJson();
 
     // Subscribe to section highlighting
@@ -89,6 +96,8 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
     try {
       this.parsedJson = JSON.parse(this.jsonInput);
       this.errorMessage = '';
+      // Update URL state after successful parsing
+      this.updateUrlWithJsonVizState();
       // Initialize visualization after parsing if the view is ready
       setTimeout(() => {
         if (this.svgContainer && this.svgContainer.nativeElement) {
@@ -387,6 +396,8 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   onVisualizationTypeChange() {
+    // Update URL state when visualization type changes
+    this.updateUrlWithJsonVizState();
     setTimeout(() => {
       if (this.svgContainer && this.svgContainer.nativeElement && this.parsedJson) {
         this.visualizeJson();
@@ -506,5 +517,35 @@ export class JsonVisualizerComponent implements OnInit, OnDestroy, AfterViewInit
       .select('svg')
       .call(this.zoom)
       .on('dblclick.zoom', null); // Disable double-click zoom
+  }
+
+  private loadUrlState(): void {
+    const jsonDataString = this.urlStateService.getStateFromUrl('jsonViz');
+    if (jsonDataString) {
+      try {
+        const jsonData = JSON.parse(jsonDataString);
+        this.jsonInput = jsonData.jsonInput || this.jsonInput;
+        this.visualizationType = jsonData.visualizationType || 'tree';
+      } catch (error) {
+        console.error('Error parsing JSON visualizer URL state:', error);
+      }
+    }
+  }
+
+  private updateUrlWithJsonVizState(): void {
+    const state = {
+      jsonInput: this.jsonInput,
+      visualizationType: this.visualizationType,
+    };
+    this.urlStateService.updateUrlState('jsonViz', JSON.stringify(state));
+  }
+
+  shareJsonViz(event?: Event): void {
+    const state = {
+      jsonInput: this.jsonInput,
+      visualizationType: this.visualizationType,
+    };
+    const buttonElement = event?.target as HTMLElement;
+    this.urlStateService.shareUrlWithFeedback('jsonViz', JSON.stringify(state), buttonElement);
   }
 }
