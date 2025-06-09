@@ -8,128 +8,22 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const {
+  DEFAULT_CONFIG,
+  extractRoutes,
+  fixAssetReferences,
+  ensureDependencies,
+  createBasicStaticRoutes
+} = require('./shared/prerender-utils');
 
-// Configuration
+// Local configuration with higher timeout for this script
 const CONFIG = {
-  distPath: path.join(__dirname, '../dist'),
-  indexPath: path.join(__dirname, '../dist/index.html'),
-  routesPath: path.join(__dirname, '../src/app/app.routes.ts'),
-  baseUrl: 'http://localhost:4200', // Local server for pre-rendering
+  ...DEFAULT_CONFIG,
   timeout: 30000, // 30 seconds timeout
 };
 
 /**
- * Fix asset references in HTML to use correct hashed filenames
- */
-function fixAssetReferences(html) {
-  // Find actual asset files in dist directory
-  const distFiles = fs.readdirSync(CONFIG.distPath);
-  
-  // Find the actual hashed CSS file
-  const actualCssFile = distFiles.find(file => file.startsWith('styles-') && file.endsWith('.css'));
-  const actualJsFile = distFiles.find(file => file.startsWith('main-') && file.endsWith('.js'));
-  const actualPolyfillsFile = distFiles.find(file => file.startsWith('polyfills-') && file.endsWith('.js'));
-  
-  let fixedHtml = html;
-  
-  // Fix CSS reference
-  if (actualCssFile) {
-    fixedHtml = fixedHtml.replace(
-      /href="styles\.css"/g, 
-      `href="${actualCssFile}"`
-    );
-  }
-  
-  // Fix main JS reference
-  if (actualJsFile) {
-    fixedHtml = fixedHtml.replace(
-      /src="main\.js"/g, 
-      `src="${actualJsFile}"`
-    );
-  }
-  
-  // Fix polyfills JS reference
-  if (actualPolyfillsFile) {
-    fixedHtml = fixedHtml.replace(
-      /src="polyfills\.js"/g, 
-      `src="${actualPolyfillsFile}"`
-    );
-  }
-  
-  // Remove development-only script tags (Vite client)
-  fixedHtml = fixedHtml.replace(
-    /<script type="module" src="\/@vite\/client"><\/script>/g, 
-    ''
-  );
-  
-  // Ensure theme class is applied to prevent flash
-  // Apply dark theme class to both html and body elements
-  
-  // Fix HTML element - remove any existing theme-dark classes first, then add once
-  fixedHtml = fixedHtml.replace(/class="[^"]*theme-dark[^"]*"/gi, '');
-  fixedHtml = fixedHtml.replace(
-    /<html([^>]*?)>/gi,
-    (match, attributes) => {
-      // Remove any existing class attribute and add our theme class
-      let cleanAttributes = attributes.replace(/\s*class="[^"]*"/gi, '');
-      return `<html${cleanAttributes} class="theme-dark">`;
-    }
-  );
-  
-  // Fix BODY element - remove any existing theme-dark classes first, then add once
-  fixedHtml = fixedHtml.replace(
-    /<body([^>]*?)>/gi,
-    (match, attributes) => {
-      // Remove any existing class attribute and add our theme class
-      let cleanAttributes = attributes.replace(/\s*class="[^"]*"/gi, '');
-      return `<body${cleanAttributes} class="theme-dark">`;
-    }
-  );
-  
-  return fixedHtml;
-}
-
-/**
- * Extract routes from Angular routes file
- */
-function extractRoutes() {
-  try {
-    const routesContent = fs.readFileSync(CONFIG.routesPath, 'utf8');
-    
-    // Extract route paths using regex - more specific pattern
-    const routeMatches = routesContent.match(/path:\s*['"]([^'"]+)['"]/g);
-    
-    if (!routeMatches) {
-      console.warn('No routes found in app.routes.ts');
-      return ['/'];
-    }
-    
-    const routes = routeMatches
-      .map(match => {
-        const pathMatch = match.match(/path:\s*['"]([^'"]+)['"]/);
-        return pathMatch ? pathMatch[1] : null;
-      })
-      .filter(route => route && route !== '' && !route.includes('**') && !route.includes(':'))
-      .map(route => `/${route}`);
-    
-    // Add home route
-    if (!routes.includes('/')) {
-      routes.unshift('/');
-    }
-    
-    console.log(`✓ Found ${routes.length} routes to pre-render:`);
-    routes.forEach(route => console.log(`  - ${route}`));
-    
-    return [...new Set(routes)]; // Remove duplicates
-    
-  } catch (error) {
-    console.error('Error reading routes file:', error.message);
-    return ['/'];
-  }
-}
-
-/**
- * Check if the Angular app is built
+ * Check if the Angular app is built and build it if necessary
  */
 function ensureAppIsBuilt() {
   if (!fs.existsSync(CONFIG.indexPath)) {
@@ -142,6 +36,12 @@ function ensureAppIsBuilt() {
     }
   }
 }
+
+
+
+
+
+
 
 /**
  * Start a local HTTP server to serve the built app
@@ -251,31 +151,7 @@ async function prerenderAllRoutes(routes, server) {
   }
 }
 
-/**
- * Install required dependencies
- */
-function ensureDependencies() {
-  const requiredDeps = ['express', 'puppeteer'];
-  const packagePath = path.join(__dirname, '../package.json');
-  const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-  
-  const missingDeps = requiredDeps.filter(dep => 
-    !packageJson.dependencies?.[dep] && !packageJson.devDependencies?.[dep]
-  );
-  
-  if (missingDeps.length > 0) {
-    console.log(`📦 Installing required dependencies: ${missingDeps.join(', ')}`);
-    try {
-      execSync(`npm install --save-dev ${missingDeps.join(' ')}`, { 
-        stdio: 'inherit', 
-        cwd: path.join(__dirname, '..') 
-      });
-    } catch (error) {
-      console.error('✗ Failed to install dependencies:', error.message);
-      process.exit(1);
-    }
-  }
-}
+
 
 /**
  * Main function
@@ -290,35 +166,11 @@ async function main() {
     // Ensure the app is built
     ensureAppIsBuilt();
     
-    // Extract routes
-    const routes = extractRoutes();
+    // Extract routes using shared utility
+    const routes = extractRoutes(CONFIG.routesPath);
     
-    // For now, let's just copy the main index.html to each route directory
-    // This provides basic SSG structure for static hosting
-    console.log('\n📁 Creating static route directories...\n');
-    
-    const indexContent = fs.readFileSync(CONFIG.indexPath, 'utf8');
-    const fixedIndexContent = fixAssetReferences(indexContent);
-    
-    // Fix the root index.html first
-    fs.writeFileSync(CONFIG.indexPath, fixedIndexContent, 'utf8');
-    console.log('✓ Fixed root index.html asset references');
-    
-    for (const route of routes) {
-      if (route === '/') continue; // Skip root
-      
-      const routePath = route.substring(1); // Remove leading slash
-      const outputDir = path.join(CONFIG.distPath, routePath);
-      
-      // Create directory
-      fs.mkdirSync(outputDir, { recursive: true });
-      
-      // Copy fixed index.html
-      const outputFile = path.join(outputDir, 'index.html');
-      fs.writeFileSync(outputFile, fixedIndexContent, 'utf8');
-      
-      console.log(`✓ Created static route: ${route} -> ${outputFile}`);
-    }
+    // Create basic static routes using shared utility
+    await createBasicStaticRoutes(routes, CONFIG.distPath, CONFIG.indexPath);
     
     console.log('\n🎉 Static Site Generation completed successfully!');
     console.log('📁 All routes have been set up for static hosting.');
@@ -335,4 +187,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { main, extractRoutes, prerenderRoute };
+module.exports = { main };

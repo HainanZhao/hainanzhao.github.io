@@ -8,13 +8,20 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const {
+  DEFAULT_CONFIG,
+  extractRoutes: extractRoutesUtil,
+  ensureAppIsBuilt: ensureAppIsBuiltUtil,
+  initializeBrowser,
+  setupPage,
+  navigateAndWait,
+  writeRouteFile,
+  createFallbackRoute,
+  fixRootIndexFile
+} = require('./shared/prerender-utils');
 
-// Configuration
 const CONFIG = {
-  distPath: path.join(__dirname, '../dist'),
-  indexPath: path.join(__dirname, '../dist/index.html'),
-  routesPath: path.join(__dirname, '../src/app/app.routes.ts'),
-  baseUrl: 'http://localhost:4200',
+  ...DEFAULT_CONFIG,
   timeout: 15000,
 };
 
@@ -22,49 +29,14 @@ const CONFIG = {
  * Extract routes from Angular routes file
  */
 function extractRoutes() {
-  try {
-    const routesContent = fs.readFileSync(CONFIG.routesPath, 'utf8');
-    
-    // Extract route paths using regex - more specific pattern
-    const routeMatches = routesContent.match(/path:\s*['"]([^'"]+)['"]/g);
-    
-    if (!routeMatches) {
-      console.warn('No routes found in app.routes.ts');
-      return ['/'];
-    }
-    
-    const routes = routeMatches
-      .map(match => {
-        const pathMatch = match.match(/path:\s*['"]([^'"]+)['"]/);
-        return pathMatch ? pathMatch[1] : null;
-      })
-      .filter(route => route && route !== '' && !route.includes('**') && !route.includes(':'))
-      .map(route => `/${route}`);
-    
-    // Add home route
-    if (!routes.includes('/')) {
-      routes.unshift('/');
-    }
-    
-    console.log(`✓ Found ${routes.length} routes to pre-render:`);
-    routes.forEach(route => console.log(`  - ${route}`));
-    
-    return [...new Set(routes)]; // Remove duplicates
-    
-  } catch (error) {
-    console.error('Error reading routes file:', error.message);
-    return ['/'];
-  }
+  return extractRoutesUtil(CONFIG.routesPath);
 }
 
 /**
  * Check if the Angular app is built
  */
 function ensureAppIsBuilt() {
-  if (!fs.existsSync(CONFIG.indexPath)) {
-    console.log('📦 Angular app not built. Please run "npm run build" first.');
-    process.exit(1);
-  }
+  ensureAppIsBuiltUtil(CONFIG.indexPath);
 }
 
 /**
@@ -103,181 +75,89 @@ function startDevServer() {
 }
 
 /**
- * Fix asset references in HTML to use correct hashed filenames
- */
-function fixAssetReferences(html) {
-  // Find actual asset files in dist directory
-  const distFiles = fs.readdirSync(CONFIG.distPath);
-  
-  // Find the actual hashed CSS file
-  const actualCssFile = distFiles.find(file => file.startsWith('styles-') && file.endsWith('.css'));
-  const actualJsFile = distFiles.find(file => file.startsWith('main-') && file.endsWith('.js'));
-  const actualPolyfillsFile = distFiles.find(file => file.startsWith('polyfills-') && file.endsWith('.js'));
-  
-  let fixedHtml = html;
-  
-  // Fix CSS reference
-  if (actualCssFile) {
-    fixedHtml = fixedHtml.replace(
-      /href="styles\.css"/g, 
-      `href="${actualCssFile}"`
-    );
-  }
-  
-  // Fix main JS reference
-  if (actualJsFile) {
-    fixedHtml = fixedHtml.replace(
-      /src="main\.js"/g, 
-      `src="${actualJsFile}"`
-    );
-  }
-  
-  // Fix polyfills JS reference
-  if (actualPolyfillsFile) {
-    fixedHtml = fixedHtml.replace(
-      /src="polyfills\.js"/g, 
-      `src="${actualPolyfillsFile}"`
-    );
-  }
-  
-  // Remove development-only script tags (Vite client)
-  fixedHtml = fixedHtml.replace(
-    /<script type="module" src="\/@vite\/client"><\/script>/g, 
-    ''
-  );
-  
-  // Ensure theme class is applied to prevent flash
-  // Apply dark theme class to both html and body elements
-  
-  // Fix HTML element - remove any existing theme-dark classes first, then add once
-  fixedHtml = fixedHtml.replace(/class="[^"]*theme-dark[^"]*"/gi, '');
-  fixedHtml = fixedHtml.replace(
-    /<html([^>]*?)>/gi,
-    (match, attributes) => {
-      // Remove any existing class attribute and add our theme class
-      let cleanAttributes = attributes.replace(/\s*class="[^"]*"/gi, '');
-      return `<html${cleanAttributes} class="theme-dark">`;
-    }
-  );
-  
-  // Fix BODY element - remove any existing theme-dark classes first, then add once
-  fixedHtml = fixedHtml.replace(
-    /<body([^>]*?)>/gi,
-    (match, attributes) => {
-      // Remove any existing class attribute and add our theme class
-      let cleanAttributes = attributes.replace(/\s*class="[^"]*"/gi, '');
-      return `<body${cleanAttributes} class="theme-dark">`;
-    }
-  );
-  
-  return fixedHtml;
-}
-
-/**
- * Pre-render a single route
+ * Pre-render a single route with improved error handling
  */
 async function prerenderRoute(route) {
-  const puppeteer = require('puppeteer');
-  
+  let browser;
   try {
     console.log(`🔄 Pre-rendering: ${route}`);
-    
-    const browser = await puppeteer.launch({ 
-      headless: 'new',
-      args: [
-        '--no-sandbox', 
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-web-security'
-      ]
-    });
-    
-    const page = await browser.newPage();
-    
-    // Set viewport for consistent rendering
-    await page.setViewport({ width: 1200, height: 800 });
-    
-    // Navigate to the route
+    browser = await initializeBrowser();
+    const page = await setupPage(browser);
     const url = `${CONFIG.baseUrl}${route === '/' ? '' : route}`;
-    
-    await page.goto(url, { 
-      waitUntil: 'networkidle2',
-      timeout: CONFIG.timeout 
-    });
-    
-    // Wait for Angular to render
-    await page.waitForSelector('app-root', { timeout: 5000 });
-    
-    // Wait a bit more for dynamic content
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    // Get the rendered HTML
+    await navigateAndWait(page, url, CONFIG.timeout);
     const html = await page.content();
-    
     await browser.close();
-    
-    // Fix asset references to use correct hashed filenames
-    const fixedHtml = fixAssetReferences(html);
-    
-    // Create directory structure if needed
-    const routePath = route === '/' ? '' : route.substring(1);
-    const outputDir = routePath ? path.join(CONFIG.distPath, routePath) : CONFIG.distPath;
-    
-    if (routePath) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-    
-    // Write the HTML file
-    const outputFile = path.join(outputDir, 'index.html');
-    fs.writeFileSync(outputFile, fixedHtml, 'utf8');
-    
-    console.log(`✓ Pre-rendered: ${route} -> ${outputFile}`);
-    
+    writeRouteFile(route, html, CONFIG.distPath);
+    return { success: true, route };
   } catch (error) {
     console.error(`✗ Failed to pre-render ${route}:`, error.message);
-    
-    // Fallback: create basic static route
-    const routePath = route === '/' ? '' : route.substring(1);
-    if (routePath) {
-      const outputDir = path.join(CONFIG.distPath, routePath);
-      fs.mkdirSync(outputDir, { recursive: true });
-      
-      const fallbackContent = fs.readFileSync(CONFIG.indexPath, 'utf8');
-      const fixedFallbackContent = fixAssetReferences(fallbackContent);
-      const outputFile = path.join(outputDir, 'index.html');
-      fs.writeFileSync(outputFile, fixedFallbackContent, 'utf8');
-      
-      console.log(`📄 Created fallback route: ${route} -> ${outputFile}`);
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (closeError) {
+        console.error(`  Could not close browser: ${closeError.message}`);
+      }
+    }
+    // Create fallback route but don't fail the entire process
+    try {
+      createFallbackRoute(route, CONFIG.indexPath, CONFIG.distPath);
+      return { success: false, route, fallbackCreated: true };
+    } catch (fallbackError) {
+      console.error(`  Could not create fallback for ${route}: ${fallbackError.message}`);
+      return { success: false, route, fallbackCreated: false };
     }
   }
 }
 
 /**
- * Pre-render all routes
+ * Pre-render all routes in parallel
  */
 async function prerenderAllRoutes(routes) {
-  console.log(`\n🚀 Starting pre-rendering of ${routes.length} routes...\n`);
+  console.log(`\n🚀 Starting parallel pre-rendering of ${routes.length} routes...\n`);
   
   try {
-    // Pre-render each route sequentially
-    for (const route of routes) {
-      await prerenderRoute(route);
+    // Set a limit on concurrent pre-rendering to prevent overloading
+    const MAX_CONCURRENT = 5; // Adjust based on your machine's capabilities
+    
+    // Keep track of successful and failed routes
+    const results = {
+      success: 0,
+      failure: 0,
+      fallback: 0
+    };
+    
+    // Process routes in batches
+    for (let i = 0; i < routes.length; i += MAX_CONCURRENT) {
+      const batch = routes.slice(i, i + MAX_CONCURRENT);
+      const batchPromises = batch.map(route => prerenderRoute(route));
+      
+      // Wait for current batch to complete before starting next batch
+      const batchResults = await Promise.all(batchPromises);
+      
+      // Update results
+      batchResults.forEach(result => {
+        if (result.success) {
+          results.success++;
+        } else if (result.fallbackCreated) {
+          results.fallback++;
+        } else {
+          results.failure++;
+        }
+      });
+      
+      // Log progress
+      const completed = Math.min(i + MAX_CONCURRENT, routes.length);
+      console.log(`📊 Progress: ${completed}/${routes.length} routes processed (${Math.round(completed/routes.length*100)}%)`);
     }
     
-    // Also fix the root index.html file
-    console.log('🔧 Fixing root index.html asset references...');
-    const rootIndexPath = path.join(CONFIG.distPath, 'index.html');
-    if (fs.existsSync(rootIndexPath)) {
-      const rootContent = fs.readFileSync(rootIndexPath, 'utf8');
-      const fixedRootContent = fixAssetReferences(rootContent);
-      fs.writeFileSync(rootIndexPath, fixedRootContent, 'utf8');
-      console.log('✓ Fixed root index.html');
-    }
+    // Fix the root index.html last
+    fixRootIndexFile(CONFIG.distPath);
     
-    console.log(`\n✅ Successfully processed all ${routes.length} routes!`);
+    console.log(`\n✅ Successfully processed all ${routes.length} routes in parallel!`);
+    console.log(`📈 Results: ${results.success} successful, ${results.fallback} fallbacks created, ${results.failure} failed`);
     
   } catch (error) {
-    console.error('\n✗ Pre-rendering failed:', error.message);
+    console.error('\n✗ Parallel pre-rendering failed:', error.message);
     throw error;
   }
 }
@@ -303,12 +183,12 @@ async function main() {
     // Wait a bit more for full startup
     await new Promise(resolve => setTimeout(resolve, 5000));
     
-    // Pre-render all routes
+    // Pre-render all routes in parallel
     await prerenderAllRoutes(routes);
     
     console.log('\n🎉 Advanced Static Site Generation completed successfully!');
-    console.log('📁 All routes have been pre-rendered to static HTML files.');
-    console.log('🚀 Your site is now ready for static hosting with improved SEO!');
+    console.log('📁 All routes have been pre-rendered to static HTML files in parallel.');
+    console.log('🚀 Your site is now ready for static hosting with improved SEO and performance!');
     
   } catch (error) {
     console.error('\n💥 Advanced Static Site Generation failed:', error.message);
