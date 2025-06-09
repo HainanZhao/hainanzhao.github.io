@@ -89,13 +89,23 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 For GitHub Pages deployment:
 ```bash
-npm run build:gh-pages
+# Use the lightweight build for GitHub Pages to avoid timeouts
+npm run build:gh-pages:lightweight
 ```
 
 ## GitHub Pages
 
 This project is configured for deployment to GitHub Pages. The live version can be accessed at:
 https://hainanzhao.github.io/
+
+### Deployment Notes
+
+The GitHub Pages deployment uses a lightweight build process that:
+- Skips resource-intensive pre-rendering
+- Uses simplified SEO file generation
+- Configures proper SPA routing via 404.html
+
+See `docs/GITHUB_PAGES_DEPLOYMENT.md` for detailed information.
 
 ## Features
 

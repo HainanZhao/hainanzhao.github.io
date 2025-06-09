@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))", "dest": "/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ],
   "github": {
     "silent": true
   },
@@ -13,6 +7,11 @@
   "outputDirectory": "dist",
   "framework": "angular",
   "installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock --legacy-peer-deps",
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/(.*)\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)", "destination": "/$1.$2" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

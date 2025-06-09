@@ -58,12 +58,9 @@ jobs:
 
       - name: Build Angular application
         run: |
-          # Build the Angular app for production.
-          # IMPORTANT: Adjust '--base-href' to match your GitHub Pages URL structure.
-          # For a project page (e.g., https://<username>.github.io/<repo-name>/), use /<repo-name>/
-          # For a user/organization page (e.g., https://<username>.github.io/), use /
-          # Replace 'your-repo-name' with your actual GitHub repository name.
-          npm run build:gh-pages
+          # Use our lightweight GitHub Pages build script that skips pre-rendering and complex SEO generation
+          # This prevents timeouts and resource issues during GitHub Pages builds
+          npm run build:gh-pages:lightweight
 
       - name: Add .nojekyll file
         # This prevents GitHub Pages from trying to build your Angular app with Jekyll,

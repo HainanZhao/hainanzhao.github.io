@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "npm run lint && ng build && npm run seo:generate",
     "build:prod": "npm run lint && ng build --configuration production && npm run prerender:advanced && npm run seo:generate",
-    "build:gh-pages": "npm run build:prod",
     "build:no-lint": "ng build && npm run seo:generate",
     "build:prod:no-lint": "ng build --configuration production && npm run seo:generate",
     "build:vercel": "node scripts/vercel-build.js",
@@ -24,7 +23,7 @@
     "prerender": "node scripts/prerender.js",
     "prerender:advanced": "node scripts/prerender-advanced.js",
     "prerender:advanced:config": "node -r dotenv/config scripts/prerender-advanced.js dotenv_config_path=.env.prerender",
-    "build:ssg": "npm run lint && ng build --configuration production && npm run prerender && npm run seo:generate"
+    "build:gh-pages:lightweight": "node scripts/github-pages-build.js"
   },
   "private": true,
   "dependencies": {
