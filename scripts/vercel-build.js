@@ -25,16 +25,11 @@ async function main() {
     
     // Run the build
     console.log('📦 Building Angular app for Vercel deployment...');
-    if (process.env.USE_FALLBACK === '1') {
-      console.log('ℹ️ Using fallback build mode...');
-      execSync('npm run build:vercel:base', { stdio: 'inherit' });
-    } else {
-      execSync('npm run build:vercel:base', { stdio: 'inherit' });
-      
-      // Run the prerender with Vercel optimizations
-      console.log('🔄 Running pre-rendering with Vercel optimizations...');
-      execSync('node scripts/prerender-advanced.js', { stdio: 'inherit', env: { ...process.env, VERCEL: '1' } });
-    }
+    execSync('npm run build:vercel:base', { stdio: 'inherit' });
+    
+    // Always use JavaScript-only prerendering (no browser required)
+    console.log('🔄 Running JavaScript-only pre-rendering...');
+    execSync('node scripts/prerender-js-only.js', { stdio: 'inherit' });
     
     // Generate SEO files
     console.log('🔍 Generating SEO files...');
@@ -47,73 +42,33 @@ async function main() {
   }
 }
 
-// Check and handle dependency issues
+// Check and handle dependency issues - simplified for JS-only approach
 async function checkDependencies() {
-  try {
-    // Try to require chrome-aws-lambda and puppeteer-core
-    const chromeLambda = require('chrome-aws-lambda');
-    const puppeteer = require('puppeteer-core');
-    console.log('✅ chrome-aws-lambda and puppeteer-core are installed');
-
-    // Verify browser can be launched
-    try {
-      const executablePath = await chromeLambda.executablePath;
-      if (!executablePath || !(await fs.promises.access(executablePath).then(() => true).catch(() => false))) {
-        throw new Error('Chrome binary not found');
-      }
-      console.log('✅ Chrome binary found at:', executablePath);
-    } catch (browserError) {
-      console.warn('⚠️ Chrome binary not found, installing specific Chromium revision...');
-      try {
-        // Remove existing puppeteer to ensure clean install
-        execSync('npm remove puppeteer puppeteer-core', { stdio: 'inherit' });
-        
-        // Install specific versions known to work with chrome-aws-lambda
-        execSync('npm install --save-dev puppeteer@10.1.0', { stdio: 'inherit' });
-        console.log('✅ Installing Chromium revision 884014...');
-        
-        // Force download of Chromium
-        const download = require('puppeteer/lib/cjs/puppeteer/node/install.js');
-        await download({ cacheDir: path.join(__dirname, '../node_modules/puppeteer/.local-chromium') });
-        
-        console.log('✅ Chromium installed successfully');
-      } catch (installError) {
-        console.warn('⚠️ Failed to install Chromium:', installError.message);
-        process.env.USE_FALLBACK = '1';
-      }
-    }
-  } catch (error) {
-    console.warn('⚠️ Dependency check failed:', error.message);
-    process.env.USE_FALLBACK = '1';
-  }
+  console.log('🔧 Using JavaScript-based static generation (no browser required)');
   
+  // Always use fallback mode for Vercel to avoid Chrome dependency issues
+  process.env.USE_FALLBACK = '1';
+  
+  // Check for required Node.js modules only
   try {
-    // Verify puppeteer-core version compatibility
-    const puppeteerCorePath = require.resolve('puppeteer-core');
-    const packageJsonPath = path.join(path.dirname(puppeteerCorePath), '..', 'package.json');
+    // Verify basic dependencies that don't require native binaries
+    require('fs');
+    require('path');
+    console.log('✅ Basic dependencies available');
     
-    if (fs.existsSync(packageJsonPath)) {
-      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-      console.log(`📊 Using puppeteer-core version: ${packageJson.version}`);
-      
-      // Check if version is compatible with chrome-aws-lambda
-      const versionNumber = packageJson.version.split('.');
-      const majorVersion = parseInt(versionNumber[0]);
-      
-      if (majorVersion > 10) {
-        console.warn('⚠️ puppeteer-core version is too new for chrome-aws-lambda, attempting to fix...');
-        try {
-          execSync('npm install puppeteer-core@10.1.0 --save-exact', { stdio: 'inherit' });
-          console.log('✅ Installed compatible puppeteer-core version');
-        } catch (installError) {
-          console.warn('⚠️ Failed to install compatible puppeteer-core:', installError.message);
-          process.env.USE_FALLBACK = '1';
-        }
-      }
+    // Check if we have the built Angular app
+    const distPath = path.join(__dirname, '../dist/debugi');
+    const indexPath = path.join(distPath, 'index.html');
+    
+    if (fs.existsSync(indexPath)) {
+      console.log('✅ Built Angular app found');
+    } else {
+      console.log('⚠️ Angular app not built yet - will be built during process');
     }
+    
   } catch (error) {
-    console.warn('⚠️ Could not check puppeteer-core version:', error.message);
-    process.env.USE_FALLBACK = '1';
+    console.warn('⚠️ Basic dependency check failed:', error.message);
+    throw new Error('Missing required Node.js dependencies');
   }
 }
 
