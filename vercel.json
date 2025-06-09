@@ -6,7 +6,7 @@
   "buildCommand": "node scripts/vercel-build.js",
   "outputDirectory": "dist",
   "framework": "angular",
-  "installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock --legacy-peer-deps",
+  "installCommand": "npm install --no-shrinkwrap --no-package-lock --legacy-peer-deps",
   "rewrites": [
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
     { "source": "/(.*)\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)", "destination": "/$1.$2" },
