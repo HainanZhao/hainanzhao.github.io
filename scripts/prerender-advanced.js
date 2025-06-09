@@ -469,6 +469,21 @@ async function main() {
     if (isVercelEnvironment()) {
       console.log('⚡ Detected Vercel environment - using serverless approach');
       
+      // Check if we should use fallback mode immediately
+      if (process.env.USE_FALLBACK === '1') {
+        console.log('💡 Using fallback static generation mode (forced by configuration)');
+        await createStaticRoutesWithoutRendering(routes, CONFIG.distPath);
+        
+        const totalTimeSeconds = Math.round((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(totalTimeSeconds / 60);
+        const seconds = totalTimeSeconds % 60;
+        const timeDisplay = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+        
+        console.log(`\n🎉 Static Site Generation completed in ${timeDisplay}!`);
+        console.log('📁 All routes have been set up for static hosting.');
+        return; // Exit early since we're done
+      }
+      
       try {
         // Try to use chrome-aws-lambda
         console.log('🌐 Initializing serverless browser...');

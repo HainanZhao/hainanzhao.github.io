@@ -9,10 +9,10 @@
   "github": {
     "silent": true
   },
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "node scripts/vercel-build.js",
   "outputDirectory": "dist",
   "framework": "angular",
-  "installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock",
+  "installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock --legacy-peer-deps",
   "headers": [
     {
       "source": "/(.*)",

@@ -15,14 +15,27 @@ async function initializeServerlessBrowser() {
     // Dynamically import chrome-aws-lambda and puppeteer-core
     // This is done dynamically to avoid issues when running locally
     const chromium = require('chrome-aws-lambda');
-    const puppeteer = require('puppeteer-core');
     
-    return await puppeteer.launch({
+    // Try to use the compatible puppeteer-core version first
+    let puppeteer;
+    try {
+      // This should match the version required by chrome-aws-lambda
+      puppeteer = require('puppeteer-core');
+      console.log('✓ Using compatible puppeteer-core with chrome-aws-lambda');
+    } catch (err) {
+      console.error('❗ Error loading puppeteer-core:', err.message);
+      throw err;
+    }
+    
+    const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: { width: 1200, height: 800 },
       executablePath: await chromium.executablePath,
       headless: true,
     });
+    
+    console.log('✓ Successfully initialized serverless browser with chrome-aws-lambda');
+    return browser;
   } catch (error) {
     console.error('Failed to initialize serverless browser:', error.message);
     console.log('Falling back to static file generation without rendering...');

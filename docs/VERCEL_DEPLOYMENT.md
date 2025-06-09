@@ -51,54 +51,81 @@ Puppeteer requires Chrome, which needs several system libraries that aren't avai
 /vercel/.cache/puppeteer/chrome/linux-137.0.7151.55/chrome-linux64/chrome: error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory
 ```
 
-### Our Solution
+Additionally, there are strict version requirements between `chrome-aws-lambda` and `puppeteer-core`:
 
-We've implemented a multi-tier approach:
+```
+npm ERR! While resolving: chrome-aws-lambda@10.1.0
+npm ERR! Found: puppeteer-core@24.10.0
+npm ERR! Could not resolve dependency: peer puppeteer-core@"^10.1.0" from chrome-aws-lambda@10.1.0
+```
 
-1. **Attempt Serverless Chrome**: First, we try to use `chrome-aws-lambda`, which is designed for serverless environments.
+### Our Multi-Tier Solution
 
-2. **Fallback Mechanism**: If that fails, we gracefully fall back to a non-browser method that simply copies the index.html to each route directory.
+We've implemented a robust approach to handle these challenges:
 
-3. **Environment Detection**: The system automatically detects when it's running on Vercel and adjusts its behavior accordingly.
+1. **Dependency Management**: We use package overrides to ensure `chrome-aws-lambda` gets the correct version of `puppeteer-core`.
+
+2. **Automated Detection**: Our vercel-build script automatically detects compatibility issues.
+
+3. **Serverless Chrome**: We try to use `chrome-aws-lambda`, which is designed for serverless environments.
+
+4. **Graceful Fallback**: If the serverless approach fails, we fall back to a non-browser method that simply copies the index.html to each route directory.
+
+5. **Environment Detection**: The system automatically detects when it's running on Vercel and adjusts its behavior accordingly.
 
 ## Deployment Process
 
 The build process on Vercel follows these steps:
 
-1. Angular builds the application with production settings
-2. The pre-rendering script runs, detecting the Vercel environment
-3. Either the serverless browser or fallback method generates static HTML files
+1. Our custom `vercel-build.js` script runs first, which:
+   - Checks for dependency compatibility issues
+   - Sets up the environment correctly
+   - Handles any potential errors gracefully
+
+2. Angular builds the application with production settings
+
+3. The pre-rendering script runs, detecting the Vercel environment
+   - It tries to use the serverless browser approach first
+   - Falls back to static generation if needed
+
 4. SEO files (sitemap.xml, robots.txt) are generated
 
-## Compression and Performance
+## Vercel-Specific Configuration
 
-All files are automatically compressed by Vercel's edge network using Brotli and Gzip. Our tests show:
+The custom build script in `scripts/vercel-build.js` automates dependency version checks and provides a reliable build process.
 
-- Brotli compression reduces HTML file size by ~85%
-- Gzip compression reduces HTML file size by ~83%
+### Install Script
 
-We've also added cache headers to improve performance:
+In your `vercel.json`:
 
 ```json
-"headers": [
-  {
-    "source": "/(.*)",
-    "headers": [
-      {
-        "key": "Cache-Control",
-        "value": "public, max-age=3600, stale-while-revalidate=86400"
-      }
-    ]
-  }
-]
+"installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock",
 ```
 
-## Testing Locally
+### Build Command
 
-You can test the Vercel deployment process locally by setting the VERCEL environment variable:
+In your `vercel.json`:
+
+```json
+"buildCommand": "npm run build:vercel",
+```
+
+This points to our custom script which handles all the complexity of browser dependencies.
+
+## Testing Vercel Deployment Locally
+
+You can test the Vercel deployment process locally:
 
 ```bash
-VERCEL=1 node scripts/prerender-advanced.js
+# Test the full Vercel build process
+node scripts/vercel-build.js
+
+# Test only the fallback mode
+npm run build:vercel:fallback
+
+# Test with only environment variable
+VERCEL=1 npm run prerender:advanced
+```
 ```
 
 For production deployments, Vercel will:

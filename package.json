@@ -9,7 +9,8 @@
     "build:gh-pages": "npm run build:prod",
     "build:no-lint": "ng build && npm run seo:generate",
     "build:prod:no-lint": "ng build --configuration production && npm run seo:generate",
-    "build:vercel": "VERCEL=1 npm run build:prod",
+    "build:vercel": "node scripts/vercel-build.js",
+    "build:vercel:fallback": "VERCEL=1 USE_FALLBACK=1 npm run build:prod:no-lint && npm run seo:generate",
     "watch": "ng build --watch --configuration development",
     "test": "npm run lint && ng test",
     "lint": "ng lint",
@@ -68,9 +69,14 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.5.3",
     "puppeteer": "^24.10.0",
-    "puppeteer-core": "^24.10.0",
+    "puppeteer-core": "^10.1.0",
     "sharp": "^0.34.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.32.1"
+  },
+  "overrides": {
+    "chrome-aws-lambda": {
+      "puppeteer-core": "^10.1.0"
+    }
   }
 }
