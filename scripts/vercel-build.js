@@ -48,18 +48,37 @@ async function main() {
 }
 
 // Check and handle dependency issues
-function checkDependencies() {
+async function checkDependencies() {
   try {
-    // Try to require chrome-aws-lambda to see if it works
-    require('chrome-aws-lambda');
-    console.log('✅ chrome-aws-lambda is installed and accessible');
+    // Try to require chrome-aws-lambda and puppeteer-core
+    const chromeLambda = require('chrome-aws-lambda');
+    const puppeteer = require('puppeteer-core');
+    console.log('✅ chrome-aws-lambda and puppeteer-core are installed');
+
+    // Verify browser can be launched
+    try {
+      const executablePath = await chromeLambda.executablePath;
+      if (!executablePath || !(await fs.promises.access(executablePath).then(() => true).catch(() => false))) {
+        throw new Error('Chrome binary not found');
+      }
+      console.log('✅ Chrome binary found at:', executablePath);
+    } catch (browserError) {
+      console.warn('⚠️ Chrome binary not found, attempting to install...');
+      try {
+        execSync('npm install puppeteer --save-dev', { stdio: 'inherit' });
+        console.log('✅ Puppeteer installed successfully');
+      } catch (installError) {
+        console.warn('⚠️ Failed to install Puppeteer:', installError.message);
+        process.env.USE_FALLBACK = '1';
+      }
+    }
   } catch (error) {
-    console.warn('⚠️ chrome-aws-lambda could not be loaded, using fallback mode');
+    console.warn('⚠️ Dependency check failed:', error.message);
     process.env.USE_FALLBACK = '1';
   }
   
   try {
-    // Make sure puppeteer-core is the compatible version
+    // Check puppeteer-core version compatibility
     const puppeteerCorePath = require.resolve('puppeteer-core');
     const packageJsonPath = path.join(path.dirname(puppeteerCorePath), '..', 'package.json');
     
