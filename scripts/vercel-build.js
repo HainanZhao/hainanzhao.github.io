@@ -63,12 +63,22 @@ async function checkDependencies() {
       }
       console.log('✅ Chrome binary found at:', executablePath);
     } catch (browserError) {
-      console.warn('⚠️ Chrome binary not found, attempting to install...');
+      console.warn('⚠️ Chrome binary not found, installing specific Chromium revision...');
       try {
-        execSync('npm install puppeteer --save-dev', { stdio: 'inherit' });
-        console.log('✅ Puppeteer installed successfully');
+        // Remove existing puppeteer to ensure clean install
+        execSync('npm remove puppeteer puppeteer-core', { stdio: 'inherit' });
+        
+        // Install specific versions known to work with chrome-aws-lambda
+        execSync('npm install --save-dev puppeteer@10.1.0', { stdio: 'inherit' });
+        console.log('✅ Installing Chromium revision 884014...');
+        
+        // Force download of Chromium
+        const download = require('puppeteer/lib/cjs/puppeteer/node/install.js');
+        await download({ cacheDir: path.join(__dirname, '../node_modules/puppeteer/.local-chromium') });
+        
+        console.log('✅ Chromium installed successfully');
       } catch (installError) {
-        console.warn('⚠️ Failed to install Puppeteer:', installError.message);
+        console.warn('⚠️ Failed to install Chromium:', installError.message);
         process.env.USE_FALLBACK = '1';
       }
     }
@@ -78,7 +88,7 @@ async function checkDependencies() {
   }
   
   try {
-    // Check puppeteer-core version compatibility
+    // Verify puppeteer-core version compatibility
     const puppeteerCorePath = require.resolve('puppeteer-core');
     const packageJsonPath = path.join(path.dirname(puppeteerCorePath), '..', 'package.json');
     
@@ -91,8 +101,14 @@ async function checkDependencies() {
       const majorVersion = parseInt(versionNumber[0]);
       
       if (majorVersion > 10) {
-        console.warn('⚠️ puppeteer-core version is too new for chrome-aws-lambda, using fallback mode');
-        process.env.USE_FALLBACK = '1';
+        console.warn('⚠️ puppeteer-core version is too new for chrome-aws-lambda, attempting to fix...');
+        try {
+          execSync('npm install puppeteer-core@10.1.0 --save-exact', { stdio: 'inherit' });
+          console.log('✅ Installed compatible puppeteer-core version');
+        } catch (installError) {
+          console.warn('⚠️ Failed to install compatible puppeteer-core:', installError.message);
+          process.env.USE_FALLBACK = '1';
+        }
       }
     }
   } catch (error) {
