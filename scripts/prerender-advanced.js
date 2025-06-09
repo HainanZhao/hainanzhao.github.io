@@ -514,7 +514,6 @@ async function main() {
     // Regular environment approach (local machine or CI with full capabilities)
     
     // Start dev server
-    console.log('🚀 Starting Angular dev server...');
     server = await startDevServer();
     
     // Wait a bit more for full startup

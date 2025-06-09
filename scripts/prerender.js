@@ -29,7 +29,7 @@ function ensureAppIsBuilt() {
   if (!fs.existsSync(CONFIG.indexPath)) {
     console.log('📦 Building Angular app first...');
     try {
-      execSync('npm run build:no-lint', { stdio: 'inherit', cwd: path.join(__dirname, '..') });
+      execSync('npm run build', { stdio: 'inherit', cwd: path.join(__dirname, '..') });
     } catch (error) {
       console.error('✗ Failed to build Angular app:', error.message);
       process.exit(1);

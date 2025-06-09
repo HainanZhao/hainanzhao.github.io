@@ -22,7 +22,7 @@ async function main() {
     
     // Run the build
     console.log('📦 Building Angular app for production...');
-    execSync('npm run build:prod:no-lint', { stdio: 'inherit' });
+    execSync('npm run build:prod', { stdio: 'inherit' });
     
     // Run the prerender with fallback option
     console.log('🔄 Running pre-rendering with Vercel optimizations...');

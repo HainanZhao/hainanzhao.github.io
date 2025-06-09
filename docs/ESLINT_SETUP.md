@@ -39,11 +39,8 @@ The ESLint configuration includes:
 ```json
 {
   "scripts": {
-    "build": "npm run lint && ng build && npm run seo:generate",
-    "build:prod": "npm run lint && ng build --configuration production && npm run seo:generate",
-    "build:gh-pages": "npm run lint && ng build --configuration production && npm run seo:generate",
-    "build:no-lint": "ng build && npm run seo:generate",
-    "build:prod:no-lint": "ng build --configuration production && npm run seo:generate",
+    "build": "npm run lint && ng build",
+    "build:prod": "npm run lint && ng build --configuration production",
     "test": "npm run lint && ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix"
@@ -54,7 +51,6 @@ The ESLint configuration includes:
 ### Key Features
 
 1. **Enforced Linting**: All build commands now run `npm run lint` first
-2. **No-Lint Fallback**: `build:no-lint` and `build:prod:no-lint` commands available for emergency builds
 3. **Auto-fix Support**: `npm run lint:fix` command for automatic fixes
 4. **Test Integration**: Tests also enforce linting before running
 
@@ -84,10 +80,6 @@ npm run lint:fix
 # Build with lint enforcement
 npm run build
 npm run build:prod
-
-# Emergency build without lint checks
-npm run build:no-lint
-npm run build:prod:no-lint
 ```
 
 ### Development Workflow
@@ -157,7 +149,6 @@ try {
 1. Run `npm run lint` to see specific errors
 2. Run `npm run lint:fix` to auto-fix simple issues
 3. Manually fix remaining errors
-4. Use `npm run build:no-lint` for emergency builds (not recommended for production)
 
 ### Adding New Dependencies
 When adding new packages, ensure they don't introduce new lint violations. Run `npm run lint` after installations.
