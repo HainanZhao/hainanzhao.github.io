@@ -8,115 +8,134 @@
 const fs = require('fs');
 const path = require('path');
 
-// Route definitions for the application
-const ROUTES = [
-  '',
-  'about',
-  'calculator',
-  'json-visualizer',
-  'regex-tester',
-  'string-utils',
-  'string-case-converter',
-  'date-utils',
-  'number-utils',
-  'array-utils',
-  'jwt-parser',
-  'diff-viewer',
-  'qr-code',
-  'csv-to-sheets-formatter',
-  'json-query',
-  'iframe-performance',
-  'utils-demo'
-];
+/**
+ * Extract routes from Angular routes file
+ */
+function extractRoutesFromAppRoutes() {
+  const routesPath = path.join(__dirname, '../src/app/app.routes.ts');
+  
+  if (!fs.existsSync(routesPath)) {
+    console.warn('⚠️ app.routes.ts not found, using fallback routes');
+    return [''];
+  }
+  
+  const routesContent = fs.readFileSync(routesPath, 'utf8');
+  const routes = [''];  // Always include home route
+  
+  // Extract path definitions using regex, excluding redirectTo paths
+  const pathMatches = routesContent.match(/{\s*path:\s*['"`]([^'"`]+)['"`][^}]*}/g);
+  if (pathMatches) {
+    pathMatches.forEach(match => {
+      // Skip redirect routes
+      if (match.includes('redirectTo')) {
+        return;
+      }
+      
+      const pathMatch = match.match(/path:\s*['"`]([^'"`]+)['"`]/);
+      if (pathMatch && pathMatch[1] && pathMatch[1] !== '') {
+        routes.push(pathMatch[1]);
+      }
+    });
+  }
+  
+  return routes;
+}
 
-// Component metadata for SEO generation
-const COMPONENT_METADATA = {
-  '': {
+/**
+ * Extract metadata from search service
+ */
+function extractMetadataFromSearchService() {
+  const searchServicePath = path.join(__dirname, '../src/app/shared/services/search.service.ts');
+  
+  if (!fs.existsSync(searchServicePath)) {
+    console.warn('⚠️ search.service.ts not found, using fallback metadata');
+    return getDefaultMetadata();
+  }
+  
+  const searchContent = fs.readFileSync(searchServicePath, 'utf8');
+  const metadata = {};
+  
+  // Add default home page metadata
+  metadata[''] = {
     title: 'Debugi - Developer Utilities',
     description: 'Comprehensive developer tools and utilities for debugging, testing, and development workflows.',
     keywords: 'developer tools, utilities, debugging, testing, web development'
-  },
-  'about': {
-    title: 'About - Debugi',
-    description: 'Learn about Debugi and its comprehensive suite of developer utilities.',
-    keywords: 'about, developer tools, debugi'
-  },
-  'calculator': {
-    title: 'Calculator - Debugi',
-    description: 'Advanced calculator with programmer features including binary, hex, and decimal conversions.',
-    keywords: 'calculator, binary, hex, decimal, programmer calculator'
-  },
-  'json-visualizer': {
-    title: 'JSON Visualizer - Debugi',
-    description: 'Visualize and format JSON data with syntax highlighting and tree view.',
-    keywords: 'json, visualizer, formatter, syntax highlighting'
-  },
-  'regex-tester': {
-    title: 'Regex Tester - Debugi',
-    description: 'Test and debug regular expressions with real-time matching and explanation.',
-    keywords: 'regex, regular expressions, pattern matching, testing'
-  },
-  'string-utils': {
-    title: 'String Utilities - Debugi',
-    description: 'Comprehensive string manipulation tools for developers.',
-    keywords: 'string utilities, text manipulation, encoding, decoding'
-  },
-  'string-case-converter': {
-    title: 'Case Converter - Debugi',
-    description: 'Convert text between different cases: camelCase, snake_case, kebab-case, and more.',
-    keywords: 'case converter, camelCase, snake_case, kebab-case, text transformation'
-  },
-  'date-utils': {
-    title: 'Date Utilities - Debugi',
-    description: 'Date and time manipulation tools with timezone support and formatting options.',
-    keywords: 'date utilities, time, timezone, formatting, timestamp'
-  },
-  'number-utils': {
-    title: 'Number Utilities - Debugi',
-    description: 'Number base conversion, formatting, and mathematical utilities.',
-    keywords: 'number utilities, base conversion, formatting, mathematics'
-  },
-  'array-utils': {
-    title: 'Array Utilities - Debugi',
-    description: 'Array manipulation tools for sorting, filtering, and data processing.',
-    keywords: 'array utilities, data processing, sorting, filtering'
-  },
-  'jwt-parser': {
-    title: 'JWT Parser - Debugi',
-    description: 'Decode and analyze JSON Web Tokens with header and payload inspection.',
-    keywords: 'jwt, json web token, parser, decoder, authentication'
-  },
-  'diff-viewer': {
-    title: 'Diff Viewer - Debugi',
-    description: 'Compare text and code with side-by-side diff visualization.',
-    keywords: 'diff viewer, text comparison, code comparison, version control'
-  },
-  'qr-code': {
-    title: 'QR Code Generator - Debugi',
-    description: 'Generate and decode QR codes with customization options.',
-    keywords: 'qr code, generator, decoder, barcode'
-  },
-  'csv-to-sheets-formatter': {
-    title: 'CSV to Sheets Formatter - Debugi',
-    description: 'Format CSV data for Google Sheets with proper escaping and formatting.',
-    keywords: 'csv, google sheets, formatter, data import'
-  },
-  'json-query': {
-    title: 'JSON Query - Debugi',
-    description: 'Query JSON data using JSONPath expressions and filters.',
-    keywords: 'json query, jsonpath, data extraction, filtering'
-  },
-  'iframe-performance': {
-    title: 'Iframe Performance - Debugi',
-    description: 'Test and analyze iframe performance and loading behavior.',
-    keywords: 'iframe, performance, testing, web development'
-  },
-  'utils-demo': {
-    title: 'Utils Demo - Debugi',
-    description: 'Interactive demonstration of all available developer utilities.',
-    keywords: 'demo, utilities, developer tools, showcase'
+  };
+  
+  // Extract searchable items to build route metadata
+  // Match complete objects between { and }
+  const objectPattern = /{\s*id:\s*['"`][^'"`]+['"`][^}]*}/gs;
+  const itemMatches = searchContent.match(objectPattern);
+  
+  if (itemMatches) {
+    itemMatches.forEach(itemMatch => {
+      try {
+        // Extract route, title, description, and keywords from each item
+        const routeMatch = itemMatch.match(/route:\s*['"`]\/([^'"`]*?)['"`]/);
+        const titleMatch = itemMatch.match(/title:\s*['"`]([^'"`]+?)['"`]/);
+        const descriptionMatch = itemMatch.match(/description:\s*['"`]((?:[^'"`\\]|\\.)*?)['"`]/);
+        const keywordsMatch = itemMatch.match(/keywords:\s*\[([\s\S]*?)\]/);
+        
+        if (routeMatch && titleMatch && descriptionMatch) {
+          const route = routeMatch[1];
+          const title = titleMatch[1];
+          const description = descriptionMatch[1];
+          
+          // Extract keywords array
+          let keywords = '';
+          if (keywordsMatch) {
+            const keywordString = keywordsMatch[1];
+            const keywordMatches = keywordString.match(/['"`]([^'"`]+?)['"`]/g);
+            if (keywordMatches) {
+              keywords = keywordMatches.map(k => k.replace(/['"`]/g, '')).join(', ');
+            }
+          }
+          
+          // Only update if we don't already have metadata for this route or if this is a more comprehensive entry
+          if (!metadata[route] || title.includes('Utils') || title.includes('Generator') || title.includes('Converter')) {
+            metadata[route] = {
+              title: `${title} - Debugi`,
+              description: description.replace(/\\'/g, "'").replace(/\\"/g, '"'), // Unescape quotes
+              keywords: keywords || title.toLowerCase().split(' ').join(', ')
+            };
+          }
+        }
+      } catch (error) {
+        // Skip malformed items
+        console.warn(`⚠️ Skipping malformed search item: ${error.message}`);
+      }
+    });
   }
-};
+  
+  return metadata;
+}
+
+/**
+ * Fallback metadata in case files are not accessible
+ */
+function getDefaultMetadata() {
+  return {
+    '': {
+      title: 'Debugi - Developer Utilities',
+      description: 'Comprehensive developer tools and utilities for debugging, testing, and development workflows.',
+      keywords: 'developer tools, utilities, debugging, testing, web development'
+    },
+    'about': {
+      title: 'About - Debugi',
+      description: 'Learn about Debugi and its comprehensive suite of developer utilities.',
+      keywords: 'about, developer tools, debugi'
+    },
+    'calculator': {
+      title: 'Calculator - Debugi',
+      description: 'Advanced calculator with programmer features including binary, hex, and decimal conversions.',
+      keywords: 'calculator, binary, hex, decimal, programmer calculator'
+    }
+  };
+}
+
+// Dynamic route and metadata extraction
+const ROUTES = extractRoutesFromAppRoutes();
+const COMPONENT_METADATA = extractMetadataFromSearchService();
 
 async function prerenderRoutes() {
   console.log('🔄 Starting JavaScript-only prerendering...');
