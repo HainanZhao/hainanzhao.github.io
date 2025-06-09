@@ -99,7 +99,7 @@ function shouldPauseRendering() {
   const cpus = os.cpus().length;
   const loadAvg = os.loadavg()[0]; // 1 minute average
   
-  // Calculate percentage of CPU capacity being used
+  // Calculate percentage of CPU capacity being used 
   const cpuPercentage = (loadAvg / cpus) * 100;
   
   return cpuPercentage > CONFIG.maxCpuPercent;
