@@ -33,7 +33,7 @@ const PAGE_CONFIG = {
   viewport: { width: 1200, height: 800 },
   waitOptions: {
     waitUntil: 'networkidle2',
-    timeout: 15000
+    timeout: process.env.NETWORK_IDLE_TIMEOUT ? parseInt(process.env.NETWORK_IDLE_TIMEOUT) : 15000
   }
 };
 
@@ -264,7 +264,8 @@ async function navigateAndWait(page, url, timeout = DEFAULT_CONFIG.timeout) {
   await page.waitForSelector('app-root', { timeout: 5000 });
   
   // Wait a bit more for dynamic content
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  const postLoadWait = process.env.POST_LOAD_WAIT ? parseInt(process.env.POST_LOAD_WAIT) : 3000;
+  await new Promise(resolve => setTimeout(resolve, postLoadWait));
 }
 
 /**

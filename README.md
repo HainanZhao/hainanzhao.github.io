@@ -29,6 +29,43 @@ This is utils application providing a collection of common utility tools for dev
 
 To run this project locally, you need to have Node.js and Angular CLI installed.
 
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to the project directory
+cd debugi
+
+# Install dependencies
+npm install
+```
+
+### Running the Application
+
+```bash
+# Start the development server
+npm start
+
+# Build for production
+npm run build:prod
+```
+
+### Static Site Generation
+
+This project uses an advanced dynamic queue system for pre-rendering:
+
+```bash
+# Pre-render the site with the default configuration
+npm run prerender:advanced
+
+# Pre-render with custom configuration from .env.prerender
+npm run prerender:advanced:config
+```
+
+See [Advanced Pre-rendering](docs/ADVANCED_PRERENDERING.md) and [Queue System Enhancements](docs/QUEUE_SYSTEM_ENHANCEMENTS.md) for details.
+
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/HainanZhao/hainanzhao.github.io.git

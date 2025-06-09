@@ -9,7 +9,19 @@
   "github": {
     "silent": true
   },
-  "buildCommand": "npm run build:gh-pages",
+  "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
-  "framework": "angular"
+  "framework": "angular",
+  "installCommand": "npm install --no-optional --no-shrinkwrap --no-package-lock",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
 }
