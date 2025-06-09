@@ -3,6 +3,8 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { GlobalSearchComponent } from './shared/components/global-search/global-search.component';
 import { SearchService } from './shared/services/search.service';
 import { ThemeService, Theme } from './shared/services/theme.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { inject } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
