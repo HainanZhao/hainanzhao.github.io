@@ -204,7 +204,7 @@ function generateEnhancedHtml(baseHtml, metadata, route) {
     `<meta property="og:title" content="${metadata.title}">`,
     `<meta property="og:description" content="${metadata.description}">`,
     `<meta property="og:type" content="website">`,
-    `<meta property="og:url" content="https://debugi.vercel.app/${route}">`,
+    `<meta property="og:url" content="https://debugi.com/${route}">`,
     `<meta property="og:site_name" content="Debugi">`,
     `<meta name="twitter:card" content="summary">`,
     `<meta name="twitter:title" content="${metadata.title}">`,
@@ -217,7 +217,7 @@ function generateEnhancedHtml(baseHtml, metadata, route) {
   );
   
   // Add canonical URL
-  const canonical = `<link rel="canonical" href="https://debugi.vercel.app/${route}">`;
+  const canonical = `<link rel="canonical" href="https://debugi.com/${route}">`;
   html = html.replace(
     '</head>',
     `  ${canonical}\n</head>`
@@ -230,7 +230,7 @@ function generateEnhancedHtml(baseHtml, metadata, route) {
       "@type": "WebApplication",
       "name": "Debugi",
       "description": metadata.description,
-      "url": "https://debugi.vercel.app",
+      "url": "https://debugi.com",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "offers": {
