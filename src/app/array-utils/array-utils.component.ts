@@ -592,16 +592,4 @@ export class ArrayUtilsComponent implements OnInit, OnDestroy {
       // Could add a toast notification here
     });
   }
-
-  clearAllFields() {
-    this.arrayInput = '[1, 2, 3, 4, 5, 2, 3]';
-    this.operationResult = '';
-    this.transformResult = '';
-    this.groupingResult = '';
-    this.generatedArray = '';
-    this.filterValue = '';
-    this.groupByKey = '';
-    this.parseArrayInput();
-    this.analyzeArray();
-  }
 }

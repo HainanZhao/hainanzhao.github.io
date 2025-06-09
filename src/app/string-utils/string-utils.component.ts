@@ -386,16 +386,4 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       // Could add a toast notification here
     });
   }
-
-  clearAllFields() {
-    this.inputText = '';
-    this.convertedText = '';
-    this.generatedCharacters = '';
-    this.manipulatedText = '';
-    this.encodedText = '';
-    this.decodedText = '';
-    this.hashedText = '';
-    this.generatedPassword = '';
-    this.textAnalysis = {};
-  }
 }
