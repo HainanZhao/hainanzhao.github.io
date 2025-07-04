@@ -34,6 +34,8 @@ export class DateUtilsComponent implements OnInit, OnDestroy {
   periodResult: string = '';
   businessDayResult: string = '';
 
+  showHelp: boolean = false;
+
   // Options
   formatOptions = ['short', 'medium', 'long', 'full', 'time', 'datetime', 'date-only', 'time-only'];
   timeUnits: ('years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds')[] = [
@@ -240,5 +242,9 @@ export class DateUtilsComponent implements OnInit, OnDestroy {
     const endDate = dateUtils.addTime(startDate, 30, 'days'); // 30 days from start
     const businessDays = dateUtils.getBusinessDays(startDate, endDate);
     this.businessDayResult = `Business days in next 30 days: ${businessDays}`;
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
   }
 }

@@ -24,6 +24,7 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
   // Input data
   jsonInput = '';
   sqlQuery = '';
+  showHelp: boolean = false;
 
   // Sample data for demonstration
   sampleJsonData = [
@@ -336,5 +337,9 @@ export class JsonQueryComponent implements OnInit, OnDestroy {
     this.jsonInput = '';
     this.queryResult = { data: [] };
     this.jsonFormatError = null;
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
   }
 }

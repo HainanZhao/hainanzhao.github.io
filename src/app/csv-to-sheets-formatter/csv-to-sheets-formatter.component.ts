@@ -23,6 +23,8 @@ import { DataDisplayComponent } from '../shared/components/data-display/data-dis
 })
 export class CsvToSheetsFormatterComponent implements OnInit, OnDestroy {
   csvInput: string = '';
+  showQuerySection: boolean = false;
+  showOutputSection: boolean = false;
 
   // Search integration
   private highlightSubscription?: Subscription;
@@ -285,5 +287,13 @@ Alice Brown,28,Houston,alice@example.com`;
     };
     const buttonElement = event?.target as HTMLElement;
     this.urlStateService.shareUrlWithFeedback('csv', JSON.stringify(state), buttonElement);
+  }
+
+  toggleQuerySection() {
+    this.showQuerySection = !this.showQuerySection;
+  }
+
+  toggleOutputSection() {
+    this.showOutputSection = !this.showOutputSection;
   }
 }

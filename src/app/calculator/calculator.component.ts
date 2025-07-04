@@ -17,6 +17,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CalculatorComponent implements OnInit, OnDestroy {
   expression: string = '';
   result: number | string = 0;
+  showExamples: boolean = false;
+  showHelp: boolean = false;
 
   // Search integration
   private highlightSubscription?: Subscription;
@@ -176,5 +178,13 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       this.expression,
       buttonElement
     );
+  }
+
+  toggleExamples() {
+    this.showExamples = !this.showExamples;
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
   }
 }

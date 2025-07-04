@@ -49,64 +49,73 @@
 
   <!-- Query Section -->
   <section class="section" id="csv-query" *ngIf="csvInput.trim()">
-    <h3>SQL Query (Optional)</h3>
-    <p class="query-help">Use SQL syntax to query the CSV data. Leave empty to show all data.</p>
-    <div class="sample-queries">
-      <span>Sample queries:</span>
-      <div class="query-chips">
-        <button
-          *ngFor="let query of sampleSqlQueries"
-          (click)="loadSampleQuery(query)"
-          class="btn btn-sm btn-secondary"
-        >
-          {{ query }}
-        </button>
+    <h3 (click)="toggleQuerySection()" class="collapsible-header">
+      SQL Query (Optional)
+      <i class="fas" [ngClass]="showQuerySection ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div *ngIf="showQuerySection">
+      <p class="query-help">Use SQL syntax to query the CSV data. Leave empty to show all data.</p>
+      <div class="sample-queries">
+        <span>Sample queries:</span>
+        <div class="query-chips">
+          <button
+            *ngFor="let query of sampleSqlQueries"
+            (click)="loadSampleQuery(query)"
+            class="btn btn-sm btn-secondary"
+          >
+            {{ query }}
+          </button>
+        </div>
       </div>
+      <div class="textarea-container">
+        <textarea
+          [(ngModel)]="sqlQuery"
+          placeholder="Enter your SQL query here... (e.g., SELECT * FROM ? WHERE Age > 25)"
+          rows="4"
+          class="sql-input"
+        ></textarea>
+      </div>
+      <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!csvInput || isLoading">
+        <span *ngIf="!isLoading">Execute Query</span>
+        <span *ngIf="isLoading">Executing...</span>
+      </button>
     </div>
-    <div class="textarea-container">
-      <textarea
-        [(ngModel)]="sqlQuery"
-        placeholder="Enter your SQL query here... (e.g., SELECT * FROM ? WHERE Age > 25)"
-        rows="4"
-        class="sql-input"
-      ></textarea>
-    </div>
-    <button (click)="executeQuery()" class="btn btn-primary" [disabled]="!csvInput || isLoading">
-      <span *ngIf="!isLoading">Execute Query</span>
-      <span *ngIf="isLoading">Executing...</span>
-    </button>
   </section>
 
   <!-- Output Section -->
   <section class="section" id="csv-output" *ngIf="displayData.length > 0 || queryResult.error">
-    <h3>Output</h3>
+    <h3 (click)="toggleOutputSection()" class="collapsible-header">
+      Output
+      <i class="fas" [ngClass]="showOutputSection ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div *ngIf="showOutputSection">
+      <!-- Query Status Info -->
+      <div *ngIf="isShowingQueryResults && queryResult.executionTime" class="execution-info">
+        Query executed in {{ queryResult.executionTime.toFixed(2) }}ms, returned {{ displayData.length }} records
+        <button class="btn btn-sm btn-secondary" (click)="clearQueryResults()" style="margin-left: 1rem">
+          Show Original Data
+        </button>
+      </div>
 
-    <!-- Query Status Info -->
-    <div *ngIf="isShowingQueryResults && queryResult.executionTime" class="execution-info">
-      Query executed in {{ queryResult.executionTime.toFixed(2) }}ms, returned {{ displayData.length }} records
-      <button class="btn btn-sm btn-secondary" (click)="clearQueryResults()" style="margin-left: 1rem">
-        Show Original Data
-      </button>
+      <!-- Error Message -->
+      <div *ngIf="queryResult.error" class="error-message">
+        <strong>Query Error:</strong>
+        {{ queryResult.error }}
+      </div>
+
+      <!-- Data Display -->
+      <app-data-display
+        *ngIf="displayData.length > 0"
+        [data]="displayData"
+        [format]="outputFormat"
+        [tableName]="displayTableName"
+        [hasHeaders]="hasHeaders"
+        [options]="{
+          showLineNumbers: showLineNumbers,
+          allowDownload: true,
+          allowCopy: true,
+        }"
+      ></app-data-display>
     </div>
-
-    <!-- Error Message -->
-    <div *ngIf="queryResult.error" class="error-message">
-      <strong>Query Error:</strong>
-      {{ queryResult.error }}
-    </div>
-
-    <!-- Data Display -->
-    <app-data-display
-      *ngIf="displayData.length > 0"
-      [data]="displayData"
-      [format]="outputFormat"
-      [tableName]="displayTableName"
-      [hasHeaders]="hasHeaders"
-      [options]="{
-        showLineNumbers: showLineNumbers,
-        allowDownload: true,
-        allowCopy: true,
-      }"
-    ></app-data-display>
   </section>
 </div>

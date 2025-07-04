@@ -47,6 +47,14 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   includeSymbols: boolean = false;
   generatedPassword: string = '';
 
+  showTextAnalysis: boolean = false;
+  showTextManipulation: boolean = false;
+  showEncodingDecoding: boolean = false;
+  showHashGeneration: boolean = false;
+  showPasswordGenerator: boolean = false;
+
+  showHelp: boolean = false;
+
   constructor(
     private searchService: SearchService,
     private urlStateService: UrlStateService
@@ -385,5 +393,29 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
     navigator.clipboard.writeText(text).then(() => {
       // Could add a toast notification here
     });
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
+  }
+
+  toggleTextAnalysis() {
+    this.showTextAnalysis = !this.showTextAnalysis;
+  }
+
+  toggleTextManipulation() {
+    this.showTextManipulation = !this.showTextManipulation;
+  }
+
+  toggleEncodingDecoding() {
+    this.showEncodingDecoding = !this.showEncodingDecoding;
+  }
+
+  toggleHashGeneration() {
+    this.showHashGeneration = !this.showHashGeneration;
+  }
+
+  togglePasswordGenerator() {
+    this.showPasswordGenerator = !this.showPasswordGenerator;
   }
 }

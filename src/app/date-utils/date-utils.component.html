@@ -82,21 +82,26 @@
 
   <!-- Period Operations -->
   <section class="section" id="period-ops">
-    <h3>Period Operations</h3>
-    <div class="btn-group">
-      <button class="btn btn-secondary" (click)="getStartOfWeek()">Week</button>
-      <button class="btn btn-secondary" (click)="getStartOfMonth()">Month</button>
-      <button class="btn btn-secondary" (click)="getStartOfYear()">Year</button>
-      <button class="btn btn-primary" (click)="checkWeekend()">Weekend?</button>
-      <button class="btn btn-primary" (click)="calculateBusinessDays()">Biz Days</button>
-    </div>
-    <div class="result" *ngIf="periodResult">
-      <strong>Period:</strong>
-      {{ periodResult }}
-    </div>
-    <div class="result" *ngIf="businessDayResult">
-      <strong>Result:</strong>
-      {{ businessDayResult }}
+    <h3 (click)="toggleHelp()" class="collapsible-header">
+      Period Operations
+      <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div *ngIf="showHelp">
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="getStartOfWeek()">Week</button>
+        <button class="btn btn-secondary" (click)="getStartOfMonth()">Month</button>
+        <button class="btn btn-secondary" (click)="getStartOfYear()">Year</button>
+        <button class="btn btn-primary" (click)="checkWeekend()">Weekend?</button>
+        <button class="btn btn-primary" (click)="calculateBusinessDays()">Biz Days</button>
+      </div>
+      <div class="result" *ngIf="periodResult">
+        <strong>Period:</strong>
+        {{ periodResult }}
+      </div>
+      <div class="result" *ngIf="businessDayResult">
+        <strong>Result:</strong>
+        {{ businessDayResult }}
+      </div>
     </div>
   </section>
 </div>

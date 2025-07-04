@@ -106,8 +106,11 @@
 
   <!-- Help Section -->
   <section class="section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
-    <h3>SQL Query Guide</h3>
-    <div class="help-content">
+    <h3 (click)="toggleHelp()" class="collapsible-header">
+      SQL Query Guide
+      <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div class="help-content" *ngIf="showHelp">
       <div class="help-section">
         <h4>Basic Query Syntax</h4>
         <pre>SELECT column1, column2 FROM ? WHERE condition</pre>

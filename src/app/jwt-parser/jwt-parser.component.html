@@ -282,80 +282,84 @@
 
   <!-- JWT Information Section -->
   <section class="section">
-    <h3>About JWT (JSON Web Tokens)</h3>
+    <h3 (click)="toggleHelp()" class="collapsible-header">
+      About JWT (JSON Web Tokens)
+      <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div *ngIf="showHelp">
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>
+            <i class="fas fa-shield-alt"></i>
+            Security
+          </h4>
+          <ul>
+            <li>Tokens are signed, not encrypted</li>
+            <li>Never put sensitive data in the payload</li>
+            <li>Always verify signatures on the server</li>
+            <li>Use HTTPS in production</li>
+          </ul>
+        </div>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <h4>
-          <i class="fas fa-shield-alt"></i>
-          Security
-        </h4>
-        <ul>
-          <li>Tokens are signed, not encrypted</li>
-          <li>Never put sensitive data in the payload</li>
-          <li>Always verify signatures on the server</li>
-          <li>Use HTTPS in production</li>
-        </ul>
-      </div>
+        <div class="info-card">
+          <h4>
+            <i class="fas fa-clock"></i>
+            Expiration
+          </h4>
+          <ul>
+            <li>
+              <strong>exp:</strong>
+              Token expires after this time
+            </li>
+            <li>
+              <strong>nbf:</strong>
+              Token not valid before this time
+            </li>
+            <li>
+              <strong>iat:</strong>
+              Token was issued at this time
+            </li>
+            <li>Always check expiration on the server</li>
+          </ul>
+        </div>
 
-      <div class="info-card">
-        <h4>
-          <i class="fas fa-clock"></i>
-          Expiration
-        </h4>
-        <ul>
-          <li>
-            <strong>exp:</strong>
-            Token expires after this time
-          </li>
-          <li>
-            <strong>nbf:</strong>
-            Token not valid before this time
-          </li>
-          <li>
-            <strong>iat:</strong>
-            Token was issued at this time
-          </li>
-          <li>Always check expiration on the server</li>
-        </ul>
-      </div>
+        <div class="info-card">
+          <h4>
+            <i class="fas fa-key"></i>
+            Algorithms
+          </h4>
+          <ul>
+            <li>
+              <strong>HS256:</strong>
+              HMAC with shared secret
+            </li>
+            <li>
+              <strong>RS256:</strong>
+              RSA with public/private keys
+            </li>
+            <li>
+              <strong>ES256:</strong>
+              ECDSA with public/private keys
+            </li>
+            <li>
+              <strong>none:</strong>
+              Unsigned (dangerous!)
+            </li>
+          </ul>
+        </div>
 
-      <div class="info-card">
-        <h4>
-          <i class="fas fa-key"></i>
-          Algorithms
-        </h4>
-        <ul>
-          <li>
-            <strong>HS256:</strong>
-            HMAC with shared secret
-          </li>
-          <li>
-            <strong>RS256:</strong>
-            RSA with public/private keys
-          </li>
-          <li>
-            <strong>ES256:</strong>
-            ECDSA with public/private keys
-          </li>
-          <li>
-            <strong>none:</strong>
-            Unsigned (dangerous!)
-          </li>
-        </ul>
-      </div>
-
-      <div class="info-card">
-        <h4>
-          <i class="fas fa-users"></i>
-          Use Cases
-        </h4>
-        <ul>
-          <li>Authentication & Authorization</li>
-          <li>Secure information exchange</li>
-          <li>Single Sign-On (SSO)</li>
-          <li>API access tokens</li>
-        </ul>
+        <div class="info-card">
+          <h4>
+            <i class="fas fa-users"></i>
+            Use Cases
+          </h4>
+          <ul>
+            <li>Authentication & Authorization</li>
+            <li>Secure information exchange</li>
+            <li>Single Sign-On (SSO)</li>
+            <li>API access tokens</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>

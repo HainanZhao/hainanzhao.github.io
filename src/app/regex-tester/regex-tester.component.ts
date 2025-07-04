@@ -41,6 +41,7 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
   testString: string = '';
   flags: string = 'g';
   testResult: TestResult | null = null;
+  showExamples: boolean = false;
 
   constructor(
     private searchService: SearchService,
@@ -311,6 +312,10 @@ export class RegexTesterComponent implements OnInit, OnDestroy {
     navigator.clipboard.writeText(text).then(() => {
       // Could add a toast notification here
     });
+  }
+
+  toggleExamples() {
+    this.showExamples = !this.showExamples;
   }
 
   getRegexExplanation(): string {

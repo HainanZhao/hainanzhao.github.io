@@ -132,20 +132,25 @@
 
   <!-- Regex Examples Section -->
   <section class="section" id="regex-examples">
-    <h3>Common Regex Examples</h3>
-    <div class="examples-grid">
-      <div class="example-item" *ngFor="let example of regexExamples">
-        <div class="example-header">
-          <h4>{{ example.name }}</h4>
-          <button class="btn btn-sm btn-secondary sample-btn" (click)="loadExample(example)">Load Example</button>
-        </div>
-        <div class="example-pattern">
-          <strong>Pattern:</strong>
-          <code>/{{ example.pattern }}/{{ example.flags }}</code>
-        </div>
-        <div class="example-description">
-          <strong>Test String:</strong>
-          {{ example.testString.substring(0, 80) }}{{ example.testString.length > 80 ? '...' : '' }}
+    <h3 (click)="toggleExamples()" class="collapsible-header">
+      Common Regex Examples
+      <i class="fas" [ngClass]="showExamples ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div *ngIf="showExamples">
+      <div class="examples-grid">
+        <div class="example-item" *ngFor="let example of regexExamples">
+          <div class="example-header">
+            <h4>{{ example.name }}</h4>
+            <button class="btn btn-sm btn-secondary sample-btn" (click)="loadExample(example)">Load Example</button>
+          </div>
+          <div class="example-pattern">
+            <strong>Pattern:</strong>
+            <code>/{{ example.pattern }}/{{ example.flags }}</code>
+          </div>
+          <div class="example-description">
+            <strong>Test String:</strong>
+            {{ example.testString.substring(0, 80) }}{{ example.testString.length > 80 ? '...' : '' }}
+          </div>
         </div>
       </div>
     </div>

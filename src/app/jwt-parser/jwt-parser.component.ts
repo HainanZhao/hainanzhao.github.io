@@ -61,6 +61,7 @@ export class JwtParserComponent implements OnInit, OnDestroy {
   // Display options
   showRawData = false;
   autoRefresh = true;
+  showHelp: boolean = false;
 
   // Sample JWTs
   sampleJwts = [
@@ -413,5 +414,9 @@ export class JwtParserComponent implements OnInit, OnDestroy {
     if (status === 'Expired' || status === 'Invalid structure') return 'status-invalid';
     if (status === 'Not yet valid') return 'status-warning';
     return '';
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
   }
 }

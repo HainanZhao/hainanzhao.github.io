@@ -24,8 +24,11 @@
     </div>
 
     <div class="examples-section">
-      <h4>Try Complex Examples:</h4>
-      <div class="examples-grid">
+      <h4 (click)="toggleExamples()" class="collapsible-header">
+        Try Complex Examples:
+        <i class="fas" [ngClass]="showExamples ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      </h4>
+      <div class="examples-grid" *ngIf="showExamples">
         <button class="btn btn-secondary example-btn" (click)="loadSimpleExample()">Basic Arithmetic</button>
         <button class="btn btn-secondary example-btn" (click)="loadTrigExample()">Trigonometry</button>
         <button class="btn btn-secondary example-btn" (click)="loadAlgebraExample()">Algebra</button>
@@ -39,8 +42,11 @@
   </section>
 
   <section class="section" id="help">
-    <h3>Calculator Help</h3>
-    <div class="help-content">
+    <h3 (click)="toggleHelp()" class="collapsible-header">
+      Calculator Help
+      <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </h3>
+    <div class="help-content" *ngIf="showHelp">
       <h4>Supported Operations:</h4>
       <ul>
         <li>
