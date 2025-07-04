@@ -98,10 +98,19 @@ button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not
   ):active {
   background: var(--accent-primary);
   color: white;
-  border-color: var(--accent-primary);
-  transform: none;
-  box-shadow: none;
+  border-color: transparent; /* Remove border on active */
+  transform: translateY(1px); /* Add slight press animation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
   filter: brightness(0.9);
+}
+
+.btn-primary:focus,
+.btn:focus,
+button:not([class*='btn-']):not([class*='secondary']):not([class*='danger']):not(
+    [class*='success']
+  ):focus {
+  outline: none; /* Remove outline on focus */
+  outline-offset: 0;
 }
 
 /* SECONDARY BUTTON - Supporting actions */
@@ -130,16 +139,24 @@ button.secondary:active {
   background: var(--bg-active);
   color: var(--text-primary);
   border-color: var(--border-secondary);
-  transform: none;
-  box-shadow: none;
+  transform: translateY(1px); /* Add slight press animation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.btn-secondary:focus,
+button.secondary:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 /* DANGER BUTTON - Destructive actions */
 .btn-danger,
 button.danger {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-primary);
+  background: var(--accent-error);
+  color: white;
+  border: 1px solid var(--accent-error);
   box-shadow: none;
 }
 
@@ -150,16 +167,24 @@ button.danger:hover {
   border-color: var(--accent-error);
   transform: none;
   box-shadow: none;
+  filter: brightness(0.9);
 }
 
 .btn-danger:active,
 button.danger:active {
   background: var(--accent-error);
   color: var(--text-primary);
-  border-color: var(--accent-error);
-  transform: none;
-  box-shadow: none;
+  border-color: transparent;
+  transform: translateY(1px); /* Add slight press animation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
   filter: brightness(0.9);
+  outline: none;
+}
+
+.btn-danger:focus,
+button.danger:focus {
+  outline: none;
+  outline-offset: 0;
 }
 
 /* Add specific accent color for success buttons */
