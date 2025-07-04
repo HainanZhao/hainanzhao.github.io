@@ -34,24 +34,6 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.query-chip {
-  background: var(--bg-tertiary);
-  color: var(--accent-primary);
-  border: 1px solid var(--accent-primary);
-  border-radius: var(--border-radius-md);
-  font-size: 0.8rem;
-  padding: var(--spacing-xs) var(--spacing-md);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 250px;
-}
-
-.query-chip:hover {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-}
-
 /* Query action buttons */
 .query-actions {
   display: flex;

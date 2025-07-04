@@ -242,24 +242,4 @@ select:focus {
   }
 }
 
-/* Zoom Controls */
-.zoom-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: var(--spacing-md);
-  gap: var(--spacing-sm);
-}
-
-.zoom-btn {
-  padding: var(--spacing-xs) var(--spacing-sm);
-  font-size: 0.9rem;
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-primary);
-  color: var(--text-primary);
-  transition: var(--transition-smooth);
-}
-
-.zoom-btn:hover {
-  background-color: var(--accent-secondary);
-  color: var(--text-primary);
-}
+/* Component-specific responsive behavior (non-duplicate) */

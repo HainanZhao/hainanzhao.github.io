@@ -32,21 +32,6 @@
   margin-top: var(--spacing-md);
 }
 
-.example-btn {
-  font-size: 0.9rem;
-  padding: var(--spacing-sm);
-  text-align: center;
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-primary);
-  transition: var(--transition-smooth);
-}
-
-.example-btn:hover {
-  background-color: var(--accent-secondary);
-  color: var(--text-primary);
-  transform: translateY(-2px);
-}
-
 /* Help Section */
 .help-content {
   background-color: var(--bg-secondary);

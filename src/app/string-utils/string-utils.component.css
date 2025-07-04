@@ -156,47 +156,6 @@
   margin: 0;
 }
 
-/* Copy Button */
-.copy-btn {
-  background-color: var(--accent-primary);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-  font-size: 0.8rem;
-  margin-top: var(--spacing-sm);
-  transition: var(--transition-smooth);
-}
-
-.copy-btn:hover {
-  background-color: var(--accent-secondary);
-}
-
-/* Clear Section */
-.clear-section {
-  text-align: center;
-  padding: 1rem;
-}
-
-.clear-btn {
-  background-color: var(--accent-error);
-  color: var(--text-primary);
-  border: none;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-sm);
-}
-
-.clear-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
 /* Section highlighting for search results */
 .section.highlighted {
   border: 2px solid var(--accent-primary);

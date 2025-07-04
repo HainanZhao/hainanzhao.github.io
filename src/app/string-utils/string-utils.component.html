@@ -45,11 +45,7 @@
   </section>
 
   <!-- Text Analysis Section -->
-  <section
-    id="text-analysis"
-    class="section"
-    [class.highlighted]="highlightedSection === 'text-analysis'"
-  >
+  <section id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'">
     <h3 (click)="toggleTextAnalysis()" class="collapsible-header">
       Text Analysis
       <i class="fas" [ngClass]="showTextAnalysis ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
