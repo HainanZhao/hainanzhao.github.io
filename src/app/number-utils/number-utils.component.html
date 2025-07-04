@@ -3,7 +3,7 @@
   <p class="subtitle">Advanced number operations and conversions for developers</p>
 
   <!-- Byte Conversion -->
-  <section class="section" id="byte-conversion">
+  <section id="byte-conversion">
     <h3>Byte Conversion</h3>
     <label for="bytesInput">Bytes:</label>
     <input id="bytesInput" type="number" [(ngModel)]="bytesInput" min="0" (input)="convertBytes()" />
@@ -31,7 +31,7 @@
   </section>
 
   <!-- Base Conversion -->
-  <section class="section" id="base-conversion">
+  <section id="base-conversion">
     <h3>Base Conversion</h3>
     <label for="baseInput">Number:</label>
     <input id="baseInput" type="text" [(ngModel)]="baseInput" (input)="convertBase()" />
@@ -69,7 +69,7 @@
   </section>
 
   <!-- Locale-Aware Number Formatting -->
-  <section class="section" id="number-formatting">
+  <section id="number-formatting">
     <h3>Locale-Aware Number Formatting</h3>
     <label for="formatInput">Number:</label>
     <input id="formatInput" type="number" [(ngModel)]="formatInput" (input)="formatNumber()" />
@@ -90,7 +90,7 @@
   </section>
 
   <!-- Unit Conversion -->
-  <section class="section" id="unit-conversion">
+  <section id="unit-conversion">
     <h3>Unit Conversion</h3>
     <label for="unitValue">Value:</label>
     <input id="unitValue" type="number" [(ngModel)]="unitValue" (input)="convertUnits()" />
@@ -128,7 +128,7 @@
   </section>
 
   <!-- Duration Formatting -->
-  <section class="section" id="duration-formatting">
+  <section id="duration-formatting">
     <h3>Duration Formatting</h3>
     <label for="durationMs">Milliseconds:</label>
     <input id="durationMs" type="number" [(ngModel)]="durationMs" min="0" (input)="formatDuration()" />
@@ -139,7 +139,7 @@
   </section>
 
   <!-- Financial Calculations -->
-  <section class="section" id="financial-calculations">
+  <section id="financial-calculations">
     <h3>Financial Calculations</h3>
     <label for="principal">Principal:</label>
     <input id="principal" type="number" [(ngModel)]="principal" min="0" (input)="calculateCompound()" />

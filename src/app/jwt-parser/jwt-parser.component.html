@@ -2,7 +2,7 @@
   <h1 class="title">JWT Parser & Generator</h1>
 
   <!-- JWT Input Section -->
-  <section id="jwt-input" class="section" [class.highlighted]="highlightedSection === 'jwt-input'">
+  <section id="jwt-input" [class.highlighted]="highlightedSection === 'jwt-input'">
     <h3>JWT Token Input</h3>
 
     <label for="jwtToken">JWT Token</label>
@@ -60,7 +60,7 @@
   </section>
 
   <!-- Parse Error Section -->
-  <section class="section" *ngIf="parseError">
+  <section *ngIf="parseError">
     <div class="error-message">
       <i class="fas fa-exclamation-triangle"></i>
       <strong>Parse Error:</strong>
@@ -69,7 +69,7 @@
   </section>
 
   <!-- JWT Validation Status -->
-  <section class="section" *ngIf="parsedJwt">
+  <section *ngIf="parsedJwt">
     <h3>Validation Status</h3>
     <div class="validation-status">
       <div class="status-badge" [class]="getValidationClass()">
@@ -90,7 +90,7 @@
   </section>
 
   <!-- JWT Header Section -->
-  <section id="jwt-header" class="section" [class.highlighted]="highlightedSection === 'jwt-header'" *ngIf="parsedJwt">
+  <section id="jwt-header" [class.highlighted]="highlightedSection === 'jwt-header'" *ngIf="parsedJwt">
     <div class="results-header">
       <h3>JWT Header</h3>
       <button
@@ -130,12 +130,7 @@
   </section>
 
   <!-- JWT Payload Section -->
-  <section
-    id="jwt-payload"
-    class="section"
-    [class.highlighted]="highlightedSection === 'jwt-payload'"
-    *ngIf="parsedJwt"
-  >
+  <section id="jwt-payload" [class.highlighted]="highlightedSection === 'jwt-payload'" *ngIf="parsedJwt">
     <div class="results-header">
       <h3>JWT Payload</h3>
       <button
@@ -199,12 +194,7 @@
   </section>
 
   <!-- JWT Signature Section -->
-  <section
-    id="jwt-signature"
-    class="section"
-    [class.highlighted]="highlightedSection === 'jwt-signature'"
-    *ngIf="parsedJwt"
-  >
+  <section id="jwt-signature" [class.highlighted]="highlightedSection === 'jwt-signature'" *ngIf="parsedJwt">
     <div class="results-header">
       <h3>JWT Signature</h3>
       <button
@@ -242,7 +232,7 @@
   </section>
 
   <!-- JWT Generator Section -->
-  <section id="jwt-generator" class="section" [class.highlighted]="highlightedSection === 'jwt-generator'">
+  <section id="jwt-generator" [class.highlighted]="highlightedSection === 'jwt-generator'">
     <h3>JWT Generator</h3>
 
     <div class="generator-grid">
@@ -279,7 +269,7 @@
   </section>
 
   <!-- JWT Information Section -->
-  <section class="section">
+  <section>
     <h3 (click)="toggleHelp()" class="collapsible-header">
       About JWT (JSON Web Tokens)
       <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -363,7 +353,7 @@
   </section>
 
   <!-- Raw Data Section -->
-  <section class="section" *ngIf="showRawData && parsedJwt">
+  <section *ngIf="showRawData && parsedJwt">
     <h3>Raw Token Data</h3>
 
     <div class="raw-data-grid">

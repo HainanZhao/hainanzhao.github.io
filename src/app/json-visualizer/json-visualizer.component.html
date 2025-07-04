@@ -2,7 +2,7 @@
   <h2 class="title">JSON Visualizer</h2>
 
   <!-- JSON Input Section -->
-  <section id="json-input" class="section" [class.highlighted]="highlightedSection === 'json-input'">
+  <section id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Input</h3>
     <div class="action-buttons">
       <button (click)="loadSampleData('simple')" class="btn btn-secondary sample-btn">Simple Sample</button>
@@ -29,7 +29,6 @@
   <!-- Visualization Controls -->
   <section
     id="visualization-controls"
-    class="section"
     [class.highlighted]="highlightedSection === 'visualization-controls'"
     *ngIf="parsedJson && !errorMessage"
   >

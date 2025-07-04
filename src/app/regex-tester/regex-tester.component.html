@@ -2,7 +2,7 @@
   <h2 class="title">Regex Tester</h2>
 
   <!-- Regex Input Section -->
-  <section class="section" id="regex-input">
+  <section id="regex-input">
     <h3>Regular Expression</h3>
     <label for="regexPattern">Regex Pattern:</label>
     <div class="regex-input-container">
@@ -54,7 +54,7 @@
   </section>
 
   <!-- Test String Section -->
-  <section class="section" id="test-string">
+  <section id="test-string">
     <h3>Test String</h3>
     <label for="testString">Text to test against:</label>
     <textarea
@@ -67,7 +67,7 @@
   </section>
 
   <!-- Results Section -->
-  <section class="section" id="results" *ngIf="testResult && testResult.isValid">
+  <section id="results" *ngIf="testResult && testResult.isValid">
     <h3>Results</h3>
 
     <div class="results-summary">
@@ -131,7 +131,7 @@
   </section>
 
   <!-- Regex Examples Section -->
-  <section class="section" id="regex-examples">
+  <section id="regex-examples">
     <h3 (click)="toggleExamples()" class="collapsible-header">
       Common Regex Examples
       <i class="fas" [ngClass]="showExamples ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -157,7 +157,7 @@
   </section>
 
   <!-- Regex Help Section -->
-  <section class="section" id="quick-reference">
+  <section id="quick-reference">
     <h3>Quick Reference</h3>
     <div class="help-content">
       <div class="help-column">

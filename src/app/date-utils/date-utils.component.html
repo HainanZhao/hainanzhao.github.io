@@ -3,13 +3,13 @@
   <p class="subtitle">Advanced date manipulation and formatting tools for developers</p>
 
   <!-- Primary Date Input -->
-  <section class="section" id="date-input">
+  <section id="date-input">
     <h3>Date Input</h3>
     <input id="dateInput" type="date" [(ngModel)]="dateInput" class="form-control" />
   </section>
 
   <!-- Format & Convert -->
-  <section class="section" id="format-convert">
+  <section id="format-convert">
     <h3>Format & Convert</h3>
     <div class="controls">
       <select [(ngModel)]="formatType" class="form-control">
@@ -42,7 +42,7 @@
   </section>
 
   <!-- Parse & Validate -->
-  <section class="section" id="parse-validate">
+  <section id="parse-validate">
     <h3>Parse & Validate</h3>
     <div class="controls">
       <input type="text" [(ngModel)]="flexDateInput" placeholder="Any date format" class="form-control" />
@@ -55,7 +55,7 @@
   </section>
 
   <!-- Timezone & Calculations -->
-  <section class="section" id="timezone-calc">
+  <section id="timezone-calc">
     <h3>Timezone & Calculations</h3>
     <div class="controls">
       <select [(ngModel)]="timezone" class="form-control">
@@ -81,7 +81,7 @@
   </section>
 
   <!-- Period Operations -->
-  <section class="section" id="period-ops">
+  <section id="period-ops">
     <h3 (click)="toggleHelp()" class="collapsible-header">
       Period Operations
       <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>

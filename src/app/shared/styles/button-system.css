@@ -134,12 +134,9 @@ button.secondary:active {
   box-shadow: none;
 }
 
-/* DANGER BUTTON - Destructive actions (maps to secondary style with danger color accent) */
+/* DANGER BUTTON - Destructive actions */
 .btn-danger,
-button.danger,
-.btn-tertiary,
-.btn-success,
-button.success {
+button.danger {
   background: var(--bg-secondary);
   color: var(--text-secondary);
   border: 1px solid var(--border-primary);
@@ -147,33 +144,22 @@ button.success {
 }
 
 .btn-danger:hover,
-button.danger:hover,
-.btn-tertiary:hover,
-.btn-success:hover,
-button.success:hover {
-  background: var(--bg-hover);
+button.danger:hover {
+  background: var(--accent-error);
   color: var(--text-primary);
-  border-color: var(--border-secondary);
+  border-color: var(--accent-error);
   transform: none;
   box-shadow: none;
 }
 
 .btn-danger:active,
-button.danger:active,
-.btn-tertiary:active,
-.btn-success:active,
-button.success:active {
-  background: var(--bg-active);
+button.danger:active {
+  background: var(--accent-error);
   color: var(--text-primary);
-  border-color: var(--border-secondary);
+  border-color: var(--accent-error);
   transform: none;
   box-shadow: none;
-}
-
-/* Add specific accent color for danger buttons */
-.btn-danger,
-button.danger {
-  border-left: 3px solid var(--color-danger, #dc3545);
+  filter: brightness(0.9);
 }
 
 /* Add specific accent color for success buttons */

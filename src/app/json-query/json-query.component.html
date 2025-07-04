@@ -2,7 +2,7 @@
   <h2 class="title">JSON Query</h2>
 
   <!-- Input Section -->
-  <section class="section" id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
+  <section id="json-input" [class.highlighted]="highlightedSection === 'json-input'">
     <h3>JSON Data</h3>
     <div class="action-buttons">
       <button (click)="loadSampleData()" class="btn btn-secondary sample-btn">Load Sample Data</button>
@@ -33,7 +33,7 @@
   </section>
 
   <!-- Query Section -->
-  <section class="section" id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
+  <section id="sql-query" [class.highlighted]="highlightedSection === 'sql-query'">
     <h3>SQL Query</h3>
     <p class="query-help">Use SQL syntax to query the JSON data. The data is referenced using '?' as a placeholder.</p>
     <div class="sample-queries">
@@ -75,7 +75,6 @@
 
   <!-- Results Section -->
   <section
-    class="section"
     id="query-results"
     *ngIf="queryResult.data.length > 0 || queryResult.error"
     [class.highlighted]="highlightedSection === 'query-results'"
@@ -105,7 +104,7 @@
   </section>
 
   <!-- Help Section -->
-  <section class="section" id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
+  <section id="query-help" [class.highlighted]="highlightedSection === 'query-help'">
     <h3 (click)="toggleHelp()" class="collapsible-header">
       SQL Query Guide
       <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>

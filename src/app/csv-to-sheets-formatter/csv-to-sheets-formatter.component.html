@@ -2,7 +2,7 @@
   <h2 class="title">CSV Utilities & Query</h2>
 
   <!-- Configuration Section - One Line -->
-  <section class="section" id="csv-conversion">
+  <section id="csv-conversion">
     <h3>Configuration</h3>
     <div class="config-group">
       <div class="config-item">
@@ -27,7 +27,7 @@
   </section>
 
   <!-- Input Section -->
-  <section class="section" id="csv-input">
+  <section id="csv-input">
     <h3>CSV Input</h3>
     <label for="csvInput">Paste CSV Data:</label>
     <textarea
@@ -48,7 +48,7 @@
   </section>
 
   <!-- Query Section -->
-  <section class="section" id="csv-query" *ngIf="csvInput.trim()">
+  <section id="csv-query" *ngIf="csvInput.trim()">
     <h3 (click)="toggleQuerySection()" class="collapsible-header">
       SQL Query (Optional)
       <i class="fas" [ngClass]="showQuerySection ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -83,7 +83,7 @@
   </section>
 
   <!-- Output Section -->
-  <section class="section" id="csv-output" *ngIf="displayData.length > 0 || queryResult.error">
+  <section id="csv-output" *ngIf="displayData.length > 0 || queryResult.error">
     <h3 (click)="toggleOutputSection()" class="collapsible-header">
       Output
       <i class="fas" [ngClass]="showOutputSection ? 'fa-chevron-up' : 'fa-chevron-down'"></i>

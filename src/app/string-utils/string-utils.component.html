@@ -2,7 +2,7 @@
   <h2 class="title">String Utilities</h2>
 
   <!-- String Case Conversion Section -->
-  <section id="case-conversion" class="section" [class.highlighted]="highlightedSection === 'case-conversion'">
+  <section id="case-conversion" [class.highlighted]="highlightedSection === 'case-conversion'">
     <h3>String Case Converter</h3>
     <div class="input-section">
       <textarea
@@ -45,7 +45,7 @@
   </section>
 
   <!-- Text Manipulation Section -->
-  <section id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
+  <section id="text-manipulation" [class.highlighted]="highlightedSection === 'text-manipulation'">
     <div (click)="toggleTextManipulation()" class="collapsible-header">
       <h3>Text Manipulation</h3>
       <i class="fas" [ngClass]="showTextManipulation ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -86,7 +86,7 @@
   </section>
 
   <!-- Encoding/Decoding Section -->
-  <section id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
+  <section id="encoding-decoding" [class.highlighted]="highlightedSection === 'encoding-decoding'">
     <div (click)="toggleEncodingDecoding()" class="collapsible-header">
       <h3>Encoding & Decoding</h3>
       <i class="fas" [ngClass]="showEncodingDecoding ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -125,7 +125,7 @@
   </section>
 
   <!-- Hash Generation Section -->
-  <section id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
+  <section id="hash-generation" [class.highlighted]="highlightedSection === 'hash-generation'">
     <div (click)="toggleHashGeneration()" class="collapsible-header">
       <h3>Hash Generation</h3>
       <i class="fas" [ngClass]="showHashGeneration ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -145,7 +145,7 @@
   </section>
 
   <!-- Password Generator Section -->
-  <section id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
+  <section id="password-generator" [class.highlighted]="highlightedSection === 'password-generator'">
     <div (click)="togglePasswordGenerator()" class="collapsible-header">
       <h3>Password Generator</h3>
       <i class="fas" [ngClass]="showPasswordGenerator ? 'fa-chevron-up' : 'fa-chevron-down'"></i>

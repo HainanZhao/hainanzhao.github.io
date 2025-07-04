@@ -6,7 +6,7 @@
   </p>
 
   <!-- Performance Monitoring Section -->
-  <div class="section" [class.highlighted]="highlightedSection === 'monitoring'">
+  <div [class.highlighted]="highlightedSection === 'monitoring'">
     <h3>Real-time Performance Monitoring</h3>
     <div class="monitoring-grid">
       <div class="fps-monitor main-thread">
@@ -39,7 +39,7 @@
   </div>
 
   <!-- Test Selection Section -->
-  <div class="section" [class.highlighted]="highlightedSection === 'tests'">
+  <div [class.highlighted]="highlightedSection === 'tests'">
     <h3>Performance Tests</h3>
     <div class="action-buttons">
       <button class="btn btn-primary" (click)="runAllTests()" [disabled]="isRunning">Run All Tests</button>
@@ -63,7 +63,7 @@
   </div>
 
   <!-- Test Iframe Section -->
-  <div class="section" [class.highlighted]="highlightedSection === 'iframe'">
+  <div [class.highlighted]="highlightedSection === 'iframe'">
     <h3>Test Environment</h3>
     <div class="iframe-container">
       <iframe
@@ -76,7 +76,7 @@
   </div>
 
   <!-- Results Section -->
-  <div class="section" [class.highlighted]="highlightedSection === 'results'">
+  <div [class.highlighted]="highlightedSection === 'results'">
     <h3>Test Results</h3>
 
     <div *ngIf="testResults.length === 0" class="no-results">
@@ -135,7 +135,7 @@
   </div>
 
   <!-- Information Section -->
-  <div class="section" [class.highlighted]="highlightedSection === 'info'">
+  <div [class.highlighted]="highlightedSection === 'info'">
     <h3>About Iframe Performance Testing</h3>
     <div class="info-grid">
       <div class="info-card">

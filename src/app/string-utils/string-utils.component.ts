@@ -177,8 +177,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
       .trim()
       .split(/\s+/)
       .filter(word => word.length > 0);
-    const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
-    const paragraphs = text.split(/\n\s*\n/).filter(para => para.trim().length > 0);
 
     // Character frequency
     const charFrequency: Record<string, number> = {};

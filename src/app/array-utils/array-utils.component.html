@@ -3,7 +3,7 @@
   <p class="subtitle">Advanced array operations and data manipulation for developers</p>
 
   <!-- Array Input Section -->
-  <section class="section" id="array-input">
+  <section id="array-input">
     <h3>Array Input</h3>
     <textarea
       id="arrayInput"
@@ -40,7 +40,7 @@
   </section>
 
   <!-- Array Analysis -->
-  <section class="section" id="array-analysis" *ngIf="arrayStats.length">
+  <section id="array-analysis" *ngIf="arrayStats.length">
     <h3>Array Statistics</h3>
     <div class="stats-grid">
       <div class="stat-item">
@@ -71,7 +71,7 @@
   </section>
 
   <!-- Array Manipulation -->
-  <section class="section" id="array-manipulation">
+  <section id="array-manipulation">
     <h3>Array Manipulation</h3>
 
     <div class="operation-group">
@@ -128,7 +128,7 @@
   </section>
 
   <!-- Array Transformations -->
-  <section class="section" id="array-transformations">
+  <section id="array-transformations">
     <h3>Array Transformations</h3>
 
     <div class="transform-group">
@@ -170,7 +170,7 @@
   </section>
 
   <!-- Array Grouping & Aggregation -->
-  <section class="section" id="array-grouping">
+  <section id="array-grouping">
     <h3>Grouping & Aggregation</h3>
 
     <div class="group-by-controls">
@@ -196,7 +196,7 @@
   </section>
 
   <!-- Array Generation -->
-  <section class="section" id="array-generation">
+  <section id="array-generation">
     <h3>Array Generation</h3>
 
     <div class="range-controls">
@@ -240,11 +240,7 @@
   </section>
 
   <!-- Output Format -->
-  <section
-    class="section"
-    id="output-format"
-    *ngIf="operationResult || transformResult || groupingResult || generatedArray"
-  >
+  <section id="output-format" *ngIf="operationResult || transformResult || groupingResult || generatedArray">
     <h3>Export Options</h3>
     <div class="export-controls">
       <label for="outputFormat">Output Format:</label>

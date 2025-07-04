@@ -2,7 +2,7 @@
   <h1 class="title">Diff Viewer</h1>
 
   <!-- Input Section -->
-  <section class="section">
+  <section>
     <h3>Text Comparison</h3>
 
     <div class="input-grid">
@@ -60,7 +60,7 @@
   </section>
 
   <!-- Options Section -->
-  <section class="section">
+  <section>
     <h3>Diff Options</h3>
 
     <div class="options-grid">
@@ -108,7 +108,7 @@
   </section>
 
   <!-- Statistics Section -->
-  <section class="section" *ngIf="diffLines.length > 0">
+  <section *ngIf="diffLines.length > 0">
     <h3>Diff Statistics</h3>
 
     <div class="stats-grid">
@@ -132,7 +132,7 @@
   </section>
 
   <!-- Diff Results Section -->
-  <section class="section" *ngIf="diffLines.length > 0">
+  <section *ngIf="diffLines.length > 0">
     <div class="results-header">
       <h3>Diff Results</h3>
       <div class="result-actions">
