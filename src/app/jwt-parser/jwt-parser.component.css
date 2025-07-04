@@ -1,6 +1,6 @@
 /* JWT Parser Component Styles */
 
-.input-group textarea {
+#jwt-input textarea {
   font-family: var(--font-mono);
   font-size: var(--spacing-md);
   line-height: 1.4;

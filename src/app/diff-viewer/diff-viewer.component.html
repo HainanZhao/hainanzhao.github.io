@@ -6,37 +6,33 @@
     <h3>Text Comparison</h3>
 
     <div class="input-grid">
-      <div class="input-group">
-        <div class="input-header">
-          <label for="original">Original Text</label>
-          <button type="button" class="btn-secondary" (click)="formatOriginalAsJson()" title="Format as JSON">
-            <i class="fas fa-code"></i>
-          </button>
-        </div>
-        <textarea
-          id="original"
-          [(ngModel)]="originalText"
-          (input)="generateDiff()"
-          placeholder="Enter original text, JSON, or code..."
-          rows="12"
-        ></textarea>
+      <div class="input-header">
+        <label for="original">Original Text</label>
+        <button type="button" class="btn-secondary" (click)="formatOriginalAsJson()" title="Format as JSON">
+          <i class="fas fa-code"></i>
+        </button>
       </div>
+      <textarea
+        id="original"
+        [(ngModel)]="originalText"
+        (input)="generateDiff()"
+        placeholder="Enter original text, JSON, or code..."
+        rows="12"
+      ></textarea>
 
-      <div class="input-group">
-        <div class="input-header">
-          <label for="modified">Modified Text</label>
-          <button type="button" class="btn-secondary" (click)="formatModifiedAsJson()" title="Format as JSON">
-            <i class="fas fa-code"></i>
-          </button>
-        </div>
-        <textarea
-          id="modified"
-          [(ngModel)]="modifiedText"
-          (input)="generateDiff()"
-          placeholder="Enter modified text, JSON, or code..."
-          rows="12"
-        ></textarea>
+      <div class="input-header">
+        <label for="modified">Modified Text</label>
+        <button type="button" class="btn-secondary" (click)="formatModifiedAsJson()" title="Format as JSON">
+          <i class="fas fa-code"></i>
+        </button>
       </div>
+      <textarea
+        id="modified"
+        [(ngModel)]="modifiedText"
+        (input)="generateDiff()"
+        placeholder="Enter modified text, JSON, or code..."
+        rows="12"
+      ></textarea>
     </div>
 
     <div class="action-buttons">
