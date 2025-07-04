@@ -280,6 +280,9 @@ button.success {
   border-left-color: var(--accent-tertiary, #6c757d);
   color: var(--text-secondary);
   box-shadow: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 0.8rem;
+  transition: var(--transition-smooth);
 }
 
 .sample-btn:hover {
@@ -287,7 +290,8 @@ button.success {
   border-color: var(--border-secondary);
   border-left-color: var(--accent-tertiary, #6c757d);
   color: var(--text-primary);
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
 .sample-btn:active {
