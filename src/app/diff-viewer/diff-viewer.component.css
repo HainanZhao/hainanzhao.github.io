@@ -258,10 +258,6 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .input-grid {
-    grid-template-columns: 1fr;
-  }
-
   .split-view {
     grid-template-columns: 1fr;
   }
