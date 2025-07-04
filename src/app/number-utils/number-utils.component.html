@@ -5,17 +5,17 @@
   <!-- Byte Conversion -->
   <section class="section" id="byte-conversion">
     <h3>Byte Conversion</h3>
-      <label for="bytesInput">Bytes:</label>
-      <input id="bytesInput" type="number" [(ngModel)]="bytesInput" min="0" (input)="convertBytes()" />
+    <label for="bytesInput">Bytes:</label>
+    <input id="bytesInput" type="number" [(ngModel)]="bytesInput" min="0" (input)="convertBytes()" />
 
-      <label for="bytesStringInput">Human Readable (e.g., "1 GB"):</label>
-      <input
-        id="bytesStringInput"
-        type="text"
-        [(ngModel)]="bytesStringInput"
-        placeholder="1 GB, 500 MB, etc."
-        (input)="parseByteString()"
-      />
+    <label for="bytesStringInput">Human Readable (e.g., "1 GB"):</label>
+    <input
+      id="bytesStringInput"
+      type="text"
+      [(ngModel)]="bytesStringInput"
+      placeholder="1 GB, 500 MB, etc."
+      (input)="parseByteString()"
+    />
 
     <div class="results-grid">
       <div class="result" *ngIf="bytesResult">
@@ -33,34 +33,34 @@
   <!-- Base Conversion -->
   <section class="section" id="base-conversion">
     <h3>Base Conversion</h3>
-      <label for="baseInput">Number:</label>
-      <input id="baseInput" type="text" [(ngModel)]="baseInput" (input)="convertBase()" />
+    <label for="baseInput">Number:</label>
+    <input id="baseInput" type="text" [(ngModel)]="baseInput" (input)="convertBase()" />
 
-      <div class="base-selectors">
-        <div>
-          <label for="fromBase">From Base:</label>
-          <select id="fromBase" [(ngModel)]="fromBase" (change)="convertBase()">
-            <option value="2">Binary (2)</option>
-            <option value="8">Octal (8)</option>
-            <option value="10">Decimal (10)</option>
-            <option value="16">Hexadecimal (16)</option>
-            <option value="32">Base32</option>
-            <option value="36">Base36</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="toBase">To Base:</label>
-          <select id="toBase" [(ngModel)]="toBase" (change)="convertBase()">
-            <option value="2">Binary (2)</option>
-            <option value="8">Octal (8)</option>
-            <option value="10">Decimal (10)</option>
-            <option value="16">Hexadecimal (16)</option>
-            <option value="32">Base32</option>
-            <option value="36">Base36</option>
-          </select>
-        </div>
+    <div class="base-selectors">
+      <div>
+        <label for="fromBase">From Base:</label>
+        <select id="fromBase" [(ngModel)]="fromBase" (change)="convertBase()">
+          <option value="2">Binary (2)</option>
+          <option value="8">Octal (8)</option>
+          <option value="10">Decimal (10)</option>
+          <option value="16">Hexadecimal (16)</option>
+          <option value="32">Base32</option>
+          <option value="36">Base36</option>
+        </select>
       </div>
+
+      <div>
+        <label for="toBase">To Base:</label>
+        <select id="toBase" [(ngModel)]="toBase" (change)="convertBase()">
+          <option value="2">Binary (2)</option>
+          <option value="8">Octal (8)</option>
+          <option value="10">Decimal (10)</option>
+          <option value="16">Hexadecimal (16)</option>
+          <option value="32">Base32</option>
+          <option value="36">Base36</option>
+        </select>
+      </div>
+    </div>
 
     <div class="result" *ngIf="baseResult.value || baseResult.error">
       <span *ngIf="baseResult.value" class="success">{{ baseResult.value }}</span>
@@ -71,18 +71,18 @@
   <!-- Locale-Aware Number Formatting -->
   <section class="section" id="number-formatting">
     <h3>Locale-Aware Number Formatting</h3>
-      <label for="formatInput">Number:</label>
-      <input id="formatInput" type="number" [(ngModel)]="formatInput" (input)="formatNumber()" />
+    <label for="formatInput">Number:</label>
+    <input id="formatInput" type="number" [(ngModel)]="formatInput" (input)="formatNumber()" />
 
-      <label for="locale">Locale:</label>
-      <select id="locale" [(ngModel)]="locale" (change)="formatNumber()">
-        <option value="en-US">English (US)</option>
-        <option value="en-GB">English (UK)</option>
-        <option value="de-DE">German</option>
-        <option value="fr-FR">French</option>
-        <option value="ja-JP">Japanese</option>
-        <option value="zh-CN">Chinese</option>
-      </select>
+    <label for="locale">Locale:</label>
+    <select id="locale" [(ngModel)]="locale" (change)="formatNumber()">
+      <option value="en-US">English (US)</option>
+      <option value="en-GB">English (UK)</option>
+      <option value="de-DE">German</option>
+      <option value="fr-FR">French</option>
+      <option value="ja-JP">Japanese</option>
+      <option value="zh-CN">Chinese</option>
+    </select>
 
     <div class="result" *ngIf="formatResult">
       <span>{{ formatResult }}</span>
@@ -92,34 +92,34 @@
   <!-- Unit Conversion -->
   <section class="section" id="unit-conversion">
     <h3>Unit Conversion</h3>
-      <label for="unitValue">Value:</label>
-      <input id="unitValue" type="number" [(ngModel)]="unitValue" (input)="convertUnits()" />
+    <label for="unitValue">Value:</label>
+    <input id="unitValue" type="number" [(ngModel)]="unitValue" (input)="convertUnits()" />
 
-      <div class="unit-selectors">
-        <div>
-          <label for="fromUnit">From:</label>
-          <select id="fromUnit" [(ngModel)]="fromUnit" (change)="convertUnits()">
-            <optgroup label="Length">
-              <option *ngFor="let unit of unitCategories.length" [value]="unit">{{ unit }}</option>
-            </optgroup>
-            <optgroup label="Weight">
-              <option *ngFor="let unit of unitCategories.weight" [value]="unit">{{ unit }}</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div>
-          <label for="toUnit">To:</label>
-          <select id="toUnit" [(ngModel)]="toUnit" (change)="convertUnits()">
-            <optgroup label="Length">
-              <option *ngFor="let unit of unitCategories.length" [value]="unit">{{ unit }}</option>
-            </optgroup>
-            <optgroup label="Weight">
-              <option *ngFor="let unit of unitCategories.weight" [value]="unit">{{ unit }}</option>
-            </optgroup>
-          </select>
-        </div>
+    <div class="unit-selectors">
+      <div>
+        <label for="fromUnit">From:</label>
+        <select id="fromUnit" [(ngModel)]="fromUnit" (change)="convertUnits()">
+          <optgroup label="Length">
+            <option *ngFor="let unit of unitCategories.length" [value]="unit">{{ unit }}</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option *ngFor="let unit of unitCategories.weight" [value]="unit">{{ unit }}</option>
+          </optgroup>
+        </select>
       </div>
+
+      <div>
+        <label for="toUnit">To:</label>
+        <select id="toUnit" [(ngModel)]="toUnit" (change)="convertUnits()">
+          <optgroup label="Length">
+            <option *ngFor="let unit of unitCategories.length" [value]="unit">{{ unit }}</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option *ngFor="let unit of unitCategories.weight" [value]="unit">{{ unit }}</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
 
     <div class="result" *ngIf="unitResult.value || unitResult.error">
       <span *ngIf="unitResult.value" class="success">{{ unitResult.value }} {{ toUnit }}</span>
@@ -130,8 +130,8 @@
   <!-- Duration Formatting -->
   <section class="section" id="duration-formatting">
     <h3>Duration Formatting</h3>
-      <label for="durationMs">Milliseconds:</label>
-      <input id="durationMs" type="number" [(ngModel)]="durationMs" min="0" (input)="formatDuration()" />
+    <label for="durationMs">Milliseconds:</label>
+    <input id="durationMs" type="number" [(ngModel)]="durationMs" min="0" (input)="formatDuration()" />
 
     <div class="result" *ngIf="durationResult">
       <span>{{ durationResult }}</span>
@@ -141,23 +141,23 @@
   <!-- Financial Calculations -->
   <section class="section" id="financial-calculations">
     <h3>Financial Calculations</h3>
-      <label for="principal">Principal:</label>
-      <input id="principal" type="number" [(ngModel)]="principal" min="0" (input)="calculateCompound()" />
+    <label for="principal">Principal:</label>
+    <input id="principal" type="number" [(ngModel)]="principal" min="0" (input)="calculateCompound()" />
 
-      <label for="rate">Annual Rate (decimal):</label>
-      <input id="rate" type="number" [(ngModel)]="rate" step="0.01" min="0" (input)="calculateCompound()" />
+    <label for="rate">Annual Rate (decimal):</label>
+    <input id="rate" type="number" [(ngModel)]="rate" step="0.01" min="0" (input)="calculateCompound()" />
 
-      <label for="time">Time (years):</label>
-      <input id="time" type="number" [(ngModel)]="time" min="0" (input)="calculateCompound()" />
+    <label for="time">Time (years):</label>
+    <input id="time" type="number" [(ngModel)]="time" min="0" (input)="calculateCompound()" />
 
-      <label for="frequency">Compound Frequency (per year):</label>
-      <select id="frequency" [(ngModel)]="frequency" (change)="calculateCompound()">
-        <option value="1">Annually</option>
-        <option value="2">Semi-annually</option>
-        <option value="4">Quarterly</option>
-        <option value="12">Monthly</option>
-        <option value="365">Daily</option>
-      </select>
+    <label for="frequency">Compound Frequency (per year):</label>
+    <select id="frequency" [(ngModel)]="frequency" (change)="calculateCompound()">
+      <option value="1">Annually</option>
+      <option value="2">Semi-annually</option>
+      <option value="4">Quarterly</option>
+      <option value="12">Monthly</option>
+      <option value="365">Daily</option>
+    </select>
 
     <div class="result" *ngIf="compoundResult">
       <span class="label">Compound Interest Result:</span>

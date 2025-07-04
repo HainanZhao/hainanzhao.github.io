@@ -5,14 +5,14 @@
   <section id="jwt-input" class="section" [class.highlighted]="highlightedSection === 'jwt-input'">
     <h3>JWT Token Input</h3>
 
-      <label for="jwtToken">JWT Token</label>
-      <textarea
-        id="jwtToken"
-        [(ngModel)]="jwtToken"
-        (input)="autoRefresh && parseJwt()"
-        placeholder="Paste your JWT token here (e.g., eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)"
-        rows="4"
-      ></textarea>
+    <label for="jwtToken">JWT Token</label>
+    <textarea
+      id="jwtToken"
+      [(ngModel)]="jwtToken"
+      (input)="autoRefresh && parseJwt()"
+      placeholder="Paste your JWT token here (e.g., eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)"
+      rows="4"
+    ></textarea>
 
     <div class="primary-actions">
       <button type="button" class="btn-primary" (click)="parseJwt()">

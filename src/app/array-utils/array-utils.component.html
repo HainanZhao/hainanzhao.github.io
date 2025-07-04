@@ -5,22 +5,22 @@
   <!-- Array Input Section -->
   <section class="section" id="array-input">
     <h3>Array Input</h3>
-      <textarea
-        id="arrayInput"
-        [(ngModel)]="arrayInput"
-        rows="4"
-        placeholder="Enter array as JSON: [1, 2, 3, 4, 5] or CSV: 1, 2, 3, 4, 5"
-        (input)="parseArrayInput(); analyzeArray()"
-      ></textarea>
-      <button
-        class="btn btn-secondary share-btn"
-        (click)="shareArray($event)"
-        [disabled]="!parsedArray.length"
-        title="Copy shareable URL to clipboard"
-      >
-        <i class="fas fa-share-alt"></i>
-        Share Array
-      </button>
+    <textarea
+      id="arrayInput"
+      [(ngModel)]="arrayInput"
+      rows="4"
+      placeholder="Enter array as JSON: [1, 2, 3, 4, 5] or CSV: 1, 2, 3, 4, 5"
+      (input)="parseArrayInput(); analyzeArray()"
+    ></textarea>
+    <button
+      class="btn btn-secondary share-btn"
+      (click)="shareArray($event)"
+      [disabled]="!parsedArray.length"
+      title="Copy shareable URL to clipboard"
+    >
+      <i class="fas fa-share-alt"></i>
+      Share Array
+    </button>
 
     <div class="input-format">
       <label for="inputFormat">Input Format:</label>
@@ -74,51 +74,51 @@
   <section class="section" id="array-manipulation">
     <h3>Array Manipulation</h3>
 
-      <div class="operation-group">
-        <h4>Basic Operations</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="shuffleArray()">Shuffle</button>
-          <button class="btn btn-secondary" (click)="uniqueArray()">Remove Duplicates</button>
-          <button class="btn btn-secondary" (click)="reverseArray()">Reverse</button>
-          <button class="btn btn-secondary" (click)="sortArray()">Sort</button>
-          <button class="btn btn-secondary" (click)="flattenArray()">Flatten</button>
-        </div>
+    <div class="operation-group">
+      <h4>Basic Operations</h4>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="shuffleArray()">Shuffle</button>
+        <button class="btn btn-secondary" (click)="uniqueArray()">Remove Duplicates</button>
+        <button class="btn btn-secondary" (click)="reverseArray()">Reverse</button>
+        <button class="btn btn-secondary" (click)="sortArray()">Sort</button>
+        <button class="btn btn-secondary" (click)="flattenArray()">Flatten</button>
+      </div>
+    </div>
+
+    <div class="operation-group">
+      <h4>Filtering & Slicing</h4>
+      <div class="filter-controls">
+        <input type="text" [(ngModel)]="filterValue" placeholder="Filter value" />
+        <select [(ngModel)]="filterOperation">
+          <option value="equals">Equals</option>
+          <option value="contains">Contains</option>
+          <option value="startsWith">Starts With</option>
+          <option value="endsWith">Ends With</option>
+          <option value="greater">Greater Than</option>
+          <option value="less">Less Than</option>
+        </select>
+        <button class="btn btn-secondary" (click)="filterArray()">Filter</button>
       </div>
 
-      <div class="operation-group">
-        <h4>Filtering & Slicing</h4>
-        <div class="filter-controls">
-          <input type="text" [(ngModel)]="filterValue" placeholder="Filter value" />
-          <select [(ngModel)]="filterOperation">
-            <option value="equals">Equals</option>
-            <option value="contains">Contains</option>
-            <option value="startsWith">Starts With</option>
-            <option value="endsWith">Ends With</option>
-            <option value="greater">Greater Than</option>
-            <option value="less">Less Than</option>
-          </select>
-          <button class="btn btn-secondary" (click)="filterArray()">Filter</button>
-        </div>
-
-        <div class="slice-controls">
-          <input type="number" [(ngModel)]="sliceStart" placeholder="Start index" />
-          <input type="number" [(ngModel)]="sliceEnd" placeholder="End index" />
-          <button class="btn btn-secondary" (click)="sliceArray()">Slice</button>
-        </div>
+      <div class="slice-controls">
+        <input type="number" [(ngModel)]="sliceStart" placeholder="Start index" />
+        <input type="number" [(ngModel)]="sliceEnd" placeholder="End index" />
+        <button class="btn btn-secondary" (click)="sliceArray()">Slice</button>
       </div>
+    </div>
 
-      <div class="operation-group">
-        <h4>Mathematical Operations (Numbers)</h4>
-        <div class="btn-group" *ngIf="arrayStats.dataType === 'numeric'">
-          <button class="btn btn-secondary" (click)="calculateSum()">Sum</button>
-          <button class="btn btn-secondary" (click)="calculateMedian()">Median</button>
-          <button class="btn btn-secondary" (click)="calculateMode()">Mode</button>
-          <button class="btn btn-secondary" (click)="calculateStdDev()">Std Dev</button>
-        </div>
-        <div *ngIf="arrayStats.dataType !== 'numeric'" class="info-text">
-          Mathematical operations are only available for numeric arrays
-        </div>
+    <div class="operation-group">
+      <h4>Mathematical Operations (Numbers)</h4>
+      <div class="btn-group" *ngIf="arrayStats.dataType === 'numeric'">
+        <button class="btn btn-secondary" (click)="calculateSum()">Sum</button>
+        <button class="btn btn-secondary" (click)="calculateMedian()">Median</button>
+        <button class="btn btn-secondary" (click)="calculateMode()">Mode</button>
+        <button class="btn btn-secondary" (click)="calculateStdDev()">Std Dev</button>
       </div>
+      <div *ngIf="arrayStats.dataType !== 'numeric'" class="info-text">
+        Mathematical operations are only available for numeric arrays
+      </div>
+    </div>
 
     <div class="result" *ngIf="operationResult">
       <span class="label">Result:</span>
@@ -131,36 +131,36 @@
   <section class="section" id="array-transformations">
     <h3>Array Transformations</h3>
 
-      <div class="transform-group">
-        <h4>Data Type Conversions</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="convertToNumbers()">To Numbers</button>
-          <button class="btn btn-secondary" (click)="convertToStrings()">To Strings</button>
-          <button class="btn btn-secondary" (click)="convertToBooleans()">To Booleans</button>
-        </div>
+    <div class="transform-group">
+      <h4>Data Type Conversions</h4>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="convertToNumbers()">To Numbers</button>
+        <button class="btn btn-secondary" (click)="convertToStrings()">To Strings</button>
+        <button class="btn btn-secondary" (click)="convertToBooleans()">To Booleans</button>
       </div>
+    </div>
 
-      <div class="transform-group">
-        <h4>String Transformations</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="toUpperCase()">UPPERCASE</button>
-          <button class="btn btn-secondary" (click)="toLowerCase()">lowercase</button>
-          <button class="btn btn-secondary" (click)="trimStrings()">Trim Whitespace</button>
-          <button class="btn btn-secondary" (click)="capitalizeStrings()">Capitalize</button>
-        </div>
+    <div class="transform-group">
+      <h4>String Transformations</h4>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="toUpperCase()">UPPERCASE</button>
+        <button class="btn btn-secondary" (click)="toLowerCase()">lowercase</button>
+        <button class="btn btn-secondary" (click)="trimStrings()">Trim Whitespace</button>
+        <button class="btn btn-secondary" (click)="capitalizeStrings()">Capitalize</button>
       </div>
+    </div>
 
-      <div class="transform-group">
-        <h4>Array Structure</h4>
-        <div class="chunk-controls">
-          <input type="number" [(ngModel)]="chunkSize" placeholder="Chunk size" min="1" />
-          <button class="btn btn-secondary" (click)="chunkArray()">Chunk Array</button>
-        </div>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="transposeMatrix()">Transpose (2D)</button>
-          <button class="btn btn-secondary" (click)="zipArrays()">Zip with Indices</button>
-        </div>
+    <div class="transform-group">
+      <h4>Array Structure</h4>
+      <div class="chunk-controls">
+        <input type="number" [(ngModel)]="chunkSize" placeholder="Chunk size" min="1" />
+        <button class="btn btn-secondary" (click)="chunkArray()">Chunk Array</button>
       </div>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="transposeMatrix()">Transpose (2D)</button>
+        <button class="btn btn-secondary" (click)="zipArrays()">Zip with Indices</button>
+      </div>
+    </div>
 
     <div class="result" *ngIf="transformResult">
       <span class="label">Transformed:</span>
@@ -173,20 +173,20 @@
   <section class="section" id="array-grouping">
     <h3>Grouping & Aggregation</h3>
 
-      <div class="group-by-controls">
-        <h4>Group By Property</h4>
-        <input type="text" [(ngModel)]="groupByKey" placeholder="Property name (for objects)" />
-        <button class="btn btn-secondary" (click)="groupByProperty()">Group By</button>
-      </div>
+    <div class="group-by-controls">
+      <h4>Group By Property</h4>
+      <input type="text" [(ngModel)]="groupByKey" placeholder="Property name (for objects)" />
+      <button class="btn btn-secondary" (click)="groupByProperty()">Group By</button>
+    </div>
 
-      <div class="frequency-controls">
-        <h4>Value Analysis</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="getFrequency()">Value Frequency</button>
-          <button class="btn btn-secondary" (click)="findOutliers()">Find Outliers</button>
-          <button class="btn btn-secondary" (click)="getPercentiles()">Percentiles</button>
-        </div>
+    <div class="frequency-controls">
+      <h4>Value Analysis</h4>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="getFrequency()">Value Frequency</button>
+        <button class="btn btn-secondary" (click)="findOutliers()">Find Outliers</button>
+        <button class="btn btn-secondary" (click)="getPercentiles()">Percentiles</button>
       </div>
+    </div>
 
     <div class="result" *ngIf="groupingResult">
       <span class="label">Analysis:</span>
@@ -199,38 +199,38 @@
   <section class="section" id="array-generation">
     <h3>Array Generation</h3>
 
-      <div class="range-controls">
-        <h4>Number Ranges</h4>
-        <div class="range-inputs">
-          <input type="number" [(ngModel)]="rangeStart" placeholder="Start" />
-          <input type="number" [(ngModel)]="rangeEnd" placeholder="End" />
-          <input type="number" [(ngModel)]="rangeStep" placeholder="Step" value="1" />
-          <button class="btn btn-secondary" (click)="createRange()">Create Range</button>
-        </div>
+    <div class="range-controls">
+      <h4>Number Ranges</h4>
+      <div class="range-inputs">
+        <input type="number" [(ngModel)]="rangeStart" placeholder="Start" />
+        <input type="number" [(ngModel)]="rangeEnd" placeholder="End" />
+        <input type="number" [(ngModel)]="rangeStep" placeholder="Step" value="1" />
+        <button class="btn btn-secondary" (click)="createRange()">Create Range</button>
       </div>
+    </div>
 
-      <div class="random-controls">
-        <h4>Random Arrays</h4>
-        <div class="random-inputs">
-          <input type="number" [(ngModel)]="randomCount" placeholder="Count" value="10" />
-          <input type="number" [(ngModel)]="randomMin" placeholder="Min" value="1" />
-          <input type="number" [(ngModel)]="randomMax" placeholder="Max" value="100" />
-          <button class="btn btn-secondary" (click)="generateRandomNumbers()">Random Numbers</button>
-        </div>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="generateRandomStrings()">Random Strings</button>
-          <button class="btn btn-secondary" (click)="generateGUID()">UUIDs</button>
-        </div>
+    <div class="random-controls">
+      <h4>Random Arrays</h4>
+      <div class="random-inputs">
+        <input type="number" [(ngModel)]="randomCount" placeholder="Count" value="10" />
+        <input type="number" [(ngModel)]="randomMin" placeholder="Min" value="1" />
+        <input type="number" [(ngModel)]="randomMax" placeholder="Max" value="100" />
+        <button class="btn btn-secondary" (click)="generateRandomNumbers()">Random Numbers</button>
       </div>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="generateRandomStrings()">Random Strings</button>
+        <button class="btn btn-secondary" (click)="generateGUID()">UUIDs</button>
+      </div>
+    </div>
 
-      <div class="sequence-controls">
-        <h4>Sequences</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary" (click)="fibonacci()">Fibonacci</button>
-          <button class="btn btn-secondary" (click)="primeNumbers()">Prime Numbers</button>
-          <button class="btn btn-secondary" (click)="factorials()">Factorials</button>
-        </div>
+    <div class="sequence-controls">
+      <h4>Sequences</h4>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="fibonacci()">Fibonacci</button>
+        <button class="btn btn-secondary" (click)="primeNumbers()">Prime Numbers</button>
+        <button class="btn btn-secondary" (click)="factorials()">Factorials</button>
       </div>
+    </div>
 
     <div class="result" *ngIf="generatedArray">
       <span class="label">Generated Array:</span>
