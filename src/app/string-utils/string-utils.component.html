@@ -46,10 +46,10 @@
 
   <!-- Text Manipulation Section -->
   <section id="text-manipulation" class="section" [class.highlighted]="highlightedSection === 'text-manipulation'">
-    <h3 (click)="toggleTextManipulation()" class="collapsible-header">
-      Text Manipulation
+    <div (click)="toggleTextManipulation()" class="collapsible-header">
+      <h3>Text Manipulation</h3>
       <i class="fas" [ngClass]="showTextManipulation ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
+    </div>
     <div *ngIf="showTextManipulation">
       <div class="manipulation-options">
         <div class="basic-operations">
@@ -87,10 +87,10 @@
 
   <!-- Encoding/Decoding Section -->
   <section id="encoding-decoding" class="section" [class.highlighted]="highlightedSection === 'encoding-decoding'">
-    <h3 (click)="toggleEncodingDecoding()" class="collapsible-header">
-      Encoding & Decoding
+    <div (click)="toggleEncodingDecoding()" class="collapsible-header">
+      <h3>Encoding & Decoding</h3>
       <i class="fas" [ngClass]="showEncodingDecoding ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
+    </div>
     <div *ngIf="showEncodingDecoding">
       <div class="encoding-options">
         <div class="encode-group">
@@ -126,10 +126,10 @@
 
   <!-- Hash Generation Section -->
   <section id="hash-generation" class="section" [class.highlighted]="highlightedSection === 'hash-generation'">
-    <h3 (click)="toggleHashGeneration()" class="collapsible-header">
-      Hash Generation
+    <div (click)="toggleHashGeneration()" class="collapsible-header">
+      <h3>Hash Generation</h3>
       <i class="fas" [ngClass]="showHashGeneration ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
+    </div>
     <div *ngIf="showHashGeneration">
       <div class="hash-buttons">
         <button class="btn btn-secondary" (click)="generateSHA256()">Generate SHA-256</button>
@@ -146,10 +146,10 @@
 
   <!-- Password Generator Section -->
   <section id="password-generator" class="section" [class.highlighted]="highlightedSection === 'password-generator'">
-    <h3 (click)="togglePasswordGenerator()" class="collapsible-header">
-      Password Generator
+    <div (click)="togglePasswordGenerator()" class="collapsible-header">
+      <h3>Password Generator</h3>
       <i class="fas" [ngClass]="showPasswordGenerator ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
+    </div>
     <div *ngIf="showPasswordGenerator">
       <div class="password-controls">
         <div class="length-control">

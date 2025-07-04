@@ -42,10 +42,10 @@
   </section>
 
   <section class="section" id="help">
-    <h3 (click)="toggleHelp()" class="collapsible-header">
-      Calculator Help
+    <div (click)="toggleHelp()" class="collapsible-header">
+      <h3>Calculator Help</h3>
       <i class="fas" [ngClass]="showHelp ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
+    </div>
     <div class="help-content" *ngIf="showHelp">
       <h4>Supported Operations:</h4>
       <ul>
