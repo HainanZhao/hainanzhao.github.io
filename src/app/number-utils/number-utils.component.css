@@ -4,14 +4,14 @@
 .clamp-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .base-selectors,
 .unit-selectors {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 /* Results grid - compact sizing */
@@ -24,18 +24,18 @@
 
 /* More compact result styling */
 .result {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-sm);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .result .label {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   margin-bottom: calc(var(--spacing-xs) * 0.5);
 }
 
 .result span {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   word-break: break-all;
 }
 

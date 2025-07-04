@@ -26,7 +26,7 @@ select {
   background-color: var(--bg-tertiary);
   color: var(--text-primary);
   border: 1px solid var(--border-primary);
-  border-radius: 6px;
+  border-radius: var(--border-radius-md);
   font-size: 0.9rem;
   transition: var(--transition-smooth);
 }
@@ -43,7 +43,7 @@ select:focus {
   overflow-x: auto;
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   padding: var(--spacing-sm);
   transition: var(--transition-smooth);
 }
@@ -61,11 +61,11 @@ select:focus {
 /* Make the visualization section larger */
 .visualization-section {
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
+  border: 1px solid var(--border-primary);
+  transition: var(--transition-smooth);
   min-height: 700px; /* Reduced from 900px */
   width: 100%;
 }
@@ -76,7 +76,7 @@ select:focus {
   height: auto !important;
   min-height: 700px;
   background-color: var(--bg-primary);
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm);
 }
 
 /* Tree Layout Styles */
@@ -100,15 +100,15 @@ select:focus {
 }
 
 :host ::ng-deep .node-boolean circle {
-  fill: #ff9800;
+  fill: var(--accent-warning);
 }
 
 :host ::ng-deep .node-object circle {
-  fill: #9c27b0;
+  fill: var(--accent-secondary);
 }
 
 :host ::ng-deep .node-array circle {
-  fill: #f44336;
+  fill: var(--accent-error);
 }
 
 :host ::ng-deep .node text {
@@ -120,28 +120,28 @@ select:focus {
 
 /* Bubble Hierarchy Styles */
 :host ::ng-deep .bubble circle {
-  stroke: #0d7377;
+  stroke: var(--accent-primary);
   stroke-width: 1px;
 }
 
 :host ::ng-deep .bubble-string circle {
-  fill: rgba(76, 175, 80, 0.7);
+  fill: rgba(var(--accent-success-rgb), 0.7);
 }
 
 :host ::ng-deep .bubble-number circle {
-  fill: rgba(33, 150, 243, 0.7);
+  fill: rgba(var(--accent-primary-rgb), 0.7);
 }
 
 :host ::ng-deep .bubble-boolean circle {
-  fill: rgba(255, 152, 0, 0.7);
+  fill: rgba(var(--accent-warning-rgb), 0.7);
 }
 
 :host ::ng-deep .bubble-object circle {
-  fill: rgba(156, 39, 176, 0.7);
+  fill: rgba(var(--accent-secondary-rgb), 0.7);
 }
 
 :host ::ng-deep .bubble-array circle {
-  fill: rgba(244, 67, 54, 0.7);
+  fill: rgba(var(--accent-error-rgb), 0.7);
 }
 
 :host ::ng-deep .bubble text {
@@ -157,7 +157,7 @@ select:focus {
 }
 
 :host ::ng-deep .network-node circle {
-  stroke: #0d7377;
+  stroke: var(--accent-primary);
   stroke-width: 2px;
   cursor: grab;
 }
@@ -167,23 +167,23 @@ select:focus {
 }
 
 :host ::ng-deep .network-node-string circle {
-  fill: #4caf50;
+  fill: var(--accent-success);
 }
 
 :host ::ng-deep .network-node-number circle {
-  fill: #2196f3;
+  fill: var(--accent-primary);
 }
 
 :host ::ng-deep .network-node-boolean circle {
-  fill: #ff9800;
+  fill: var(--accent-warning);
 }
 
 :host ::ng-deep .network-node-object circle {
-  fill: #9c27b0;
+  fill: var(--accent-secondary);
 }
 
 :host ::ng-deep .network-node-array circle {
-  fill: #f44336;
+  fill: var(--accent-error);
 }
 
 :host ::ng-deep .network-node text {
@@ -198,11 +198,11 @@ select:focus {
 
 /* Visualization Info */
 .visualization-info {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
-  border-radius: 6px;
+  border-radius: var(--border-radius-md);
   font-size: 0.9rem;
 }
 
@@ -256,10 +256,10 @@ select:focus {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
   color: var(--text-primary);
-  transition: all 0.2s ease;
+  transition: var(--transition-smooth);
 }
 
 .zoom-btn:hover {
   background-color: var(--accent-secondary);
-  color: var(--text-on-accent);
+  color: var(--text-primary);
 }

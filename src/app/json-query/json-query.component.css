@@ -3,37 +3,6 @@
 
 /* JSON Query Specific Styles */
 
-.container {
-  padding: var(--spacing-sm) var(--spacing-xl);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--text-primary);
-}
-
-.description {
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* Override for SQL textarea */
 .sql-input {
   font-size: 1rem;
@@ -43,25 +12,25 @@
 /* Query specific styles */
 .query-help {
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
   font-size: 0.9rem;
 }
 
 .sample-queries {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
 }
 
 .sample-queries span {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-sm);
   display: block;
 }
 
 .query-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -69,9 +38,9 @@
   background: var(--bg-tertiary);
   color: var(--accent-primary);
   border: 1px solid var(--accent-primary);
-  border-radius: 20px;
+  border-radius: var(--border-radius-md);
   font-size: 0.8rem;
-  padding: 0.25rem 0.75rem;
+  padding: var(--spacing-xs) var(--spacing-md);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -87,23 +56,21 @@
 .query-actions {
   display: flex;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
 }
-
-/* Share button styling is now handled by the global button system */
 
 /* Results area */
 .result-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
 }
 
 .format-options {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-lg);
 }
 
 .format-options span {
@@ -114,7 +81,7 @@
 .format-options label {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--spacing-xs);
   cursor: pointer;
 }
 
@@ -144,47 +111,47 @@ th {
   background: var(--bg-tertiary);
   color: var(--accent-primary);
   text-align: left;
-  padding: 0.75rem;
+  padding: var(--spacing-sm);
   border-bottom: 2px solid var(--border-primary);
   font-weight: 600;
 }
 
 td {
-  padding: 0.75rem;
+  padding: var(--spacing-sm);
   border-bottom: 1px solid var(--border-primary);
   color: var(--text-primary);
 }
 
 tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(var(--text-primary-rgb), 0.025);
 }
 
 /* Help section */
 .help-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
 }
 
 .help-section {
   background: var(--bg-tertiary);
-  padding: var(--spacing-sm);
-  border-radius: 8px;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
 }
 
 .help-section h4 {
   color: var(--accent-primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--spacing-sm);
   font-size: 1rem;
 }
 
 .help-section pre {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.75rem;
-  border-radius: 4px;
+  background: var(--bg-secondary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-sm);
   overflow-x: auto;
-  margin-bottom: 0.75rem;
-  font-family: 'Courier New', monospace;
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-mono);
   font-size: 0.85rem;
 }
 
@@ -194,21 +161,21 @@ tr:nth-child(even) {
 }
 
 .help-section ul {
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
+  padding-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
 }
 
 .help-section li {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-xs);
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .help-section code {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
+  background: var(--bg-secondary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-mono);
   font-size: 0.85rem;
 }
 

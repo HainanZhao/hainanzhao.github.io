@@ -24,7 +24,7 @@
   word-break: break-all;
   font-size: 0.85rem;
   white-space: pre-wrap;
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: auto;
   color: var(--text-secondary);
   transition: var(--transition-smooth);
@@ -37,7 +37,7 @@
 
 .hash-text {
   word-break: break-all;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-tertiary);
 }
 
@@ -80,10 +80,6 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--accent-primary);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .analysis-details ul {
@@ -91,12 +87,12 @@
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-sm);
   border: 1px solid var(--border-primary);
-  margin: 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .analysis-details li {
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
 }
 
 /* Manipulation Controls */
@@ -162,19 +158,19 @@
 
 /* Copy Button */
 .copy-btn {
-  background-color: #0d7377;
-  color: white;
+  background-color: var(--accent-primary);
+  color: var(--text-primary);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-size: 0.8rem;
-  margin-top: 0.5rem;
-  transition: background-color 0.2s;
+  margin-top: var(--spacing-sm);
+  transition: var(--transition-smooth);
 }
 
 .copy-btn:hover {
-  background-color: #14a085;
+  background-color: var(--accent-secondary);
 }
 
 /* Clear Section */
@@ -184,8 +180,8 @@
 }
 
 .clear-btn {
-  background: linear-gradient(135deg, var(--accent-error) 0%, #dc2626 100%);
-  color: white;
+  background-color: var(--accent-error);
+  color: var(--text-primary);
   border: none;
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--border-radius-md);
@@ -220,12 +216,8 @@
   }
 }
 
-input[type='number'] {
-  width: 200px;
-}
-
 textarea {
-  min-height: 80px;
+  min-height: 120px;
   resize: vertical;
 }
 
@@ -260,7 +252,6 @@ textarea {
 .case-selector select,
 .operation-selector select {
   width: 100%;
-  max-width: 300px;
 }
 
 .basic-operations,
@@ -269,8 +260,8 @@ textarea {
 }
 
 .extraction-operations {
-  border-top: 1px solid var(--border-primary);
-  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-secondary);
+  padding-top: var(--spacing-lg);
 }
 
 .extract-buttons,
@@ -280,27 +271,23 @@ textarea {
 .password-buttons,
 .random-buttons {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   flex-wrap: wrap;
 }
 
 .encoding-options {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   flex-wrap: wrap;
 }
 
 .encode-group,
 .decode-group {
   flex: 1;
-  min-width: 200px;
+  min-width: 250px;
 }
 
 .password-buttons,
 .random-buttons {
-  margin-top: var(--spacing-md);
-}
-
-.clear-btn {
-  width: 100%;
+  margin-top: var(--spacing-lg);
 }

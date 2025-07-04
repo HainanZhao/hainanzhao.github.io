@@ -1,20 +1,20 @@
 .about-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--spacing-2xl);
   line-height: 1.6;
 }
 
 .about-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .about-icon {
   width: 64px;
   height: 64px;
-  margin: 0 auto 1rem;
-  color: var(--accent-color);
+  margin: 0 auto var(--spacing-lg);
+  color: var(--accent-primary);
 }
 
 .about-icon svg {
@@ -32,16 +32,16 @@
 .about-content {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: var(--spacing-2xl);
 }
 
 .about-section h2 {
   color: var(--text-primary);
   font-size: 1.5rem;
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--spacing-lg) 0;
   font-weight: 600;
-  border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-primary);
+  padding-bottom: var(--spacing-sm);
 }
 
 .about-section p {
@@ -53,29 +53,29 @@
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
 .tool-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition-smooth);
 }
 
 .tool-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-primary);
 }
 
 .tool-item i {
-  color: var(--accent-color);
+  color: var(--accent-primary);
   font-size: 1.2rem;
   width: 20px;
   text-align: center;
@@ -89,22 +89,22 @@
 .features-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0 0;
+  margin: var(--spacing-lg) 0 0 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 0.75rem;
+  gap: var(--spacing-md);
 }
 
 .features-list li {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
   color: var(--text-secondary);
 }
 
 .features-list i {
-  color: var(--accent-color);
+  color: var(--accent-primary);
   font-size: 1.1rem;
   width: 20px;
   text-align: center;
@@ -113,29 +113,29 @@
 .shortcuts-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
 .shortcut-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
 }
 
 .shortcut-item kbd {
   background: var(--text-primary);
   color: var(--bg-primary);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .shortcut-item span {
@@ -146,7 +146,7 @@
 /* Mobile responsive */
 @media (max-width: 768px) {
   .about-container {
-    padding: 1rem;
+    padding: var(--spacing-lg);
   }
 
   .about-header h1 {
@@ -159,11 +159,11 @@
 
   .tools-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.75rem;
+    gap: var(--spacing-md);
   }
 
   .tool-item {
-    padding: 0.5rem 0.75rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     font-size: 0.9rem;
   }
 
@@ -174,21 +174,21 @@
   .shortcut-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
 }
 
 @media (max-width: 480px) {
   .about-container {
-    padding: 0.75rem;
+    padding: var(--spacing-md);
   }
 
   .about-header {
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-xl);
   }
 
   .about-content {
-    gap: 2rem;
+    gap: var(--spacing-xl);
   }
 
   .tools-grid {
