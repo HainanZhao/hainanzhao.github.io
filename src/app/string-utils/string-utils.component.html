@@ -10,7 +10,7 @@
         [(ngModel)]="inputText"
         rows="3"
         placeholder="Enter text to convert..."
-        (input)="analyzeText(); updateUrlWithText()"
+        (input)="updateUrlWithText()"
       ></textarea>
       <button
         class="btn btn-secondary share-btn"
@@ -41,49 +41,6 @@
     <div class="result" *ngIf="convertedText">
       <span class="result-text">{{ convertedText }}</span>
       <button class="btn btn-secondary copy-btn" (click)="copyToClipboard(convertedText)">📋 Copy</button>
-    </div>
-  </section>
-
-  <!-- Text Analysis Section -->
-  <section id="text-analysis" class="section" [class.highlighted]="highlightedSection === 'text-analysis'">
-    <h3 (click)="toggleTextAnalysis()" class="collapsible-header">
-      Text Analysis
-      <i class="fas" [ngClass]="showTextAnalysis ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-    </h3>
-    <div *ngIf="showTextAnalysis && textAnalysis.characterCount">
-      <div class="analysis-grid">
-        <div class="stat-item">
-          <span class="stat-label">Characters</span>
-          <span class="stat-value">{{ textAnalysis.characterCount }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Characters (no spaces)</span>
-          <span class="stat-value">{{ textAnalysis.characterCountNoSpaces }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Words</span>
-          <span class="stat-value">{{ textAnalysis.wordCount }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Sentences</span>
-          <span class="stat-value">{{ textAnalysis.sentenceCount }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Paragraphs</span>
-          <span class="stat-value">{{ textAnalysis.paragraphCount }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Reading Time</span>
-          <span class="stat-value">{{ textAnalysis.readingTime }} min</span>
-        </div>
-      </div>
-
-      <div class="analysis-details" *ngIf="textAnalysis.commonWords?.length > 0">
-        <h4>Most Common Words</h4>
-        <ul>
-          <li *ngFor="let word of textAnalysis.commonWords">{{ word[0] }}: {{ word[1] }} times</li>
-        </ul>
-      </div>
     </div>
   </section>
 

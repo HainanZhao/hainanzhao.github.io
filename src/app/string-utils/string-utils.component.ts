@@ -25,9 +25,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   characterCount: number = 10;
   generatedCharacters: string = '';
 
-  // Text analysis properties
-  textAnalysis: any = {};
-
   // Text manipulation properties
   manipulatedText: string = '';
   selectedTextOperation = '';
@@ -47,7 +44,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   includeSymbols: boolean = false;
   generatedPassword: string = '';
 
-  showTextAnalysis: boolean = false;
   showTextManipulation: boolean = false;
   showEncodingDecoding: boolean = false;
   showHashGeneration: boolean = false;
@@ -397,10 +393,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
 
   toggleHelp() {
     this.showHelp = !this.showHelp;
-  }
-
-  toggleTextAnalysis() {
-    this.showTextAnalysis = !this.showTextAnalysis;
   }
 
   toggleTextManipulation() {
