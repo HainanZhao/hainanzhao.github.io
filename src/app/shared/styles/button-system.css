@@ -113,7 +113,7 @@ button.secondary {
   box-shadow: none;
   position: relative;
   border-left-width: 3px;
-  border-left-color: var(--border-secondary);
+  border-left-color: var(--accent-tertiary);
 }
 
 .btn-secondary:hover,
@@ -274,24 +274,12 @@ button.success {
 
 /* Sample Buttons - For loading example data */
 .sample-btn {
-  background-color: var(--accent-tertiary);
-  border: 1px solid var(--border-primary); /* Visible border */
-  border-left-width: 3px;
+  /* Inherits base styles from .btn-secondary */
   border-left-color: var(--accent-tertiary);
-  color: var(--text-primary);
-  box-shadow: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  font-size: 0.8rem;
-  transition: var(--transition-smooth);
 }
 
 .sample-btn:hover {
-  background-color: var(--accent-secondary);
-  border-color: var(--border-secondary); /* Visible border on hover */
   border-left-color: var(--accent-secondary);
-  color: var(--text-primary);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-1px);
 }
 
 .sample-btn:active {
