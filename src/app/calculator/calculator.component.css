@@ -71,20 +71,3 @@
 .result span {
   flex-grow: 1;
 }
-
-.collapsible-header {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-sm) 0;
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-primary);
-  margin-bottom: var(--spacing-md);
-}
-
-.collapsible-header i {
-  transition: transform 0.2s ease-in-out;
-}

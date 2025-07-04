@@ -169,7 +169,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
   // Text Analysis Methods
   analyzeText() {
     if (!this.inputText) {
-      this.textAnalysis = {};
       return;
     }
 
@@ -197,28 +196,6 @@ export class StringUtilsComponent implements OnInit, OnDestroy {
         wordFrequency[cleanWord] = (wordFrequency[cleanWord] || 0) + 1;
       }
     }
-
-    // Most common words
-    const commonWords = Object.entries(wordFrequency)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5);
-
-    this.textAnalysis = {
-      characterCount: text.length,
-      characterCountNoSpaces: text.replace(/\s/g, '').length,
-      wordCount: words.length,
-      sentenceCount: sentences.length,
-      paragraphCount: paragraphs.length,
-      averageWordsPerSentence:
-        sentences.length > 0 ? (words.length / sentences.length).toFixed(1) : 0,
-      averageCharsPerWord:
-        words.length > 0 ? (text.replace(/\s/g, '').length / words.length).toFixed(1) : 0,
-      readingTime: Math.ceil(words.length / 200), // Assuming 200 WPM
-      commonWords: commonWords,
-      charFrequency: Object.entries(charFrequency)
-        .sort(([, a], [, b]) => b - a)
-        .slice(0, 5),
-    };
   }
 
   // Text Manipulation Methods

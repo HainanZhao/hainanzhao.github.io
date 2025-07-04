@@ -196,22 +196,23 @@ h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 }
 h2 {
-  font-size: 1.75rem;
-}
-h3 {
   font-size: 1.5rem;
 }
-h4 {
+h3 {
   font-size: 1.25rem;
+  margin-bottom: 1rem; /* Ensure consistent spacing */
+}
+h4 {
+  font-size: 1rem;
 }
 h5 {
-  font-size: 1.125rem;
+  font-size: 0.875rem;
 }
 h6 {
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 
 section,
@@ -227,11 +228,36 @@ section,
 /* Section Header Styling - Beautiful gradient text for all section headers */
 .section h3,
 .json-section h3,
-section h3 {
-  font-size: 1rem;
+section h3,
+.section-header h3 {
+  font-size: 1.5rem; /* Standard H3 size */
   font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-  margin-right: 1rem;
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Collapsible header specific layout */
+.collapsible-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.collapsible-header i {
+  transition: transform 0.2s ease-in-out;
+}
+
+.collapsible-header h3 {
+  /* Ensure h3 inside collapsible header inherits section-header styles */
+  margin: 0; /* Override default h3 margin */
+  font-size: 1.5rem; /* Ensure consistent font size */
+  font-weight: 600; /* Ensure consistent font weight */
   background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   background-clip: text;
   -webkit-background-clip: text;
