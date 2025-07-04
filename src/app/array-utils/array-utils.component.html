@@ -5,7 +5,6 @@
   <!-- Array Input Section -->
   <section class="section" id="array-input">
     <h3>Array Input</h3>
-    <div class="input-section">
       <textarea
         id="arrayInput"
         [(ngModel)]="arrayInput"
@@ -22,7 +21,6 @@
         <i class="fas fa-share-alt"></i>
         Share Array
       </button>
-    </div>
 
     <div class="input-format">
       <label for="inputFormat">Input Format:</label>
@@ -76,7 +74,6 @@
   <section class="section" id="array-manipulation">
     <h3>Array Manipulation</h3>
 
-    <div class="operation-groups">
       <div class="operation-group">
         <h4>Basic Operations</h4>
         <div class="btn-group">
@@ -122,7 +119,6 @@
           Mathematical operations are only available for numeric arrays
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="operationResult">
       <span class="label">Result:</span>
@@ -135,7 +131,6 @@
   <section class="section" id="array-transformations">
     <h3>Array Transformations</h3>
 
-    <div class="transformation-controls">
       <div class="transform-group">
         <h4>Data Type Conversions</h4>
         <div class="btn-group">
@@ -166,7 +161,6 @@
           <button class="btn btn-secondary" (click)="zipArrays()">Zip with Indices</button>
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="transformResult">
       <span class="label">Transformed:</span>
@@ -179,7 +173,6 @@
   <section class="section" id="array-grouping">
     <h3>Grouping & Aggregation</h3>
 
-    <div class="grouping-controls">
       <div class="group-by-controls">
         <h4>Group By Property</h4>
         <input type="text" [(ngModel)]="groupByKey" placeholder="Property name (for objects)" />
@@ -194,7 +187,6 @@
           <button class="btn btn-secondary" (click)="getPercentiles()">Percentiles</button>
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="groupingResult">
       <span class="label">Analysis:</span>
@@ -207,7 +199,6 @@
   <section class="section" id="array-generation">
     <h3>Array Generation</h3>
 
-    <div class="generation-controls">
       <div class="range-controls">
         <h4>Number Ranges</h4>
         <div class="range-inputs">
@@ -240,7 +231,6 @@
           <button class="btn btn-secondary" (click)="factorials()">Factorials</button>
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="generatedArray">
       <span class="label">Generated Array:</span>

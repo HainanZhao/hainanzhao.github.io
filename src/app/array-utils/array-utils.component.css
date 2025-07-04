@@ -1,14 +1,14 @@
 /* Array Utils Styles - Leveraging global design system */
 
 /* Input section with share button */
-.input-section {
+.section#array-input {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
 }
 
-.input-section textarea {
+.section#array-input textarea {
   flex: 1;
   min-height: 100px;
   resize: vertical;
@@ -76,10 +76,10 @@
 }
 
 /* Operation groups */
-.operation-groups,
-.transformation-controls,
-.grouping-controls,
-.generation-controls {
+.section#array-manipulation,
+.section#array-transformations,
+.section#array-grouping,
+.section#array-generation {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
