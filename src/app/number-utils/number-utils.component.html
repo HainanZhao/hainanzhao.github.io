@@ -5,7 +5,6 @@
   <!-- Byte Conversion -->
   <section class="section" id="byte-conversion">
     <h3>Byte Conversion</h3>
-    <div class="input-group">
       <label for="bytesInput">Bytes:</label>
       <input id="bytesInput" type="number" [(ngModel)]="bytesInput" min="0" (input)="convertBytes()" />
 
@@ -17,7 +16,6 @@
         placeholder="1 GB, 500 MB, etc."
         (input)="parseByteString()"
       />
-    </div>
 
     <div class="results-grid">
       <div class="result" *ngIf="bytesResult">
@@ -35,7 +33,6 @@
   <!-- Base Conversion -->
   <section class="section" id="base-conversion">
     <h3>Base Conversion</h3>
-    <div class="input-group">
       <label for="baseInput">Number:</label>
       <input id="baseInput" type="text" [(ngModel)]="baseInput" (input)="convertBase()" />
 
@@ -64,7 +61,6 @@
           </select>
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="baseResult.value || baseResult.error">
       <span *ngIf="baseResult.value" class="success">{{ baseResult.value }}</span>
@@ -75,7 +71,6 @@
   <!-- Locale-Aware Number Formatting -->
   <section class="section" id="number-formatting">
     <h3>Locale-Aware Number Formatting</h3>
-    <div class="input-group">
       <label for="formatInput">Number:</label>
       <input id="formatInput" type="number" [(ngModel)]="formatInput" (input)="formatNumber()" />
 
@@ -88,7 +83,6 @@
         <option value="ja-JP">Japanese</option>
         <option value="zh-CN">Chinese</option>
       </select>
-    </div>
 
     <div class="result" *ngIf="formatResult">
       <span>{{ formatResult }}</span>
@@ -98,7 +92,6 @@
   <!-- Unit Conversion -->
   <section class="section" id="unit-conversion">
     <h3>Unit Conversion</h3>
-    <div class="input-group">
       <label for="unitValue">Value:</label>
       <input id="unitValue" type="number" [(ngModel)]="unitValue" (input)="convertUnits()" />
 
@@ -127,7 +120,6 @@
           </select>
         </div>
       </div>
-    </div>
 
     <div class="result" *ngIf="unitResult.value || unitResult.error">
       <span *ngIf="unitResult.value" class="success">{{ unitResult.value }} {{ toUnit }}</span>
@@ -138,10 +130,8 @@
   <!-- Duration Formatting -->
   <section class="section" id="duration-formatting">
     <h3>Duration Formatting</h3>
-    <div class="input-group">
       <label for="durationMs">Milliseconds:</label>
       <input id="durationMs" type="number" [(ngModel)]="durationMs" min="0" (input)="formatDuration()" />
-    </div>
 
     <div class="result" *ngIf="durationResult">
       <span>{{ durationResult }}</span>
@@ -151,7 +141,6 @@
   <!-- Financial Calculations -->
   <section class="section" id="financial-calculations">
     <h3>Financial Calculations</h3>
-    <div class="input-group">
       <label for="principal">Principal:</label>
       <input id="principal" type="number" [(ngModel)]="principal" min="0" (input)="calculateCompound()" />
 
@@ -169,7 +158,6 @@
         <option value="12">Monthly</option>
         <option value="365">Daily</option>
       </select>
-    </div>
 
     <div class="result" *ngIf="compoundResult">
       <span class="label">Compound Interest Result:</span>

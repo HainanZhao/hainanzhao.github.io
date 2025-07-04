@@ -39,6 +39,46 @@
   word-break: break-all;
 }
 
+/* Section input styling */
+.section > label,
+.section > input,
+.section > select,
+.section > .base-selectors,
+.section > .unit-selectors {
+  margin-bottom: var(--spacing-sm);
+}
+
+.section > label:first-child {
+  margin-top: var(--spacing-sm);
+}
+
+.section > input[type="number"],
+.section > input[type="text"],
+.section > select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.section > input[type="number"]:focus,
+.section > input[type="text"]:focus,
+.section > select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.section > input[type="number"]:hover,
+.section > input[type="text"]:hover,
+.section > select:hover {
+  border-color: var(--border-secondary);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .clamp-inputs,
